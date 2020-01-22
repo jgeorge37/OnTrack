@@ -16,7 +16,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Documents/Project-2-JavaScript-Ohio" />
   </component>
   <component name="RunManager">
     <configuration name="game" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
@@ -66,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579733722939</updated>
-      <workItem from="1579733726948" duration="1865000" />
+      <workItem from="1579733726948" duration="3566000" />
     </task>
     <servers />
   </component>
@@ -74,24 +74,28 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1487" height="184" key="GridCell.Tab.0.bottom" timestamp="1579734611253">
+    <state x="616" y="168" width="424" height="484" key="FileChooserDialogImpl" timestamp="1579736472664">
       <screen x="67" y="27" width="1533" height="768" />
     </state>
-    <state width="1487" height="184" key="GridCell.Tab.0.bottom/67.27.1533.768@67.27.1533.768" timestamp="1579734611253" />
-    <state width="1487" height="184" key="GridCell.Tab.0.center" timestamp="1579734611252">
+    <state x="616" y="168" width="424" height="484" key="FileChooserDialogImpl/67.27.1533.768@67.27.1533.768" timestamp="1579736472664" />
+    <state width="1487" height="184" key="GridCell.Tab.0.bottom" timestamp="1579736551798">
       <screen x="67" y="27" width="1533" height="768" />
     </state>
-    <state width="1487" height="184" key="GridCell.Tab.0.center/67.27.1533.768@67.27.1533.768" timestamp="1579734611252" />
-    <state width="1487" height="184" key="GridCell.Tab.0.left" timestamp="1579734611251">
+    <state width="1487" height="184" key="GridCell.Tab.0.bottom/67.27.1533.768@67.27.1533.768" timestamp="1579736551798" />
+    <state width="1487" height="184" key="GridCell.Tab.0.center" timestamp="1579736551797">
       <screen x="67" y="27" width="1533" height="768" />
     </state>
-    <state width="1487" height="184" key="GridCell.Tab.0.left/67.27.1533.768@67.27.1533.768" timestamp="1579734611251" />
-    <state width="1487" height="184" key="GridCell.Tab.0.right" timestamp="1579734611252">
+    <state width="1487" height="184" key="GridCell.Tab.0.center/67.27.1533.768@67.27.1533.768" timestamp="1579736551797" />
+    <state width="1487" height="184" key="GridCell.Tab.0.left" timestamp="1579736551797">
       <screen x="67" y="27" width="1533" height="768" />
     </state>
-    <state width="1487" height="184" key="GridCell.Tab.0.right/67.27.1533.768@67.27.1533.768" timestamp="1579734611252" />
+    <state width="1487" height="184" key="GridCell.Tab.0.left/67.27.1533.768@67.27.1533.768" timestamp="1579736551797" />
+    <state width="1487" height="184" key="GridCell.Tab.0.right" timestamp="1579736551798">
+      <screen x="67" y="27" width="1533" height="768" />
+    </state>
+    <state width="1487" height="184" key="GridCell.Tab.0.right/67.27.1533.768@67.27.1533.768" timestamp="1579736551798" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Project_1_OnTrack@game.rcov" NAME="game Coverage Results" MODIFIED="1579734611177" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Project 1 OnTrack" />
+    <SUITE FILE_PATH="coverage/Project_1_OnTrack@game.rcov" NAME="game Coverage Results" MODIFIED="1579736551763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Project 1 OnTrack" />
   </component>
 </project>
