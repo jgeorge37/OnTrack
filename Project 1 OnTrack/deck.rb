@@ -1,4 +1,5 @@
 # Created by Jack Thompson - 1/21/2020
+# Edited by Jack Thompson - 1/22/2020 - deck now initializes with all possible cards in a random order
 #
 # List with 81 randomly sorted card objects (all possible combinations)
 
