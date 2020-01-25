@@ -23,6 +23,6 @@ class Deck
       end
     end
 
-    @cardList.shuffle()
+    @cardList = @cardList.shuffle
   end
 end
