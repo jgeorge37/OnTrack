@@ -1,5 +1,6 @@
 # Created by Jack Thompson - 1/21/2020
 # Edited by Jack Thompson - 1/22/2020 - added attributes
+# Edited by Von Mbah - 1/22/2020 - fixed spelling mistake iniaitlize -> initialize
 #
 # Card object with Color, Shape, Number, and Shading Attributes
 class Card
