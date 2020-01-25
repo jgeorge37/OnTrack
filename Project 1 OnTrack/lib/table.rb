@@ -1,8 +1,27 @@
 # Created by Jack Thompson - 1/21/2020
 # Edited by Jack Thompson - 1/22/2020 - Added isSet method
+# Edited by Jack Thompson - 1/25/2020 - Added initialize and fillTable methods
 #
 # Holds current cards on table (pulls from deck)
 class Table
+  attr_accessor :currentCards
+
+  # Created by Jack Thompson - 1/25/20
+  def initialize
+    @currentCards = []
+  end
+
+  # Created by Jack Thompson - 1/25/20
+  def fillTable(deck)
+    while @currentCards.size < 12 do
+      @currentCards.append(deck.cardList.shift)
+    end
+
+    @currentCards.each do |num|
+      puts num
+    end
+  end
+
   # Created by Jack Thompson - 1/22/20
   #
   # Checks to see if three chosen cards make up a set

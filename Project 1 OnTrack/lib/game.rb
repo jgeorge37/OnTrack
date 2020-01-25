@@ -13,6 +13,7 @@ player = Player.new
 table = Table.new
 
 # Place 12 cards on table
+table.fillTable(deck)
 gameOver = false
 
 until gameOver do
