@@ -6,6 +6,7 @@
 require_relative 'deck'
 require_relative 'player'
 require_relative 'table'
+require_relative 'view'
 
 # Initialize variables
 deck = Deck.new
@@ -14,11 +15,12 @@ table = Table.new
 
 # Place 12 cards on table
 table.fillTable(deck)
+tableView = View.new(table.currentCards)
 gameOver = false
 
 until gameOver do
   # Display table
-
+  tableView.render
   # Verify that there is a set (if not, add more cards if possible)
   correctSet = false
 
