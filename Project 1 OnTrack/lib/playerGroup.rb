@@ -19,13 +19,13 @@ class PlayerGroup
 	def addPlayers
 		# Ask for number of players
 		puts("Enter the number of players.")
-		playerCount = gets.chomp
+		playerCount = gets.chomp.to_i
 
 		# List of names of players to ensure no duplicates
 		usedNames = []
 
 		# Get the names of the players
-		while @playerList.size < playerCount do
+		while @playerList.length < playerCount do
 			# Ask for player identifier
 			puts("Enter a unique player name.")
 			name = gets.chomp
