@@ -10,7 +10,6 @@ require_relative 'view'
 
 # Initialize variables
 deck = Deck.new
-player = Player.new
 table = Table.new
 
 # Place 12 cards on table
