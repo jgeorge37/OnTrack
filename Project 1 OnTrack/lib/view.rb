@@ -18,7 +18,7 @@ class View
         table = TTY::Table.new header: ['Card #','Color', 'Shape', 'Number', 'Shading']
         index = 1
         cardList.each do |card|
-            table << [index.to_s, numToColor(card.color), numToShape(card.shape), card.number.to_s, numToShading(card.shading)]
+            table << [index.to_s, numToColor(card.color), numToShape(card.shape), (card.number + 1).to_s, numToShading(card.shading)]
             index += 1
         end
         finalTable = table.render :unicode do |renderer| 
@@ -45,9 +45,9 @@ class View
     def numToShape(number) 
         case number
             when 0
-                "Square"
+                "Squiggle"
             when 1
-                "Circle"
+                "Oval"
             when 2
                 "Diamond"
             end
@@ -64,5 +64,7 @@ class View
             "Striped"
         end
     end
+
+    
 
 end
