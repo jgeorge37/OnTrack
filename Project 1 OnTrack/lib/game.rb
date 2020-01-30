@@ -57,21 +57,17 @@ until gameOver do
 
       puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
-      if card1 == "n" || card2 == "n" || card3 =="n"
-        table.ifNoSets(deck)
+      # Check if entered cards are a match
+      if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
+        # If match, continue out of loop and +1 to player Score
+        playerGroup.updateScore(name, 1)
+        correctSet = true
       else
-        # Check if entered cards are a match
-        if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
-          # If match, continue out of loop and +1 to player Score
-          playerGroup.updateScore(name, 1)
-          correctSet = true
-        else
-          # Else, return to prompting and -1 point to player Score
-          playerGroup.updateScore(name, -1)
-        end
+        # Else, return to prompting and -1 point to player Score
+        playerGroup.updateScore(name, -1)
       end
     when "NoSet"
-      puts "Not yet implemented"
+      table.ifNoSets(deck)
     when "Quit"
       gameOver = true
     else
