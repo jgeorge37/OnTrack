@@ -7,30 +7,28 @@ to be briefed on the rules.
 - http://magliery.com/Set/SetRules.html
 
 ## Table of Contents
-* [Technologies Used:](#technologies-used)
-* [Installation Guide:](#installation-guide)
-* [Required Functionality Included:](#required-functionality)
-* [Additional Functionality Included:](#additional-functionality)
+* [Technologies Used](#technologies-used)
+* [Installation Guide](#installation-guide)
+* [Required Functionality Included](#required-functionality)
+* [Additional Functionality Included](#additional-functionality)
 * [Usage Guide](#usage-guide)
-* [Testing:](#testing)
-* [Gems Included:](#gems-included)
-## Technologies Used:
+* [Testing](#testing)
+* [Gems Included](#gems-included)
+## Technologies Used
 
-## Installation Guide:
-
-## Required Functionality Included:
--
+## Installation Guide
+			
+## Required Functionality Included
 - Deal the appropriate number of cards
 - Verify the correctness of player-identified sets
 - Replace the identified cards with new ones
 - Keep track of score to identify a winner
 
-## Additional Functionality Included:
--
-## Usage Guide:
+## Additional Functionality Included
 
-## Testing:
+## Usage Guide
 
-## Gems Included:
--
+## Testing
+
+## Gems Included
 - tty-table
