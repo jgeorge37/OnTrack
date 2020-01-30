@@ -5,6 +5,8 @@
 # and shadingCheck methods.  Edited isSet methods to include these methods
 # Edited by Von Mbah -
 # Edited by Jing George - 1/29/20 - Changed colorCheck, shapeCheck, numberCheck,
+# Edited by Jack Thompson - 1/30/2020 - Removed debug print message
+# 
 # and shadingCheck methods to attributeCheck method.
 
 # Holds current cards on table (pulls from deck)
@@ -20,10 +22,6 @@ class Table
   def fillTable(deck)
     while @currentCards.size < 12 do
       @currentCards.append(deck.cardList.shift)
-    end
-
-    @currentCards.each do |num|
-      puts num
     end
   end
 
