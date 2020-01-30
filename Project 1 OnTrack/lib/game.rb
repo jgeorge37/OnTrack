@@ -38,7 +38,7 @@ until gameOver do
   until correctSet || gameOver
     tableView.render
     # Prompt for card 1
-    case prompt.select("Choose your destiny?", %w(EnterCards NoSet Quit))
+    case prompt.select("Select an option (use the arrow keys to move)", %w(EnterCards NoSet Quit))
     when "EnterCards"
       puts("Enter the first card")
       card1 = gets.chomp
@@ -71,7 +71,7 @@ until gameOver do
         end
       end
     when "NoSet"
-
+      puts "Not yet implemented"
     when "Quit"
       gameOver = true
     else
