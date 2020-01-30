@@ -2,9 +2,10 @@
 # Edited by Jack Thompson - 1/22/2020 - Added isSet method
 # Edited by Jack Thompson - 1/25/2020 - Added initialize and fillTable methods
 # Edited by Jack Hanley - 1/27/20 - Added colorCheck, shapeCheck, numberCheck
-# and shadingCheck methods.  Ediited isSet methods to include these methods
-# Edited by Von Mbah - 
-
+# and shadingCheck methods.  Edited isSet methods to include these methods
+# Edited by Von Mbah -
+# Edited by Jing George - 1/29/20 - Changed colorCheck, shapeCheck, numberCheck,
+# and shadingCheck methods to attributeCheck method.
 
 # Holds current cards on table (pulls from deck)
 class Table
@@ -35,7 +36,7 @@ class Table
 
   # Removes cards that were chosen to be a set and then replace them with new cards if
   # current card list is less than 12 cards
-  def replaceCards(first, second, third, deck) 
+  def replaceCards(first, second, third, deck)
     @currentCards.delete(first)
     @currentCards.delete(second)
     @currentCards.delete(third)
@@ -44,58 +45,27 @@ class Table
 
   # Created by Jack Thompson - 1/22/20
   # Edited by Jack Hanley - 1/27/20
+  # Edited by Jing George - 1/29/20
   # Checks to see if three chosen cards make up a set
   def isSet(card1,card2,card3)
-    isSet = false
-    # Attribute check. Calls other methods to find if attributes meet criteria
-    if (colorCheck==true && shapeCheck==true && numberCheck==true && shadingCheck==true)
-      isSet = true
-    end
+    # Call attributeCheck method on all 4 attributes for each card.
+    isSet = attributeCheck(card1.color, card2.color, card3.color)
+    isSet = isSet && attributeCheck(card1.shape, card2.shape, card3.shape)
+    isSet = isSet && attributeCheck(card1.number, card2.number, card3.number)
+    isSet = isSet && attributeCheck(card1.shading, card2.shading, card3.shading)
     isSet
   end
 
   private
 
-  # Created by Jack Hanley - 1/27/20
-  # Checks if colors on cards are either all the same or all different
-  def colorCheck(card1,card2,card3)
-    result = true
-    if (card1.color == card2.color && card1.color != card3.color || card1.color == card3.color && card1.color != card2.color || card2.color == card3.color && card2.color != card1.color)
-      result = false
-    end
-    result
-  end
-
-  # Created by Jack Hanley - 1/27/20
-  # Checks if shape on cards are either all the same or all different
-  def shapeCheck(card1,card2,card3)
-    result = true
-    if (card1.shape == card2.shape && card1.shape != card3.shape || card1.shape == card3.shape && card1.shape != card2.shape || card2.shape == card3.shape && card2.color != card1.color)
-      result = false
-    end
-    result
-  end
-  # Created by Jack Hanley - 1/27/20
-  # Checks if number on cards are either all the same or all different
-  def numberCheck(card1,card2,card3)
-    result = true
-    if (card1.number == card2.number && card1.number != card3.number || card1.number == card3.number && card1.number != card2.number || card2.number == card3.number && card2.number != car1.number)
-      result = false
-    end
-    result
-  end
-
-  # Created by Jack Hanley - 1/27/20
-  # Checks if shading on cards are either all the same or all different
-  def shadingCheck(card1,card2,card3)
-    result = true
-    if (card1.shading == card2.shading && card1.shading != card3.shading|| card1.shading == card3.shading && card1.shading != card2.shading || card2.shading == card3.shading && card2.shading != card1.shading)
-      result = false
-    end
+  # Created by Jing George - 1/29/20
+  # Returns true if all given attributes are either all matching or all different,
+  # returns false otherwise (i.e. only two match).
+  def attributeCheck(attr1, attr2, attr3)
+    result = (attr1 == attr2 && attr1 == attr3)
+    result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3)
     result
   end
 
 
-
-  
 end
