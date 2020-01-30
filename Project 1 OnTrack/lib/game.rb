@@ -2,6 +2,7 @@
 # Edited by Jack Thompson - 1/22/2020 - Laid out foundation of program
 # Edited by Jing George - 1/26/2020 - Incorporation of new PlayerGroup class
 # Edit by Von Mbah - 1/29/2020 - Changed a bit of game logic as well as included replacing cards
+# Edited by Jack Thompson - 1/30/2020 - Implemented isSet() method test into main gameplay
 # Controls overall game functionality
 
 require_relative 'deck'
@@ -54,11 +55,14 @@ until gameOver do
       table.ifNoSets(deck)
     else
     # Check if entered cards are a match
-      # If match, continue out of loop and +1 to player Score
+      if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
+        # If match, continue out of loop and +1 to player Score
         playerGroup.updateScore(name, 1)
         correctSet = true
-      # Else, return to prompting and -1 point to player Score
-          # playerGroup.updateScore(name, -1)
+      else
+        # Else, return to prompting and -1 point to player Score
+        playerGroup.updateScore(name, -1)
+      end
     end
   end
   # Replace entered cards
