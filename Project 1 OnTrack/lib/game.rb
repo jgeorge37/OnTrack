@@ -51,7 +51,7 @@ until gameOver do
     puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
     # Check if entered cards are a match
-    if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
+    if(table.isSet(table.currentCards[card1.to_i-1],table.currentCards[card2.to_i-1],table.currentCards[card3.to_i-1]))
       # If match, continue out of loop and +1 to player Score
       playerGroup.updateScore(name, 1)
       correctSet = true
