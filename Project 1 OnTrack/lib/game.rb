@@ -3,6 +3,8 @@
 # Edited by Jing George - 1/26/2020 - Incorporation of new PlayerGroup class
 # Edit by Von Mbah - 1/29/2020 - Changed a bit of game logic as well as included replacing cards
 # Edited by Jack Thompson - 1/30/2020 - Implemented isSet() method test into main gameplay; option for quit
+# Edited by Jack Thompson - 1/30/2020 - Implemented tty-prompt menu options
+#
 # Controls overall game functionality
 
 require_relative 'deck'
@@ -10,11 +12,13 @@ require_relative 'player'
 require_relative 'playerGroup'
 require_relative 'table'
 require_relative 'view'
+require "tty-prompt"
 
 # Initialize variables
 deck = Deck.new
 table = Table.new
 playerGroup = PlayerGroup.new
+prompt = TTY::Prompt.new
 
 # Get player information
 playerGroup.addPlayers
@@ -31,18 +35,14 @@ until gameOver do
   correctSet = false
 
   # Prompt for input until correct set is entered
-  until correctSet
+  until correctSet || gameOver
     tableView.render
     # Prompt for card 1
-    puts("Enter the first card. Type 'q' to quit")
-    card1 = gets.chomp
+    case prompt.select("Choose your destiny?", %w(EnterCards NoSet Quit))
+    when "EnterCards"
+      puts("Enter the first card")
+      card1 = gets.chomp
 
-    if(card1 == "q")
-      gameOver = true;
-      break;
-    end
-
-    if !gameOver
       # Prompt for card 2
       puts("Enter the second card.")
       card2 = gets.chomp
@@ -60,7 +60,7 @@ until gameOver do
       if card1 == "n" || card2 == "n" || card3 =="n"
         table.ifNoSets(deck)
       else
-      # Check if entered cards are a match
+        # Check if entered cards are a match
         if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
           # If match, continue out of loop and +1 to player Score
           playerGroup.updateScore(name, 1)
@@ -70,6 +70,12 @@ until gameOver do
           playerGroup.updateScore(name, -1)
         end
       end
+    when "NoSet"
+
+    when "Quit"
+      gameOver = true
+    else
+
     end
   end
   # Replace entered cards
