@@ -29,55 +29,45 @@ tableView = View.new(table.currentCards)
 gameOver = false
 
 until gameOver do
-  # Display table
-  
-  # Verify that there is a set (if not, add more cards if possible)
-  correctSet = false
+  tableView.render
+  # Prompt for card 1
+  case prompt.select("Select an option", %w(EnterCards NoSet Quit))
+  when "EnterCards"
+    puts("Enter the first card.")
+    card1 = gets.chomp
 
-  # Prompt for input until correct set is entered
-  until correctSet || gameOver
-    tableView.render
-    # Prompt for card 1
-    case prompt.select("Select an option (use the arrow keys to move)", %w(EnterCards NoSet Quit))
-    when "EnterCards"
-      puts("Enter the first card")
-      card1 = gets.chomp
+    # Prompt for card 2
+    puts("Enter the second card.")
+    card2 = gets.chomp
 
-      # Prompt for card 2
-      puts("Enter the second card.")
-      card2 = gets.chomp
+    # Prompt for card 3
+    puts("Enter the third card.")
+    card3 = gets.chomp
 
-      # Prompt for card 3
-      puts("Enter the third card.")
-      card3 = gets.chomp
+    # Prompt for player's name
+    puts("Enter your name.")
+    name = gets.chomp
 
-      # Prompt for player's name
-      puts("Enter your name.")
-      name = gets.chomp
+    puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
-      puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
-
-      # Check if entered cards are a match
-      if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
-        # If match, continue out of loop and +1 to player Score
-        playerGroup.updateScore(name, 1)
-        correctSet = true
-      else
-        # Else, return to prompting and -1 point to player Score
-        playerGroup.updateScore(name, -1)
-      end
-    when "NoSet"
-      table.ifNoSets(deck)
-    when "Quit"
-      gameOver = true
+    # Check if entered cards are a match
+    if(table.isSet(table.currentCards[card1.to_i],table.currentCards[card2.to_i],table.currentCards[card3.to_i]))
+      # If match, continue out of loop and +1 to player Score
+      playerGroup.updateScore(name, 1)
+      correctSet = true
+      # Replace entered cards
+      table.replaceCards(table.currentCards[card1.to_i-1], table.currentCards[card2.to_i-1], table.currentCards[card3.to_i-1], deck)
     else
-
+      # Else, return to prompting and -1 point to player Score
+      playerGroup.updateScore(name, -1)
     end
+  when "NoSet"
+    table.ifNoSets(deck)
+  when "Quit"
+    gameOver = true
+  else
+    puts "Not a menu option"
   end
-  # Replace entered cards
-  table.replaceCards(table.currentCards[card1.to_i-1], table.currentCards[card2.to_i-1], table.currentCards[card3.to_i-1], deck)
-  # If no more cards/sets, end game
-
 end
 
 playerGroup.printGameResult
