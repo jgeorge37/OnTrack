@@ -5,7 +5,7 @@
 # Edited by Jack Thompson - 1/30/2020 - Implemented isSet() method test into main gameplay; option for quit
 # Edited by Jack Thompson - 1/30/2020 - Implemented tty-prompt menu options
 # Edited by Jing George - 1/30/2020 - Fixed issue with card indexing when calling isSet
-#
+# Edited by Von Mbah - 1/30/2020 - Changed prompts now to multi-select
 # Controls overall game functionality
 
 require_relative 'deck'
@@ -30,20 +30,24 @@ tableView = View.new(table.currentCards)
 gameOver = false
 
 until gameOver do
+  # Displaying the table
   tableView.render
-  # Prompt for card 1
-  case prompt.select("Select an option", %w(EnterCards NoSet Quit))
+  case prompt.select("Select an option.", %w(EnterCards NoSet Quit))
   when "EnterCards"
-    puts("Enter the first card.")
-    card1 = gets.chomp
-
-    # Prompt for card 2
-    puts("Enter the second card.")
-    card2 = gets.chomp
-
-    # Prompt for card 3
-    puts("Enter the third card.")
-    card3 = gets.chomp
+    
+    # Prompting the user to select 3 cards
+    cardArray = Array.new
+    choices = (1..table.currentCards.length).to_a
+    choices = choices.map(&:to_s)
+    while cardArray.length != 3 do
+      cardArray = prompt.multi_select("Select 3 cards.", choices)
+      if cardArray.length != 3
+        puts "Incorrect number of cards selected."
+      end
+    end
+    card1 = cardArray[0]
+    card2 = cardArray[1]
+    card3 = cardArray[2]
 
     # Prompt for player's name
     puts("Enter your name.")
