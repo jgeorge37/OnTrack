@@ -24,9 +24,7 @@ class Table
     if (deck.cardList.size > 0)
     	while @currentCards.size < 12 do
       		@currentCards.append(deck.cardList.shift)
-    end
-    while @currentCards.size < 12 do
-        @currentCards.append(deck.cardList.shift)
+	end    
     end
   end
 
