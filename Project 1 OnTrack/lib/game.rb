@@ -91,8 +91,9 @@ while(!exit)
           playerGroup.updateScore(name, -1)
         end
       when "NoSet"
-        print "\e[H\e[2J"
-        table.ifNoSets(deck)
+        if table.ifNoSets(deck) == -1
+          gameOver = true
+        end
       when "Quit"
         print "\e[H\e[2J"
         gameOver = true

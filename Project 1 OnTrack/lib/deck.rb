@@ -24,5 +24,6 @@ class Deck
     end
 
     @cardList = @cardList.shuffle
+    @cardList = @cardList.slice(0, 15)
   end
 end
