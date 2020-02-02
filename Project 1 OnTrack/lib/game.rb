@@ -21,6 +21,8 @@ table = Table.new
 playerGroup = PlayerGroup.new
 prompt = TTY::Prompt.new
 
+visual = prompt.select("Select an option.", %w(Graphics Table))
+
 # Get player information
 playerGroup.addPlayers
 
@@ -31,8 +33,12 @@ gameOver = false
 
 until gameOver do
   # Displaying the table
-  #tableView.render
-  table.displayTable()
+  if(visual == "Graphics")
+    table.displayTable()
+  else
+    tableView.render
+  end
+
   case prompt.select("Select an option.", %w(EnterCards NoSet Quit))
   when "EnterCards"
     

@@ -22,11 +22,11 @@ class Table
   # Created by Jack Thompson - 1/25/20
   def fillTable(deck)
     while @currentCards.size < 12 do
-      @currentCards.append(deck.cardList.shift)
+        @currentCards.append(deck.cardList.shift)
     end
   end
 
-  # Created by Jack Thompson - 2/2020
+  # Created by Jack Thompson - 2/2/20
   def displayTable
     disp = Ascii.new
 
