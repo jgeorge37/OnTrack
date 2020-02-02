@@ -20,7 +20,7 @@ class Tutorial
       display.printByLine(Card.new(0,2,1,2), line)
       puts
     end
-    print("This card is red coloring, has a number of 1, a shape of hexagon, and vertical shading")
+    print("This card has red coloring, a number of 1, a shape of hexagon, and vertical shading")
     gets
     print("Three cards make up a set when, for each attribute, they all have different values or the same values")
     gets
@@ -74,6 +74,8 @@ class Tutorial
     print("Each incorrect guess at a set takes one point away from the player's score")
     gets
     print("The goal of the game is to have the highest score once the deck completely runs out of cards")
+    gets
+    print("Press <Enter> to return to Main Menu")
     gets
   end
 end

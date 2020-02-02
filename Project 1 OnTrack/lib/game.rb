@@ -108,7 +108,7 @@ while(!exit)
     end
 
     playerGroup.printGameResult
-    print("Press enter to quit")
+    print("Press <Enter> to return to Main Menu")
     gets
 
   when "Tutorial"
