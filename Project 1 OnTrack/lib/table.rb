@@ -24,25 +24,41 @@ class Table
     while @currentCards.size < 12 do
       @currentCards.append(deck.cardList.shift)
     end
+  end
+
+  # Created by Jack Thompson - 2/2020
+  def displayTable
     disp = Ascii.new
 
-    for line in 1..8 do
-     for item in 0...6 do
-       disp.printByLine(@currentCards[item], line)
-        print("   ")
-     end
-     puts
-    end
+    remaining = @currentCards.size
+    printed = 0
+    while(remaining > 0) do
+      for line in 1..8 do
+        for item in printed...printed+6 do
+          if(@currentCards.size > item)
+            disp.printByLine(@currentCards[item], line)
+            print("   ")
+          end
 
-    for line in 1..8 do
-      for item in 6...12 do
-        disp.printByLine(@currentCards[item], line)
-        print("   ")
+        end
+        puts
       end
+
       puts
+      for item in printed...printed+6 do
+        if(@currentCards.size > item)
+          print("Card #{item+1}")
+          print("               ")
+        end
+
+      end
+
+      puts
+      puts
+
+      printed+=6
+      remaining-=6
     end
-
-
   end
 
   # Adds in 3 more if the user

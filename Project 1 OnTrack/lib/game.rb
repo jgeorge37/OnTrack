@@ -31,7 +31,8 @@ gameOver = false
 
 until gameOver do
   # Displaying the table
-  tableView.render
+  #tableView.render
+  table.displayTable()
   case prompt.select("Select an option.", %w(EnterCards NoSet Quit))
   when "EnterCards"
     
