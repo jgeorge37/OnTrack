@@ -8,6 +8,7 @@
 # Edited by Jack Thompson - 1/30/2020 - Removed debug print message
 # 
 # and shadingCheck methods to attributeCheck method.
+require_relative 'ascii'
 
 # Holds current cards on table (pulls from deck)
 class Table
@@ -23,6 +24,25 @@ class Table
     while @currentCards.size < 12 do
       @currentCards.append(deck.cardList.shift)
     end
+    disp = Ascii.new
+
+    for line in 1..8 do
+     for item in 0...6 do
+       disp.printByLine(@currentCards[item], line)
+        print("   ")
+     end
+     puts
+    end
+
+    for line in 1..8 do
+      for item in 6...12 do
+        disp.printByLine(@currentCards[item], line)
+        print("   ")
+      end
+      puts
+    end
+
+
   end
 
   # Adds in 3 more if the user
