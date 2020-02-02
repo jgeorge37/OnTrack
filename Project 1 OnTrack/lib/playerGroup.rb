@@ -8,6 +8,8 @@ class PlayerGroup
 	attr_accessor :playerList
 
 	# Created by Jing George - 1/26/20
+	#
+	# @return [Self]
 	def initialize
 		#Initialize list of players
 		@playerList = []
@@ -58,6 +60,9 @@ class PlayerGroup
 	#
 	# Update score based on player name and change param; negative values for
 	# deduction, positive values for addition
+	#
+	# @param [String] name
+	# @param [Integer] change
 	def updateScore(name, change)
 		# Player gets 3 tries to input name correctly
 		for i in 1..3
@@ -82,6 +87,8 @@ class PlayerGroup
 	end
 
 	# Created by Jing George - 1/26/20
+	#
+	# Prints the names of the players with the highest score.
 	def printGameResult
 		# Winners stored in list in case of tie
 		winners = []
