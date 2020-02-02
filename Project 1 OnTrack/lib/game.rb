@@ -19,7 +19,7 @@ require_relative 'tutorial'
 require "tty-prompt"
 
 # Initialize variables
-deck = Deck.new
+
 table = Table.new
 playerGroup = PlayerGroup.new
 prompt = TTY::Prompt.new
@@ -36,6 +36,7 @@ while(!exit)
     playerGroup.addPlayers
 
   # Place 12 cards on table
+    deck = Deck.new
     table.fillTable(deck)
     tableView = View.new(table.currentCards)
     gameOver = false
