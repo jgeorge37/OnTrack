@@ -13,8 +13,13 @@ application using Ruby.
 ## Technologies Used
 
 ## Installation Guide
-- Requires Ruby v2.6.3 or later
-- Download the zip archive of the OnTrack repository
+0. Requires Ruby v2.6.3 or later.
+1. Download the zip archive of the OnTrack repository.
+2. Navigate to the 'Project 1 OnTrack' directory.
+3. Install the required Ruby gems with the following command:
+```
+$ bundle install
+```
 
 ## Required Functionality Included
 - Deal the appropriate number of cards
@@ -28,15 +33,11 @@ application using Ruby.
 - Tutorial
 
 ## Usage Guide
-Navigate to the 'Project 1 OnTrack/lib' directory.
-Run the following command to install the required Ruby Gems:
-```
-$ bundle install
-```
 Run the following command to start the game:
 ```
-$ ruby game.rb
+$ ruby lib/game.rb
 ```
+If shapes overlap in graphics mode, widen the terminal window.
 
 If you are unfamiliar with the card game Set, please follow the link below
 to be briefed on the rules or use the tutorial provided in-game.
