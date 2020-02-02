@@ -26,6 +26,8 @@ to be briefed on the rules.
 
 ## Additional Functionality Included
 - Option for ASCII visual style versus table display
+- Menus
+- Tutorial
 
 ## Usage Guide
 
