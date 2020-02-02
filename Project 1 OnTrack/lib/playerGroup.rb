@@ -19,7 +19,11 @@ class PlayerGroup
 	def addPlayers
 		# Ask for number of players
 		puts("Enter the number of players.")
-		playerCount = gets.chomp.to_i
+		playerCount = Integer(gets.chomp) rescue false
+		while !playerCount do
+			puts("Enter the number of players as an integer.")
+			playerCount = Integer(gets.chomp) rescue false
+		end
 
 		# List of names of players to ensure no duplicates
 		usedNames = []
