@@ -32,6 +32,7 @@ while(!exit)
   print "\e[H\e[2J"
   case prompt.select("Welcome to Set!", %w(Start Tutorial Settings Quit))
   when "Start"
+    playerGroup = PlayerGroup.new
     # Get player information
     playerGroup.addPlayers
 
@@ -67,8 +68,11 @@ while(!exit)
         card3 = cardArray[2]
 
         # Prompt for player's name
-        puts("Enter your name.")
-        name = gets.chomp
+        nameList = []
+        playerGroup.playerList.each_index do |item|
+          nameList.append(playerGroup.playerList[item].name)
+        end
+        name = prompt.select("Which player is entering the set?", nameList)
 
         puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
