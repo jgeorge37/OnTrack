@@ -55,7 +55,6 @@ class Table
   end
 
   private
-
   # Created by Jing George - 1/29/20
   # Returns true if all given attributes are either all matching or all different,
   # returns false otherwise (i.e. only two match).
@@ -65,5 +64,42 @@ class Table
     result
   end
 
-
+  # Created by Jack Hanley - 1/30/20 
+  # Checks to see if a set is possible given current cards
+  def noSet(currentCards)
+     currentCombos.new
+     currentCombos = @currentCards.combination(3).to_a
+     setPresent = false
+     count = 0
+     while setPresent==false && count<currentCombos.length do
+	temp = currentCombos[count]
+	if (isSet(temp[0],temp[1],temp[2]) == true)
+		setPresent=true
+	end
+	count = count + 1
+     end
+     setPresent
+  end
+  
+ #  Created by Jack Hanley
+ #  Method that generates a hint for a player.  Tells the user a potential 
+ #  card to use
+ def hintGenerator(currentCards)
+ 	currentCombos.new
+	currentCombos = @currentCards.combination(3).to_a
+	if (noSet(@currentCards) == true)
+		puts "There may not be any sets to find within these cards."
+	end 
+	flag = false
+	count = 0 
+	until flag == true 
+		temp = currentCombos[count]
+		if (isSet(temp[0],temp[1],temp[2]) == true)
+			singleCard = temp[0]
+			puts "Try using card with color: " + singleCard.color
+			flag = true
+		end
+		count = count + 1
+	end
+   end
 end
