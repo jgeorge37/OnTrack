@@ -21,8 +21,10 @@ class Table
 
   # Created by Jack Thompson - 1/25/20
   def fillTable(deck)
-    while @currentCards.size < 12 do
-        @currentCards.append(deck.cardList.shift)
+    if (deck.cardList.size > 0)
+    	while @currentCards.size < 12 do
+      		@currentCards.append(deck.cardList.shift)
+	end    
     end
   end
 
@@ -63,9 +65,16 @@ class Table
 
   # Adds in 3 more if the user
   # sees no possible sets
-  def ifNoSets(deck)
-    puts "Replacing 3 cards."
-    3.times { @currentCards.append(deck.cardList.shift) }
+  def ifNoSets(deck, currentCards)
+    if (deck.cardList.size > 0)
+   	if (setPresent(currentCards) == false)
+    		puts "No sets are present.  Adding 3 cards."
+    		3.times { @currentCards.append(deck.cardList.shift) }
+    	else
+		puts "Keep looking.  There is a set than can be found."
+    	end
+    end
+	
   end
 
   # Removes cards that were chosen to be a set and then replace them with new cards if
@@ -100,11 +109,19 @@ class Table
     result
   end
 
+  # Created by Jack Hanley - 2/2/20
+  # Method generates all possible combos of cards currently on table
+  def createCombos(currentCards)
+	currentCombos.new
+	currentCombos = @currentCards.combination(3).to_a
+	currentCombos
+  end
+
   # Created by Jack Hanley - 1/30/20 
   # Checks to see if a set is possible given current cards
-  def noSet(currentCards)
+  def setPresent(currentCards)
      currentCombos.new
-     currentCombos = @currentCards.combination(3).to_a
+     currentCombos = createCombos(@currentCards)
      setPresent = false
      count = 0
      while setPresent==false && count<currentCombos.length do
@@ -122,7 +139,7 @@ class Table
  #  card to use
  def hintGenerator(currentCards)
  	currentCombos.new
-	currentCombos = @currentCards.combination(3).to_a
+	currentCombos = createCombos(@currentCards)
 	if (noSet(@currentCards) == true)
 		puts "There may not be any sets to find within these cards."
 	end 
@@ -132,7 +149,7 @@ class Table
 		temp = currentCombos[count]
 		if (isSet(temp[0],temp[1],temp[2]) == true)
 			singleCard = temp[0]
-			puts "Try using card with color: " + singleCard.color
+			puts "Try using card with color: #{singleCard.color}, shape: #{singleCard.shape}, shading: #{singleCard.shading}, and number: #{singleCard.number}"
 			flag = true
 		end
 		count = count + 1
