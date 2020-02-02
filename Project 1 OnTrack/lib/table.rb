@@ -112,7 +112,6 @@ class Table
   # Created by Jack Hanley - 2/2/20
   # Method generates all possible combos of cards currently on table
   def createCombos(currentCards)
-	currentCombos.new
 	currentCombos = @currentCards.combination(3).to_a
 	currentCombos
   end
@@ -120,7 +119,6 @@ class Table
   # Created by Jack Hanley - 1/30/20 
   # Checks to see if a set is possible given current cards
   def setPresent(currentCards)
-     currentCombos.new
      currentCombos = createCombos(@currentCards)
      setPresent = false
      count = 0
@@ -138,7 +136,6 @@ class Table
  #  Method that generates a hint for a player.  Tells the user a potential 
  #  card to use
  def hintGenerator(currentCards)
- 	currentCombos.new
 	currentCombos = createCombos(@currentCards)
 	if (noSet(@currentCards) == true)
 		puts "There may not be any sets to find within these cards."
