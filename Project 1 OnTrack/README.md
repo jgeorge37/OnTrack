@@ -1,10 +1,6 @@
 # Project #1 - Game of Set (OnTrack)
 The goal of this project is to recreate the card game Set as a text-based 
 application using Ruby.
-Rules of Set:
-If you are unfamiliar with the card game Set, please follow the link below
-to be briefed on the rules.
-- http://magliery.com/Set/SetRules.html
 
 ## Table of Contents
 * [Technologies Used](#technologies-used)
@@ -30,6 +26,12 @@ to be briefed on the rules.
 - Tutorial
 
 ## Usage Guide
+Enter the "lib" folder and type "bundle install" to install the required Ruby Gems.
+Next type "ruby game.rb" in order to run the game file itself.
+
+If you are unfamiliar with the card game Set, please follow the link below
+to be briefed on the rules or use the tutorial provided in-game.
+- http://magliery.com/Set/SetRules.html
 
 ## Testing
 

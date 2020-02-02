@@ -53,7 +53,6 @@ while(!exit)
 
       case prompt.select("Select an option.", %w(EnterCards NoSet GiveHint Quit))
       when "EnterCards"
-
         # Prompting the user to select 3 cards
         cardArray = Array.new
         choices = (1..table.currentCards.length).to_a
@@ -75,26 +74,34 @@ while(!exit)
         end
         name = prompt.select("Which player is entering the set?", nameList)
 
+        print "\e[H\e[2J"
         puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
         # Check if entered cards are a match
         if(table.isSet(table.currentCards[card1.to_i-1],table.currentCards[card2.to_i-1],table.currentCards[card3.to_i-1]))
           # If match, continue out of loop and +1 to player Score
+          puts("Congratulations! You've correctly entered a set!")
           playerGroup.updateScore(name, 1)
           correctSet = true
           # Replace entered cards
           table.replaceCards(table.currentCards[card1.to_i-1], table.currentCards[card2.to_i-1], table.currentCards[card3.to_i-1], deck)
         else
           # Else, return to prompting and -1 point to player Score
+          puts("These cards do not make a set.")
           playerGroup.updateScore(name, -1)
         end
       when "NoSet"
         table.ifNoSets(deck)
+	if table.ifNoSets(deck) == -1
+	   gameOver = true
+	end 
       when "GiveHint"
         table.giveHint
       when "Quit"
+        print "\e[H\e[2J"
         gameOver = true
       else
+        print "\e[H\e[2J"
         puts "Not a menu option"
       end
     end
