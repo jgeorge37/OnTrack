@@ -65,7 +65,7 @@ class Table
 
   # Adds in 3 more if the user
   # sees no possible sets
-  def ifNoSets(deck, currentCards)
+  def ifNoSets(deck)
     if (deck.cardList.size > 0)
    	if (setPresent(currentCards) == false)
     		puts "No sets are present.  Adding 3 cards."
