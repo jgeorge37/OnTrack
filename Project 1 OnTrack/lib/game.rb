@@ -6,8 +6,8 @@
 # Edited by Jack Thompson - 1/30/2020 - Implemented tty-prompt menu options
 # Edited by Jing George - 1/30/2020 - Fixed issue with card indexing when calling isSet
 # Edited by Von Mbah - 1/30/2020 - Changed prompts now to multi-select
-# Edited by Jack Thompson - 2/2/2020 - Implemented main menu functionality
-# 
+# Edited by Jack Thompson - 2/2/2020 - Implemented main menu functionality, tutorial, settings
+#
 # Controls overall game functionality
 
 require_relative 'deck'
@@ -15,6 +15,7 @@ require_relative 'player'
 require_relative 'playerGroup'
 require_relative 'table'
 require_relative 'view'
+require_relative 'tutorial'
 require "tty-prompt"
 
 # Initialize variables
@@ -22,11 +23,13 @@ deck = Deck.new
 table = Table.new
 playerGroup = PlayerGroup.new
 prompt = TTY::Prompt.new
+tutorial = Tutorial.new
 exit = false
 visual = "Graphics"
 
 # Main menu
 while(!exit)
+  print "\e[H\e[2J"
   case prompt.select("Welcome to Set!", %w(Start Tutorial Settings Quit))
   when "Start"
     # Get player information
@@ -89,8 +92,11 @@ while(!exit)
     end
 
     playerGroup.printGameResult
+    print("Press enter to quit")
+    gets
 
   when "Tutorial"
+    tutorial.display
   when "Settings"
     visual = prompt.select("Select an option.", %w(Graphics Table))
   when "Quit"
