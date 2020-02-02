@@ -6,7 +6,7 @@
 # Edited by Von Mbah -
 # Edited by Jing George - 1/29/20 - Changed colorCheck, shapeCheck, numberCheck,
 # Edited by Jack Thompson - 1/30/2020 - Removed debug print message
-# 
+#
 # and shadingCheck methods to attributeCheck method.
 require_relative 'ascii'
 
@@ -24,7 +24,7 @@ class Table
     if (deck.cardList.size > 0)
     	while @currentCards.size < 12 do
       		@currentCards.append(deck.cardList.shift)
-	end    
+	end
     end
   end
 
@@ -71,10 +71,10 @@ class Table
     		puts "No sets are present.  Adding 3 cards."
     		3.times { @currentCards.append(deck.cardList.shift) }
     	else
-		puts "Keep looking.  There is a set than can be found."
+		puts "Keep looking.  There is a set that can be found."
     	end
     end
-	
+
   end
 
   # Removes cards that were chosen to be a set and then replace them with new cards if
@@ -116,7 +116,7 @@ class Table
 	currentCombos
   end
 
-  # Created by Jack Hanley - 1/30/20 
+  # Created by Jack Hanley - 1/30/20
   # Checks to see if a set is possible given current cards
   def setPresent(currentCards)
      currentCombos = createCombos(@currentCards)
@@ -131,18 +131,18 @@ class Table
      end
      setPresent
   end
-  
+
  #  Created by Jack Hanley
- #  Method that generates a hint for a player.  Tells the user a potential 
+ #  Method that generates a hint for a player.  Tells the user a potential
  #  card to use
  def hintGenerator(currentCards)
 	currentCombos = createCombos(@currentCards)
 	if (noSet(@currentCards) == true)
 		puts "There may not be any sets to find within these cards."
-	end 
+	end
 	flag = false
-	count = 0 
-	until flag == true 
+	count = 0
+	until flag == true
 		temp = currentCombos[count]
 		if (isSet(temp[0],temp[1],temp[2]) == true)
 			singleCard = temp[0]
