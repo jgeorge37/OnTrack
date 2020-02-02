@@ -99,7 +99,7 @@ class Table
     isSet
   end
 
-  private
+  
   # Created by Jing George - 1/29/20
   # Returns true if all given attributes are either all matching or all different,
   # returns false otherwise (i.e. only two match).
@@ -135,9 +135,9 @@ class Table
  #  Created by Jack Hanley
  #  Method that generates a hint for a player.  Tells the user a potential
  #  card to use
- def hintGenerator(currentCards)
+ def giveHint
 	currentCombos = createCombos(@currentCards)
-	if (noSet(@currentCards) == true)
+	if (setPresent(@currentCards) == false)
 		puts "There may not be any sets to find within these cards."
 	end
 	flag = false
@@ -145,8 +145,24 @@ class Table
 	until flag == true
 		temp = currentCombos[count]
 		if (isSet(temp[0],temp[1],temp[2]) == true)
-			singleCard = temp[0]
-			puts "Try using card with color: #{singleCard.color}, shape: #{singleCard.shape}, shading: #{singleCard.shading}, and number: #{singleCard.number}"
+			singleCard1 = temp[0]
+			singleCard2 = temp[1]
+			singleCard3 = temp[2]
+			count = 0
+			index1 = 0
+			index2 = 0
+			index3 = 0
+			while (count < @currentCards.length) do
+				if (singleCard1 == @currentCards[count]) 
+					index1 = count + 1
+				elsif (singleCard2 == @currentCards[count])
+					index2 = count + 1
+				elsif (singleCard3 == @currentCards[count])
+					index3 = count + 1
+				end
+				count = count + 1
+			end
+			puts "Try using card numbers: #{index1}, #{index2}, #{index3}"
 			flag = true
 		end
 		count = count + 1

@@ -51,7 +51,7 @@ while(!exit)
         tableView.render
       end
 
-      case prompt.select("Select an option.", %w(EnterCards NoSet Quit))
+      case prompt.select("Select an option.", %w(EnterCards NoSet GiveHint Quit))
       when "EnterCards"
 
         # Prompting the user to select 3 cards
@@ -90,6 +90,8 @@ while(!exit)
         end
       when "NoSet"
         table.ifNoSets(deck)
+      when "GiveHint"
+        table.giveHint
       when "Quit"
         gameOver = true
       else
