@@ -25,6 +25,7 @@ to be briefed on the rules.
 - Keep track of score to identify a winner
 
 ## Additional Functionality Included
+- Option for ASCII visual style versus table display
 
 ## Usage Guide
 
@@ -32,3 +33,5 @@ to be briefed on the rules.
 
 ## Gems Included
 - tty-table
+- tty-prompt
+- paint
