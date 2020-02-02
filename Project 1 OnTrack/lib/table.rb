@@ -66,14 +66,18 @@ class Table
   # Adds in 3 more if the user
   # sees no possible sets
   def ifNoSets(deck)
-    if (deck.cardList.size > 0)
-   	if (setPresent(currentCards) == false)
-    		puts "No sets are present.  Adding 3 cards."
-    		3.times { @currentCards.append(deck.cardList.shift) }
-    	else
-		puts "Keep looking.  There is a set that can be found."
-    	end
-    end
+
+ 	  if (setPresent(currentCards) == false)
+      if deck.cardList.size > 0
+  		  puts "No sets are present.  Adding 3 cards."
+  		  3.times { @currentCards.append(deck.cardList.shift) }
+      else
+        return -1
+      end
+  	else
+	    puts "Keep looking.  There is a set that can be found."
+  	end
+
 
   end
 

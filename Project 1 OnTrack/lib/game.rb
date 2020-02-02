@@ -89,7 +89,9 @@ while(!exit)
           playerGroup.updateScore(name, -1)
         end
       when "NoSet"
-        table.ifNoSets(deck)
+        if table.ifNoSets(deck) == -1
+          gameOver = true
+        end
       when "Quit"
         gameOver = true
       else
