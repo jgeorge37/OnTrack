@@ -1,4 +1,4 @@
-# Created by Jing George - 1/30/2020 - Added test cases for updateScore
+# Created by Jing George - 1/30/2020 - Added test cases for update_score
 #
 # Test class for PlayerGroup methods.
 
@@ -13,18 +13,18 @@ class TestPlayerGroup < Test::Unit::TestCase
   # Add players to the PlayerGroup object
   @@playerGroup.playerList = [Player.new("p1"), Player.new("p2"), Player.new("p3")]
 
-	# Tests of PlayerGroup.updateScore.
+	# Tests of PlayerGroup.update_score.
   # The following tests only cover cases where the name argument passed
-  # to updateScore is the name of a player in the game, since cases where
+  # to update_score is the name of a player in the game, since cases where
   # the name is not associated with an existing player involves reading in user
   # input.
 
   # Add one to an existing player's score.
-  def test_updateScore_simple_pos1
+  def test_update_score_simple_pos1
     # Set players of PlayerGroup object
     @@playerGroup.playerList = [Player.new("p1"), Player.new("p2"), Player.new("p3")]
     # Call method under test
-    @@playerGroup.updateScore("p3", 1)
+    @@playerGroup.update_score("p3", 1)
     # Check for expected scores
     assert_equal(0, @@playerGroup.playerList[0].score)
     assert_equal(0, @@playerGroup.playerList[1].score)
@@ -32,11 +32,11 @@ class TestPlayerGroup < Test::Unit::TestCase
   end
 
   # Add zero to an existing player's score.
-  def test_updateScore_simple_zero
+  def test_update_score_simple_zero
     # Set players of PlayerGroup object
     @@playerGroup.playerList = [Player.new("p1"), Player.new("p2"), Player.new("p3")]
     # Call method under test
-    @@playerGroup.updateScore("p2", 0)
+    @@playerGroup.update_score("p2", 0)
     # Check for expected scores
     assert_equal(0, @@playerGroup.playerList[0].score)
     assert_equal(0, @@playerGroup.playerList[1].score)
@@ -44,11 +44,11 @@ class TestPlayerGroup < Test::Unit::TestCase
   end
 
   # Add -1 to an existing player's score.
-  def test_updateScore_simple_neg1
+  def test_update_score_simple_neg1
     # Set players of PlayerGroup object
     @@playerGroup.playerList = [Player.new("p1"), Player.new("p2"), Player.new("p3")]
     # Call method under test
-    @@playerGroup.updateScore("p2", -1)
+    @@playerGroup.update_score("p2", -1)
     # Check for expected scores
     assert_equal(0, @@playerGroup.playerList[0].score)
     assert_equal(-1, @@playerGroup.playerList[1].score)
@@ -56,19 +56,19 @@ class TestPlayerGroup < Test::Unit::TestCase
   end
 
   # Multiple score adjustments for multiple players.
-  def test_updateScore_complex
+  def test_update_score_complex
     # Set players of PlayerGroup object
     @@playerGroup.playerList = [Player.new("p1"), Player.new("p2"), Player.new("p3")]
     # Call method under test
-    @@playerGroup.updateScore("p2", -1)
-    @@playerGroup.updateScore("p1", -1)
-    @@playerGroup.updateScore("p1", -6)
-    @@playerGroup.updateScore("p2", 9)
-    @@playerGroup.updateScore("p3", -10)
-    @@playerGroup.updateScore("p3", 0)
-    @@playerGroup.updateScore("p2", -1)
-    @@playerGroup.updateScore("p1", 14)
-    @@playerGroup.updateScore("p2", -1)
+    @@playerGroup.update_score("p2", -1)
+    @@playerGroup.update_score("p1", -1)
+    @@playerGroup.update_score("p1", -6)
+    @@playerGroup.update_score("p2", 9)
+    @@playerGroup.update_score("p3", -10)
+    @@playerGroup.update_score("p3", 0)
+    @@playerGroup.update_score("p2", -1)
+    @@playerGroup.update_score("p1", 14)
+    @@playerGroup.update_score("p2", -1)
     # Check for expected scores
     assert_equal(7, @@playerGroup.playerList[0].score)
     assert_equal(6, @@playerGroup.playerList[1].score)

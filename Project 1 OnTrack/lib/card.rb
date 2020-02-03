@@ -9,7 +9,7 @@ class Card
   attr_accessor :number
   attr_accessor :shading
 
-  def initialize(color,shape,number,shading)
+  def initialize(color, shape, number, shading)
     @color = color
     @shape = shape
     @number = number

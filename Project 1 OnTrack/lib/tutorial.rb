@@ -4,6 +4,7 @@ require "tty-prompt"
 require_relative 'card'
 require_relative 'ascii'
 
+# Object that presents the Tutorial 
 class Tutorial
   def display
     print "\e[H\e[2J"
@@ -17,9 +18,10 @@ class Tutorial
     gets
     puts("For example. Take a look at this card")
     for line in 1..8 do
-      display.printByLine(Card.new(0,2,1,2), line)
+      display.print_by_line(Card.new(0, 2 ,1 ,2), line)
       puts
     end
+
     print("This card has red coloring, a number of 1, a shape of hexagon, and vertical shading")
     gets
     print("Three cards make up a set when, for each attribute, they all have different values or the same values")
@@ -27,14 +29,15 @@ class Tutorial
     puts
 
     cardDisplay = []
-    cardDisplay.append(Card.new(0,2,1,2))
-    cardDisplay.append(Card.new(0,1,0,2))
-    cardDisplay.append(Card.new(0,0,2,2))
+    cardDisplay.append(Card.new(0, 2, 1, 2))
+    cardDisplay.append(Card.new(0, 1, 0, 2))
+    cardDisplay.append(Card.new(0, 0, 2, 2))
     for line in 1..8 do
       for item in 0..2 do
-        display.printByLine(cardDisplay[item], line)
+        display.print_by_line(cardDisplay[item], line)
         print("   ")
       end
+
       puts
     end
 
@@ -52,14 +55,15 @@ class Tutorial
     puts
 
     cardDisplay = []
-    cardDisplay.append(Card.new(0,2,1,2))
-    cardDisplay.append(Card.new(0,1,0,2))
-    cardDisplay.append(Card.new(1,0,2,2))
+    cardDisplay.append(Card.new(0, 2, 1, 2))
+    cardDisplay.append(Card.new(0, 1, 0, 2))
+    cardDisplay.append(Card.new(1, 0, 2, 2))
     for line in 1..8 do
       for item in 0..2 do
-        display.printByLine(cardDisplay[item], line)
+        display.print_by_line(cardDisplay[item], line)
         print("   ")
       end
+
       puts
     end
 

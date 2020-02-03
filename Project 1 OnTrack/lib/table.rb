@@ -1,13 +1,13 @@
 # Created by Jack Thompson - 1/21/2020
-# Edited by Jack Thompson - 1/22/2020 - Added isSet method
+# Edited by Jack Thompson - 1/22/2020 - Added is_set method
 # Edited by Jack Thompson - 1/25/2020 - Added initialize and fillTable methods
 # Edited by Jack Hanley - 1/27/20 - Added colorCheck, shapeCheck, numberCheck
-# and shadingCheck methods.  Edited isSet methods to include these methods
+# and shadingCheck methods.  Edited is_set methods to include these methods
 # Edited by Von Mbah -
 # Edited by Jing George - 1/29/20 - Changed colorCheck, shapeCheck, numberCheck,
 # Edited by Jack Thompson - 1/30/2020 - Removed debug print message
 #
-# and shadingCheck methods to attributeCheck method.
+# and shadingCheck methods to attribute_check method.
 require_relative 'ascii'
 
 # Holds current cards on table (pulls from deck)
@@ -21,24 +21,26 @@ class Table
 
   # Created by Jack Thompson - 1/25/20
   def fillTable(deck)
-    if (deck.cardList.size > 0)
-    	while @currentCards.size < 12 do
+    if deck.cardList.size > 0
+    	while @currentCards.size < 12
       		@currentCards.append(deck.cardList.shift)
-	end
+      end
+      
     end
+
   end
 
   # Created by Jack Thompson - 2/2/20
-  def displayTable
+  def display_table
     disp = Ascii.new
 
     remaining = @currentCards.size
     printed = 0
-    while(remaining > 0) do
+    while remaining > 0
       for line in 1..8 do
         for item in printed...printed+6 do
-          if(@currentCards.size > item)
-            disp.printByLine(@currentCards[item], line)
+          if @currentCards.size > item
+            disp.print_by_line(@currentCards[item], line)
             print("   ")
           end
 
@@ -48,7 +50,7 @@ class Table
 
       puts
       for item in printed...printed+6 do
-        if(@currentCards.size > item)
+        if @currentCards.size > item
           print("Card #{item+1}")
           print("               ")
         end
@@ -58,32 +60,33 @@ class Table
       puts
       puts
 
-      printed+=6
-      remaining-=6
+      printed += 6
+      remaining -= 6
     end
+
   end
 
   # Adds in 3 more if the user
   # sees no possible sets
-  def ifNoSets(deck)
+  def if_no_sets(deck)
 
- 	  if (setPresent(currentCards) == false)
+ 	  if set_present(currentCards) == false
       if deck.cardList.size > 0
   		  puts "No sets are present.  Adding 3 cards."
   		  3.times { @currentCards.append(deck.cardList.shift) }
       else
         return -1
       end
+
   	else
 	    puts "Keep looking.  There is a set that can be found."
   	end
-
 
   end
 
   # Removes cards that were chosen to be a set and then replace them with new cards if
   # current card list is less than 12 cards
-  def replaceCards(first, second, third, deck)
+  def replace_cards(first, second, third, deck)
     @currentCards.delete(first)
     @currentCards.delete(second)
     @currentCards.delete(third)
@@ -94,20 +97,20 @@ class Table
   # Edited by Jack Hanley - 1/27/20
   # Edited by Jing George - 1/29/20
   # Checks to see if three chosen cards make up a set
-  def isSet(card1,card2,card3)
-    # Call attributeCheck method on all 4 attributes for each card.
-    isSet = attributeCheck(card1.color, card2.color, card3.color)
-    isSet = isSet && attributeCheck(card1.shape, card2.shape, card3.shape)
-    isSet = isSet && attributeCheck(card1.number, card2.number, card3.number)
-    isSet = isSet && attributeCheck(card1.shading, card2.shading, card3.shading)
-    isSet
+  def is_set(card1, card2, card3)
+    # Call attribute_check method on all 4 attributes for each card.
+    is_set = attribute_check(card1.color, card2.color, card3.color)
+    is_set = is_set && attribute_check(card1.shape, card2.shape, card3.shape)
+    is_set = is_set && attribute_check(card1.number, card2.number, card3.number)
+    is_set = is_set && attribute_check(card1.shading, card2.shading, card3.shading)
+    is_set
   end
 
   
   # Created by Jing George - 1/29/20
   # Returns true if all given attributes are either all matching or all different,
   # returns false otherwise (i.e. only two match).
-  def attributeCheck(attr1, attr2, attr3)
+  def attribute_check(attr1, attr2, attr3)
     result = (attr1 == attr2 && attr1 == attr3)
     result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3)
     result
@@ -115,61 +118,67 @@ class Table
 
   # Created by Jack Hanley - 2/2/20
   # Method generates all possible combos of cards currently on table
-  def createCombos(currentCards)
-	currentCombos = @currentCards.combination(3).to_a
-	currentCombos
+  def create_combos(currentCards)
+    currentCombos = @currentCards.combination(3).to_a
+    currentCombos
   end
 
   # Created by Jack Hanley - 1/30/20
   # Checks to see if a set is possible given current cards
-  def setPresent(currentCards)
-     currentCombos = createCombos(@currentCards)
-     setPresent = false
-     count = 0
-     while setPresent==false && count<currentCombos.length do
-	temp = currentCombos[count]
-	if (isSet(temp[0],temp[1],temp[2]) == true)
-		setPresent=true
-	end
-	count = count + 1
-     end
-     setPresent
+  def set_present(currentCards)
+    currentCombos = create_combos(@currentCards)
+    set_present = false
+    count = 0
+    while set_present==false && count<currentCombos.size 
+      temp = currentCombos[count]
+      if is_set(temp[0], temp[1], temp[2]) == true
+        set_present=true
+      end
+      count = count + 1
+    end
+    set_present
   end
 
  #  Created by Jack Hanley
  #  Method that generates a hint for a player.  Tells the user a potential
  #  card to use
- def giveHint
-	currentCombos = createCombos(@currentCards)
-	if (setPresent(@currentCards) == false)
-		puts "There may not be any sets to find within these cards."
-	end
-	flag = false
-	count = 0
-	until flag == true
-		temp = currentCombos[count]
-		if (isSet(temp[0],temp[1],temp[2]) == true)
-			singleCard1 = temp[0]
-			singleCard2 = temp[1]
-			singleCard3 = temp[2]
-			count = 0
-			index1 = 0
-			index2 = 0
-			index3 = 0
-			while (count < @currentCards.length) do
-				if (singleCard1 == @currentCards[count]) 
-					index1 = count + 1
-				elsif (singleCard2 == @currentCards[count])
-					index2 = count + 1
-				elsif (singleCard3 == @currentCards[count])
-					index3 = count + 1
-				end
-				count = count + 1
-			end
-			puts "Try using card numbers: #{index1}, #{index2}, #{index3}"
-			flag = true
-		end
-		count = count + 1
-	end
-   end
+  def give_hint
+    currentCombos = create_combos(@currentCards)
+    if set_present(@currentCards) == false
+      puts "There may not be any sets to find within these cards."
+    end
+
+    flag = false
+    count = 0
+    until flag == true
+      temp = currentCombos[count]
+      if is_set(temp[0], temp[1], temp[2]) == true
+        singleCard1 = temp[0]
+        singleCard2 = temp[1]
+        singleCard3 = temp[2]
+        count = 0
+        index1 = 0
+        index2 = 0
+        index3 = 0
+        while count < @currentCards.size
+          if singleCard1 == @currentCards[count]
+            index1 = count + 1
+          elsif singleCard2 == @currentCards[count]
+            index2 = count + 1
+          elsif singleCard3 == @currentCards[count]
+            index3 = count + 1
+          end
+          
+          count = count + 1
+        end
+        
+        puts "Try using card numbers: #{index1}, #{index2}, #{index3}"
+        flag = true
+      end
+      
+      count = count + 1
+
+    end
+
+  end
 end

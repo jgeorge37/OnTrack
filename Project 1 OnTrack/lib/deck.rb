@@ -6,6 +6,7 @@
 
 require_relative 'card'
 
+# Representation of a deck of cards
 class Deck
   attr_accessor :cardList
 
@@ -17,10 +18,13 @@ class Deck
       for j in 0...3
         for k in 0...3
           for l in 0...3
-            @cardList.append(Card.new(i,j,k,l))
+            @cardList.append(Card.new(i, j, k, l))
           end
+
         end
+
       end
+
     end
 
     @cardList = @cardList.shuffle

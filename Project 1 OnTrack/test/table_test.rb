@@ -19,769 +19,769 @@ class TestTable < Test::Unit::TestCase
   @@numbers = [0, 1, 2]
   @@shadings = [0, 1, 2]
 
-	# Tests of Table.isSet.
+	# Tests of Table.is_set.
 	# Tests all possible variations of the number of cards that share the same
 	# color, shape, number, or shading, excluding cases where duplicate cards
 	# would be involved.
 
   # 3 of same color, 3 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_1_true
+  def test_is_set_1_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[1])
     card3 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[2])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 3 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_2_false
+  def test_is_set_2_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 3 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_3_false
+  def test_is_set_3_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 3 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_4_true
+  def test_is_set_4_true
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 3 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_5_false
+  def test_is_set_5_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[0], @@shapes[2], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 3 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_6_true
+  def test_is_set_6_true
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_7_false
+  def test_is_set_7_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_8_false
+  def test_is_set_8_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[0])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_9_false
+  def test_is_set_9_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[0])
     card3 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_10_false
+  def test_is_set_10_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_11_false
+  def test_is_set_11_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_12_false
+  def test_is_set_12_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[2], @@numbers[2], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_13_false
+  def test_is_set_13_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[0], @@shapes[1], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[0], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 2 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_14_false
+  def test_is_set_14_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 3 of same number, 3 of same shading.
-  def test_isSet_15_true
+  def test_is_set_15_true
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[2], @@numbers[0], @@shadings[2])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_16_false
+  def test_is_set_16_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[2], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_17_true
+  def test_is_set_17_true
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[1], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_18_false
+  def test_is_set_18_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[1], @@shapes[2], @@numbers[2], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_19_false
+  def test_is_set_19_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_20_false
+  def test_is_set_20_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_21_true
+  def test_is_set_21_true
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_22_false
+  def test_is_set_22_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 3 of same color, 0 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_23_true
+  def test_is_set_23_true
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 	# 2 of same color, 3 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_24_false
+  def test_is_set_24_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 2 of same color, 3 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_25_false
+  def test_is_set_25_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 2 of same color, 3 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_26_false
+  def test_is_set_26_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 2 of same color, 3 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_27_false
+  def test_is_set_27_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[1], @@numbers[2], @@shadings[0])
     card2 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
 	# 2 of same color, 3 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_28_false
+  def test_is_set_28_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 3 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_29_false
+  def test_is_set_29_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 3 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_30_false
+  def test_is_set_30_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 3 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_31_false
+  def test_is_set_31_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 3 of same number, 3 of same shading.
-  def test_isSet_32_false
+  def test_is_set_32_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_33_false
+  def test_is_set_33_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_34_false
+  def test_is_set_34_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_35_false
+  def test_is_set_35_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[0])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_36_false
+  def test_is_set_36_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_37_false
+  def test_is_set_37_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[0])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_38_false
+  def test_is_set_38_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_39_false
+  def test_is_set_39_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 2 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_40_false
+  def test_is_set_40_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 3 of same number, 3 of same shading.
-  def test_isSet_41_false
+  def test_is_set_41_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[0], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_42_false
+  def test_is_set_42_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_43_false
+  def test_is_set_43_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_44_false
+  def test_is_set_44_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[0])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_45_false
+  def test_is_set_45_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_46_false
+  def test_is_set_46_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_47_false
+  def test_is_set_47_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_48_false
+  def test_is_set_48_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 2 of same color, 0 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_49_false
+  def test_is_set_49_false
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[1], @@numbers[0], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 3 of same number, 3 of same shading.
-  def test_isSet_50_true
+  def test_is_set_50_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[2], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[0])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_51_false
+  def test_is_set_51_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_52_true
+  def test_is_set_52_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_53_false
+  def test_is_set_53_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_54_false
+  def test_is_set_54_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_55_false
+  def test_is_set_55_false
     # Create card objects
     card1 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_56_true
+  def test_is_set_56_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[2], @@shadings[1])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_57_false
+  def test_is_set_57_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[2], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 3 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_58_true
+  def test_is_set_58_true
     # Create card objects
     card1 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 3 of same number, 3 of same shading.
-  def test_isSet_59_false
+  def test_is_set_59_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_60_false
+  def test_is_set_60_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_61_false
+  def test_is_set_61_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_62_false
+  def test_is_set_62_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_63_false
+  def test_is_set_63_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[2], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_64_false
+  def test_is_set_64_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[2], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[2], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[0], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_65_false
+  def test_is_set_65_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[2], @@shadings[0])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_66_false
+  def test_is_set_66_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 2 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_67_false
+  def test_is_set_67_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 3 of same number, 3 of same shading.
-  def test_isSet_68_true
+  def test_is_set_68_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[1], @@shadings[2])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 3 of same number, 2 of same shading.
-  def test_isSet_69_false
+  def test_is_set_69_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[1], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 3 of same number, 0 of same shading.
-  def test_isSet_70_true
+  def test_is_set_70_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[2], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 2 of same number, 3 of same shading.
-  def test_isSet_71_false
+  def test_is_set_71_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[1], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[0], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[1], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 2 of same number, 2 of same shading.
-  def test_isSet_72_false
+  def test_is_set_72_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[2], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[0], @@numbers[1], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[1], @@numbers[1], @@shadings[1])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 2 of same number, 0 of same shading.
-  def test_isSet_73_false
+  def test_is_set_73_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[1], @@shadings[1])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[2], @@shadings[2])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[1], @@shadings[0])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 0 of same number, 3 of same shading.
-  def test_isSet_74_true
+  def test_is_set_74_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[0])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[0])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 0 of same number, 2 of same shading.
-  def test_isSet_75_false
+  def test_is_set_75_false
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[0], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[2], @@numbers[2], @@shadings[2])
     # Call method under test
-    assert(!@@table.isSet(card1, card2, card3))
+    assert(!@@table.is_set(card1, card2, card3))
   end
 
   # 0 of same color, 0 of same shape, 0 of same number, 0 of same shading.
-  def test_isSet_76_true
+  def test_is_set_76_true
     # Create card objects
     card1 = Card.new(@@colors[0], @@shapes[2], @@numbers[0], @@shadings[2])
     card2 = Card.new(@@colors[1], @@shapes[1], @@numbers[1], @@shadings[1])
     card3 = Card.new(@@colors[2], @@shapes[0], @@numbers[2], @@shadings[0])
     # Call method under test
-    assert(@@table.isSet(card1, card2, card3))
+    assert(@@table.is_set(card1, card2, card3))
   end
 
 end
