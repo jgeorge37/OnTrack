@@ -1,5 +1,5 @@
 # Project #1 - Game of Set (OnTrack)
-The goal of this project is to recreate the card game Set as a text-based 
+The goal of this project is to recreate the card game Set as a text-based
 application using Ruby.
 
 ## Table of Contents
@@ -13,7 +13,14 @@ application using Ruby.
 ## Technologies Used
 
 ## Installation Guide
-			
+0. Requires Ruby v2.6.3 or later.
+1. Download the zip archive of the OnTrack repository.
+2. Navigate to the 'Project 1 OnTrack' directory.
+3. Install the required Ruby gems with the following command:
+```
+$ bundle install
+```
+
 ## Required Functionality Included
 - Deal the appropriate number of cards
 - Verify the correctness of player-identified sets
@@ -26,8 +33,11 @@ application using Ruby.
 - Tutorial
 
 ## Usage Guide
-Enter the "lib" folder and type "bundle install" to install the required Ruby Gems.
-Next type "ruby game.rb" in order to run the game file itself.
+Run the following command to start the game:
+```
+$ ruby lib/game.rb
+```
+If shapes overlap in graphics mode, widen the terminal window.
 
 If you are unfamiliar with the card game Set, please follow the link below
 to be briefed on the rules or use the tutorial provided in-game.

@@ -92,10 +92,11 @@ while(!exit)
         end
       when "NoSet"
         table.ifNoSets(deck)
-	if table.ifNoSets(deck) == -1
-	   gameOver = true
-	end 
+        if table.ifNoSets(deck) == -1
+           gameOver = true
+        end
       when "GiveHint"
+        print "\e[H\e[2J"
         table.giveHint
       when "Quit"
         print "\e[H\e[2J"
@@ -108,7 +109,7 @@ while(!exit)
 
     playerGroup.printGameResult
     playerGroup.updateHighScore(playerGroup.playerList)
-    print("Press enter to quit")
+    print("Press <Enter> to return to Main Menu")
     gets
 
   when "Tutorial"
@@ -125,3 +126,5 @@ while(!exit)
 
   end
 end
+
+print "\e[H\e[2J"
