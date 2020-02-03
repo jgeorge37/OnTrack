@@ -12,18 +12,18 @@ require_relative 'ascii'
 
 # Holds current cards on table (pulls from deck)
 class Table
-  attr_accessor :currentCards
+  attr_accessor :current_cards
 
   # Created by Jack Thompson - 1/25/20
   def initialize
-    @currentCards = []
+    @current_cards = []
   end
 
   # Created by Jack Thompson - 1/25/20
   def fillTable(deck)
-    if deck.cardList.size > 0
-    	while @currentCards.size < 12
-      		@currentCards.append(deck.cardList.shift)
+    if deck.card_list.size > 0
+    	while @current_cards.size < 12
+      		@current_cards.append(deck.card_list.shift)
       end
       
     end
@@ -34,13 +34,13 @@ class Table
   def display_table
     disp = Ascii.new
 
-    remaining = @currentCards.size
+    remaining = @current_cards.size
     printed = 0
     while remaining > 0
       for line in 1..8 do
         for item in printed...printed+6 do
-          if @currentCards.size > item
-            disp.print_by_line(@currentCards[item], line)
+          if @current_cards.size > item
+            disp.print_by_line(@current_cards[item], line)
             print("   ")
           end
 
@@ -50,7 +50,7 @@ class Table
 
       puts
       for item in printed...printed+6 do
-        if @currentCards.size > item
+        if @current_cards.size > item
           print("Card #{item+1}")
           print("               ")
         end
@@ -70,10 +70,10 @@ class Table
   # sees no possible sets
   def if_no_sets(deck)
 
- 	  if set_present(currentCards) == false
-      if deck.cardList.size > 0
+ 	  if set_present(current_cards) == false
+      if deck.card_list.size > 0
   		  puts "No sets are present.  Adding 3 cards."
-  		  3.times { @currentCards.append(deck.cardList.shift) }
+  		  3.times { @current_cards.append(deck.card_list.shift) }
       else
         return -1
       end
@@ -87,9 +87,9 @@ class Table
   # Removes cards that were chosen to be a set and then replace them with new cards if
   # current card list is less than 12 cards
   def replace_cards(first, second, third, deck)
-    @currentCards.delete(first)
-    @currentCards.delete(second)
-    @currentCards.delete(third)
+    @current_cards.delete(first)
+    @current_cards.delete(second)
+    @current_cards.delete(third)
     fillTable(deck)
   end
 
@@ -118,15 +118,15 @@ class Table
 
   # Created by Jack Hanley - 2/2/20
   # Method generates all possible combos of cards currently on table
-  def create_combos(currentCards)
-    currentCombos = @currentCards.combination(3).to_a
+  def create_combos(current_cards)
+    currentCombos = @current_cards.combination(3).to_a
     currentCombos
   end
 
   # Created by Jack Hanley - 1/30/20
   # Checks to see if a set is possible given current cards
-  def set_present(currentCards)
-    currentCombos = create_combos(@currentCards)
+  def set_present(current_cards)
+    currentCombos = create_combos(@current_cards)
     set_present = false
     count = 0
     while set_present==false && count<currentCombos.size 
@@ -143,8 +143,8 @@ class Table
  #  Method that generates a hint for a player.  Tells the user a potential
  #  card to use
   def give_hint
-    currentCombos = create_combos(@currentCards)
-    if set_present(@currentCards) == false
+    currentCombos = create_combos(@current_cards)
+    if set_present(@current_cards) == false
       puts "There may not be any sets to find within these cards."
     end
 
@@ -160,12 +160,12 @@ class Table
         index1 = 0
         index2 = 0
         index3 = 0
-        while count < @currentCards.size
-          if singleCard1 == @currentCards[count]
+        while count < @current_cards.size
+          if singleCard1 == @current_cards[count]
             index1 = count + 1
-          elsif singleCard2 == @currentCards[count]
+          elsif singleCard2 == @current_cards[count]
             index2 = count + 1
-          elsif singleCard3 == @currentCards[count]
+          elsif singleCard3 == @current_cards[count]
             index3 = count + 1
           end
           

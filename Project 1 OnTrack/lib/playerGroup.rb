@@ -7,15 +7,15 @@ require 'tty-table'
 
 # Object that represents a group of players
 class PlayerGroup
-  attr_accessor :playerList
+  attr_accessor :player_list
 
   # Created by Jing George - 1/26/20
   #
   # @return [Self]
   def initialize
   #Initialize list of players
-    @playerList = []
-    @highScoreList = []
+    @player_list = []
+    @highscore_list = []
   end
 
   # Created by Jing George - 1/26/20
@@ -34,7 +34,7 @@ class PlayerGroup
     usedNames = []
 
     # Get the names of the players
-    while @playerList.size < playerCount
+    while @player_list.size < playerCount
       # Ask for player identifier
       puts("Enter a unique player name.")
       name = gets.chomp
@@ -47,7 +47,7 @@ class PlayerGroup
       end
 
       # Add new Player object to player list
-      @playerList.append(Player.new(name))
+      @player_list.append(Player.new(name))
       # Add name to list of used names
       usedNames.append(name)
       # Confirm player was added
@@ -69,7 +69,7 @@ class PlayerGroup
   def update_score(name, change)
     # Player gets 3 tries to input name correctly
     for i in 1..3
-      @playerList.each do |player| 
+      @player_list.each do |player| 
 
         # If the player object is found, adjust score
         if name == player.name
@@ -96,10 +96,10 @@ class PlayerGroup
   def print_game_result
     # Winners stored in list in case of tie
     winners = []
-    highestScore = @playerList[0].score
+    highestScore = @player_list[0].score
 
     # Determine who has the highest score
-    @playerList.each do |player|
+    @player_list.each do |player|
 
       # Highest score thus far is matched
       if highestScore == player.score
@@ -129,7 +129,7 @@ class PlayerGroup
   # Displays the top players high score
   def list_top_players
       table = TTY::Table.new header: ['Name', 'Score']
-      @highScoreList.each do |player|
+      @highscore_list.each do |player|
           table << [player.name, player.score]
       end
 
@@ -143,39 +143,39 @@ class PlayerGroup
   end
 
   # Updates the top players high score
-  def update_highscore!(playerList)
-    playerList.each do |player|
-      if @highScoreList.empty? 
-        @highScoreList[0] = player
-      elsif @highScoreList.size < 5
-        if @highScoreList.size == 1
-          if @highScoreList[0].score >= player.score
-              @highScoreList[@highScoreList.size] = player
+  def update_highscore!(player_list)
+    player_list.each do |player|
+      if @highscore_list.empty? 
+        @highscore_list[0] = player
+      elsif @highscore_list.size < 5
+        if @highscore_list.size == 1
+          if @highscore_list[0].score >= player.score
+              @highscore_list[@highscore_list.size] = player
           else
-            @highScoreList.unshift player
+            @highscore_list.unshift player
           end
 
-        elsif @highScoreList[@highScoreList.size - 1].score >= player.score
-          @highScoreList[@highScoreList.size] = player
+        elsif @highscore_list[@highscore_list.size - 1].score >= player.score
+          @highscore_list[@highscore_list.size] = player
         else
-          for i in 0..@highScoreList.size-2
-            if @highScoreList[@highScoreList.size - i - 1].score <= player.score &&
-               @highScoreList[@highScoreList.size - i - 2].score >= player.score
+          for i in 0..@highscore_list.size-2
+            if @highscore_list[@highscore_list.size - i - 1].score <= player.score &&
+               @highscore_list[@highscore_list.size - i - 2].score >= player.score
 
-              @highScoreList.insert @highScoreList.size - i - 1, player
+              @highscore_list.insert @highscore_list.size - i - 1, player
             end
 
           end
 
         end
 
-      elsif player.score > @highScoreList[4].score 
+      elsif player.score > @highscore_list[4].score 
           for i in 0..3 do
-            if @highScoreList[4 - i].score <= player.score && 
-              @highScoreList[4 - i - 1].score >= player.score 
+            if @highscore_list[4 - i].score <= player.score && 
+              @highscore_list[4 - i - 1].score >= player.score 
 
-              @highScoreList.insert 4 - i - 1, player
-              @highScoreList.pop
+              @highscore_list.insert 4 - i - 1, player
+              @highscore_list.pop
               break
             end
           

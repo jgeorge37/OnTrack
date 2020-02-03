@@ -3,22 +3,22 @@ require 'tty-table'
 
 # A table representation of the dealt cards
 class View 
-  attr_accessor :cardList
+  attr_accessor :card_list
 
-  def initialize(cardList) 
-    @cardList = cardList
+  def initialize(card_list) 
+    @card_list = card_list
   end
 
-  #updates the cardList array
-  def update(newCardList) 
-    @cardList = newCardList
+  #updates the card_list array
+  def update(new_card_list) 
+    @card_list = new_card_list
   end
 
-  #displays the current cardList to the terminal 
+  #displays the current card_list to the terminal 
   def render 
     table = TTY::Table.new header: ['Card #','Color', 'Shape', 'Number', 'Shading']
     index = 1
-    cardList.each do |card|
+    card_list.each do |card|
       table << [index.to_s, num_to_color(card.color), num_to_shape(card.shape), (card.number + 1).to_s, num_to_shading(card.shading)]
       index += 1
     end
