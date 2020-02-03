@@ -3,6 +3,7 @@
 # Class to manage scores of multiple players
 
 require_relative 'player'
+require 'tty-table'
 
 class PlayerGroup
   attr_accessor :playerList
@@ -124,7 +125,7 @@ class PlayerGroup
 
   # Displays the top players high score
   def listTopPlayers
-      table = TTY:table.new header: ['Name', 'Score']
+      table = TTY::Table.new header: ['Name', 'Score']
       @highScoreList.each do |player|
           table << [player.name, player.score]
       end
@@ -143,25 +144,25 @@ class PlayerGroup
         @highScoreList[0] = player
       elsif @highScoreList.length < 5
         if @highScoreList.length == 1
-          if @highScoreList[0].score > player.score
+          if @highScoreList[0].score >= player.score
               @highScoreList[@highScoreList.length] = player
           else
             @highScoreList.unshift player
           end 
-        elsif @highScoreList[@highScoreList.length - 1] > player.score
+        elsif @highScoreList[@highScoreList.length - 1].score >= player.score
           @highScoreList[@highScoreList.length] = player
         else
           for i in 0..@highScoreList.length-2
-            if @highScoreList[@highScoreList.length - i - 1] < player.score &&
-              @highScoreList[@Highscore.length - i - 2] > player.score
+            if @highScoreList[@highScoreList.length - i - 1].score <= player.score &&
+              @highScoreList[@highScoreList.length - i - 2].score >= player.score
                 @highScoreList.insert @highScoreList.length - i - 1, player
             end
           end
         end
       elsif player.score > @highScoreList[4].score 
           for i in 0..3 do
-          if(@highScoreList[4 - i].score < player.score && 
-            @highScoreList[4 - i - 1] > player.score) 
+          if(@highScoreList[4 - i].score <= player.score && 
+            @highScoreList[4 - i - 1].score >= player.score) 
               @highScoreList.insert 4 - i - 1, player
               @highScoreList.pop
             break

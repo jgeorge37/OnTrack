@@ -30,7 +30,7 @@ visual = "Graphics"
 # Main menu
 while(!exit)
   print "\e[H\e[2J"
-  case prompt.select("Welcome to Set!", %w(Start Tutorial Highscore Settings Quit))
+  case prompt.select("Welcome to Set!", %w(Start Tutorial HighScore Settings Quit))
   when "Start"
     playerGroup.playerList = []
     # Get player information
