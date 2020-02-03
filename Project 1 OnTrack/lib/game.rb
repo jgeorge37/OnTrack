@@ -30,9 +30,9 @@ visual = "Graphics"
 # Main menu
 while(!exit)
   print "\e[H\e[2J"
-  case prompt.select("Welcome to Set!", %w(Start Tutorial Settings Quit))
+  case prompt.select("Welcome to Set!", %w(Start Tutorial Highscore Settings Quit))
   when "Start"
-    playerGroup = PlayerGroup.new
+    playerGroup.playerList = []
     # Get player information
     playerGroup.addPlayers
 
@@ -107,11 +107,16 @@ while(!exit)
     end
 
     playerGroup.printGameResult
+    playerGroup.updateHighScore(playerGroup.playerList)
     print("Press enter to quit")
     gets
 
   when "Tutorial"
     tutorial.display
+  when "HighScore"
+    playerGroup.listTopPlayers
+    print("press enter to quit")
+    gets
   when "Settings"
     visual = prompt.select("Select an option.", %w(Graphics Table))
   when "Quit"

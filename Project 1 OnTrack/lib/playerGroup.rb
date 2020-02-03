@@ -13,6 +13,7 @@ class PlayerGroup
   def initialize
   #Initialize list of players
     @playerList = []
+    @highScoreList = []
   end
 
   # Created by Jing George - 1/26/20
@@ -119,6 +120,55 @@ class PlayerGroup
       puts("Winner:")
     end
     winners.each { |winner| puts(winner)}
+  end
+
+  # Displays the top players high score
+  def listTopPlayers
+      table = TTY:table.new header: ['Name', 'Score']
+      @highScoreList.each do |player|
+          table << [player.name, player.score]
+      end
+      finalTable = table.render :unicode do |renderer|
+          renderer.alignments = [:left, :center]
+          renderer.border.separator = :each_row
+      end
+      puts "Sets Current Highscore"
+      puts finalTable
+  end
+
+  # Updates the top players high score
+  def updateHighScore(playerList)
+    playerList.each do |player|
+      if @highScoreList.empty? 
+        @highScoreList[0] = player
+      elsif @highScoreList.length < 5
+        if @highScoreList.length == 1
+          if @highScoreList[0].score > player.score
+              @highScoreList[@highScoreList.length] = player
+          else
+            @highScoreList.unshift player
+          end 
+        elsif @highScoreList[@highScoreList.length - 1] > player.score
+          @highScoreList[@highScoreList.length] = player
+        else
+          for i in 0..@highScoreList.length-2
+            if @highScoreList[@highScoreList.length - i - 1] < player.score &&
+              @highScoreList[@Highscore.length - i - 2] > player.score
+                @highScoreList.insert @highScoreList.length - i - 1, player
+            end
+          end
+        end
+      elsif player.score > @highScoreList[4].score 
+          for i in 0..3 do
+          if(@highScoreList[4 - i].score < player.score && 
+            @highScoreList[4 - i - 1] > player.score) 
+              @highScoreList.insert 4 - i - 1, player
+              @highScoreList.pop
+            break
+          end
+        end
+      end
+    end
   end
 
 end
