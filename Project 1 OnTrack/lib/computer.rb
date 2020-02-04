@@ -24,9 +24,9 @@ class Computer
       correct_set
     else
       card1 = card_array.shuffle.first
-      card_array.delete_at(card1-1)
+      card_array.shift
       card2 = card_array.shuffle.first
-      card_array.delete_at(card2-1)
+      card_array.shift
       card3 = card_array.shuffle.first
       puts "Computer chose #{card1.to_s},#{card2.to_s},#{card3.to_s} "
       [card1, card2, card3]
