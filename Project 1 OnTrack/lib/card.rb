@@ -9,6 +9,12 @@ class Card
   attr_accessor :number
   attr_accessor :shading
 
+  # Iniitialize a Card
+  # @param [String] color
+  # @param [String] shape
+  # @param [String] number
+  # @param [String] shading
+  # @return [Self] 
   def initialize(color, shape, number, shading)
     @color = color
     @shape = shape

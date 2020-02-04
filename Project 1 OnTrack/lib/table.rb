@@ -15,11 +15,14 @@ class Table
   attr_accessor :current_cards
 
   # Created by Jack Thompson - 1/25/20
+  # Initialize a Table
+  # @return [Self]
   def initialize
     @current_cards = []
   end
 
   # Created by Jack Thompson - 1/25/20
+  # @param [Deck] deck
   def fillTable(deck)
     if deck.card_list.size > 0
     	while @current_cards.size < 12
@@ -68,6 +71,7 @@ class Table
 
   # Adds in 3 more if the user
   # sees no possible sets
+  # @param [Deck] deck
   def if_no_sets(deck)
 
  	  if set_present(current_cards) == false
@@ -97,6 +101,10 @@ class Table
   # Edited by Jack Hanley - 1/27/20
   # Edited by Jing George - 1/29/20
   # Checks to see if three chosen cards make up a set
+  # @param [Card] card1
+  # @param [Card] card2
+  # @param [Card] card3
+  # @return [Boolean] is_set
   def is_set(card1, card2, card3)
     # Call attribute_check method on all 4 attributes for each card.
     is_set = attribute_check(card1.color, card2.color, card3.color)
@@ -110,6 +118,10 @@ class Table
   # Created by Jing George - 1/29/20
   # Returns true if all given attributes are either all matching or all different,
   # returns false otherwise (i.e. only two match).
+  # @param [String] attr1
+  # @param [String] attr2
+  # @param [String] attr3
+  # @return [Boolean]
   def attribute_check(attr1, attr2, attr3)
     result = (attr1 == attr2 && attr1 == attr3)
     result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3)
@@ -118,6 +130,8 @@ class Table
 
   # Created by Jack Hanley - 2/2/20
   # Method generates all possible combos of cards currently on table
+  # @param [Array[Card]] current_cards
+  # @return [Array[Card]] currentCombos
   def create_combos(current_cards)
     currentCombos = @current_cards.combination(3).to_a
     currentCombos
@@ -125,6 +139,8 @@ class Table
 
   # Created by Jack Hanley - 1/30/20
   # Checks to see if a set is possible given current cards
+  # @param [Array[Card]] current_cards
+  # @return [Boolean] set_present
   def set_present(current_cards)
     currentCombos = create_combos(@current_cards)
     set_present = false
@@ -134,8 +150,10 @@ class Table
       if is_set(temp[0], temp[1], temp[2]) == true
         set_present=true
       end
+
       count = count + 1
     end
+    
     set_present
   end
 

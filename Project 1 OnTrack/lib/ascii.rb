@@ -4,6 +4,10 @@ require 'paint'
 
 # A visual representation of the cards with their shape, color, shading and numbering 
 class Ascii
+  # Does shading to the card based of the card attribute
+  # @param [Card] card
+  # @param [Integer] amount
+  # @param [String] color
   def shading(card, amount, color)
     amount.times do
       case card.shading
@@ -19,6 +23,9 @@ class Ascii
 
   end
 
+  # Prints out the individual cards to the screen
+  # @param [Card] card
+  # @param [Integer] line
   def print_by_line(card, line)
     case card.color
     when 0

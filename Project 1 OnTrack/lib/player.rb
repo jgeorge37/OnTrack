@@ -8,8 +8,8 @@ class Player
   attr_accessor :name
   attr_accessor :score
 
+  # a unique identifier to associate players with scores
   # @param [String] name
-  #   a unique identifier to associate players with scores
   # @return [Self]
   def initialize(name)
     @name = name

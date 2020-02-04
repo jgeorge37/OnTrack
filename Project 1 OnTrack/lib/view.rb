@@ -5,11 +5,15 @@ require 'tty-table'
 class View 
   attr_accessor :card_list
 
+  # Initializes a View
+  # @param [Array[Card]] card_list
+  # @return [Self]
   def initialize(card_list) 
     @card_list = card_list
   end
 
   #updates the card_list array
+  # @param [Array[Card]] new_card_list
   def update(new_card_list) 
     @card_list = new_card_list
   end
@@ -32,7 +36,10 @@ class View
   end
 
   private
+
   #Converts a number to their respected color
+  # @param [String] number
+  # @return [String]
   def num_to_color(number) 
     case number
     when 0
@@ -46,6 +53,8 @@ class View
   end
 
   #Converts a number to their respected shape
+  # @param [String] number
+  # @return [String]
   def num_to_shape(number) 
     case number
     when 0
@@ -59,6 +68,8 @@ class View
   end
 
   #Converts a number to their respected Shading
+  # @param [String] number
+  # @return [String]
   def num_to_shading(number) 
     case number
     when 0

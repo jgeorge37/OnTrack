@@ -10,7 +10,7 @@ class PlayerGroup
   attr_accessor :player_list
 
   # Created by Jing George - 1/26/20
-  #
+  # Initialize a PlayerGroup
   # @return [Self]
   def initialize
   #Initialize list of players
@@ -143,6 +143,7 @@ class PlayerGroup
   end
 
   # Updates the top players high score
+  # @param [Array] player_list
   def update_highscore!(player_list)
     player_list.each do |player|
       if @highscore_list.empty? 

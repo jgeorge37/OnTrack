@@ -6,6 +6,7 @@ require_relative 'ascii'
 
 # Object that presents the Tutorial 
 class Tutorial
+  #displays the tutorial to the terminal
   def display
     print "\e[H\e[2J"
     prompt = TTY::Prompt.new

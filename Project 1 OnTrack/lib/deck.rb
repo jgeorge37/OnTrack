@@ -10,6 +10,8 @@ require_relative 'card'
 class Deck
   attr_accessor :card_list
 
+  # Initialize a Deck
+  # @return [Self]
   def initialize
     # Initialize card objects
     @card_list = []
