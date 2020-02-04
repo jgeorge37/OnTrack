@@ -145,6 +145,9 @@ class PlayerGroup
 
   # Displays the top players high score
   def list_top_players
+    if @highscore_list.empty?
+      puts "No available data."
+    else
       table = TTY::Table.new header: ['Name', 'Score']
       @highscore_list.each do |player|
           table << [player.name, player.score]
@@ -157,6 +160,7 @@ class PlayerGroup
 
       puts "Sets Current Highscore"
       puts finalTable
+    end
   end
 
   # Updates the top players high score
