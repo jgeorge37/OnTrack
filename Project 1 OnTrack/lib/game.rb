@@ -141,7 +141,7 @@ while !exit
         computer_turn = !computer_turn
 
       when "NoSet"
-        table.if_no_sets(deck)
+        print "\e[H\e[2J"
         if table.if_no_sets(deck) == -1
            gameOver = true
         end
