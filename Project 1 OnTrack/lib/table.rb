@@ -53,6 +53,7 @@ class Table
           end
 
         end
+
         puts
       end
 
@@ -245,8 +246,10 @@ class Table
          elsif temp[2] == @current_cards[index_count]
            correct_set << index_count + 1
          end
+
          index_count += 1
        end
+       
        correct_set
     end
 

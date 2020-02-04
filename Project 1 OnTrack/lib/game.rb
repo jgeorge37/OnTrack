@@ -53,7 +53,6 @@ while !exit
           computer_flag = true
           # false as its the players turn first
           computer_turn = false
-
         end
 
   # Place 12 cards on table
@@ -88,8 +87,8 @@ while !exit
           puts("These cards do not make a set.")
           playerGroup.update_score("Computer", -1)
           prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-
         end
+
         computer_turn = !computer_turn
       else
         # player turn
@@ -105,7 +104,9 @@ while !exit
           if card_array.size != 3
             puts "Incorrect number of cards selected."
           end
+
         end
+
         card1 = card_array[0]
         card2 = card_array[1]
         card3 = card_array[2]
@@ -122,6 +123,7 @@ while !exit
         else
           name = prompt.select("Which player is entering the set?", nameList)
         end
+
         # print out cards that the player has entered
         print "\e[H\e[2J"
         puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
@@ -141,8 +143,8 @@ while !exit
           puts("These cards do not make a set.")
           playerGroup.update_score(name, -1)
           prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-
         end
+
         computer_turn = !computer_turn
 
         # check for no set
@@ -151,8 +153,8 @@ while !exit
         if table.if_no_sets(deck) == -1
            gameOver = true
         end
+        
         prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-
       when "Hint"
         # Prompt for player's name
         nameList = []
@@ -189,7 +191,6 @@ while !exit
     playerGroup.update_highscore!(playerGroup.player_list)
     print("Press <Enter> to return to Main Menu")
     gets
-
   when "Tutorial"
     tutorial.display
   when "HighScore"
@@ -205,6 +206,7 @@ while !exit
   else
 
   end
+  
 end
 
 print "\e[H\e[2J"

@@ -9,14 +9,12 @@ require_relative 'playerGroup'
 
 
 class Computer
-
   # Created by Snigdha Tiwari 2/3/2020
   # Return an array of three cards the computer choose
-  # @param correct_set
+  # @param [Array[Card]] correct_set
   #  an array of 3 indexes of correct cards
-  # @param table_size
+  # @param [Integer] table_size
   # size of table
-  #
   def computer_moves(correct_set,table_size)
     #create array of choices
     card_array = (1..table_size).to_a

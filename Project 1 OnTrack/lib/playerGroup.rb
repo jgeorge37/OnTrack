@@ -161,6 +161,7 @@ class PlayerGroup
       puts "Sets Current Highscore"
       puts finalTable
     end
+    
   end
 
   # Updates the top players high score
