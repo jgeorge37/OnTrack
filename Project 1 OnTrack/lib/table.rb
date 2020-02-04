@@ -6,6 +6,7 @@
 # Edited by Von Mbah -
 # Edited by Jing George - 1/29/20 - Changed colorCheck, shapeCheck, numberCheck,
 # Edited by Jack Thompson - 1/30/2020 - Removed debug print message
+# Edited by Snigdha Tiwari - 2/3/2020 - Added some documentation and comments regarding functionality
 #
 # and shadingCheck methods to attribute_check method.
 require_relative 'ascii'
@@ -36,6 +37,8 @@ class Table
   end
 
   # Created by Jack Thompson - 2/2/20
+  # Displays all the cards
+  #
   def display_table
     disp = Ascii.new
 
@@ -211,8 +214,11 @@ class Table
 
   end
 
-  #  Created by Snigdha Tiwari
+  #  Created by Snigdha Tiwari 2/3/2020
+  #
   #  Find potential hints and return array of indexes else return empty array
+  # @return correct_set
+  #
   def correct_set
     current_combos = create_combos(@current_cards)
     correct_set = []
@@ -229,7 +235,7 @@ class Table
 
        end
 
-       # find indexes
+       # find indexes of the cards
        index_count = 0
        while index_count < @current_cards.size
          if temp[0] == @current_cards[index_count]

@@ -1,5 +1,6 @@
 # Created by Jing George - 1/26/2020
 # Edited by Snigdha Tiwari - 2/3/2020 - Added a def to create computer name
+# Edited by Snigdha Tiwari - 2/4/2020 - Added documentation and methods
 #
 # Class to manage scores of multiple players
 
@@ -63,9 +64,9 @@ class PlayerGroup
 
   # Created by Sngidha Tiwari - 2/3/20
   #
-  # Add player for computer mode
+  # Add player for the computer and user itself to play against the computer
   #
-  # @param [String] name
+  #
 
   def add_computer
     puts("Enter a unique player name.")

@@ -1,5 +1,6 @@
 # Created by Snigdha Tiwari 2/3/2020
 # Edited by Snigdha Tiwari 2/3/2020 - fixed a bug in the program which picked two of the same cards
+# Edited by Snigdha Tiwari 2/4/2020 - added comments about functionality
 #
 
 require 'tty-prompt'
@@ -26,11 +27,15 @@ class Computer
       puts "Computer chose #{correct_set.join(',')}"
       correct_set
     else
+      # choose 3 random cards from the table and return them
       card1 = card_array.shuffle.first
+      # remove an element
       card_array.shift
       card2 = card_array.shuffle.first
+      # remove an element
       card_array.shift
       card3 = card_array.shuffle.first
+      # print out cards
       puts "Computer chose #{card1.to_s},#{card2.to_s},#{card3.to_s} "
       [card1, card2, card3]
 

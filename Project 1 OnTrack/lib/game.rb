@@ -40,15 +40,18 @@ while !exit
     print "\e[H\e[2J"
     playerGroup.player_list = []
     computer_flag = false
-    # Get player information
+    # Get player information to choose whether they want to play multiplayer and computer
     case prompt.select("Choose: ", %w(Multiplayer Computer))
         when "Multiplayer"
           print "\e[H\e[2J"
+          # get the names of the players
           playerGroup.add_players
         when "Computer"
           print "\e[H\e[2J"
+          # add the name of the player and computer
           playerGroup.add_computer
           computer_flag = true
+          # false as its the players turn first
           computer_turn = false
 
         end
@@ -113,13 +116,13 @@ while !exit
           nameList.append(playerGroup.player_list[item].name)
         end
 
-        # if computer then do not need to select name
+        # if computer then do not need to select name from nameList
         if computer_flag
           name = nameList[1]
         else
           name = prompt.select("Which player is entering the set?", nameList)
         end
-
+        # print out cards that the player has entered
         print "\e[H\e[2J"
         puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
@@ -142,6 +145,7 @@ while !exit
         end
         computer_turn = !computer_turn
 
+        # check for no set
       when "NoSet"
         print "\e[H\e[2J"
         if table.if_no_sets(deck) == -1
@@ -163,6 +167,7 @@ while !exit
           name = prompt.select("Which player is using the hint?", nameList)
         end
 
+        # gives out the score
         print "\e[H\e[2J"
         playerGroup.update_score(name, -1)
         table.give_hint
