@@ -47,6 +47,7 @@ class PlayerGroup
         next
       end
 
+      print "\e[H\e[2J"
       # Add new Player object to player list
       @player_list.append(Player.new(name))
       # Add name to list of used names

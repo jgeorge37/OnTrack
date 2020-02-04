@@ -42,9 +42,10 @@ while !exit
     # Get player information
     case prompt.select("Choose: ", %w(Multiplayer Computer))
         when "Multiplayer"
+          print "\e[H\e[2J"
           playerGroup.add_players
-
         when "Computer"
+          print "\e[H\e[2J"
           playerGroup.add_computer
           computer_flag = true
           computer_turn = false
@@ -88,7 +89,7 @@ while !exit
         computer_turn = !computer_turn
       else
         # player turn
-      case prompt.select("Select an option.", %w(EnterCards NoSet give_hint Main))
+      case prompt.select("Select an option.", %w(EnterCards NoSet Hint MainMenu))
 
       when "EnterCards"
         # Prompting the user to select 3 cards
@@ -146,11 +147,11 @@ while !exit
         end
         prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
 
-      when "give_hint"
+      when "Hint"
         print "\e[H\e[2J"
         table.give_hint
         prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-      when "Main"
+      when "MainMenu"
         print "\e[H\e[2J"
         gameOver = true
       else
