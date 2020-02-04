@@ -13,12 +13,14 @@ require_relative 'ascii'
 # Holds current cards on table (pulls from deck)
 class Table
   attr_accessor :current_cards
+  attr_accessor :hintNum
 
   # Created by Jack Thompson - 1/25/20
   # Initialize a Table
   # @return [Self]
   def initialize
     @current_cards = []
+    @hintNum = 0
   end
 
   # Created by Jack Thompson - 1/25/20
@@ -190,7 +192,16 @@ class Table
           count = count + 1
         end
 
-        puts "Try using card numbers: #{index1}, #{index2}, #{index3}"
+        case @hintNum
+        when 0
+          puts "Card #{index1} is in a set"
+          @hintNum += 1
+        when 1
+          puts "Cards #{index1} and #{index2} are in a set"
+          @hintNum += 1
+        else
+          puts "Try using card numbers: #{index1}, #{index2}, #{index3}"
+        end
         flag = true
       end
 

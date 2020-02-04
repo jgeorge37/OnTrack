@@ -112,7 +112,7 @@ while !exit
           nameList.append(playerGroup.player_list[item].name)
         end
 
-        # if computer thhen do not need to select name
+        # if computer then do not need to select name
         if computer_flag
           name = nameList[1]
         else
@@ -126,9 +126,10 @@ while !exit
         if(table.is_set(table.current_cards[card1.to_i-1], table.current_cards[card2.to_i-1], table.current_cards[card3.to_i-1]))
           # If match, continue out of loop and +1 to player Score
           puts("Congratulations! You've correctly entered a set!")
-          playerGroup.update_score(name, 1)
+          playerGroup.update_score(name, 3)
           prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
           correctSet = true
+          table.hintNum = 0
           # Replace entered cards
           table.replace_cards(table.current_cards[card1.to_i-1], table.current_cards[card2.to_i-1], table.current_cards[card3.to_i-1], deck)
         else
@@ -148,7 +149,21 @@ while !exit
         prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
 
       when "Hint"
+        # Prompt for player's name
+        nameList = []
+        playerGroup.player_list.each_index do |item|
+          nameList.append(playerGroup.player_list[item].name)
+        end
+
+        # if computer then do not need to select name
+        if computer_flag
+          name = nameList[1]
+        else
+          name = prompt.select("Which player is using the hint?", nameList)
+        end
+
         print "\e[H\e[2J"
+        playerGroup.update_score(name, -1)
         table.give_hint
         prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
       when "MainMenu"
