@@ -1,4 +1,5 @@
 # Created by Jing George - 1/26/2020
+# Edited by Snigdha Tiwari - 2/3/2020 - Added a def to create computer name
 #
 # Class to manage scores of multiple players
 
@@ -57,6 +58,20 @@ class PlayerGroup
 
     # Confirm that players were added to game
     puts("#{playerCount} players added to game.")
+  end
+
+  # Created by Sngidha Tiwari - 2/3/20
+  #
+  # Add player for computer mode
+  #
+  # @param [String] name
+
+  def add_computer
+    puts("Enter a unique player name.")
+    name = gets.chomp
+    @player_list.append(Player.new("Computer"))
+    @player_list.append(Player.new(name))
+
   end
 
   # Created by Jing Geroge - 1/26/20
