@@ -25,10 +25,10 @@ class Table
   # @param [Deck] deck
   def fillTable(deck)
     if deck.card_list.size > 0
-    	while @current_cards.size < 12
-      		@current_cards.append(deck.card_list.shift)
+      while @current_cards.size < 12
+        @current_cards.append(deck.card_list.shift)
       end
-      
+
     end
 
   end
@@ -41,7 +41,7 @@ class Table
     printed = 0
     while remaining > 0
       for line in 1..8 do
-        for item in printed...printed+6 do
+        for item in printed...printed + 6 do
           if @current_cards.size > item
             disp.print_by_line(@current_cards[item], line)
             print("   ")
@@ -52,9 +52,9 @@ class Table
       end
 
       puts
-      for item in printed...printed+6 do
+      for item in printed...printed + 6 do
         if @current_cards.size > item
-          print("Card #{item+1}")
+          print("Card #{item + 1}")
           print("               ")
         end
 
@@ -74,17 +74,17 @@ class Table
   # @param [Deck] deck
   def if_no_sets(deck)
 
- 	  if set_present(current_cards) == false
+    if set_present(current_cards) == false
       if deck.card_list.size > 0
-  		  puts "No sets are present.  Adding 3 cards."
-  		  3.times { @current_cards.append(deck.card_list.shift) }
+        puts "No sets are present.  Adding 3 cards."
+        3.times { @current_cards.append(deck.card_list.shift) }
       else
         return -1
       end
 
-  	else
-	    puts "Keep looking.  There is a set that can be found."
-  	end
+    else
+      puts "Keep looking.  There is a set that can be found."
+    end
 
   end
 
@@ -114,7 +114,7 @@ class Table
     is_set
   end
 
-  
+
   # Created by Jing George - 1/29/20
   # Returns true if all given attributes are either all matching or all different,
   # returns false otherwise (i.e. only two match).
@@ -145,10 +145,10 @@ class Table
     currentCombos = create_combos(@current_cards)
     set_present = false
     count = 0
-    while set_present==false && count<currentCombos.size 
+    while set_present == false && count < currentCombos.size
       temp = currentCombos[count]
       if is_set(temp[0], temp[1], temp[2]) == true
-        set_present=true
+        set_present = true
       end
 
       count = count + 1
@@ -157,9 +157,9 @@ class Table
     set_present
   end
 
- #  Created by Jack Hanley
- #  Method that generates a hint for a player.  Tells the user a potential
- #  card to use
+  #  Created by Jack Hanley
+  #  Method that generates a hint for a player.  Tells the user a potential
+  #  card to use
   def give_hint
     currentCombos = create_combos(@current_cards)
     if set_present(@current_cards) == false
@@ -186,16 +186,51 @@ class Table
           elsif singleCard3 == @current_cards[count]
             index3 = count + 1
           end
-          
+
           count = count + 1
         end
-        
+
         puts "Try using card numbers: #{index1}, #{index2}, #{index3}"
         flag = true
       end
-      
+
       count = count + 1
 
+    end
+
+  end
+
+  #  Created by Snigdha Tiwari
+  #  Find potential hints and return array of indexes else return empty array
+  def correct_set
+    current_combos = create_combos(@current_cards)
+    correct_set = []
+    # if set is present
+    if !set_present(@current_cards)
+       []
+    else
+       # there is a set, find it
+       count = 0
+       temp = current_combos[count]
+       until is_set(temp[0], temp[1], temp[2]) do
+         count += 1
+         temp = current_combos[count]
+
+       end
+
+       # find indexes
+       index_count = 0
+       while index_count < @current_cards.size
+         if temp[0] == @current_cards[index_count]
+           correct_set << index_count + 1
+         elsif temp[1] == @current_cards[index_count]
+           correct_set << index_count + 1
+         elsif temp[2] == @current_cards[index_count]
+           correct_set << index_count + 1
+         end
+         index_count += 1
+       end
+       correct_set
     end
 
   end
