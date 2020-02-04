@@ -1,5 +1,8 @@
-require 'tty-prompt'
+# Created by Snigdha Tiwari 2/3/2020
+# Edited by Snigdha Tiwari 2/3/2020 - fixed a bug in the program which picked two of the same cards
+#
 
+require 'tty-prompt'
 
 require_relative 'playerGroup'
 

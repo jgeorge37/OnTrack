@@ -9,6 +9,7 @@
 # Edited by Jack Thompson - 2/2/2020 - Implemented main menu functionality, tutorial, settings
 # Edited by Snigdha Tiwari- 2/3/2020 - Added breaks in between to make sure that the players can see hints and scores
 # Edited by Snigdha Tiwari - 2/3/2020 - Added functionality for a computer player
+# Edited by Snigdha Tiwari - 2/3/2020 - Made a change to scores for the computer player
 #
 # Controls overall game functionality
 
@@ -74,7 +75,7 @@ while !exit
         if(table.is_set(table.current_cards[moves[0]-1], table.current_cards[moves[1]-1], table.current_cards[moves[2]-1]))
           # If match, continue out of loop and +1 to player Score
           puts("Congratulations! You've correctly entered a set!")
-          playerGroup.update_score("Computer", 1)
+          playerGroup.update_score("Computer", 3)
           prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
           correctSet = true
           # Replace entered cards
