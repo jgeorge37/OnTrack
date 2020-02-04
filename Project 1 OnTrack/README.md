@@ -29,6 +29,7 @@ Ruby Gems:
 - Tutorial
 - Hints
 - High score tracking across multiple games
+- Playing against a computer player 
 
 
 ## Installation Guide
