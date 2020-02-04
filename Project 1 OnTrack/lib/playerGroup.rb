@@ -27,7 +27,7 @@ class PlayerGroup
     # Ask for number of players
     puts("Enter the number of players.")
     playerCount = Integer(gets.chomp) rescue false
-    while !playerCount do
+    while !playerCount || playerCount < 1 do
       puts("Enter the number of players as an integer.")
       playerCount = Integer(gets.chomp) rescue false
     end
