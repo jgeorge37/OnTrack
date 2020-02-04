@@ -36,6 +36,7 @@ while !exit
 
   case prompt.select("Welcome to Set!", %w(Start Tutorial HighScore Settings Quit))
   when "Start"
+    print "\e[H\e[2J"
     playerGroup.player_list = []
     computer_flag = false
     # Get player information
@@ -170,10 +171,12 @@ while !exit
   when "Tutorial"
     tutorial.display
   when "HighScore"
+    print "\e[H\e[2J"
     playerGroup.list_top_players
     print("press enter to quit")
     gets
   when "Settings"
+    print "\e[H\e[2J"
     visual = prompt.select("Select an option.", %w(Graphics Table))
   when "Quit"
     exit = true
