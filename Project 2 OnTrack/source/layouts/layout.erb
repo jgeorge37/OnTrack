@@ -11,6 +11,13 @@
     <%= javascript_include_tag "site" %>
   </head>
   <body>
-    <%= yield %>
+    <div class="navigation">
+      <%= link_to 'Home', '../index.html'%>
+      <%= link_to 'News', '/pages/news.html'%>
+      <%= link_to 'Research', '/pages/research.html'%>
+      <%= link_to 'Teaching', '/pages/news.html'%>
+      <%= link_to 'MISC', '/pages/misc.html'%>
+      <%= yield %>
+    <div>
   </body>
 </html>
