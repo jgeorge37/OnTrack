@@ -1,7 +1,20 @@
 
 .navigation {
-  padding: 20px;
-  align-self: center;
-  border-color: black;
+  padding: 10px;
 }
+
+.navigation a{
+  float: left;
+  background-color: rgb(102, 102, 102);
+  color: black;
+  padding: 7px 16px;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.navigation a:hover {
+  background-color: rgb(187, 0, 0);
+  color: white;
+}
+
 
