@@ -16,7 +16,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Documents/Project-4-JavaScript-Ohio" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpringUtil" SPRING_PRE_LOADER_OPTION="true" RAKE_SPRING_PRE_LOADER_OPTION="true" RAILS_SPRING_PRE_LOADER_OPTION="true" />
   <component name="SvnConfiguration">
@@ -30,6 +30,7 @@
       <option name="presentableId" value="Default" />
       <updated>1581293065984</updated>
       <workItem from="1581293085921" duration="1123000" />
+      <workItem from="1581301705845" duration="350000" />
     </task>
     <servers />
   </component>
