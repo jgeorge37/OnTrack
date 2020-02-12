@@ -1,19 +1,32 @@
+body {
+  margin: 0px;
+  font-family: Georgia;
+}
+
 .header {
   text-align: center;
 }
 
+
+
 .navigation {
-  padding: 10px;
+  background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
+  text-align: center;
+  font-size: 0;
+  padding: 20px;
+  border-bottom: 5px solid rgb(152,3,3);
 }
 
+
+
 .navigation a{
-  float: left;
-  background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
-  border-bottom: 5px solid rgb(152,3,3);
+  // background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
+  // border-bottom: 5px solid rgb(152,3,3);
   color: black;
-  padding: 7px 16px;
+  padding: 20px 16px 20px 16px;
   text-decoration: none;
   font-size: 20px;
+  
 }
 
 .navigation a:hover {
@@ -26,6 +39,7 @@
   border: 3px solid black;
   padding: 10px;
   margin: auto;
+  border-radius: 15px;
 }
 
 .home_layout {
@@ -41,6 +55,7 @@
 
 .home_header {
   margin-left: 220px;
+  
 }
 
 .home_content {
