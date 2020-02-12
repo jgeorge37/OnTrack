@@ -9,7 +9,7 @@
 .navigation a{
   float: left;
   background-color: rgb(102, 102, 102);
-  color: black;
+  color: white;
   padding: 7px 16px;
   text-decoration: none;
   font-size: 20px;
@@ -27,6 +27,24 @@
   margin: auto;
 }
 
-.table, th, td {
-  border: 1px solid black;
+.home_layout {
+  width: 800px;
+  padding: 10px;
+  height: 416px;
+}
+
+.home_img {
+  width: 200px;
+  float: left;
+}
+
+.home_header {
+  margin-left: 220px;
+}
+
+.home_content {
+  margin-left: 220px;
+  width: 100%;
+  border: 3px solid black;
+  padding: 10px;
 }
