@@ -8,15 +8,16 @@
 
 .navigation a{
   float: left;
-  background-color: rgb(102, 102, 102);
-  color: white;
+  background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
+  border-bottom: 5px solid rgb(152,3,3);
+  color: black;
   padding: 7px 16px;
   text-decoration: none;
   font-size: 20px;
 }
 
 .navigation a:hover {
-  background-color: rgb(187, 0, 0);
+  background: linear-gradient(to bottom, #fa1e1e 0, rgb(152,3,3) 100%);
   color: white;
 }
 
@@ -49,5 +50,6 @@
   padding: 10px;
 }
 
-
-
+tr:nth-child(even){
+  background-color: #dddddd;
+}
