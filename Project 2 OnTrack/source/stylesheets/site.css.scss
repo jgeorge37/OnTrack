@@ -1,13 +1,20 @@
+
 body {
   margin: 0px;
   font-family: Georgia;
+  background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
+  // background-color: #d3d3d3;
 }
 
 .header {
   text-align: center;
+  text-shadow: grey 2px 2px 3px;
 }
 
 
+footer {
+  text-align: middle;
+}
 
 .navigation {
   background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
@@ -34,12 +41,14 @@ body {
   color: white;
 }
 
+
 .content {
   width:1000px;
   border: 3px solid black;
   padding: 10px;
   margin: auto;
   border-radius: 15px;
+  background-color: #f8f8f8;
 }
 
 .home_layout {
@@ -63,8 +72,11 @@ body {
   width: 100%;
   border: 3px solid black;
   padding: 10px;
+  background-color: #f8f8f8;
+  border-radius: 15px;
 }
 
 tr:nth-child(even){
   background-color: #dddddd;
 }
+
