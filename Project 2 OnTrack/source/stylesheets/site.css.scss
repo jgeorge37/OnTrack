@@ -20,7 +20,7 @@ footer {
   background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
   text-align: center;
   font-size: 0;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
   border-bottom: 5px solid rgb(152,3,3);
 }
 
@@ -30,10 +30,10 @@ footer {
   // background: linear-gradient(to bottom, #e3e3e3 0, #b9b9ba 100%);
   // border-bottom: 5px solid rgb(152,3,3);
   color: black;
-  padding: 20px 16px 20px 16px;
+  padding: 20px 16px 10px 16px;
   text-decoration: none;
   font-size: 20px;
-  
+
 }
 
 .navigation a:hover {
@@ -53,11 +53,12 @@ footer {
 
 .home_layout {
   width: 800px;
-  padding: 10px;
+  padding: 0px 20px 20px 20px;
 }
 
 .home_img {
   width: 200px;
+  padding-top: 5px;
   float: left;
 }
 
@@ -70,7 +71,7 @@ footer {
   margin-left: 220px;
   width: 100%;
   border: 3px solid black;
-  padding: 10px;
+  padding: 2px 10px 1px 10px;
   background-color: #f8f8f8;
   border-radius: 15px;
 }
@@ -78,4 +79,3 @@ footer {
 tr:nth-child(even){
   background-color: #dddddd;
 }
-
