@@ -1,0 +1,9 @@
+Correctness: Good job ensuring user enters in valid number of players and name and using keyed navigation to prevent crashes at other parts of the game! Nice thorough creation of automated tests.
+
+Functionality/Features: Tutorial feature is very helpful and neat. Great job letting user navigate through game with arrows and keys instead of traditional terminal interaction! Very good looking UI (nice job giving the user the option to view cards or table). Implementation of the computer player seems great! Very easy to install and play game.
+
+Design: Great modularization of code across many classes (player, game, deck, etc.). This design could very easily be expanded on moving forward, well done! Only suggestion is to use "src" instead of "lib" using forward, as "lib" folders are commonly used for reusable basic library components, whereas "src" applies to the meat of the project.
+
+Documentation: Extremely thorough Readme, keep this up! Great class and function-level comments to explain expected behavior. Great commit messages and history of edits.
+
+Style: Good job listing style guide used in Readme. Style is very consistent throughout entire project. Good job using features of Ruby!
