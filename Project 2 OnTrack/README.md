@@ -3,6 +3,7 @@ The goal of this project is to redesign Professor Mike Bond's website to be more
 ## Table of Contents
 * [Technologies Used](#technologies-used)
 * [Installation Guide](#installation-guide)
+* [Usage](#usage)
 * [Styling](#styling)
 * [Authors](#authors)
 
