@@ -13,7 +13,7 @@ The goal of this project is to redesign Professor Mike Bond's website to be more
 
 ## Installation Guide
 1. Download the zip archive of the OnTrack repository.
-2. Navigate to the 'Project 2 OnTrack' directory.
+2. Navigate to the 'Project 1 OnTrack' directory.
 3. Install the required Ruby gems with the following command:
 ```
 $ bundle install
