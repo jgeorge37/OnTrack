@@ -1,0 +1,11 @@
+Client Impression: Use of a header and footer make this an upgrade over the original faculty page! Tables on publications page are very useful and would be a nice addition to the original page! While not overly complex, the redesigned page is just as functional as the original and is more organized/visually appealing.
+
+Aesthetics: Images on members page are sized awkwardly (very skinny). No attempt at adding colors to create more of a unique brand on the webpage. Home page should probably have some stuff centered (picture and main heading) to take up the entire screen. Navigation bar and footer are great additions, but they should probably take up the full screen (left to right) in order to be more visually appealing. I would challenge you guys to attempt more customizations (colors, fonts, bold/italicized text, shaded tables, etc.) to take this page to the next level.
+
+Performance: Performance seems good!
+
+Design: Good use of Middleman! Great use of layout.erb, header.erb, and footer.erb to reduce amount of repeated code! Nice useful names for CSS classes. Next step would be to use features of embedded Ruby (loops, if-else, etc.) to reduce amount of repeated code in HTML files.
+
+Documentation: README file is sufficient. Nice commit messages. More file-level documentation is desired to specify what each file contributes to the site.
+
+Style: Good job referencing style used in README. HTML validation issues mostly have to do with misuse of <br> tag. HTML formatting is fairly consistent!
