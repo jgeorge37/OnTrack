@@ -12,12 +12,12 @@ def web_scraper
   # pareses for each panel which is each class and then loops through to get the name of each class
   course_list = parsed_url.css('div.panel')
   course_list.each do |course|
-  course = {
-         title: course_list.css('div.panel-heading').text
+    course = {
+        title: course_list.css('div.panel-heading').text
 
-      # url: "https://courses.osu.edu/psp/csosuct/EMPLOYEE/PUB/c/COMMUNITY_ACCESS.OSR_CAT_SRCH.GBL" + course_list.css('a')[0].attributes["href"].value
+        # url: "https://courses.osu.edu/psp/csosuct/EMPLOYEE/PUB/c/COMMUNITY_ACCESS.OSR_CAT_SRCH.GBL" + course_list.css('a')[0].attributes["href"].value
 
-  }
+    }
     all_courses << course
   end
 
@@ -26,7 +26,7 @@ def web_scraper
 
   class_table.each do |class_info|
     class_info = {
-        classNumber_blue: class_table.css('tr.group0[0]').text
+        classNumber_blue: class_table.css('tr.group0').text
         #component: class_table.css('td')[1].text,
         #location: class_table.css('td')[2].text,
         #times: class_table.css('td')[3].text,
