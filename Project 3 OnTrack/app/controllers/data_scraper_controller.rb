@@ -1,5 +1,9 @@
 class DataScraperController < ApplicationController
   def scrape
+    if ClassName.any?
+      redirect_to :action => 'list'
+      return
+    end
     current_names = ClassName.all
     secondary_names = []
     current_classes = Teaching.all
@@ -17,18 +21,18 @@ class DataScraperController < ApplicationController
         secondary_names.unshift(full_title)
         rows_0 = course.css('table.table').first.css('tr.group0')
         rows_1 = course.css('table.table').first.css('tr.group1')
-        rows_0.each do |td| 
+        rows_0.each do |td|
             values = td.css('td')
             course = Teaching.create(class_number: values[0].text.to_i, component: values[1].text, location: values[2].text,
-              times: values[3].text, instructor: values[4].text, session: values[5].text, topic: values[6].text, 
+              times: values[3].text, instructor: values[4].text, session: values[5].text, topic: values[6].text,
               semester: semester.text, class_name_id: class_name.id
             )
         end
 
-        rows_1.each do |td| 
+        rows_1.each do |td|
           values = td.css('td')
           course = Teaching.create(class_number: values[0].text.to_i, component: values[1].text, location: values[2].text,
-            times: values[3].text, instructor: values[4].text, session: values[5].text, topic: values[6].text, 
+            times: values[3].text, instructor: values[4].text, session: values[5].text, topic: values[6].text,
             semester: semester.text, class_name_id: class_name.id
           )
         end
