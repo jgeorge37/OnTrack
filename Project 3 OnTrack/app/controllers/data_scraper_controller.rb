@@ -36,12 +36,14 @@ class DataScraperController < ApplicationController
 
       end
     end
-    redirect_to 'list'
+    redirect_to :action => 'list'
+    return
   end
 
   def list
     @names = ClassName.all
     @course = Teaching.all
+    render 'list'
   end
 end
 
