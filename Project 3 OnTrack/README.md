@@ -1,24 +1,43 @@
-# README
+# Project #3 - Web Scrapter
+The goal of this project is to create a web scraper for OSU classes and their attributes.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Table of Contents
+* [Technologies Used](#technologies-used)
+* [Installation Guide](#installation-guide)
+* [Usage Guide](#usage-guide)
+* [Styling](#styling)
+* [Authors](#authors)
 
-Things you may want to cover:
+## Technologies Used
+Ruby 2.6.3
+Rails 5.2.3
+SQLite 3.2.4
 
-* Ruby version
+## Installation Guide
+1. Download the zip archive of the OnTrack repository.
+2. Navigate to the 'Project 3 OnTrack' directory.
+3. Install the required gems with the following command:
+'''
+$ bundle install
+'''
 
-* System dependencies
+## Usage Guide
+After installing the necessary gems, use the following command to launch the 
+server:
+'''
+$ rails server
+'''
+Following this command, you should be presented with a TCP link. You can 
+either copy and paste this, or type 'localhost:3000' into the web browser
+of your choice.
 
-* Configuration
+## Styling
+All Ruby files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/ruby).
 
-* Database creation
+## Authors
+- Jing George
+- Jack Hanley
+- Jack Thompson
+- Snigdha Tiwari
+- Von Mbah
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
