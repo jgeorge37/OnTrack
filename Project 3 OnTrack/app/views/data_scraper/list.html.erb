@@ -21,7 +21,7 @@
     <!-- Print each row in scraped table to displayed table -->
     <% @course.each do |c| %>
       <tr>
-        <td><%= class_names.find(c.class_name_id) %></td> <!-- Course (ex: CSE 3901) -->
+        <td><%= @names.find(c.class_name_id).name %></td> <!-- Course (ex: CSE 3901) -->
         <td><%= c.class_number %></td> <!-- Class number (ex: 6845) -->
         <td><%= c.component %></td> <!-- Component -->
         <td><%= c.times %></td> <!-- Times (ex: 0800A) -->
