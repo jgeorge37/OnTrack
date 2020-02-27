@@ -9,7 +9,7 @@ The goal of this project is to create a web scraper for OSU classes and their at
 * [Authors](#authors)
 
 ## Technologies Used
-- Ruby 2.6.3
+- Ruby 2.6.5
 - Rails 5.2.3
 - SQLite 3.2.4
 
@@ -46,7 +46,7 @@ classes that are offered to them in a single table.
 
 ## Styling
 All Ruby files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/ruby).
-
+The page was styled in CSS and printed to the website using HTML.
 ## Authors
 - Jing George
 - Jack Hanley
