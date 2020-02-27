@@ -9,24 +9,24 @@ The goal of this project is to create a web scraper for OSU classes and their at
 * [Authors](#authors)
 
 ## Technologies Used
-Ruby 2.6.3
-Rails 5.2.3
-SQLite 3.2.4
+- Ruby 2.6.3
+- Rails 5.2.3
+- SQLite 3.2.4
 
 ## Installation Guide
 1. Download the zip archive of the OnTrack repository.
 2. Navigate to the 'Project 3 OnTrack' directory.
 3. Install the required gems with the following command:
-'''
+```
 $ bundle install
-'''
+```
 
 ## Usage Guide
 After installing the necessary gems, use the following command to launch the 
 server:
-'''
+```
 $ rails server
-'''
+```
 Following this command, you should be presented with a TCP link. You can 
 either copy and paste this, or type 'localhost:3000' into the web browser
 of your choice.
