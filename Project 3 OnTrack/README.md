@@ -31,6 +31,19 @@ Following this command, you should be presented with a TCP link. You can
 either copy and paste this, or type 'localhost:3000' into the web browser
 of your choice.
 
+This web page will display a table of CSE courses starting from the 1000 level
+up to the 8000 level.  The table will display the following information:
+- Course Number
+- Class Number
+- Component (Ex. LEC, LAB, Online)
+- Time
+- Location
+- Instructor
+- Session
+
+CSE students could use this program to quickly and accurately display all the 
+classes that are offered to them in a single table.
+
 ## Styling
 All Ruby files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/ruby).
 
