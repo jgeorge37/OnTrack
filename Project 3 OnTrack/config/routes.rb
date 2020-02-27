@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'data_scraper#list'
+  root 'data_scraper#scrape'
   get 'data_scraper/list'
   get 'data_scraper/scrape'
 
