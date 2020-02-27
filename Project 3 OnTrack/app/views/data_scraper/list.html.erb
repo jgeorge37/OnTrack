@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-    <%= @course.each do |c| %>
+    <% @course.each do |c| %>
       <tr>
         <td><%= class_names.find(c.class_name_id) %></td> <!-- Course (ex: CSE 3901) -->
         <td><%= c.class_number %></td> <!-- Class number (ex: 6845) -->
@@ -24,6 +24,7 @@
         <td><%= c.instructor %></td> <!-- Instructor (ex: P.Bucci) -->
         <td><%= c.session %></td> <!-- Session -->
       </tr>
+    <% end %>
   </tbody>
 </table>
 <br>
