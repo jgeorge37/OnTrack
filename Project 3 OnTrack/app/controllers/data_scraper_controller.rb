@@ -19,30 +19,29 @@ class DataScraperController < ApplicationController
         rows_1 = course.css('table.table').first.css('tr.group1')
         rows_0.each do |td| 
             values = td.css('td')
-            p values[0].text
             course = Teaching.create(class_number: values[0].text.to_i, component: values[1].text, location: values[2].text,
               times: values[3].text, instructor: values[4].text, session: values[5].text, topic: values[6].text, 
-              semester: semester.text, class_name_id: class_name.id.to_i)
+              semester: semester.text, class_name_id: class_name.id
+            )
         end
 
         rows_1.each do |td| 
           values = td.css('td')
           course = Teaching.create(class_number: values[0].text.to_i, component: values[1].text, location: values[2].text,
             times: values[3].text, instructor: values[4].text, session: values[5].text, topic: values[6].text, 
-            semester: semester.text, class_name_id: class_name.id.to_i)
+            semester: semester.text, class_name_id: class_name.id
+          )
         end
       end
 
       end
     end
-    redirect_to :action => "list"
-    return 
+    redirect_to 'list'
   end
 
   def list
     @names = ClassName.all
     @course = Teaching.all
-    render 'list'
   end
 end
 
