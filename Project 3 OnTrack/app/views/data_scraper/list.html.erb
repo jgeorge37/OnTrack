@@ -1,5 +1,9 @@
+<!-- View that displays the results of the web scraping in a table -->
+
 <h1>OnTrack Project 3: Web Scraping</h1>
+<!-- Print time that data was gathered -->
 <h4>Last updated: <%= Time.new.inspect %></h4>
+<!-- Table to display course information -->
 <table>
   <thead>
     <tr>
@@ -7,13 +11,14 @@
       <th>Class #</th>
       <th>Component</th>
       <th>Time</th>
-      <th>Location(</th>
+      <th>Location</th>
       <th>Instructor</th>
       <th>Session</th>
     </tr>
   </thead>
 
   <tbody>
+    <!-- Print each row in scraped table to displayed table -->
     <% @course.each do |c| %>
       <tr>
         <td><%= class_names.find(c.class_name_id) %></td> <!-- Course (ex: CSE 3901) -->
