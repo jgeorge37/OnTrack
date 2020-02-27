@@ -7,7 +7,7 @@ class DataScraperController < ApplicationController
     secondary_names = []
     agent = Mechanize.new
     page = agent.get("https://web.cse.ohio-state.edu/oportal/schedule_display")
-    form = page.form_with(:dom_id => 'filter');
+    form = page.form_with(:dom_id => 'filter')
     form.field_with(:name => 'strm').options.each do |semester|
       semester.click
       semester_page = form.submit.parser
@@ -41,7 +41,6 @@ class DataScraperController < ApplicationController
       end
     end
     redirect_to :action => 'list'
-    return
   end
 
   def list
