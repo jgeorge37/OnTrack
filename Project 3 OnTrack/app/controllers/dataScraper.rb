@@ -19,20 +19,26 @@ class Scraper
        rows_1 = course.css('table.table').first.css('tr.group1')
        rows_0.each do |td| 
           values = td.css('td')
-          course = Teaching.new(class_number: values[0].text.chomp, component: values[1].text.chomp, location: values[2].text.chomp,
-            times: values[3].text.chomp, instructor: values[4].text.chomp, session: values[5].text.chomp, topic: values[6].text.chomp, 
-            semester: semester.text, class_name_id: class_name.id
-          )
-          course.save
+          if !Teaching.exists?(session: values[5].text.chomp)
+            course = Teaching.new(class_number: values[0].text.chomp, component: values[1].text.chomp, location: values[2].text.chomp,
+                                  times: values[3].text.chomp, instructor: values[4].text.chomp, session: values[5].text.chomp, topic: values[6].text.chomp,
+                                  semester: semester.text, class_name_id: class_name.id
+            )
+
+            course.save
+          end
+
        end
 
        rows_1.each do |td| 
         values = td.css('td')
-        course = Teaching.new(class_number: values[0].text.chomp, component: values[1].text.chomp, location: values[2].text.chomp,
-          times: values[3].text.chomp, instructor: values[4].text.chomp, session: values[5].text.chomp, topic: values[6].text.chomp, 
-          semester: semester.text, class_name_id: class_name.id
-        )
-        course.save
+        if !Teaching.exists?(session: values[5].text.chomp)
+          course = Teaching.new(class_number: values[0].text.chomp, component: values[1].text.chomp, location: values[2].text.chomp,
+            times: values[3].text.chomp, instructor: values[4].text.chomp, session: values[5].text.chomp, topic: values[6].text.chomp,
+            semester: semester.text, class_name_id: class_name.id
+          )
+          course.save
+        end
       end
 
       end
