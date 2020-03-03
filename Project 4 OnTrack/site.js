@@ -22,179 +22,185 @@ visual = "Graphics"
 
 # Main menu
 while !exit
-    print "\e[H\e[2J"
+        print "\e[H\e[2J"
 
-case prompt.select("Welcome to Set!", %w(Start Tutorial HighScore Settings Quit))
-when "Start"
-print "\e[H\e[2J"
-playerGroup.player_list = []
-computer_flag = false
-# Get player information to choose whether they want to play multiplayer and computer
-case prompt.select("Choose: ", %w(Multiplayer Computer))
-when "Multiplayer"
-print "\e[H\e[2J"
-# get the names of the players
-playerGroup.add_players
-when "Computer"
-print "\e[H\e[2J"
-# add the name of the player and computer
-playerGroup.add_computer
-computer_flag = true
-# false as its the players turn first
-computer_turn = false
-end
+        case prompt.select("Welcome to Set!", %w(Start Tutorial HighScore Settings Quit))
+        when "Start"
+                print "\e[H\e[2J"
+                playerGroup.player_list = []
+                computer_flag = false
 
-# Place 12 cards on table
-deck = Deck.new
-table = Table.new
-table.fillTable(deck)
-tableView = View.new(table.current_cards)
-gameOver = false
-computer = Computer.new
+                # Get player information to choose whether they want to play multiplayer and computer
+                case prompt.select("Choose: ", %w(Multiplayer Computer))
+                when "Multiplayer"
+                        print "\e[H\e[2J"
 
-until gameOver
-# Displaying the table
-if(visual == "Graphics")
-    table.display_table
-else
-    tableView.render
-end
+                        # get the names of the players
+                        playerGroup.add_players
+                when "Computer"
+                        print "\e[H\e[2J"
 
-# computer mode and computer's turn
-if computer_flag && computer_turn
-    moves = computer.computer_moves(table.correct_set,table.current_cards.size)
-if(table.is_set(table.current_cards[moves[0]-1], table.current_cards[moves[1]-1], table.current_cards[moves[2]-1]))
-    # If match, continue out of loop and +1 to player Score
-puts("Congratulations! You've correctly entered a set!")
-playerGroup.update_score("Computer", 3)
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-correctSet = true
-# Replace entered cards
-table.replace_cards(table.current_cards[moves[0]-1], table.current_cards[moves[1]-1], table.current_cards[moves[2]-1], deck)
-else
-# Else, return to prompting and -1 point to player Score
-puts("These cards do not make a set.")
-playerGroup.update_score("Computer", -1)
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-end
+                        # add the name of the player and computer
+                        playerGroup.add_computer
+                        computer_flag = true
 
-computer_turn = !computer_turn
-else
-# player turn
-case prompt.select("Select an option.", %w(EnterCards NoSet Hint MainMenu))
+                        # false as its the players turn first
+                        computer_turn = false
+                end
 
-when "EnterCards"
-# Prompting the user to select 3 cards
-card_array = []
-choices = (1..table.current_cards.size).to_a
-choices = choices.map(&:to_s)
-while card_array.size != 3 do
-    card_array = prompt.multi_select("Select 3 cards.", choices)
-if card_array.size != 3
-    puts "Incorrect number of cards selected."
-end
+        # Place 12 cards on table
+        deck = Deck.new
+        table = Table.new
+        table.fillTable(deck)
+        tableView = View.new(table.current_cards)
+        gameOver = false
+        computer = Computer.new
 
-end
+        until gameOver
+                # Displaying the table
+                if(visual == "Graphics")
+                    table.display_table
+                else
+                    tableView.render
+                end
 
-card1 = card_array[0]
-card2 = card_array[1]
-card3 = card_array[2]
+                # computer mode and computer's turn
+                if computer_flag && computer_turn
+                        moves = computer.computer_moves(table.correct_set,table.current_cards.size)
+                        if(table.is_set(table.current_cards[moves[0]-1], table.current_cards[moves[1]-1], table.current_cards[moves[2]-1]))
+                                # If match, continue out of loop and +1 to player Score
+                                puts("Congratulations! You've correctly entered a set!")
+                                playerGroup.update_score("Computer", 3)
+                                prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                                correctSet = true
+                                # Replace entered cards
+                                table.replace_cards(table.current_cards[moves[0]-1], table.current_cards[moves[1]-1], table.current_cards[moves[2]-1], deck)
+                        else
+                                # Else, return to prompting and -1 point to player Score
+                                puts("These cards do not make a set.")
+                                playerGroup.update_score("Computer", -1)
+                                prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                        end
 
-# Prompt for player's name
-nameList = []
-playerGroup.player_list.each_index do |item|
-nameList.append(playerGroup.player_list[item].name)
-end
+                        computer_turn = !computer_turn
+                else
+                        # player turn
+                        case prompt.select("Select an option.", %w(EnterCards NoSet Hint MainMenu))
 
-# if computer then do not need to select name from nameList
-if computer_flag
-    name = nameList[1]
-else
-    name = prompt.select("Which player is entering the set?", nameList)
-end
+                        when "EnterCards"
+                                # Prompting the user to select 3 cards
+                                card_array = []
+                                choices = (1..table.current_cards.size).to_a
+                                choices = choices.map(&:to_s)
+                                while card_array.size != 3 do
+                                    card_array = prompt.multi_select("Select 3 cards.", choices)
+                                        if card_array.size != 3
+                                            puts "Incorrect number of cards selected."
+                                        end
 
-# print out cards that the player has entered
-print "\e[H\e[2J"
-puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
+                                end
 
-# Check if entered cards are a match
-if(table.is_set(table.current_cards[card1.to_i-1], table.current_cards[card2.to_i-1], table.current_cards[card3.to_i-1]))
-    # If match, continue out of loop and +1 to player Score
-puts("Congratulations! You've correctly entered a set!")
-playerGroup.update_score(name, 3)
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-correctSet = true
-table.hintNum = 0
-# Replace entered cards
-table.replace_cards(table.current_cards[card1.to_i-1], table.current_cards[card2.to_i-1], table.current_cards[card3.to_i-1], deck)
-else
-# Else, return to prompting and -1 point to player Score
-puts("These cards do not make a set.")
-playerGroup.update_score(name, -1)
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-end
+                                card1 = card_array[0]
+                                card2 = card_array[1]
+                                card3 = card_array[2]
 
-computer_turn = !computer_turn
+                                # Prompt for player's name
+                                nameList = []
+                                playerGroup.player_list.each_index do |item|
+                                        nameList.append(playerGroup.player_list[item].name)
+                                end
 
-# check for no set
-when "NoSet"
-print "\e[H\e[2J"
-if table.if_no_sets(deck) == -1
-    gameOver = true
-end
+                                # if computer then do not need to select name from nameList
+                                if computer_flag
+                                    name = nameList[1]
+                                else
+                                    name = prompt.select("Which player is entering the set?", nameList)
+                                end
 
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-when "Hint"
-# Prompt for player's name
-nameList = []
-playerGroup.player_list.each_index do |item|
-nameList.append(playerGroup.player_list[item].name)
-end
+                                # print out cards that the player has entered
+                                print "\e[H\e[2J"
+                                puts("You've entered " + card1 + ", " + card2 + ", " + card3 + ".\n")
 
-# if computer then do not need to select name
-if computer_flag
-    name = nameList[1]
-else
-    name = prompt.select("Which player is using the hint?", nameList)
-end
+                                # Check if entered cards are a match
+                                if(table.is_set(table.current_cards[card1.to_i-1], table.current_cards[card2.to_i-1], table.current_cards[card3.to_i-1]))
+                                        # If match, continue out of loop and +1 to player Score
+                                        puts("Congratulations! You've correctly entered a set!")
+                                        playerGroup.update_score(name, 3)
+                                        prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                                        correctSet = true
+                                        table.hintNum = 0
 
-# gives out the score
-print "\e[H\e[2J"
-playerGroup.update_score(name, -1)
-table.give_hint
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-when "MainMenu"
-print "\e[H\e[2J"
-gameOver = true
-else
-print "\e[H\e[2J"
-puts "Not a menu option"
-prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
-end
+                                        # Replace entered cards
+                                        table.replace_cards(table.current_cards[card1.to_i-1], table.current_cards[card2.to_i-1], table.current_cards[card3.to_i-1], deck)
+                                else
+                                        # Else, return to prompting and -1 point to player Score
+                                        puts("These cards do not make a set.")
+                                        playerGroup.update_score(name, -1)
+                                        prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                                end
 
-end
+                                        computer_turn = !computer_turn
 
-end
+                                        # check for no set
+                        when "NoSet"
+                                print "\e[H\e[2J"
+                                if table.if_no_sets(deck) == -1
+                                    gameOver = true
+                                end
 
-playerGroup.print_game_result
-playerGroup.update_highscore!(playerGroup.player_list)
-print("Press <Enter> to return to Main Menu")
-gets
-when "Tutorial"
-tutorial.display
-when "HighScore"
-print "\e[H\e[2J"
-playerGroup.list_top_players
-print("press enter to quit")
-gets
-when "Settings"
-print "\e[H\e[2J"
-visual = prompt.select("Select an option.", %w(Graphics Table))
-when "Quit"
-exit = true
-else
+                                prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                        when "Hint"
+                                # Prompt for player's name
+                                nameList = []
+                                playerGroup.player_list.each_index do |item|
+                                        nameList.append(playerGroup.player_list[item].name)
+                                end
 
-end
+                                # if computer then do not need to select name
+                                if computer_flag
+                                    name = nameList[1]
+                                else
+                                    name = prompt.select("Which player is using the hint?", nameList)
+                                end
+
+                                # gives out the score
+                                print "\e[H\e[2J"
+                                playerGroup.update_score(name, -1)
+                                table.give_hint
+                                prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                        when "MainMenu"
+                                print "\e[H\e[2J"
+                                gameOver = true
+                        else
+                                print "\e[H\e[2J"
+                                puts "Not a menu option"
+                                prompt.keypress("Press any key to continue :countdown ...", timeout: 3)
+                        end
+
+                end
+
+        end
+
+        playerGroup.print_game_result
+        playerGroup.update_highscore!(playerGroup.player_list)
+        print("Press <Enter> to return to Main Menu")
+        gets
+
+        when "Tutorial"
+                tutorial.display
+        when "HighScore"
+                print "\e[H\e[2J"
+                playerGroup.list_top_players
+                print("press enter to quit")
+                gets
+        when "Settings"
+                print "\e[H\e[2J"
+                visual = prompt.select("Select an option.", %w(Graphics Table))
+        when "Quit"
+                exit = true
+        else
+
+        end
 
 end
 
@@ -204,16 +210,36 @@ exit = false;
 
 // Main menu
 while(!exit) {
-    // Display "Welcome to Set!"
-    // Options for: (Start Tutorial HighScore Settings Quit)
-    // Case Start
-        // Play game
-    // Case Tutorial
-        // Display tutorial
-    // Case HighScore
-        // List high scores table
-    // Case Settings
-        // Prompt for Visuals: (Graphics Table)
-    // Case Quit
-        exit = true;
+        // Display "Welcome to Set!"
+        // Options for: (Start Tutorial HighScore Settings Quit)
+        // Case Start
+        // Prompt for: (Multiplayer Computer)
+        // Case Multiplayer
+        // Get player names
+        // Case Computer
+        // Get player names
+        // Place 12 cards on table
+        gameOver = false;
+        while(!gameOver) {
+                // Display table
+
+                // Computer turn
+
+                // Player turn
+                // Prompt for: (EnterCards NoSet Hint MainMenu)
+                // Case EnterCards
+                // Case NoSet
+                // Case Hint
+                // Case MainMenu
+
+                // Re-display Main Menu
+        }
+        // Case Tutorial
+                // Display tutorial
+        // Case HighScore
+                // List high scores table
+        // Case Settings
+                // Prompt for Visuals: (Graphics Table)
+        // Case Quit
+                exit = true;
 }
