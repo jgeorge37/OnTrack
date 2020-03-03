@@ -1,1 +1,18 @@
 /* Created by Jack Thompson 3/3/2020 */
+
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-content: space-between;
+  width: 150px;
+  margin: auto;
+}
+
+.buttons button {
+  margin: 8px 0px;
+}
