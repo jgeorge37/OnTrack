@@ -213,27 +213,28 @@ while(!exit) {
         // Display "Welcome to Set!"
         // Options for: (Start Tutorial HighScore Settings Quit)
         // Case Start
-        // Prompt for: (Multiplayer Computer)
-        // Case Multiplayer
-        // Get player names
-        // Case Computer
-        // Get player names
-        // Place 12 cards on table
-        gameOver = false;
-        while(!gameOver) {
-                // Display table
+                // Prompt for: (Multiplayer Computer)
+                // Case Multiplayer
+                // Get player names
+                // Case Computer
+                // Get player names
+                // Place 12 cards on table
+                gameOver = false;
+                while(!gameOver) {
+                        // Display table
 
-                // Computer turn
+                        // Computer turn
 
-                // Player turn
-                // Prompt for: (EnterCards NoSet Hint MainMenu)
-                // Case EnterCards
-                // Case NoSet
-                // Case Hint
-                // Case MainMenu
-
+                        // Player turn
+                        // Prompt for: (EnterCards NoSet Hint MainMenu)
+                        // Case EnterCards
+                        // Case NoSet
+                        // Case Hint
+                        // Case MainMenu
+                                // Re-display Main Menu
+                        gameOver=true;
+                }
                 // Re-display Main Menu
-        }
         // Case Tutorial
                 // Display tutorial
         // Case HighScore
