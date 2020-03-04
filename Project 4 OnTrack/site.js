@@ -207,7 +207,6 @@ end
 print "\e[H\e[2J"
 */
 
-window.onload = function() {
 
 /* Card constructor */
 function Card(color, shape, number, shading){
@@ -231,12 +230,41 @@ function hideAll(collection){
 
 /* Function to display an element */
 function show(target){
-  target.style.display = "block";
+  target.style.display = "flex";
 }
+
+/* Function to return a grid element with 12 cards */
+function createGrid(){
+  var grid = document.createElement("div");
+  grid.setAttribute("id", "grid_container");
+
+  for(var i=0; i<12; i++){
+    var grid_card = document.createElement("div");
+    grid_card.setAttribute("class", "grid_card");
+    grid_card.innerHTML = "test";
+    grid.appendChild(grid_card);
+  }
+
+  return grid;
+}
+
+/* Function to add 3 cards to an existing grid */
+function addThreeCards(){
+  var grid = document.getElementById("grid_container");
+  for(var i=0; i<3; i++){
+    var grid_card.setAttribute("class", "grid_card");
+    grid_card.innerHTML = "test additional card";
+    grid.appendChild(grid_card);
+  }
+}
+
+window.onload = function() {
+
+var grid = createGrid();
 
 /* Get the main menu buttons and main content views */
 var buttons = document.getElementById("menu").getElementsByTagName("button");
-var views = document.getElementById("main_content").getElementsByTagName("div");
+var views = document.getElementsByClassName("view");
 
 /* addEventListener for displaying appropriate view when each button is clicked */
 for(var i=0; i<buttons.length; i++){
@@ -251,7 +279,6 @@ for(var i=0; i<buttons.length; i++){
     }
   });
 }
-
 
 
 var exit = false;

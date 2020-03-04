@@ -22,14 +22,31 @@ body {
 }
 
 #main_content {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
+  height: 500px;
+  width: 800px;
   margin: auto;
-  background-color: #E9E9E9;
 }
 
-#main_content div {
- margin: 20px;
+.view {
+ margin: 15px;
+ width: 100%;
+ height: 100%;
  display: none;
+}
+
+#grid_container {
+  display: grid;
+  height: 400px;
+  width: 700px;
+  grid-template-columns: auto auto auto auto;
+  background-color: #b0b0b0;
+  padding: 5px;
+  margin: auto;
+}
+
+.grid_card {
+  background-color: #d1ffba;
+  margin: 5px;
+  text-align: center;
+  padding: 20px;
 }
