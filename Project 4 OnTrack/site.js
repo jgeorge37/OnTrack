@@ -216,6 +216,62 @@ function Card(color, shape, number, shading){
   this.shading = shading;
 }
 
+function Deck(){
+  this.card_list = [];
+  colors = ["red", "green", "purple"];
+  shapes = ["oval", "square", "triangle"];
+  shading = ["solid", "open", "striped"];
+
+  for(var i=0; i<3; i++){
+    for(var j=0; j<3; j++){
+      for(var k=1; k<=3; k++){
+        for(var l=0; l<3; l++){
+          this.card_list[this.card_list.length] = new Card(colors[i], shapes[j], k, shading[l]);
+        }
+      }
+    }
+  }
+  // need to shuffle
+}
+
+function Grid(){
+  this.addCard=function(card) {
+    var grid = document.getElementById("grid_container");
+    var grid_card = document.createElement("div");
+    grid_card.className = "grid_card";
+
+    for(var i=0; i<card.number; i++){
+      var shape = document.createElement("div");
+      shape.className = card.color;
+      shape.className += " " + card.shading;
+      shape.className += " " + card.shape;
+      grid_card.appendChild(shape);
+    }
+    grid.appendChild(grid_card);
+  }
+
+  this.removeCard=function(index) {
+    var grid = document.getElementById("grid_container");
+    grid.removeChild(grid.childNodes[index]);
+  }
+
+  this.removeGrid=function(){
+    var grid = document.getElementById("grid_container");
+    grid.parentNode.removeChild(grid);
+  }
+
+  this.addGrid=function(node, card_list){
+    var grid = document.createElement("div");
+    grid.setAttribute("id", "grid_container");
+    node.appendChild(grid);
+
+    for(var i=0; i<12; i++){
+      this.addCard(card_list[0]);
+      card_list.shift();
+    }
+  }
+}
+
 /* Function to not display an element */
 function hide(target){
   target.style.display = "none";
@@ -233,34 +289,11 @@ function show(target){
   target.style.display = "flex";
 }
 
-/* Function to return a grid element with 12 cards */
-function createGrid(){
-  var grid = document.createElement("div");
-  grid.setAttribute("id", "grid_container");
-
-  for(var i=0; i<12; i++){
-    var grid_card = document.createElement("div");
-    grid_card.setAttribute("class", "grid_card");
-    grid_card.innerHTML = "test";
-    grid.appendChild(grid_card);
-  }
-
-  return grid;
-}
-
-/* Function to add 3 cards to an existing grid */
-function addThreeCards(){
-  var grid = document.getElementById("grid_container");
-  for(var i=0; i<3; i++){
-    var grid_card.setAttribute("class", "grid_card");
-    grid_card.innerHTML = "test additional card";
-    grid.appendChild(grid_card);
-  }
-}
-
 window.onload = function() {
 
-var grid = createGrid();
+var grid_obj = new Grid();
+var deck = new Deck();
+
 
 /* Get the main menu buttons and main content views */
 var buttons = document.getElementById("menu").getElementsByTagName("button");
@@ -279,6 +312,11 @@ for(var i=0; i<buttons.length; i++){
     }
   });
 }
+
+var sp_view = document.getElementById("singleplayer_view");
+console.log(deck);
+console.log(deck.card_list);
+grid_obj.addGrid(sp_view, deck.card_list);
 
 
 var exit = false;

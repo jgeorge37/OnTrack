@@ -37,8 +37,8 @@ body {
 #grid_container {
   display: grid;
   height: 400px;
-  width: 700px;
-  grid-template-columns: auto auto auto auto;
+  width: 800px;
+  grid-template-columns: 195px 195px 195px 195px;
   background-color: #b0b0b0;
   padding: 5px;
   margin: auto;
@@ -47,6 +47,52 @@ body {
 .grid_card {
   background-color: #d1ffba;
   margin: 5px;
-  text-align: center;
   padding: 20px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+
+}
+
+.grid_card div {
+  width: 30px;
+  height: 40px;
+  margin: auto;
+  padding: 5px;
+}
+
+.grid_card .red {
+  background-color: red;
+}
+
+.grid_card .green {
+  background-color: green;
+}
+
+.grid_card .purple {
+  background-color: purple;
+}
+
+.grid_card .oval {
+  border-radius: 18px / 22px;
+}
+
+.grid_card .square {
+  /* don't need anything here???? */
+}
+
+.grid_card .triangle {
+
+}
+
+.grid_card .solid {
+  /* probably don't need anyhting here */
+}
+
+.grid_card .open {
+
+
+}
+
+.grid_card .striped {
+
 }
