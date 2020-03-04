@@ -216,6 +216,8 @@ function Card(color, shape, number, shading){
   this.shading = shading;
 }
 
+
+
 function Deck(){
   this.card_list = [];
   colors = ["red", "green", "purple"];
@@ -231,7 +233,21 @@ function Deck(){
       }
     }
   }
-  // need to shuffle
+
+  /*
+  Shuffle cards in deck.
+  Adapated from https://medium.com/@nitinpatel_20236
+  /how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
+  */
+
+  for(var i=this.card_list.length - 1; i>0; i--){
+    var j = Math.floor(Math.random() * i);
+    var temp = this.card_list[i];
+    this.card_list[i] = this.card_list[j];
+    this.card_list[j] = temp;
+  }
+
+
 }
 
 function Grid(){
