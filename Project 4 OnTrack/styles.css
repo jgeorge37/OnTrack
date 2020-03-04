@@ -16,3 +16,16 @@
 .buttons button {
   margin: 8px 0px;
 }
+
+#main_content {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  background-color: #E9E9E9;
+}
+
+#main_content div {
+ margin: 20px;
+ display: none;
+}

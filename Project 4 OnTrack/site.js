@@ -206,6 +206,44 @@ end
 
 print "\e[H\e[2J"
 */
+
+window.onload = function() {
+
+/* Function to not display an element */
+function hide(target){
+  target.style.display = "none";
+}
+
+/* Function to not display a collection of elements */
+function hideAll(collection){
+  for(var i=0; i<collection.length; i++){
+    hide(collection[i]);
+  }
+}
+
+/* Function to display an element */
+function show(target){
+  target.style.display = "block";
+}
+
+/* Get the main menu buttons and main content views */
+var buttons = document.getElementById("menu").getElementsByTagName("button");
+var views = document.getElementById("main_content").getElementsByTagName("div");
+
+/* addEventListener for displaying appropriate view when each button is clicked */
+for(var i=0; i<buttons.length; i++){
+  buttons[i].addEventListener("click", function(){
+    /* hide old content */
+    hideAll(views);
+    /* show new content */
+    for(var k=0; k<buttons.length; k++){
+      if(buttons[k] == this){
+        show(views[k]);
+      }
+    }
+  });
+}
+
 var exit = false;
 
 // Main menu
@@ -243,4 +281,6 @@ while(!exit) {
                 // Prompt for Visuals: (Graphics Table)
         // Case Quit
                 exit = true;
+}
+
 }
