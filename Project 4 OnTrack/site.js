@@ -1,4 +1,6 @@
 // Created by Jack Thompson 3/3/2020
+// Edited by Jing George 3/3, 3/4/2020: created Card, Deck, Grid/card graphics,
+// views' visibility for each button pressed in the main menu.
 
 /*
     Outline from game.rb (Project #1)
@@ -210,20 +212,24 @@ print "\e[H\e[2J"
 
 /* Card constructor */
 function Card(color, shape, number, shading){
+  /* set object properties according to arguments */
   this.color = color;
   this.shape = shape;
   this.number = number;
   this.shading = shading;
 }
 
-
-
+/* Deck constructor */
 function Deck(){
+  /* array of all 81 cards */
   this.card_list = [];
+
+  /* card properties */
   colors = ["red", "green", "purple"];
-  shapes = ["oval", "square", "triangle"];
+  shapes = ["oval", "square", "almond"];
   shading = ["solid", "open", "striped"];
 
+  /* create each card with different property combination */
   for(var i=0; i<3; i++){
     for(var j=0; j<3; j++){
       for(var k=1; k<=3; k++){
@@ -239,23 +245,29 @@ function Deck(){
   Adapated from https://medium.com/@nitinpatel_20236
   /how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
   */
-
   for(var i=this.card_list.length - 1; i>0; i--){
     var j = Math.floor(Math.random() * i);
     var temp = this.card_list[i];
     this.card_list[i] = this.card_list[j];
     this.card_list[j] = temp;
   }
-
-
 }
 
+/* Grid constructor */
 function Grid(){
+
+  /* array of cards in the grid, not in the Deck */
+  this.cardsInGrid = [];
+
+  /* function to add a card to the grid of displayed cards */
   this.addCard=function(card) {
+    /* retreive main grid container */
     var grid = document.getElementById("grid_container");
+    /* create div element for a card */
     var grid_card = document.createElement("div");
     grid_card.className = "grid_card";
 
+    /* create appropriate number of shapes to show on card */
     for(var i=0; i<card.number; i++){
       var shape = document.createElement("div");
       shape.className = card.color;
@@ -263,27 +275,36 @@ function Grid(){
       shape.className += " " + card.shape;
       grid_card.appendChild(shape);
     }
+    /* add the card to the main grid container */
     grid.appendChild(grid_card);
+
+    /* add Card object to array of cards in the grid */
+    this.cardsInGrid.push(card);
   }
 
+  /* function to remove a card from the grid */
   this.removeCard=function(index) {
     var grid = document.getElementById("grid_container");
     grid.removeChild(grid.childNodes[index]);
+    /* remove card from the array of cards */
+    this.cardsInGrid.splice(index, 1);
   }
 
+  /* function to remove the grid from its parent node */
   this.removeGrid=function(){
     var grid = document.getElementById("grid_container");
     grid.parentNode.removeChild(grid);
+
   }
 
+  /* function to create grid div and append to a node */
   this.addGrid=function(node, card_list){
     var grid = document.createElement("div");
     grid.setAttribute("id", "grid_container");
     node.appendChild(grid);
 
     for(var i=0; i<12; i++){
-      this.addCard(card_list[0]);
-      card_list.shift();
+      this.addCard(card_list.shift());
     }
   }
 }
@@ -310,7 +331,6 @@ window.onload = function() {
 var grid_obj = new Grid();
 var deck = new Deck();
 
-
 /* Get the main menu buttons and main content views */
 var buttons = document.getElementById("menu").getElementsByTagName("button");
 var views = document.getElementsByClassName("view");
@@ -329,10 +349,10 @@ for(var i=0; i<buttons.length; i++){
   });
 }
 
+/* This shows the grid of cards in the singleplayer view */
 var sp_view = document.getElementById("singleplayer_view");
-console.log(deck);
-console.log(deck.card_list);
 grid_obj.addGrid(sp_view, deck.card_list);
+//grid_obj.addCard(deck.card_list.shift());
 
 
 var exit = false;

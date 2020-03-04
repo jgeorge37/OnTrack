@@ -1,4 +1,5 @@
 /* Created by Jack Thompson 3/3/2020 */
+/* Edited by Jing George 3/4/2020: Card graphics */
 
 body {
   font-family: sans-serif;
@@ -36,63 +37,87 @@ body {
 
 #grid_container {
   display: grid;
-  height: 400px;
+  height: 500px;
   width: 800px;
   grid-template-columns: 195px 195px 195px 195px;
-  background-color: #b0b0b0;
+  background-color: #EAEAEA;
   padding: 5px;
   margin: auto;
+  border-radius: 10px;
 }
 
 .grid_card {
-  background-color: #d1ffba;
+  background-color: white;
   margin: 5px;
   padding: 20px;
   display: grid;
   grid-template-columns: auto auto auto;
-
+  border-radius: inherit;
 }
 
 .grid_card div {
   width: 30px;
   height: 40px;
-  margin: auto;
-  padding: 5px;
+  margin: auto 2px;
+  border: 4px solid;
 }
 
 .grid_card .red {
   background-color: red;
+  border-color: red;
 }
 
 .grid_card .green {
   background-color: green;
+  border-color: green;
 }
 
 .grid_card .purple {
   background-color: purple;
+  border-color: purple;
 }
 
 .grid_card .oval {
   border-radius: 18px / 22px;
 }
 
-.grid_card .square {
-  /* don't need anything here???? */
-}
-
-.grid_card .triangle {
-
-}
-
-.grid_card .solid {
-  /* probably don't need anyhting here */
+.grid_card .almond {
+  border-radius: 40px 0px;
 }
 
 .grid_card .open {
-
-
+  background-color: transparent;
 }
 
-.grid_card .striped {
+.grid_card .striped.green{
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    transparent 50%,
+    green 50%,
+    green
+  );
+  background-size: 100% 4.3px;
+}
 
+.grid_card .striped.purple{
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    transparent 50%,
+    purple 50%,
+    purple
+  );
+  background-size: 100% 4.3px;
+}
+
+.grid_card .striped.red{
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    transparent 50%,
+    red 50%,
+    red
+  );
+  background-size: 100% 4.3px;
 }
