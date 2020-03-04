@@ -206,7 +206,7 @@ end
 
 print "\e[H\e[2J"
 */
-exit = false;
+var exit = false;
 
 // Main menu
 while(!exit) {
@@ -219,7 +219,7 @@ while(!exit) {
                 // Case Computer
                 // Get player names
                 // Place 12 cards on table
-                gameOver = false;
+                var gameOver = false;
                 while(!gameOver) {
                         // Display table
 
@@ -232,7 +232,7 @@ while(!exit) {
                         // Case Hint
                         // Case MainMenu
                                 // Re-display Main Menu
-                        gameOver=true;
+                        gameOver = true;
                 }
                 // Re-display Main Menu
         // Case Tutorial
