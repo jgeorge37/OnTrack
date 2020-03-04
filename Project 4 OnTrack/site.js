@@ -209,6 +209,14 @@ print "\e[H\e[2J"
 
 window.onload = function() {
 
+/* Card constructor */
+function Card(color, shape, number, shading){
+  this.color = color;
+  this.shape = shape;
+  this.number = number;
+  this.shading = shading;
+}
+
 /* Function to not display an element */
 function hide(target){
   target.style.display = "none";
@@ -237,12 +245,14 @@ for(var i=0; i<buttons.length; i++){
     hideAll(views);
     /* show new content */
     for(var k=0; k<buttons.length; k++){
-      if(buttons[k] == this){
+      if(buttons[k] === this){
         show(views[k]);
       }
     }
   });
 }
+
+
 
 var exit = false;
 

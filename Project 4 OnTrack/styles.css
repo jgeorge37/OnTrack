@@ -1,5 +1,9 @@
 /* Created by Jack Thompson 3/3/2020 */
 
+body {
+  font-family: sans-serif;
+}
+
 .title {
   display: flex;
   justify-content: center;
