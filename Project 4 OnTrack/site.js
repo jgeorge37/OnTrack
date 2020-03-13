@@ -321,6 +321,7 @@ function hideAll(collection){
   }
 }
 
+
 /* Function to display an element */
 function show(target){
   target.style.display = "flex";
@@ -343,11 +344,23 @@ for(var i=0; i<buttons.length; i++){
     /* show new content */
     for(var k=0; k<buttons.length; k++){
       if(buttons[k] === this){
-        show(views[k]);
+        show(views[k+1]);
       }
     }
   });
 }
+
+var goBackButtons = this.document.getElementsByClassName("backbutton");
+for(var i = 0; i < goBackButtons.length; i++) {
+  goBackButtons[i].addEventListener("click", function() {
+    hideAll(views);
+    document.getElementById("home_view").style.display = "block";
+  });
+}
+
+
+/* displays home view*/
+document.getElementById("home_view").style.display = "block";
 
 /* This shows the grid of cards in the singleplayer view */
 var sp_view = document.getElementById("singleplayer_view");
