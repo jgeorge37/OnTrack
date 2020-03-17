@@ -10,29 +10,60 @@
 </head>
 
 <body>
-    <div class="title">
-        <h1>Game of Set</h1>
-    </div>
-    <div class="buttons" id="menu">
-        <button type="button" >Singleplayer</button>
-        <button type="button" >Multiplayer</button>
-        <button type="button" >Tutorial</button>
-        <button type="button" >Settings</button>
-        <button type="button" >Highscore</button>
-    </div>
     <div id="main_content">
+      <div class="view" id="home_view">
+        <div class="title">
+          <h1>Game of Set</h1>
+        </div>
+        <div class="buttons" id="menu">
+          <button type="button" >Singleplayer</button>
+          <button type="button" >Multiplayer</button>
+          <button type="button" >Tutorial</button>
+          <button type="button" >Settings</button>
+          <button type="button" >Highscore</button>
+        </div>
+      </div>
       <div class="view" id="singleplayer_view"></div>
       <div class="view" id="multiplayer_view">
         <p> I am the multiplayer view </p>
+        <button class="backbutton" type="button">Go Back</button>
       </div>
       <div class="view"id="tutorial_view">
-        <p> I am the tutorial view </p>
+        <div id="tutorial_text">
+          <h1>Welcome to the Game of Set</h1>
+          <p>In this game, you need to find the three cards on the table that make up a set.
+            Each card has four attributes: color, number, shape, and shading. 
+            For example, Take a look at this card:
+          </p>
+          <div id="tutorial_ex1">placeholder</div>
+          <p>This card has red coloring, a number of 1, a shape of hexagon, and vertical shading.
+            Three cards make up a set when, for each attribute, they all have different values or the same values.
+          </p>
+          <div id="tutorial_ex2">placeholder</div>
+          <pre>These three cards make up a set:
+            All three cards have the same color: red
+            All three cards have different shapes: hexagon, triangle, and square
+            All three cards have different numbers: 1, 0, and 2
+            All three cards have the same shading: vertical
+          </pre>
+          <div id=tutorial_ex3>placeholder</div>
+          <p>These three cards do not make up a set.
+            This is because two of the cards have the color red while only one has a different color (blue).
+            In the case where there is no set currently on the table, select the NoSet option to add three more cards.
+            Each correctly identified set adds one point to the player's score.
+            Each incorrect guess at a set takes one point away from the player's score.
+            The goal of the game is to have the highest score once the deck completely runs out of cards.
+          </p>
+        </div>
+        <button class="backbutton" type="button">Go Back</button>
       </div>
       <div class="view" id="settings_view">
         <p> I am the settings view </p>
+        <button class="backbutton" type="button">Go Back</button>
       </div>
       <div class="view" id="highscore_view">
         <p> I am the highscore view </p>
+        <button class="backbutton" type="button">Go Back</button>
       </div>
     </div>
 
