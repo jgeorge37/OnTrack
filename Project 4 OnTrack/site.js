@@ -301,6 +301,7 @@ function Grid(){
   this.addGrid=function(node, card_list){
     var grid = document.createElement("div");
     grid.setAttribute("id", "grid_container");
+    grid.className = "grid";
     node.appendChild(grid);
 
     for(var i=0; i<12; i++){

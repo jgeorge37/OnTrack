@@ -30,26 +30,34 @@
       </div>
       <div class="view"id="tutorial_view">
         <div id="tutorial_text">
-          <h1>Welcome to the Game of Set</h1>
+          <h1>Tutorial</h1>
           <p>In this game, you need to find the three cards on the table that make up a set.
-            Each card has four attributes: color, number, shape, and shading. 
+            Each card has four attributes: color, number, shape, and shading.
             For example, Take a look at this card:
           </p>
-          <div id="tutorial_ex1">placeholder</div>
-          <p>This card has red coloring, a number of 1, a shape of hexagon, and vertical shading.
+          <div class="grid_card"><div class="red striped oval"></div></div>
+          <p>The above card has red coloring, a number of 1, a shape of oval, and striped shading.
             Three cards make up a set when, for each attribute, they all have different values or the same values.
           </p>
-          <div id="tutorial_ex2">placeholder</div>
+          <div class="grid">
+          <div class="grid_card"><div class="red striped oval"></div><div class="red striped oval"></div></div>
+          <div class="grid_card"><div class="red striped square"></div></div>
+          <div class="grid_card"><div class="red striped almond"></div><div class="red striped almond"></div><div class="red striped almond"></div></div>
+          </div>
           <pre>These three cards make up a set:
-            All three cards have the same color: red
-            All three cards have different shapes: hexagon, triangle, and square
-            All three cards have different numbers: 1, 0, and 2
-            All three cards have the same shading: vertical
+            All three cards have the same color: red.
+            All three cards have different shapes: oval, square, and almond.
+            All three cards have different numbers: 2, 1, and 3.
+            All three cards have the same shading: striped.
           </pre>
-          <div id=tutorial_ex3>placeholder</div>
-          <p>These three cards do not make up a set.
-            This is because two of the cards have the color red while only one has a different color (blue).
-            In the case where there is no set currently on the table, select the NoSet option to add three more cards.
+          <div class="grid">
+          <div class="grid_card"><div class="red striped almond"></div><div class="red striped almond"></div></div>
+          <div class="grid_card"><div class="red striped almond"></div></div>
+          <div class="grid_card"><div class="purple striped almond"></div><div class="purple striped almond"></div><div class="purple striped almond"></div></div>
+          </div>
+          <p>These three cards above do not make up a set.
+            This is because two of the cards have the color red while only one has a different color (purple).
+            In the case where there is no set currently on the table, select the "No Set" option to add three more cards.
             Each correctly identified set adds one point to the player's score.
             Each incorrect guess at a set takes one point away from the player's score.
             The goal of the game is to have the highest score once the deck completely runs out of cards.
