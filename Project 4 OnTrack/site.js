@@ -209,9 +209,8 @@ end
 print "\e[H\e[2J"
 */
 
-
 /* Card constructor */
-function Card(color, shape, number, shading){
+function Card(color, shape, number, shading) {
   /* set object properties according to arguments */
   this.color = color;
   this.shape = shape;
@@ -220,21 +219,26 @@ function Card(color, shape, number, shading){
 }
 
 /* Deck constructor */
-function Deck(){
+function Deck() {
   /* array of all 81 cards */
   this.card_list = [];
 
   /* card properties */
-  colors = ["red", "green", "purple"];
-  shapes = ["oval", "square", "almond"];
-  shading = ["solid", "open", "striped"];
+  colors = ['red', 'green', 'purple'];
+  shapes = ['oval', 'square', 'almond'];
+  shading = ['solid', 'open', 'striped'];
 
   /* create each card with different property combination */
-  for(var i=0; i<3; i++){
-    for(var j=0; j<3; j++){
-      for(var k=1; k<=3; k++){
-        for(var l=0; l<3; l++){
-          this.card_list[this.card_list.length] = new Card(colors[i], shapes[j], k, shading[l]);
+  for (var i = 0; i < 3; i++) {
+    for (var j = 0; j < 3; j++) {
+      for (var k = 1; k <= 3; k++) {
+        for (var l = 0; l < 3; l++) {
+          this.card_list[this.card_list.length] = new Card(
+            colors[i],
+            shapes[j],
+            k,
+            shading[l]
+          );
         }
       }
     }
@@ -245,7 +249,7 @@ function Deck(){
   Adapated from https://medium.com/@nitinpatel_20236
   /how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
   */
-  for(var i=this.card_list.length - 1; i>0; i--){
+  for (var i = this.card_list.length - 1; i > 0; i--) {
     var j = Math.floor(Math.random() * i);
     var temp = this.card_list[i];
     this.card_list[i] = this.card_list[j];
@@ -254,25 +258,24 @@ function Deck(){
 }
 
 /* Grid constructor */
-function Grid(){
-
+function Grid() {
   /* array of cards in the grid, not in the Deck */
   this.cardsInGrid = [];
 
   /* function to add a card to the grid of displayed cards */
-  this.addCard=function(card) {
+  this.addCard = function(card) {
     /* retreive main grid container */
-    var grid = document.getElementById("grid_container");
+    var grid = document.getElementById('grid_container');
     /* create div element for a card */
-    var grid_card = document.createElement("div");
-    grid_card.className = "grid_card";
+    var grid_card = document.createElement('div');
+    grid_card.className = 'grid_card';
 
     /* create appropriate number of shapes to show on card */
-    for(var i=0; i<card.number; i++){
-      var shape = document.createElement("div");
+    for (var i = 0; i < card.number; i++) {
+      var shape = document.createElement('div');
       shape.className = card.color;
-      shape.className += " " + card.shading;
-      shape.className += " " + card.shape;
+      shape.className += ' ' + card.shading;
+      shape.className += ' ' + card.shape;
       grid_card.appendChild(shape);
     }
     /* add the card to the main grid container */
@@ -280,69 +283,68 @@ function Grid(){
 
     /* add Card object to array of cards in the grid */
     this.cardsInGrid.push(card);
-  }
+  };
 
   /* function to remove a card from the grid */
-  this.removeCard=function(index) {
-    var grid = document.getElementById("grid_container");
+  this.removeCard = function(index) {
+    var grid = document.getElementById('grid_container');
     grid.removeChild(grid.childNodes[index]);
     /* remove card from the array of cards */
     this.cardsInGrid.splice(index, 1);
-  }
+  };
 
   /* function to remove the grid from its parent node */
-  this.removeGrid=function(){
-    var grid = document.getElementById("grid_container");
+  this.removeGrid = function() {
+    var grid = document.getElementById('grid_container');
     grid.parentNode.removeChild(grid);
-
-  }
+  };
 
   /* function to create grid div and append to a node */
-  this.addGrid=function(node, card_list){
-    var grid = document.createElement("div");
-    grid.setAttribute("id", "grid_container");
-    grid.className = "grid";
+  this.addGrid = function(node, card_list) {
+    var grid = document.createElement('div');
+    grid.setAttribute('id', 'grid_container');
+    grid.className = 'grid';
     node.appendChild(grid);
 
-    for(var i=0; i<12; i++){
+    for (var i = 0; i < 12; i++) {
       this.addCard(card_list.shift());
     }
-  }
+  };
 }
 
 /* Function to not display an element */
-function hide(target){
-  target.style.display = "none";
+function hide(target) {
+  target.style.display = 'none';
 }
 
 /* Function to not display a collection of elements */
-function hideAll(collection){
-  for(var i=0; i<collection.length; i++){
+function hideAll(collection) {
+  for (var i = 0; i < collection.length; i++) {
     hide(collection[i]);
   }
 }
 
-
 /* Function to display an element */
-function show(target){
-  target.style.display = "flex";
+function show(target) {
+  target.style.display = 'flex';
 }
 /* function to check if an attribute of a card are the same */
 function attribute_check(attr1, attr2, attr3) {
-    var result;
-    result = (attr1 == attr2 && attr1 == attr3);
-    result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3);
-    return result;
+  var result;
+  result = attr1 == attr2 && attr1 == attr3;
+  result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3);
+  return result;
 }
 /* function that checks if three given cards are a set */
 function is_set(card1, card2, card3) {
-    var is_set;
-    // Call attribute_check method on all 4 attributes for each card.
-    is_set = attribute_check(card1.color, card2.color, card3.color);
-    is_set = is_set && attribute_check(card1.shape, card2.shape, card3.shape);
-    is_set = is_set && attribute_check(card1.number, card2.number, card3.number);
-    is_set = is_set && attribute_check(card1.shading, card2.shading, card3.shading);
-    return is_set;
+  var is_set;
+  // Call attribute_check method on all 4 attributes for each card.
+  is_set = attribute_check(card1.color, card2.color, card3.color);
+  is_set = is_set && attribute_check(card1.shape, card2.shape, card3.shape);
+  is_set = is_set && attribute_check(card1.number, card2.number, card3.number);
+  is_set =
+    is_set && attribute_check(card1.shading, card2.shading, card3.shading);
+  return is_set;
 }
 /* funtion to create all combos possible
    Adapated from https://js-algorithms.tutorialhorizon.com/2015/10/23/combinati
@@ -358,7 +360,7 @@ function create_combos(grid_obj) {
   for (i = 0; i < combinations; i++) {
     var temp = [];
     for (j = 0; j < deckLength; j++) {
-      if ((i & power(2,j))) {
+      if (i & power(2, j)) {
         temp.push(grid_obj[j]);
       }
     }
@@ -373,9 +375,9 @@ function set_present(grid_obj) {
   currentCombos = create_combos(Grid.cardsInGrid);
   var setPresent = false;
   var count = 0;
-  while (setPresent == false && count<currentCombos.length) {
+  while (setPresent == false && count < currentCombos.length) {
     temp = currentCombos[count];
-    if (is_set(temp[0],temp[1],temp[2]) == true) {
+    if (is_set(temp[0], temp[1], temp[2]) == true) {
       setPresent = true;
     }
     count = count + 1;
@@ -386,30 +388,35 @@ function set_present(grid_obj) {
 // Created by Snigdha Tiwari 3/17/20
 
 // Return array of 3 cards the computer choose.
-function computer_moves(correct_set, table_size){
-  var card_array = new Array(table_size-1)
+function computer_moves(correct_set, table_size) {
+  var card_array = new Array(table_size - 1);
 
-  var choices_array = new Array(false,true,false)
+  var choices_array = new Array(false, true, false);
 
-  shuffle(choices_array)
-  var choice = choices_array.shift()
+  shuffle(choices_array);
+  var choice = choices_array.shift();
 
   if (choice && (!Array.isArray(correct_set) || !correct_set.length)) {
-    alert("computer chose: " + correct_set[1] + ", " +  correct_set[2] + " ," + correct_set[3])
+    alert(
+      'computer chose: ' +
+        correct_set[1] +
+        ', ' +
+        correct_set[2] +
+        ' ,' +
+        correct_set[3]
+    );
   } else {
-    shuffle(card_array)
-    var card1 = card_array.shift()
+    shuffle(card_array);
+    var card1 = card_array.shift();
 
-    shuffle(card_array)
-    var card2 = card_array.shift()
+    shuffle(card_array);
+    var card2 = card_array.shift();
 
-    shuffle(card_array)
-    var card3 = card_array.shift()
+    shuffle(card_array);
+    var card3 = card_array.shift();
 
-    alert("Computer chose: " + card1 + " , " + card2 + " , " + card3)
-
+    alert('Computer chose: ' + card1 + ' , ' + card2 + ' , ' + card3);
   }
-
 }
 
 /**
@@ -432,133 +439,129 @@ function shuffle(arr) {
 /* Created by Jack Hanley
  Method that generates a hint for a player.  Tells the user a potential
  card to use */
-function give_hint {
-    var currentCombos = create_combos(Grid.cardsInGrid);
-    if (set_present(Grid.cardsInGrid) == false) {
-      window.alert("There may not be a set here");
-    }
+function give_hint() {
+  var currentCombos = create_combos(Grid.cardsInGrid);
+  if (set_present(Grid.cardsInGrid) == false) {
+    window.alert('There may not be a set here');
+  }
 
-    var flag = false;
-    var count = 0;
-    while (flag == false) {
-      var temp = currentCombos[count];
-      if (is_set(temp[0], temp[1], temp[2]) == true) {
-        var singleCard1 = temp[0];
-        var singleCard2 = temp[1];
-        var singleCard3 = temp[2];
-        var count = 0;
-        var index1 = 0;
-        var index2 = 0;
-        var index3 = 0;
-        while (count < Grid.cardsInGrid) {
-          if (singleCard1 == Grid.cardsInGrid[count]) {
-            index1 = count + 1
-          }
-          else if (singleCard2 == Grid.cardsInGrid[count]) {
-            index2 = count + 1
-          }
-          else if (singleCard3 == Grid.cardsInGrid[count]) {
-            index3 = count + 1
-          }
-          count = count + 1
+  var flag = false;
+  var count = 0;
+  while (flag == false) {
+    var temp = currentCombos[count];
+    if (is_set(temp[0], temp[1], temp[2]) == true) {
+      var singleCard1 = temp[0];
+      var singleCard2 = temp[1];
+      var singleCard3 = temp[2];
+      var count = 0;
+      var index1 = 0;
+      var index2 = 0;
+      var index3 = 0;
+      while (count < Grid.cardsInGrid) {
+        if (singleCard1 == Grid.cardsInGrid[count]) {
+          index1 = count + 1;
+        } else if (singleCard2 == Grid.cardsInGrid[count]) {
+          index2 = count + 1;
+        } else if (singleCard3 == Grid.cardsInGrid[count]) {
+          index3 = count + 1;
         }
-        var hintNum = 2;
-        switch (hintNum) {
-          case 0:
-            window.alert("Card " + index1 + " is in a set");
-            break;
-          case 1:
-            window.alert("Cards " + index1 + " and " + index2 " are in a set");
-            break;
-          case 2:
-            window.alert("Try using card numbers: "  + index1 + ", " + index2 + ", " + index3);
-            break;
-          default:
-            break;
-        }
-        flag = true;
-
+        count = count + 1;
+      }
+      var hintNum = 2;
+      switch (hintNum) {
+        case 0:
+          window.alert('Card ' + index1 + ' is in a set');
+          break;
+        case 1:
+          window.alert('Cards ' + index1 + ' and ' + index2 + ' are in a set');
+          break;
+        case 2:
+          window.alert(
+            'Try using card numbers: ' + index1 + ', ' + index2 + ', ' + index3
+          );
+          break;
+        default:
+          break;
+      }
+      flag = true;
     }
+  }
 }
 
 window.onload = function() {
+  var grid_obj = new Grid();
+  var deck = new Deck();
 
-var grid_obj = new Grid();
-var deck = new Deck();
+  /* Get the main menu buttons and main content views */
+  var buttons = document.getElementById('menu').getElementsByTagName('button');
+  var views = document.getElementsByClassName('view');
 
-/* Get the main menu buttons and main content views */
-var buttons = document.getElementById("menu").getElementsByTagName("button");
-var views = document.getElementsByClassName("view");
-
-/* addEventListener for displaying appropriate view when each button is clicked */
-for(var i=0; i<buttons.length; i++){
-  buttons[i].addEventListener("click", function(){
-    /* hide old content */
-    hideAll(views);
-    /* show new content */
-    for(var k=0; k<buttons.length; k++){
-      if(buttons[k] === this){
-        show(views[k+1]);
+  /* addEventListener for displaying appropriate view when each button is clicked */
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener('click', function() {
+      /* hide old content */
+      hideAll(views);
+      /* show new content */
+      for (var k = 0; k < buttons.length; k++) {
+        if (buttons[k] === this) {
+          show(views[k + 1]);
+        }
       }
+    });
+  }
+
+  var goBackButtons = this.document.getElementsByClassName('backbutton');
+  for (var i = 0; i < goBackButtons.length; i++) {
+    goBackButtons[i].addEventListener('click', function() {
+      hideAll(views);
+      document.getElementById('home_view').style.display = 'block';
+    });
+  }
+
+  /* displays home view*/
+  document.getElementById('home_view').style.display = 'block';
+
+  /* This shows the grid of cards in the singleplayer view */
+  var sp_view = document.getElementById('singleplayer_view');
+  grid_obj.addGrid(sp_view, deck.card_list);
+  //grid_obj.addCard(deck.card_list.shift());
+
+  var exit = false;
+
+  // Main menu
+  while (!exit) {
+    // Display "Welcome to Set!"
+    // Options for: (Start Tutorial HighScore Settings Quit)
+    // Case Start
+    // Prompt for: (Multiplayer Computer)
+    // Case Multiplayer
+    // Get player names
+    // Case Computer
+    // Get player names
+    // Place 12 cards on table
+    var gameOver = false;
+    while (!gameOver) {
+      // Display table
+
+      // Computer turn
+
+      // Player turn
+      // Prompt for: (EnterCards NoSet Hint MainMenu)
+      // Case EnterCards
+      // Case NoSet
+      // Case Hint
+      // Case MainMenu
+      // Re-display Main Menu
+      gameOver = true;
     }
-  });
-}
-
-var goBackButtons = this.document.getElementsByClassName("backbutton");
-for(var i = 0; i < goBackButtons.length; i++) {
-  goBackButtons[i].addEventListener("click", function() {
-    hideAll(views);
-    document.getElementById("home_view").style.display = "block";
-  });
-}
-
-
-/* displays home view*/
-document.getElementById("home_view").style.display = "block";
-
-/* This shows the grid of cards in the singleplayer view */
-var sp_view = document.getElementById("singleplayer_view");
-grid_obj.addGrid(sp_view, deck.card_list);
-//grid_obj.addCard(deck.card_list.shift());
-
-
-var exit = false;
-
-// Main menu
-while(!exit) {
-        // Display "Welcome to Set!"
-        // Options for: (Start Tutorial HighScore Settings Quit)
-        // Case Start
-                // Prompt for: (Multiplayer Computer)
-                // Case Multiplayer
-                // Get player names
-                // Case Computer
-                // Get player names
-                // Place 12 cards on table
-                var gameOver = false;
-                while(!gameOver) {
-                        // Display table
-
-                        // Computer turn
-
-                        // Player turn
-                        // Prompt for: (EnterCards NoSet Hint MainMenu)
-                        // Case EnterCards
-                        // Case NoSet
-                        // Case Hint
-                        // Case MainMenu
-                                // Re-display Main Menu
-                        gameOver = true;
-                }
-                // Re-display Main Menu
-        // Case Tutorial
-                // Display tutorial
-        // Case HighScore
-                // List high scores table
-        // Case Settings
-                // Prompt for Visuals: (Graphics Table)
-        // Case Quit
-                exit = true;
-}
-
-}
+    // Re-display Main Menu
+    // Case Tutorial
+    // Display tutorial
+    // Case HighScore
+    // List high scores table
+    // Case Settings
+    // Prompt for Visuals: (Graphics Table)
+    // Case Quit
+    exit = true;
+  }
+};
