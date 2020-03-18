@@ -515,6 +515,8 @@ window.onload = function() {
   var sp_view = document.getElementById('singleplayer_view');
   grid_obj.addGrid(sp_view, deck.card_list);
 
+  
+
   buttons[1].addEventListener('click', function() {
     var menu = document.getElementById('multiplayer_menu_view');
     var game = document.getElementById('multiplayer_game_view');
