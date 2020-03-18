@@ -244,17 +244,7 @@ function Deck() {
     }
   }
 
-  /*
-  Shuffle cards in deck.
-  Adapated from https://medium.com/@nitinpatel_20236
-  /how-to-shuffle-correctly-shuffle-an-array-in-javascript-15ea3f84bfb
-  */
-  for (var i = this.card_list.length - 1; i > 0; i--) {
-    var j = Math.floor(Math.random() * i);
-    var temp = this.card_list[i];
-    this.card_list[i] = this.card_list[j];
-    this.card_list[j] = temp;
-  }
+  shuffle(this.card_list);
 }
 
 /* Grid constructor */
@@ -557,6 +547,7 @@ window.onload = function() {
       .addEventListener('click', function() {
         menu.style.display = 'none';
         game.style.display = 'flex';
+        grid_obj.removeGrid();
         grid_obj.addGrid(game, deck.card_list);
       });
   });
