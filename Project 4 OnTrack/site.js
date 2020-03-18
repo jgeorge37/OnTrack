@@ -481,6 +481,7 @@ function give_hint() {
 window.onload = function() {
   var grid_obj = new Grid();
   var deck = new Deck();
+  var player_list = new PlayerGroup();
 
   /* Get the main menu buttons and main content views */
   var buttons = document.getElementById('menu').getElementsByTagName('button');
@@ -512,7 +513,7 @@ window.onload = function() {
   show(document.getElementById('home_view'));
 
   /* This shows the grid of cards in the singleplayer view */
-  buttons[0].addEventListener('click', function(){
+  buttons[0].addEventListener('click', function() {
     var sp_view = document.getElementById('singleplayer_view');
     var player_name = document.createElement('input');
     player_name.type = 'text';
@@ -522,18 +523,13 @@ window.onload = function() {
     start.type = 'button';
     start.innerHTML = 'Start';
     sp_view.appendChild(start);
-    start.addEventListener('click', function(){
-      if(document.getElementById('grid_container') != null){
+    start.addEventListener('click', function() {
+      if (document.getElementById('grid_container') != null) {
         grid_obj.removeGrid();
       }
       grid_obj.addGrid(sp_view, deck.card_list);
     });
-
-
-
   });
-
-
 
   buttons[1].addEventListener('click', function() {
     var menu = document.getElementById('multiplayer_menu_view');
@@ -557,6 +553,7 @@ window.onload = function() {
           );
           var input = document.createElement('input');
           input.type = 'text';
+          input.className = 'input_player';
           player_container.appendChild(input);
           player_container.appendChild(document.createElement('br'));
         }
@@ -567,12 +564,34 @@ window.onload = function() {
       .addEventListener('click', function() {
         menu.style.display = 'none';
         game.style.display = 'flex';
-
-        if(document.getElementById('grid_container') != null){
+        if (document.getElementById('grid_container') != null) {
           grid_obj.removeGrid();
-          console.log("beep");
+        }
+        var old_list = document.getElementById('player_list');
+        if (old_list) {
+          old_list.remove();
         }
         grid_obj.addGrid(game, deck.card_list);
+        var inputs = menu.getElementsByClassName('input_player');
+        var list = document.createElement('div');
+        list.id = 'player_list';
+        player_list.player_list = [];
+        for (i = 0; i < inputs.length; i++) {
+          var new_input = document.createElement('input');
+          new_input.type = 'radio';
+          new_input.name = 'player';
+          new_input.id = inputs[i].value;
+          new_input.value = inputs[i].value;
+          var name = document.createElement('label');
+          name.for = inputs[i].value;
+          name.textContent = inputs[i].value;
+          list.appendChild(new_input);
+          list.appendChild(name);
+          //needs to be new Player(name); for later;
+          player_list.player_list[i] = inputs[i].value;
+        }
+        game.appendChild(list);
+        console.log(player_list);
       });
   });
 
