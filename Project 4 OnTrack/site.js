@@ -524,6 +524,43 @@ window.onload = function() {
   /* This shows the grid of cards in the singleplayer view */
   var sp_view = document.getElementById('singleplayer_view');
   grid_obj.addGrid(sp_view, deck.card_list);
+
+  buttons[1].addEventListener('click', function() {
+    var menu = document.getElementById('multiplayer_menu_view');
+    var game = document.getElementById('multiplayer_game_view');
+    var player_container = document.getElementById('player_container');
+    menu.style.display = 'block';
+    game.style.display = 'none';
+    while (player_container.hasChildNodes()) {
+      player_container.removeChild(player_container.lastChild);
+    }
+    document
+      .getElementById('fill_members')
+      .addEventListener('click', function() {
+        var num = document.getElementById('player_number').value;
+        while (player_container.hasChildNodes()) {
+          player_container.removeChild(player_container.lastChild);
+        }
+        for (i = 0; i < num; i++) {
+          player_container.appendChild(
+            document.createTextNode('Player' + (i + 1))
+          );
+          var input = document.createElement('input');
+          input.type = 'text';
+          player_container.appendChild(input);
+          player_container.appendChild(document.createElement('br'));
+        }
+      });
+
+    document
+      .getElementById('startbutton')
+      .addEventListener('click', function() {
+        menu.style.display = 'none';
+        game.style.display = 'flex';
+        grid_obj.addGrid(game, deck.card_list);
+      });
+  });
+
   //grid_obj.addCard(deck.card_list.shift());
 
   var exit = false;
