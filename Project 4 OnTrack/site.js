@@ -316,7 +316,7 @@ function hideAll(collection) {
 
 /* Function to display an element */
 function show(target) {
-  target.style.display = 'flex';
+  target.style.display = 'block';
 }
 /* function to check if an attribute of a card are the same */
 function attribute_check(attr1, attr2, attr3) {
@@ -504,18 +504,36 @@ window.onload = function() {
   for (var i = 0; i < goBackButtons.length; i++) {
     goBackButtons[i].addEventListener('click', function() {
       hideAll(views);
-      document.getElementById('home_view').style.display = 'block';
+      show(document.getElementById('home_view'));
     });
   }
 
   /* displays home view*/
-  document.getElementById('home_view').style.display = 'block';
+  show(document.getElementById('home_view'));
 
   /* This shows the grid of cards in the singleplayer view */
-  var sp_view = document.getElementById('singleplayer_view');
-  grid_obj.addGrid(sp_view, deck.card_list);
+  buttons[0].addEventListener('click', function(){
+    var sp_view = document.getElementById('singleplayer_view');
+    var player_name = document.createElement('input');
+    player_name.type = 'text';
+    player_name.placeholder = 'Enter player name';
+    sp_view.appendChild(player_name);
+    var start = document.createElement('button');
+    start.type = 'button';
+    start.innerHTML = 'Start';
+    sp_view.appendChild(start);
+    start.addEventListener('click', function(){
+      if(document.getElementById('grid_container') != null){
+        grid_obj.removeGrid();
+      }
+      grid_obj.addGrid(sp_view, deck.card_list);
+    });
 
-  
+
+
+  });
+
+
 
   buttons[1].addEventListener('click', function() {
     var menu = document.getElementById('multiplayer_menu_view');
@@ -549,7 +567,11 @@ window.onload = function() {
       .addEventListener('click', function() {
         menu.style.display = 'none';
         game.style.display = 'flex';
-        grid_obj.removeGrid();
+
+        if(document.getElementById('grid_container') != null){
+          grid_obj.removeGrid();
+          console.log("beep");
+        }
         grid_obj.addGrid(game, deck.card_list);
       });
   });
