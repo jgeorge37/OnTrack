@@ -327,22 +327,39 @@ function hideAll(collection){
 function show(target){
   target.style.display = "flex";
 }
+/* function to check if an attribute of a card are the same */
+function attribute_check(attr1, attr2, attr3) {
+    var result;
+    result = (attr1 == attr2 && attr1 == attr3);
+    result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3);
+    return result;
+}
+/* function that checks if three given cards are a set */
+function is_set(card1, card2, card3) {
+    var is_set;
+    // Call attribute_check method on all 4 attributes for each card.
+    is_set = attribute_check(card1.color, card2.color, card3.color);
+    is_set = is_set && attribute_check(card1.shape, card2.shape, card3.shape);
+    is_set = is_set && attribute_check(card1.number, card2.number, card3.number);
+    is_set = is_set && attribute_check(card1.shading, card2.shading, card3.shading);
+    return is_set;
+}
 /* funtion to create all combos possible
    Adapated from https://js-algorithms.tutorialhorizon.com/2015/10/23/combinati
    ons-of-an-array/
 */
-function createAllCombos(deck) {
+function create_combos(grid_obj) {
   var i = 0;
   var j = 0;
-  result = [];
-  deckLength = deck.length;
+  var result = [];
+  var deckLength = deck.length;
   let power = Math.power;
   combinations = power(2, deckLength);
   for (i = 0; i < combinations; i++) {
     var temp = [];
     for (j = 0; j < deckLength; j++) {
       if ((i & power(2,j))) {
-        temp.push(deck[j]);
+        temp.push(grid_obj[j]);
       }
     }
     if (temp.length == 3) {
@@ -351,9 +368,71 @@ function createAllCombos(deck) {
   }
   return result;
 }
+/* function that checks if a set is present in the cards on table */
+function set_present(grid_obj) {
+  currentCombos = create_combos(Grid.cardsInGrid);
+  var setPresent = false;
+  var count = 0;
+  while (setPresent == false && count<currentCombos.length) {
+    temp = currentCombos[count];
+    if (is_set(temp[0],temp[1],temp[2]) == true) {
+      setPresent = true;
+    }
+    count = count + 1;
+  }
+  return setPresent;
+}
 
-function noSetCheck() {
+/* Created by Jack Hanley
+ Method that generates a hint for a player.  Tells the user a potential
+ card to use */
+function give_hint {
+    var currentCombos = create_combos(Grid.cardsInGrid);
+    if (set_present(Grid.cardsInGrid) == false) {
+      window.alert("There may not be a set here");
+    }
 
+    var flag = false;
+    var count = 0;
+    while (flag == false) {
+      var temp = currentCombos[count];
+      if (is_set(temp[0], temp[1], temp[2]) == true) {
+        var singleCard1 = temp[0];
+        var singleCard2 = temp[1];
+        var singleCard3 = temp[2];
+        var count = 0;
+        var index1 = 0;
+        var index2 = 0;
+        var index3 = 0;
+        while (count < Grid.cardsInGrid) {
+          if (singleCard1 == Grid.cardsInGrid[count]) {
+            index1 = count + 1
+          }
+          else if (singleCard2 == Grid.cardsInGrid[count]) {
+            index2 = count + 1
+          }
+          else if (singleCard3 == Grid.cardsInGrid[count]) {
+            index3 = count + 1
+          }
+          count = count + 1
+        }
+        var hintNum = 2;
+        switch (hintNum) {
+          case 0:
+            window.alert("Card " + index1 + " is in a set");
+            break;
+          case 1:
+            window.alert("Cards " + index1 + " and " + index2 " are in a set");
+            break;
+          case 2:
+            window.alert("Try using card numbers: "  + index1 + ", " + index2 + ", " + index3);
+            break;
+          default:
+            break;
+        }
+        flag = true;
+
+    }
 }
 
 window.onload = function() {
