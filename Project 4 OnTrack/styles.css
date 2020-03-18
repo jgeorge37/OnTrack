@@ -27,20 +27,14 @@ pre {
 
 .backbutton {
   display: flex;
-  width: 125px;
-  height: 35px;
-  align-self: center;
-  padding: 1px 40px 1px 40px;
-  margin: 25px;
+  width: 120px;
+  margin: auto;
+  padding: 5px 10px 5px 25px;
 }
 
-.backbutton button{
-  margin: 8px 0px;
-}
 
 #main_content {
-  height: 500px;
-  width: 800px;
+  width: 1000px;
   margin: auto;
 }
 
@@ -53,15 +47,21 @@ pre {
  align-content:space-around;
 }
 
-#grid_container {
+.grid {
   display: grid;
-  height: 500px;
-  width: 800px;
-  grid-template-columns: 195px 195px 195px 195px;
-  background-color: #EAEAEA;
+  height: 165px;
+  width: 589px;
+  grid-template-columns: auto auto auto;
+  background-color: #e6e6e6;
   padding: 5px;
   margin: auto;
   border-radius: 10px;
+}
+
+#grid_container {
+  height: 500px;
+  width: 790px;
+  grid-template-columns: auto auto auto auto;
 }
 
 #tutorial_view {
@@ -79,12 +79,14 @@ pre {
 }
 
 .grid_card {
-  background-color: white;
-  margin: 5px;
+  background-color: #f6f6f6;
+  width: 145px;
+  height: 115px;
+  margin: auto;
   padding: 20px;
   display: grid;
   grid-template-columns: auto auto auto;
-  border-radius: inherit;
+  border-radius: 10px;
 }
 
 .grid_card div {
