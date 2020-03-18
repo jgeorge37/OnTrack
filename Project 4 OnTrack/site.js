@@ -326,6 +326,34 @@ function hideAll(collection){
 function show(target){
   target.style.display = "flex";
 }
+/* funtion to create all combos possible
+   Adapated from https://js-algorithms.tutorialhorizon.com/2015/10/23/combinati
+   ons-of-an-array/
+*/
+function createAllCombos(deck) {
+  var i = 0;
+  var j = 0;
+  result = [];
+  deckLength = deck.length;
+  let power = Math.power;
+  combinations = power(2, deckLength);
+  for (i = 0; i < combinations; i++) {
+    var temp = [];
+    for (j = 0; j < deckLength; j++) {
+      if ((i & power(2,j))) {
+        temp.push(deck[j]);
+      }
+    }
+    if (temp.length == 3) {
+      result.push(temp);
+    }
+  }
+  return result;
+}
+
+function noSetCheck() {
+
+}
 
 window.onload = function() {
 
