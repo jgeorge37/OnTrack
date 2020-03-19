@@ -92,6 +92,11 @@ pre {
   display: none;
 }
 
+#highscore_list {
+  display: flex;
+  justify-content: center;
+}
+
 .grid_card {
   background-color: #f6f6f6;
   width: 145px;
