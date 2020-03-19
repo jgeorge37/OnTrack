@@ -478,6 +478,13 @@ function give_hint() {
   }
 }
 
+class Player {
+  constructor(name) {
+    this.name = name;
+    this.score = 0;
+  }
+}
+
 window.onload = function() {
   var grid_obj = new Grid();
   var deck = new Deck();
@@ -562,36 +569,53 @@ window.onload = function() {
     document
       .getElementById('startbutton')
       .addEventListener('click', function() {
-        menu.style.display = 'none';
-        game.style.display = 'flex';
-        if (document.getElementById('grid_container') != null) {
-          grid_obj.removeGrid();
-        }
-        var old_list = document.getElementById('player_list');
-        if (old_list) {
-          old_list.remove();
-        }
-        grid_obj.addGrid(game, deck.card_list);
+        var state = true;
         var inputs = menu.getElementsByClassName('input_player');
-        var list = document.createElement('div');
-        list.id = 'player_list';
-        player_list.player_list = [];
+        var num = document.getElementById('player_number').value;
+        console.log(num);
         for (i = 0; i < inputs.length; i++) {
-          var new_input = document.createElement('input');
-          new_input.type = 'radio';
-          new_input.name = 'player';
-          new_input.id = inputs[i].value;
-          new_input.value = inputs[i].value;
-          var name = document.createElement('label');
-          name.for = inputs[i].value;
-          name.textContent = inputs[i].value;
-          list.appendChild(new_input);
-          list.appendChild(name);
-          //needs to be new Player(name); for later;
-          player_list.player_list[i] = inputs[i].value;
+          if (inputs[i].value == '') {
+            state = false;
+            window.alert('all inputs need to be filled');
+            break;
+          }
         }
-        game.appendChild(list);
-        console.log(player_list);
+        if (num <= 1 || num == '') {
+          state = false;
+          window.alert('Must have more than 1 player');
+        }
+        if (state) {
+          menu.style.display = 'none';
+          game.style.display = 'flex';
+          if (document.getElementById('grid_container') != null) {
+            grid_obj.removeGrid();
+          }
+          var old_list = document.getElementById('player_list');
+          if (old_list) {
+            old_list.remove();
+          }
+          grid_obj.addGrid(game, deck.card_list);
+          var inputs = menu.getElementsByClassName('input_player');
+          var list = document.createElement('div');
+          list.id = 'player_list';
+          player_list.player_list = [];
+          for (i = 0; i < inputs.length; i++) {
+            var new_input = document.createElement('input');
+            new_input.type = 'radio';
+            new_input.name = 'player';
+            new_input.id = inputs[i].value;
+            new_input.value = inputs[i].value;
+            var name = document.createElement('label');
+            name.for = inputs[i].value;
+            name.textContent = inputs[i].value;
+            list.appendChild(new_input);
+            list.appendChild(name);
+            //needs to be new Player(name); for later;
+            player_list.player_list[i] = new Player(inputs[i].value);
+          }
+          game.appendChild(list);
+          console.log(player_list);
+        }
       });
   });
 
