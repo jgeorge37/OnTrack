@@ -606,11 +606,14 @@ window.onload = function() {
             new_input.id = inputs[i].value;
             new_input.value = inputs[i].value;
             var name = document.createElement('label');
-            name.for = inputs[i].value;
-            name.textContent = inputs[i].value;
+            var score = document.createElement('label');
+            score.htmlFor = inputs[i].value + '_score';
+            score.textContent = '0';
+            name.htmlFor = inputs[i].value;
+            name.textContent = inputs[i].value + ': ';
             list.appendChild(new_input);
             list.appendChild(name);
-            //needs to be new Player(name); for later;
+            list.appendChild(score);
             player_list.player_list[i] = new Player(inputs[i].value);
           }
           game.appendChild(list);
