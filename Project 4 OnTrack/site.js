@@ -259,7 +259,9 @@ function Grid() {
     /* create div element for a card */
     var grid_card = document.createElement('div');
     grid_card.className = 'grid_card';
-
+    grid_card.addEventListener('click', function() {
+      window.alert('CLICK');
+    });
     /* create appropriate number of shapes to show on card */
     for (var i = 0; i < card.number; i++) {
       var shape = document.createElement('div');
