@@ -262,6 +262,7 @@ function Grid() {
     grid_card.addEventListener('click', function() {
       window.alert('CLICK ' + guessArray.length);
       guessArray.push(card);
+      grid_card.style.border = "3px solid red";
       if (guessArray.length == 3) {
         is_set(guessArray);
         guessArray = [];
