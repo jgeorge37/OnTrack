@@ -265,7 +265,7 @@ function Grid() {
       grid_card.style.border = "3px solid red";
       if (guessArray.length == 3) {
         is_set(guessArray);
-        guessArray = [];
+        guessArray.length = 0;
       }
     });
     /* create appropriate number of shapes to show on card */
@@ -328,13 +328,23 @@ function show(target) {
 }
 /* function to check if an attribute of a card are the same */
 function attribute_check(attr1, attr2, attr3) {
-  var result;
+  var result = false;
+  window.alert("attribute check was called");
   result = attr1 == attr2 && attr1 == attr3;
   result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3);
+  if(result) {
+    window.alert("True");
+  } else {
+    window.alert("False");
+  }
   return result;
 }
 /* function that checks if three given cards are a set */
-function is_set(card1, card2, card3) {
+function is_set(array) {
+  var card1 = array[0];
+  var card2 = array[1];
+  var card3 = array[2];
+
   window.alert('is set was called');
   var is_set;
   // Call attribute_check method on all 4 attributes for each card.
@@ -343,6 +353,11 @@ function is_set(card1, card2, card3) {
   is_set = is_set && attribute_check(card1.number, card2.number, card3.number);
   is_set =
     is_set && attribute_check(card1.shading, card2.shading, card3.shading);
+  if(is_set) {
+    window.alert('Is Set');
+  } else {
+    window.alert('Is not Set');
+  }
   return is_set;
 }
 /* funtion to create all combos possible
