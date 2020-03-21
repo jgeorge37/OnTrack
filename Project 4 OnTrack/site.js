@@ -246,7 +246,7 @@ function Deck() {
 
   shuffle(this.card_list);
 }
-
+var guessArray = [];
 /* Grid constructor */
 function Grid() {
   /* array of cards in the grid, not in the Deck */
@@ -260,7 +260,13 @@ function Grid() {
     var grid_card = document.createElement('div');
     grid_card.className = 'grid_card';
     grid_card.addEventListener('click', function() {
-      window.alert('CLICK');
+      window.alert('CLICK ' + guessArray.length);
+      guessArray.push(card);
+      guessArray.length = guessArray.length + 1;
+      if (guessArray.length == 3) {
+        is_set(guessArray);
+        guessArray = [];
+      }
     });
     /* create appropriate number of shapes to show on card */
     for (var i = 0; i < card.number; i++) {
@@ -329,6 +335,7 @@ function attribute_check(attr1, attr2, attr3) {
 }
 /* function that checks if three given cards are a set */
 function is_set(card1, card2, card3) {
+  window.alert('is set was called');
   var is_set;
   // Call attribute_check method on all 4 attributes for each card.
   is_set = attribute_check(card1.color, card2.color, card3.color);
