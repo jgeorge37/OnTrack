@@ -329,14 +329,8 @@ function show(target) {
 /* function to check if an attribute of a card are the same */
 function attribute_check(attr1, attr2, attr3) {
   var result = false;
-  window.alert("attribute check was called");
   result = attr1 == attr2 && attr1 == attr3;
   result = result || (attr1 != attr2 && attr1 != attr3 && attr2 != attr3);
-  if(result) {
-    window.alert("True");
-  } else {
-    window.alert("False");
-  }
   return result;
 }
 /* function that checks if three given cards are a set */
@@ -358,6 +352,13 @@ function is_set(array) {
   } else {
     window.alert('Is not Set');
   }
+
+  // Reset card css border
+  var allCards = document.getElementsByClassName('grid_card');
+  for(var i = 0; i < allCards.length; i++) {
+      allCards[i].style.border = "";
+  }
+
   return is_set;
 }
 /* funtion to create all combos possible
