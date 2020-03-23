@@ -362,28 +362,34 @@ function is_set(array) {
   return is_set;
 }
 /* funtion to create all combos possible
-   Adapated from https://js-algorithms.tutorialhorizon.com/2015/10/23/combinati
-   ons-of-an-array/
+   Adapted from: https://www.w3resource.com/javascript-exercises/javascript-func
+   tion-exercise-21.php
 */
-function create_combos(grid_obj) {
-  var i = 0;
-  var j = 0;
-  var result = [];
-  var deckLength = deck.length;
-  let power = Math.power;
-  combinations = power(2, deckLength);
-  for (i = 0; i < combinations; i++) {
-    var temp = [];
-    for (j = 0; j < deckLength; j++) {
-      if (i & power(2, j)) {
-        temp.push(grid_obj[j]);
-      }
+function create_combos(arra, arra_size)
+ {
+    var result_set = [],
+        result;
+
+
+for(var x = 0; x < Math.pow(2, arra.length); x++)
+  {
+    result = [];
+    i = arra.length - 1;
+     do
+      {
+      if( (x & (1 << i)) !== 0)
+          {
+             result.push(arra[i]);
+           }
+        }  while(i--);
+
+    if( result.length == arra_size)
+       {
+          result_set.push(result);
+        }
     }
-    if (temp.length == 3) {
-      result.push(temp);
-    }
-  }
-  return result;
+
+    return result_set;
 }
 /* function that checks if a set is present in the cards on table */
 function set_present(grid_obj) {
@@ -454,53 +460,26 @@ function shuffle(arr) {
 /* Created by Jack Hanley
  Method that generates a hint for a player.  Tells the user a potential
  card to use */
-function give_hint() {
-  var currentCombos = create_combos(Grid.cardsInGrid);
-  if (set_present(Grid.cardsInGrid) == false) {
-    window.alert('There may not be a set here');
+function give_hint(arr) {
+  window.alert("hint was called");
+  var currentCombos = create_combos(arr, 3);
+  for (var x = 0; x < currentCombos; x++) {
+    console.log(currentCombos[x]);
   }
-
+  /*
   var flag = false;
   var count = 0;
-  while (flag == false) {
-    var temp = currentCombos[count];
+  var temp;
+  while (flag == false && count < currentCombos.length) {
+    temp = currentCombos[count];
     if (is_set(temp[0], temp[1], temp[2]) == true) {
-      var singleCard1 = temp[0];
-      var singleCard2 = temp[1];
-      var singleCard3 = temp[2];
-      var count = 0;
-      var index1 = 0;
-      var index2 = 0;
-      var index3 = 0;
-      while (count < Grid.cardsInGrid) {
-        if (singleCard1 == Grid.cardsInGrid[count]) {
-          index1 = count + 1;
-        } else if (singleCard2 == Grid.cardsInGrid[count]) {
-          index2 = count + 1;
-        } else if (singleCard3 == Grid.cardsInGrid[count]) {
-          index3 = count + 1;
-        }
-        count = count + 1;
-      }
-      var hintNum = 2;
-      switch (hintNum) {
-        case 0:
-          window.alert('Card ' + index1 + ' is in a set');
-          break;
-        case 1:
-          window.alert('Cards ' + index1 + ' and ' + index2 + ' are in a set');
-          break;
-        case 2:
-          window.alert(
-            'Try using card numbers: ' + index1 + ', ' + index2 + ', ' + index3
-          );
-          break;
-        default:
-          break;
-      }
+      window.alert("found a set");
       flag = true;
     }
+    count = count + 1;
   }
+  */
+
 }
 
 class Player {
@@ -560,7 +539,17 @@ window.onload = function() {
         grid_obj.removeGrid();
       }
       grid_obj.addGrid(sp_view, deck.card_list);
+      var hint = document.createElement('button');
+      hint.type = 'button';
+      hint.innerHTML = 'Give Hint';
+      sp_view.appendChild(hint);
+      hint.addEventListener('click', function() {
+      give_hint(grid_obj.cardsInGrid);
+      });
+
     });
+
+
   });
 
   /*starts the multiplayer view*/
