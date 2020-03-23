@@ -355,7 +355,6 @@ function is_set(array) {
   if (is_set == true) {
     window.alert("yay");
   }
-
   return is_set;
 }
 /* funtion to create all combos possible
@@ -542,6 +541,13 @@ window.onload = function() {
       hint.addEventListener('click', function() {
         give_hint(grid_obj.cardsInGrid);
       });
+        var back = document.createElement('button');
+        back.type = 'button';
+        back.innerHTML = 'Back to Main Menu';
+        sp_view.appendChild(back);
+        back.addEventListener('click', function() {
+            location.reload();
+        });
     });
 
 
