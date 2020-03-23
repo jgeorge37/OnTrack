@@ -523,8 +523,8 @@ window.onload = function() {
     var sp_view = document.getElementById('singleplayer_view');
     var sp_menu_view = document.getElementById('singleplayer_menu_view');
     var sp_game_view = document.getElementById('singleplayer_game_view');
-    sp_menu_view.style = 'block';
-    sp_game_view.style = 'none';
+    sp_menu_view.style.display = 'block';
+    sp_game_view.style.display = 'none';
     var player_name = document.createElement('input');
     player_name.type = 'text';
     player_name.placeholder = 'Enter player name';
@@ -535,8 +535,8 @@ window.onload = function() {
     sp_menu_view.appendChild(start);
     start.addEventListener('click', function() {
       if(player_name.value != '') {
-        sp_menu_view.style = 'none';
-        sp_game_view.style = 'block';
+        sp_menu_view.style.display = 'none';
+        sp_game_view.style.display = 'block';
         if (document.getElementById('grid_container') != null) {
           grid_obj.removeGrid();
         }
