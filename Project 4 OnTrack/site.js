@@ -339,7 +339,6 @@ function is_set(array) {
   var card2 = array[1];
   var card3 = array[2];
 
-  window.alert('is set was called');
   var is_set;
   // Call attribute_check method on all 4 attributes for each card.
   is_set = attribute_check(card1.color, card2.color, card3.color);
