@@ -521,33 +521,66 @@ window.onload = function() {
   /* This shows the grid of cards in the singleplayer view */
   buttons[0].addEventListener('click', function() {
     var sp_view = document.getElementById('singleplayer_view');
+    var sp_menu_view = document.getElementById('singleplayer_menu_view');
+    var sp_game_view = document.getElementById('singleplayer_game_view');
+    sp_menu_view.style = 'block';
+    sp_game_view.style = 'none';
     var player_name = document.createElement('input');
     player_name.type = 'text';
     player_name.placeholder = 'Enter player name';
-    sp_view.appendChild(player_name);
+    sp_menu_view.appendChild(player_name);
     var start = document.createElement('button');
     start.type = 'button';
     start.innerHTML = 'Start';
-    sp_view.appendChild(start);
+    sp_menu_view.appendChild(start);
     start.addEventListener('click', function() {
-      if (document.getElementById('grid_container') != null) {
-        grid_obj.removeGrid();
-      }
-      grid_obj.addGrid(sp_view, deck.card_list);
-      var hint = document.createElement('button');
-      hint.type = 'button';
-      hint.innerHTML = 'Give Hint';
-      sp_view.appendChild(hint);
-      hint.addEventListener('click', function() {
-        give_hint(grid_obj.cardsInGrid);
-      });
-        var back = document.createElement('button');
-        back.type = 'button';
-        back.innerHTML = 'Back to Main Menu';
-        sp_view.appendChild(back);
-        back.addEventListener('click', function() {
-            location.reload();
+      if(player_name.value != '') {
+        sp_menu_view.style = 'none';
+        sp_game_view.style = 'block';
+        if (document.getElementById('grid_container') != null) {
+          grid_obj.removeGrid();
+        }
+        var player_div = document.createElement('div');
+        player_div.id = 'player_div';
+        var player = document.createElement('p');
+        player.textContent = player_name.value + ': ';
+        player.id = player_name.value;
+        var player_score = document.createElement('label');
+        player_score.htmlFor = player_name;
+        player_score.id = player_name.value + '_score';
+        player_score.textContent = '0';
+        player_div.appendChild(player);
+        player_div.appendChild(player_score);
+        sp_game_view.appendChild(player_div);
+        var computer_div = document.createElement('div');
+        computer_div.id = 'computer_div'
+        var computer = document.createElement('p');
+        computer.textContent = 'Computer: ';
+        computer.id = 'computer';
+        var computer_score = document.createElement('label');
+        computer_score.id = 'computer_score';
+        computer_score.textContent = '0';
+        computer_div.appendChild(computer);
+        computer_div.appendChild(computer_score);
+        sp_game_view.appendChild(computer_div);
+        grid_obj.addGrid(sp_game_view, deck.card_list);
+        var hint = document.createElement('button');
+        hint.type = 'button';
+        hint.innerHTML = 'Give Hint';
+        sp_game_view.appendChild(hint);
+        hint.addEventListener('click', function() {
+          give_hint(grid_obj.cardsInGrid);
         });
+          var back = document.createElement('button');
+          back.type = 'button';
+          back.innerHTML = 'Back to Main Menu';
+          sp_game_view.appendChild(back);
+          back.addEventListener('click', function() {
+              location.reload();
+          });
+      }else {
+        window.alert('must fill in the argument');
+      }  
     });
 
 
