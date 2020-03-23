@@ -264,7 +264,11 @@ function Grid() {
       guessArray.push(card);
       grid_card.style.border = "3px solid red";
       if (guessArray.length == 3) {
-        is_set(guessArray);
+        if(is_set(guessArray)) {
+            window.alert("Congratulations. You have correctly identified a set!");
+        } else {
+            window.alert("These cards do not make up a set.");
+        }
         guessArray.length = 0;
       }
     });
