@@ -339,24 +339,21 @@ function is_set(array) {
   var card2 = array[1];
   var card3 = array[2];
 
-  window.alert('is set was called');
   var is_set;
   // Call attribute_check method on all 4 attributes for each card.
   is_set = attribute_check(card1.color, card2.color, card3.color);
   is_set = is_set && attribute_check(card1.shape, card2.shape, card3.shape);
   is_set = is_set && attribute_check(card1.number, card2.number, card3.number);
-  is_set =
-    is_set && attribute_check(card1.shading, card2.shading, card3.shading);
-  if(is_set) {
-    window.alert('Is Set');
-  } else {
-    window.alert('Is not Set');
-  }
+  is_set = is_set && attribute_check(card1.shading, card2.shading, card3.shading);
+
 
   // Reset card css border
   var allCards = document.getElementsByClassName('grid_card');
   for(var i = 0; i < allCards.length; i++) {
       allCards[i].style.border = "";
+  }
+  if (is_set == true) {
+    window.alert("yay");
   }
 
   return is_set;
@@ -367,8 +364,8 @@ function is_set(array) {
 */
 function create_combos(arra, arra_size)
  {
-    var result_set = [],
-        result;
+    var result_set = [];
+    var result;
 
 
 for(var x = 0; x < Math.pow(2, arra.length); x++)
@@ -381,9 +378,9 @@ for(var x = 0; x < Math.pow(2, arra.length); x++)
           {
              result.push(arra[i]);
            }
-        }  while(i--);
+      }  while(i--);
 
-    if( result.length == arra_size)
+    if(result.length == arra_size)
        {
           result_set.push(result);
         }
@@ -392,13 +389,12 @@ for(var x = 0; x < Math.pow(2, arra.length); x++)
     return result_set;
 }
 /* function that checks if a set is present in the cards on table */
-function set_present(grid_obj) {
-  currentCombos = create_combos(grid_obj);
+function set_present(arr) {
   var setPresent = false;
   var count = 0;
-  while (setPresent == false && count < currentCombos.length) {
-    temp = currentCombos[count];
-    if (is_set(temp[0], temp[1], temp[2]) == true) {
+  while (setPresent == false && count < arr.length) {
+    temp = arr[count];
+    if (is_set(temp) == true) {
       setPresent = true;
     }
     count = count + 1;
@@ -461,25 +457,25 @@ function shuffle(arr) {
  Method that generates a hint for a player.  Tells the user a potential
  card to use */
 function give_hint(arr) {
-  window.alert("hint was called");
   var currentCombos = create_combos(arr, 3);
-  for (var x = 0; x < currentCombos; x++) {
-    console.log(currentCombos[x]);
-  }
-  /*
   var flag = false;
   var count = 0;
   var temp;
+  if (set_present(currentCombos) == false) {
+    window.alert("There may not be any sets to find here.");
+  }
   while (flag == false && count < currentCombos.length) {
     temp = currentCombos[count];
-    if (is_set(temp[0], temp[1], temp[2]) == true) {
+    if (is_set(temp) == true) {
+      for (var u = 0; u < temp.length; u++) {
+        console.log(temp[u]);
+      }
       window.alert("found a set");
       flag = true;
     }
     count = count + 1;
   }
-  */
-
+  return temp;
 }
 
 class Player {
@@ -544,7 +540,7 @@ window.onload = function() {
       hint.innerHTML = 'Give Hint';
       sp_view.appendChild(hint);
       hint.addEventListener('click', function() {
-      give_hint(grid_obj.cardsInGrid);
+        give_hint(grid_obj.cardsInGrid);
       });
     });
 
