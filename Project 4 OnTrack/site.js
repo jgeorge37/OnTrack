@@ -247,6 +247,7 @@ function Deck() {
   shuffle(this.card_list);
 }
 var guessArray = [];
+var deckCards = [];
 /* Grid constructor */
 function Grid() {
   /* array of cards in the grid, not in the Deck */
@@ -260,7 +261,6 @@ function Grid() {
     var grid_card = document.createElement('div');
     grid_card.className = 'grid_card';
     grid_card.addEventListener('click', function() {
-      window.alert('CLICK ' + guessArray.length);
       guessArray.push(card);
       grid_card.style.border = "3px solid red";
       if (guessArray.length == 3) {
@@ -393,7 +393,7 @@ for(var x = 0; x < Math.pow(2, arra.length); x++)
 }
 /* function that checks if a set is present in the cards on table */
 function set_present(grid_obj) {
-  currentCombos = create_combos(Grid.cardsInGrid);
+  currentCombos = create_combos(grid_obj);
   var setPresent = false;
   var count = 0;
   while (setPresent == false && count < currentCombos.length) {
@@ -546,7 +546,6 @@ window.onload = function() {
       hint.addEventListener('click', function() {
       give_hint(grid_obj.cardsInGrid);
       });
-
     });
 
 
