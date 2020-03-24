@@ -264,6 +264,8 @@ window.onload = function() {
         sp_game_view.appendChild(computer_div);
         player_list.player_list.push(new Player(player_name.value, false));
         grid_obj.addGrid(sp_game_view, deck.card_list, player_list);
+
+        // Hint button
         var hint = document.createElement('button');
         hint.type = 'button';
         hint.innerHTML = 'Give Hint';
@@ -273,6 +275,17 @@ window.onload = function() {
           player_list.player_list[0].score -= 1;
           player_score.textContent = player_list.player_list[0].score;
         });
+
+        // No Set button
+        var noSet = document.createElement('button');
+        noSet.type = 'button';
+        noSet.innerHTML = 'No Sets Present';
+        sp_game_view.appendChild(noSet);
+        noSet.addEventListener('click', function() {
+          
+        });
+
+        // Back to Main Menu button
         var back = document.createElement('button');
         back.type = 'button';
         back.innerHTML = 'Back to Main Menu';
