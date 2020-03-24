@@ -190,25 +190,36 @@ function give_hint(arr) {
   }
   if (set_present(currentCombos) == false) {
     window.alert('There may not be any sets to find here.');
-  } /*else {
-    window.alert(("try give hint button"));
-  }*/
+  } else {
+    window.alert(
+        'Try using card with Color: ' +
+        temp[0].color +
+        ' | Shading: ' +
+        temp[0].shading +
+        ' | Shape: ' +
+        temp[0].shape +
+        ' | Count: ' +
+        temp[0].number
+    );
+  }
 
   return temp;
 }
 
-// shows an alert with the hint about what card to play
-function give_hint_display(){
-  window.alert(
-      'Try using card with Color: ' +
-      temp[0].color +
-      ' | Shading: ' +
-      temp[0].shading +
-      ' | Shape: ' +
-      temp[0].shape +
-      ' | Count: ' +
-      temp[0].number
-  );
+// creates an array of possible cards, size 3, for the computer
+function create_combos_comp(arr){
+  var currentCombos = create_combos(arr, 3);
+  var flag = false;
+  var count = 0;
+  var cpu_arr = [];
+  while (flag == false && count < currentCombos.length) {
+    temp = currentCombos[count];
+    if (is_set(cpu_arr) == true) {
+      flag = true;
+    }
+    count = count + 1;
+  }
+  return cpu_arr;
 }
 
 // Adding player functionality
@@ -309,7 +320,7 @@ window.onload = function() {
         sp_game_view.appendChild(hint);
         hint.addEventListener('click', function() {
           give_hint(cardsInGrid);
-          give_hint_display();
+          give_hint_display(cardsInGrid);
           player_list.player_list[0].score -= 1;
           player_score.textContent = player_list.player_list[0].score;
         });
