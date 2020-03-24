@@ -113,7 +113,9 @@ function addCardToGrid(grid_obj, card, players) {
         guessArray = [];
         if (CPU_turn) {
           var comp_arr = computer_moves();
-          is_set(comp_arr);
+          if(is_set(comp_arr)){
+            grid_obj.removeCard(comp_arr, deckCards);
+          }
           comp_arr.length = 0;
         }
       }
