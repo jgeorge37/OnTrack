@@ -397,6 +397,32 @@ window.onload = function() {
           list.firstChild.checked = true;
           grid_obj.addGrid(game, deck.card_list, player_list);
           game.appendChild(list);
+
+          // No Set button
+          var noSet = document.createElement('button');
+          noSet.type = 'button';
+          noSet.innerHTML = 'No Sets Present';
+          list.appendChild(noSet);
+          noSet.addEventListener('click', function() {
+            var currentCombos = create_combos(arr, 3);
+            // If set not present, add three more cards
+            if (!set_present(currentCombos)) {
+
+            } else {
+              // Else, subtract 1 point
+              /* Need access to players
+              for (i = 0; i < inputs.length; i++) {
+                if (inputs[i].checked) {
+                  players.player_list[i].score -= 1;
+                  document.getElementById(
+                      players.player_list[i].name + '_score'
+                  ).innerText = players.player_list[i].score;
+                  break;
+                }
+              }*/
+
+            }
+          });
         }
       });
   });
