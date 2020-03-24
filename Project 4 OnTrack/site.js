@@ -69,8 +69,6 @@ function addCardToGrid(grid_obj, card, players) {
                 if (document.getElementById('singleplayer_view').style.display != 'none') {
                     players.player_list[0].score += 3;
                     document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-                    grid_obj.removeCard(guessArray);
-                    guessArray = [];
                 } else {
                     var inputs = document.getElementById('player_list').getElementsByTagName('input');
                     for (i = 0; i < inputs.length - 1; i++) {
@@ -81,6 +79,7 @@ function addCardToGrid(grid_obj, card, players) {
                         }
                     }
                 }
+                grid_obj.removeCard(guessArray);
             } else {
                 if (document.getElementById('singleplayer_view').style.display != 'none') {
                     players.player_list[0].score -= 1;
@@ -96,7 +95,7 @@ function addCardToGrid(grid_obj, card, players) {
                     }
                 }
             }
-            guessArray.length = 0;
+            guessArray = [];
             if (CPU_turn) {
                 var comp_arr = computer_moves();
                 is_set(comp_arr);
