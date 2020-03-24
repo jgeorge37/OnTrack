@@ -31,8 +31,10 @@ function Grid() {
       addCardToGrid(this, card_list.shift(), players);
     }
 
-    // No more remaining cards in grid or deck
-    if(grid.childNodes.length == 0 && card_list.length == 0) {
+    // No more remaining cards in grid or deck or no more combos
+    var currentCombos = create_combos(cardsInGrid, 3);
+    
+    if((grid.childNodes.length == 0 && card_list.length == 0) || (grid.childNodes.length <= 12 && !set_present(currentCombos))) {
       if(document.getElementById('multiplayer_view').style.display != 'none') {
         var inputs = document.getElementById('player_list').getElementsByTagName('input');
         var highscore = 0;
