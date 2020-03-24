@@ -486,3 +486,4 @@ window.onload = function() {
         }
       });
   });
+}
