@@ -281,6 +281,7 @@ window.onload = function() {
 
   /*starts the multiplayer view*/
   buttons[1].addEventListener('click', function() {
+    document.getElementById('startbutton').disabled=true;
     var menu = document.getElementById('multiplayer_menu_view');
     var game = document.getElementById('multiplayer_game_view');
     var player_container = document.getElementById('player_container');
@@ -305,6 +306,7 @@ window.onload = function() {
           input.className = 'input_player';
           player_container.appendChild(input);
           player_container.appendChild(document.createElement('br'));
+          document.getElementById('startbutton').disabled=false;
         }
       });
 
