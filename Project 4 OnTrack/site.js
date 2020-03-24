@@ -151,9 +151,6 @@ function give_hint(arr) {
   var flag = false;
   var count = 0;
   var temp;
-  if (set_present(currentCombos) == false) {
-    window.alert('There may not be any sets to find here.');
-  }
   while (flag == false && count < currentCombos.length) {
     temp = currentCombos[count];
     if (is_set(temp) == true) {
@@ -161,16 +158,21 @@ function give_hint(arr) {
     }
     count = count + 1;
   }
-  window.alert(
-    'Try using card with Color: ' +
-      temp[0].color +
-      ' | Shading: ' +
-      temp[0].shading +
-      ' | Shape: ' +
-      temp[0].shape +
-      ' | Count: ' +
-      temp[0].number
-  );
+  if (set_present(currentCombos) == false) {
+    window.alert('There may not be any sets to find here.');
+  } else {
+    window.alert(
+      'Try using card with Color: ' +
+        temp[0].color +
+        ' | Shading: ' +
+        temp[0].shading +
+        ' | Shape: ' +
+        temp[0].shape +
+        ' | Count: ' +
+        temp[0].number
+    );
+  }
+
   return temp;
 }
 
