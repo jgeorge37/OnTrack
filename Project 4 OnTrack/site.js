@@ -115,7 +115,6 @@ function addCardToGrid(grid_obj, card, players) {
           var comp_arr = computer_moves();
           is_set(comp_arr);
           comp_arr.length = 0;
-          window.alert('computer player turn ended');
         }
       }
     } else {

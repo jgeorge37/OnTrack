@@ -1,5 +1,3 @@
-
-
 /* Function to not display an element */
 function hide(target) {
   target.style.display = 'none';
@@ -34,16 +32,16 @@ function is_set(array) {
   is_set = attribute_check(card1.color, card2.color, card3.color);
   is_set = is_set && attribute_check(card1.shape, card2.shape, card3.shape);
   is_set = is_set && attribute_check(card1.number, card2.number, card3.number);
-  is_set = is_set && attribute_check(card1.shading, card2.shading, card3.shading);
-
+  is_set =
+    is_set && attribute_check(card1.shading, card2.shading, card3.shading);
 
   // Reset card css border
   var allCards = document.getElementsByClassName('grid_card');
   for (var i = 0; i < allCards.length; i++) {
-    allCards[i].style.border = "";
+    allCards[i].style.border = '';
   }
   if (is_set == true) {
-    window.alert("yay");
+    // window.alert("yay");
   }
   return is_set;
 }
@@ -54,7 +52,6 @@ function is_set(array) {
 function create_combos(arra, arra_size) {
   var result_set = [];
   var result;
-
 
   for (var x = 0; x < Math.pow(2, arra.length); x++) {
     result = [];
@@ -100,11 +97,11 @@ function computers_cards(correct_set) {
   if (choice && (!Array.isArray(correct_set) || !correct_set.length)) {
     alert(
       'computer chose: ' +
-      correct_set[1] +
-      ', ' +
-      correct_set[2] +
-      ' ,' +
-      correct_set[3]
+        correct_set[1] +
+        ', ' +
+        correct_set[2] +
+        ' ,' +
+        correct_set[3]
     );
   } else {
     shuffle(card_array);
