@@ -77,7 +77,7 @@ function addCardToGrid(grid_obj, card, players) {
             var inputs = document
               .getElementById('player_list')
               .getElementsByTagName('input');
-            for (i = 0; i < inputs.length - 1; i++) {
+            for (i = 0; i < inputs.length; i++) {
               if (inputs[i].checked) {
                 players.player_list[i].score += 3;
                 document.getElementById(
@@ -99,8 +99,9 @@ function addCardToGrid(grid_obj, card, players) {
             var inputs = document
               .getElementById('player_list')
               .getElementsByTagName('input');
-            for (i = 0; i < inputs.length - 1; i++) {
+            for (i = 0; i < inputs.length; i++) {
               if (inputs[i].checked) {
+                console.log(players.player_list[i]);
                 players.player_list[i].score -= 1;
                 document.getElementById(
                   players.player_list[i].name + '_score'
