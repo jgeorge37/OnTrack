@@ -173,33 +173,21 @@ function addCardToGrid(grid_obj, card, players) {
     cardsInGrid.push(card);
 }
 
-/* Created by Jack Hanley
- Method that generates a hint for a player.  Tells the user a potential
- card to use */
 function give_hint(arr) {
-    var currentCombos = create_combos(arr, 3);
-    var flag = false;
-    var count = 0;
-    var temp;
-    while (flag == false && count < currentCombos.length) {
-        temp = currentCombos[count];
-        if (is_set(temp) == true) {
-            flag = true;
-        }
-        count = count + 1;
+  var currentCombos = create_combos(arr, 3);
+  var flag = false;
+  var count = 0;
+  var temp;
+  while (flag == false && count < currentCombos.length) {
+    temp = currentCombos[count];
+    if (is_set(temp) == true) {
+      flag = true;
     }
-    if (set_present(currentCombos) == false) {
-        window.alert('There may not be any sets to find here.');
-    }
-    /*else {
-       window.alert(("try give hint button"));
-     }*/
-
-    return temp;
-}
-
-// shows an alert with the hint about what card to play
-function give_hint_display() {
+    count = count + 1;
+  }
+  if (set_present(currentCombos) == false) {
+    window.alert('There may not be any sets to find here.');
+  } else {
     window.alert(
         'Try using card with Color: ' +
         temp[0].color +
@@ -210,6 +198,25 @@ function give_hint_display() {
         ' | Count: ' +
         temp[0].number
     );
+  }
+
+  return temp;
+}
+
+// creates an array of possible cards, size 3, for the computer
+function create_combos_comp(arr){
+  var currentCombos = create_combos(arr, 3);
+  var flag = false;
+  var count = 0;
+  var cpu_arr = [];
+  while (flag == false && count < currentCombos.length) {
+    cpu_arr = currentCombos[count];
+    if (is_set(cpu_arr) == true) {
+      flag = true;
+    }
+    count = count + 1;
+  }
+  return cpu_arr;
 }
 
 // Adding player functionality
@@ -310,7 +317,7 @@ window.onload = function() {
                 sp_game_view.appendChild(hint);
                 hint.addEventListener('click', function() {
                     give_hint(cardsInGrid);
-                    give_hint_display();
+                    create_combos_comp();
                     player_list.player_list[0].score -= 1;
                     player_score.textContent = player_list.player_list[0].score;
                 });

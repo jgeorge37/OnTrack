@@ -6,7 +6,7 @@ function computer_moves(){
     var cp_score = Number(document.getElementById('computer_score').textContent);
     // makes the chance of the computer finding a set to 25%
     if(prob_of_win > 0.75){
-        cp_array = give_hint(cardsInGrid);
+        cp_array = create_combos_comp(cardsInGrid);
     }else{
         // if computer chance is less than 0.75 then just pick 3 random cards from the current cards
         cp_array[0] = cardsInGrid[Math.floor(Math.random()*10)];
