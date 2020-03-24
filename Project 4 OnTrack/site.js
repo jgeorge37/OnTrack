@@ -123,14 +123,13 @@ function give_hint(arr) {
   while (flag == false && count < currentCombos.length) {
     temp = currentCombos[count];
     if (is_set(temp) == true) {
-      for (var u = 0; u < temp.length; u++) {
-        console.log(temp[u]);
-      }
-      window.alert("found a set");
+
       flag = true;
     }
     count = count + 1;
   }
+  window.alert("Try using card with Color: " + temp[0].color + " | Shading: " +
+  temp[0].shading + " | Shape: " + temp[0].shape + " | Count: " + temp[0].number);
   return temp;
 }
 
@@ -237,7 +236,7 @@ window.onload = function() {
           });
       }else {
         window.alert('must fill in the argument');
-      }  
+      }
     });
 
 
@@ -301,7 +300,7 @@ window.onload = function() {
           if (old_list) {
             old_list.remove();
           }
-          
+
           var inputs = menu.getElementsByClassName('input_player');
           var list = document.createElement('div');
           list.id = 'player_list';
