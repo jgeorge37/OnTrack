@@ -114,7 +114,9 @@ function addCardToGrid(grid_obj, card, players) {
         guessArray = [];
         if (CPU_turn) {
           var comp_arr = computer_moves();
-          is_set(comp_arr);
+          if(is_set(comp_arr)){
+            grid_obj.removeCard(comp_arr, deckCards);
+          }
           comp_arr.length = 0;
         }
       }
@@ -149,9 +151,6 @@ function give_hint(arr) {
   var flag = false;
   var count = 0;
   var temp;
-  if (set_present(currentCombos) == false) {
-    window.alert('There may not be any sets to find here.');
-  }
   while (flag == false && count < currentCombos.length) {
     temp = currentCombos[count];
     if (is_set(temp) == true) {
@@ -159,12 +158,11 @@ function give_hint(arr) {
     }
     count = count + 1;
   }
-  return temp;
-}
-
-function give_hint_display() {
+  if (set_present(currentCombos) == false) {
+    window.alert('There may not be any sets to find here.');
+  } else {
     window.alert(
-        'Try using card with Color: ' +
+      'Try using card with Color: ' +
         temp[0].color +
         ' | Shading: ' +
         temp[0].shading +
@@ -173,7 +171,11 @@ function give_hint_display() {
         ' | Count: ' +
         temp[0].number
     );
+  }
+
+  return temp;
 }
+
 function Player(name, cp_flag) {
   this.name = name;
   this.score = 0;
@@ -245,7 +247,7 @@ window.onload = function() {
         player.id = player_name.value;
         var player_score = document.createElement('p');
         player_score.id = player_name.value + '_score';
-        player_score.textContent = player_name.score;
+        player_score.textContent = 0;
         player_div.appendChild(player);
         player_div.appendChild(player_score);
         sp_game_view.appendChild(player_div);
@@ -268,7 +270,8 @@ window.onload = function() {
         sp_game_view.appendChild(hint);
         hint.addEventListener('click', function() {
           give_hint(cardsInGrid);
-          give_hint_display();
+          player_list.player_list[0].score -= 1;
+          player_score.textContent = player_list.player_list[0].score;
         });
         var back = document.createElement('button');
         back.type = 'button';
