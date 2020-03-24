@@ -27,8 +27,26 @@ function Grid() {
                 }
             }
         }
-        while (grid.childNodes.length < 12 && card_list.length > 0) {
-            addCardToGrid(this, card_list.shift(), players);
+    }
+}
+while (grid.childNodes.length < 12 && card_list.length > 0) {
+    addCardToGrid(this, card_list.shift(), players);
+}
+
+// No more remaining cards in grid or deck or no more combos
+var currentCombos = create_combos(cardsInGrid, 3);
+
+if ((grid.childNodes.length == 0 && card_list.length == 0) || (grid.childNodes.length <= 12 && !set_present(currentCombos))) {
+    if (document.getElementById('multiplayer_view').style.display != 'none') {
+        var inputs = document.getElementById('player_list').getElementsByTagName('input');
+        var highscore = 0;
+        var highscore_player;
+        for (i = 0; i < inputs.length; i++) {
+            var score = document.getElementById(inputs[i].value + '_score').textContent;
+            if (score > highscore) {
+                highscore = score;
+                highscore_player = inputs[i].value;
+            }
         }
 
         // No more remaining cards in grid or deck
@@ -326,9 +344,7 @@ window.onload = function() {
                         var cardsToAdd = 3;
                         var temp;
                         while (counter < cardsToAdd && deckCards.length > 0) {
-                            temp = deckCards[counter];
-                            console.log(temp);
-                            addCardToGrid(grid_obj, temp, player_list.player_list);
+                            addCardToGrid(grid_obj, deckCards.shift(), player_list.player_list);
                             counter = counter + 1;
                         }
                     } else {
@@ -452,9 +468,7 @@ window.onload = function() {
                             var cardsToAdd = 3;
                             var temp;
                             while (counter < cardsToAdd && deckCards.length > 0) {
-                                temp = deckCards[counter];
-                                console.log(temp);
-                                addCardToGrid(grid_obj, temp, player_list.player_list);
+                                addCardToGrid(grid_obj, deckCards.shift(), player_list.player_list);
                                 counter = counter + 1;
                             }
                         } else {
@@ -478,28 +492,4 @@ window.onload = function() {
                 }
             });
     });
-
-    // /*starts the highscore*/
-    // buttons[3].addEventListener('click', function() {
-    //   var list = document.getElementById('highscore_list');
-    //   while (list.hasChildNodes()) {
-    //     list.removeChild(list.lastChild);
-    //   }
-    //   if (player_list.highscore_list.length == 0) {
-    //     var no_records = document.createElement('p');
-    //     no_records.textContent = 'No records have been stored yet';
-    //     list.appendChild(no_records);
-    //   } else {
-    //     var order_list = document.createElement('ol');
-    //     for (i = 0; i < player_list.highscore_list.length; i++) {
-    //       var item = document.createElement('li');
-    //       item.textContent =
-    //         player_list.highscore_list[i].name +
-    //         ' : ' +
-    //         player_list.highscore_list[i].score;
-    //       order_list.appendChild(item);
-    //     }
-    //     list.appendChild(order_list);
-    //   }
-    // });
-};
+}
