@@ -332,6 +332,7 @@ window.onload = function() {
             }
           } else {
             // Else, subtract 1 point
+            window.alert("There is a set present. Keep looking!");
             player_list.player_list[0].score -= 1;
             player_score.textContent = player_list.player_list[0].score;
           }
