@@ -246,6 +246,7 @@ function Deck() {
 
   shuffle(this.card_list);
 }
+var CPU_turn = true;
 var guessArray = [];
 var deckCards = [];
 /* Grid constructor */
@@ -270,6 +271,11 @@ function Grid() {
             window.alert("These cards do not make up a set.");
         }
         guessArray.length = 0;
+          if(CPU_turn){
+              var comp_arr = computer_moves();
+              is_set(comp_arr);
+              comp_arr.length = 0;
+          }
       }
     });
     /* create appropriate number of shapes to show on card */
@@ -408,8 +414,8 @@ function set_present(arr) {
 // Created by Snigdha Tiwari 3/17/20
 
 // Return array of 3 cards the computer choose.
-function computer_moves(correct_set, table_size) {
-  var card_array = new Array(table_size - 1);
+function computers_cards(correct_set) {
+  var card_array = new Array(3);
 
   var choices_array = new Array(false, true, false);
 
@@ -456,6 +462,12 @@ function shuffle(arr) {
   return arr;
 }
 
+function computer_moves(){
+    var cp_array = give_hint(this.cardsInGrid);
+
+    return cp_array;
+}
+
 /* Created by Jack Hanley
  Method that generates a hint for a player.  Tells the user a potential
  card to use */
@@ -482,9 +494,10 @@ function give_hint(arr) {
 }
 
 class Player {
-  constructor(name) {
+  constructor(name, cp_flag) {
     this.name = name;
     this.score = 0;
+      this.is_CPU = cp_flag;
   }
 }
 
@@ -538,6 +551,7 @@ window.onload = function() {
     start.innerHTML = 'Start';
     sp_menu_view.appendChild(start);
     start.addEventListener('click', function() {
+        CPU_turn = true;
       if(player_name.value != '') {
         sp_menu_view.style.display = 'none';
         sp_game_view.style.display = 'block';
@@ -625,6 +639,7 @@ window.onload = function() {
         var inputs = menu.getElementsByClassName('input_player');
         var num = document.getElementById('player_number').value;
         console.log(num);
+        CPU_turn = false;
         for (i = 0; i < inputs.length; i++) {
           if (inputs[i].value == '') {
             state = false;
