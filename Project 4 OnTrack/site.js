@@ -11,7 +11,7 @@ function Grid() {
   var players;
 
   /* function to remove a card from the grid */
-  this.removeCard = function(guessArray) {
+  this.removeCard = function(guessArray, card_list) {
     var grid = document.getElementById('grid_container');
     console.log(guessArray);
     console.log(grid.childNodes);
@@ -27,7 +27,12 @@ function Grid() {
         }
       }
     }
+    while(grid.childNodes.length < 12 && card_list.length > 0){
+      addCardToGrid(this, card_list.shift(), players);
+    }
+
   };
+
 
 
   /* function to remove the grid from its parent node */
@@ -65,7 +70,7 @@ function addCardToGrid(grid_obj, card, players) {
         if (guessArray.length == 3) {
             console.log(players);
             if (is_set(guessArray)) {
-              grid_obj.removeCard(guessArray);
+              grid_obj.removeCard(guessArray, deckCards);
                 if (document.getElementById('singleplayer_view').style.display != 'none') {
                     players.player_list[0].score += 3;
                     document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
@@ -155,6 +160,7 @@ function Player(name, cp_flag) {
 window.onload = function() {
   var grid_obj = new Grid();
   var deck = new Deck();
+  deckCards = deck.card_list;
   var player_list = new PlayerGroup();
 
   /* Get the main menu buttons and main content views */
