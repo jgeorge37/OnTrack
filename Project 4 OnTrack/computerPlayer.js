@@ -12,10 +12,10 @@ function computer_moves(){
         cp_array[2] = cardsInGrid[Math.floor(Math.random()*10)];
     }
     if(is_set(cp_array)){
-        cp_score = cp_score+1;
+        cp_score += 3;
         window.alert("Computer got a set")
     }else{
-        cp_score=cp_score-1;
+        cp_score -= 1;
         window.alert("Computer did not get a set")
     }
     document.getElementById('computer_score').textContent = cp_score;
