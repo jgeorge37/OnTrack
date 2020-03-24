@@ -33,7 +33,29 @@ function Grid() {
 
     // No more remaining cards in grid or deck
     if(grid.childNodes.length == 0 && card_list.length == 0) {
-      window.alert("No more remaining cards. The game has ended!");
+      if(document.getElementById('multiplayer_view').style.display != 'none') {
+        var inputs = document.getElementById('player_list').getElementsByTagName('input');
+        var highscore = 0;
+        var highscore_player;
+        for(i = 0; i < inputs.length; i++) {
+          var score = document.getElementById(inputs[i].value + '_score').textContent;
+          if(score > highscore) { 
+            highscore = score;
+            highscore_player = inputs[i].value;
+          }
+        }
+        window.alert('There are no more cards. The winner is ' + highscore_player + ' with ' + highscore + ' points!');
+      }else {
+        var playerid = document.getElementById('player_div').getElementsByTagName('p')[0].id;
+        var playerscore = document.getElementById(playerid + '_score');
+        var computerscore = document.getElementById('computer_score');
+        if(playerscore > computerscore) {
+          window.alert('Congrats! You beat the computer with ' + playerscore + ' points!');
+        }else {
+          window.alert('The computer beat you with ' + computerscore + ' points');
+        }
+      }
+      location.reload();
     }
   };
 
@@ -56,6 +78,7 @@ function Grid() {
     }
   };
 }
+
 
 function addCardToGrid(grid_obj, card, players) {
   /* retreive main grid container */
@@ -292,12 +315,21 @@ window.onload = function() {
         noSet.innerHTML = 'No Sets Present';
         sp_game_view.appendChild(noSet);
         noSet.addEventListener('click', function() {
-          var currentCombos = create_combos(arr, 3);
+          var currentCombos = create_combos(cardsInGrid, 3);
           // If set not present, add three more cards
           if (!set_present(currentCombos)) {
-
+            var counter = 0;
+            var cardsToAdd = 3;
+            var temp;
+            while (counter < cardsToAdd && deckCards.length > 0) {
+              temp = deckCards[counter];
+              console.log(temp);
+              addCardToGrid(grid_obj, temp, player_list.player_list);
+              counter = counter + 1;
+            }
           } else {
             // Else, subtract 1 point
+            window.alert("There is a set present. Keep looking!");
             player_list.player_list[0].score -= 1;
             player_score.textContent = player_list.player_list[0].score;
           }
@@ -409,22 +441,33 @@ window.onload = function() {
           noSet.innerHTML = 'No Sets Present';
           list.appendChild(noSet);
           noSet.addEventListener('click', function() {
-            var currentCombos = create_combos(arr, 3);
+            var currentCombos = create_combos(cardsInGrid, 3);
             // If set not present, add three more cards
             if (!set_present(currentCombos)) {
-
+              var counter = 0;
+              var cardsToAdd = 3;
+              var temp;
+              while (counter < cardsToAdd && deckCards.length > 0) {
+                temp = deckCards[counter];
+                console.log(temp);
+                addCardToGrid(grid_obj, temp, player_list.player_list);
+                counter = counter + 1;
+              }
             } else {
               // Else, subtract 1 point
-              /* Need access to players
+              window.alert("There is a set present. Keep looking!");
+              var inputs = document
+                  .getElementById('player_list')
+                  .getElementsByTagName('input');
               for (i = 0; i < inputs.length; i++) {
                 if (inputs[i].checked) {
-                  players.player_list[i].score -= 1;
+                  player_list.player_list[i].score -= 1;
                   document.getElementById(
-                      players.player_list[i].name + '_score'
-                  ).innerText = players.player_list[i].score;
+                      player_list.player_list[i].name + '_score'
+                  ).innerText = player_list.player_list[i].score;
                   break;
                 }
-              }*/
+              }
 
             }
           });
@@ -432,28 +475,27 @@ window.onload = function() {
       });
   });
 
-  /*starts the highscore*/
-  buttons[3].addEventListener('click', function() {
-    var list = document.getElementById('highscore_list');
-    while (list.hasChildNodes()) {
-      list.removeChild(list.lastChild);
-    }
-    if (player_list.highscore_list.length == 0) {
-      var no_records = document.createElement('p');
-      no_records.textContent = 'No records have been stored yet';
-      list.appendChild(no_records);
-    } else {
-      var order_list = document.createElement('ol');
-      for (i = 0; i < player_list.highscore_list.length; i++) {
-        var item = document.createElement('li');
-        item.textContent =
-          player_list.highscore_list[i].name +
-          ' : ' +
-          player_list.highscore_list[i].score;
-        order_list.appendChild(item);
-      }
-      list.appendChild(order_list);
-    }
-  });
-  //grid_obj.addCard(deck.card_list.shift());
+  // /*starts the highscore*/
+  // buttons[3].addEventListener('click', function() {
+  //   var list = document.getElementById('highscore_list');
+  //   while (list.hasChildNodes()) {
+  //     list.removeChild(list.lastChild);
+  //   }
+  //   if (player_list.highscore_list.length == 0) {
+  //     var no_records = document.createElement('p');
+  //     no_records.textContent = 'No records have been stored yet';
+  //     list.appendChild(no_records);
+  //   } else {
+  //     var order_list = document.createElement('ol');
+  //     for (i = 0; i < player_list.highscore_list.length; i++) {
+  //       var item = document.createElement('li');
+  //       item.textContent =
+  //         player_list.highscore_list[i].name +
+  //         ' : ' +
+  //         player_list.highscore_list[i].score;
+  //       order_list.appendChild(item);
+  //     }
+  //     list.appendChild(order_list);
+  //   }
+  // });
 };
