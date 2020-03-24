@@ -5,7 +5,7 @@ The goal of this project is to recreate the card game Set as a visual-based appl
 * [Technologies Used](#technologies-used)
 * [Required Functionality Included](#required-functionality)
 * [Additional Functionality Included](#additional-functionality)
-* [Installation]](#installation)
+* [Installation](#installation)
 * [Usage Guide](#usage-guide)
 
 ## Technologies Used
