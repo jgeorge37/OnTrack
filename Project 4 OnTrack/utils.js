@@ -40,9 +40,6 @@ function is_set(array) {
   for (var i = 0; i < allCards.length; i++) {
     allCards[i].style.border = '';
   }
-  if (is_set == true) {
-    // window.alert("yay");
-  }
   return is_set;
 }
 /* funtion to create all combos possible
