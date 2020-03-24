@@ -243,7 +243,7 @@ window.onload = function() {
         player.id = player_name.value;
         var player_score = document.createElement('p');
         player_score.id = player_name.value + '_score';
-        player_score.textContent = player_name.score;
+        player_score.textContent = 0;
         player_div.appendChild(player);
         player_div.appendChild(player_score);
         sp_game_view.appendChild(player_div);
@@ -266,6 +266,8 @@ window.onload = function() {
         sp_game_view.appendChild(hint);
         hint.addEventListener('click', function() {
           give_hint(cardsInGrid);
+          player_list.player_list[0].score -= 1;
+          player_score.textContent = player_list.player_list[0].score;
         });
         var back = document.createElement('button');
         back.type = 'button';
