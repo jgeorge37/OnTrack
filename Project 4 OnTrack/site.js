@@ -27,30 +27,14 @@ function Grid() {
                 }
             }
         }
-    }
-}
-while (grid.childNodes.length < 12 && card_list.length > 0) {
-    addCardToGrid(this, card_list.shift(), players);
-}
-
-// No more remaining cards in grid or deck or no more combos
-var currentCombos = create_combos(cardsInGrid, 3);
-
-if ((grid.childNodes.length == 0 && card_list.length == 0) || (grid.childNodes.length <= 12 && !set_present(currentCombos))) {
-    if (document.getElementById('multiplayer_view').style.display != 'none') {
-        var inputs = document.getElementById('player_list').getElementsByTagName('input');
-        var highscore = 0;
-        var highscore_player;
-        for (i = 0; i < inputs.length; i++) {
-            var score = document.getElementById(inputs[i].value + '_score').textContent;
-            if (score > highscore) {
-                highscore = score;
-                highscore_player = inputs[i].value;
-            }
+        while (grid.childNodes.length < 12 && card_list.length > 0) {
+            addCardToGrid(this, card_list.shift(), players);
         }
 
-        // No more remaining cards in grid or deck
-        if (grid.childNodes.length == 0 && card_list.length == 0) {
+        // No more remaining cards in grid or deck or no more combos
+        var currentCombos = create_combos(cardsInGrid, 3);
+
+        if ((grid.childNodes.length == 0 && card_list.length == 0) || (grid.childNodes.length <= 12 && !set_present(currentCombos))) {
             if (document.getElementById('multiplayer_view').style.display != 'none') {
                 var inputs = document.getElementById('player_list').getElementsByTagName('input');
                 var highscore = 0;
@@ -275,7 +259,7 @@ window.onload = function() {
         var sp_view = document.getElementById('singleplayer_view');
         var sp_menu_view = document.getElementById('singleplayer_menu_view');
         var sp_game_view = document.getElementById('singleplayer_game_view');
-        sp_menu_view.style.display = 'flex';
+        sp_menu_view.style.display = 'block';
         sp_game_view.style.display = 'none';
         var player_name = document.createElement('input');
         player_name.type = 'text';
