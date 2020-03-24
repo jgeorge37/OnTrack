@@ -33,7 +33,29 @@ function Grid() {
 
     // No more remaining cards in grid or deck
     if(grid.childNodes.length == 0 && card_list.length == 0) {
-      window.alert("No more remaining cards. The game has ended!");
+      if(document.getElementById('multiplayer_view').style.display != 'none') {
+        var inputs = document.getElementById('player_list').getElementsByTagName('input');
+        var highscore = 0;
+        var highscore_player;
+        for(i = 0; i < inputs.length; i++) {
+          var score = document.getElementById(inputs[i].value + '_score').textContent;
+          if(score > hiscore) { 
+            hiscore = score;
+            highscore_player = inputs[i].value;
+          }
+        }
+        window.alert('There are no more cards. The winner is ' + highscore_player + ' with ' + highscore + ' points!');
+      }else {
+        var playerid = document.getElementById('player_div').getElementsByTagName('p')[0].id;
+        var playerscore = document.getElementById(playerid + '_score');
+        var computerscore = document.getElementById('computer_score');
+        if(playerscore > computerscore) {
+          window.alert('Congrats! You beat the computer with ' + playerscore + ' points!');
+        }else {
+          window.alert('The computer beat you with ' + computerscore + ' points');
+        }
+      }
+      location.reload();
     }
   };
 
