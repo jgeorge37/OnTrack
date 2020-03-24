@@ -150,7 +150,6 @@ function give_hint(arr) {
   var temp;
   if (set_present(currentCombos) == false) {
     window.alert('There may not be any sets to find here.');
-    break;
   }
   while (flag == false && count < currentCombos.length) {
     temp = currentCombos[count];
