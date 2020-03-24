@@ -15,9 +15,9 @@ function Grid() {
     var grid = document.getElementById('grid_container');
     console.log(guessArray);
     console.log(grid.childNodes);
-    for(let i = 0; i < guessArray.length; i++){
-      for(let j = 0; i < cardsInGrid.length; j++){
-        if (guessArray[i] == cardsInGrid[j]){
+    for (let i = 0; i < guessArray.length; i++) {
+      for (let j = 0; i < cardsInGrid.length; j++) {
+        if (guessArray[i] == cardsInGrid[j]) {
           console.log(j);
           console.log(grid.childNodes[j]);
           grid.removeChild(grid.childNodes[j]);
@@ -27,13 +27,10 @@ function Grid() {
         }
       }
     }
-    while(grid.childNodes.length < 12 && card_list.length > 0){
+    while (grid.childNodes.length < 12 && card_list.length > 0) {
       addCardToGrid(this, card_list.shift(), players);
     }
-
   };
-
-
 
   /* function to remove the grid from its parent node */
   this.removeGrid = function() {
@@ -55,7 +52,6 @@ function Grid() {
   };
 }
 
-
 function addCardToGrid(grid_obj, card, players) {
   /* retreive main grid container */
   var grid = document.getElementById('grid_container');
@@ -64,50 +60,69 @@ function addCardToGrid(grid_obj, card, players) {
   grid_card.className = 'grid_card';
 
   grid_card.addEventListener('click', function() {
-    if(!guessArray.includes(card)) {
-        guessArray.push(card);
-        grid_card.style.border = "3px solid red";
-        if (guessArray.length == 3) {
-            console.log(players);
-            if (is_set(guessArray)) {
-              grid_obj.removeCard(guessArray, deckCards);
-                if (document.getElementById('singleplayer_view').style.display != 'none') {
-                    players.player_list[0].score += 3;
-                    document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-                } else {
-                    var inputs = document.getElementById('player_list').getElementsByTagName('input');
-                    for (i = 0; i < inputs.length - 1; i++) {
-                        if (inputs[i].checked) {
-                            players.player_list[i].score += 3;
-                            document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
-                            break;
-                        }
-                    }
-                }
-
-            } else {
-                if (document.getElementById('singleplayer_view').style.display != 'none') {
-                    players.player_list[0].score -= 1;
-                    document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-                } else {
-                    var inputs = document.getElementById('player_list').getElementsByTagName('input');
-                    for (i = 0; i < inputs.length - 1; i++) {
-                        if (inputs[i].checked) {
-                            players.player_list[i].score -= 1;
-                            document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
-                            break;
-                        }
-                    }
-                }
+    if (!guessArray.includes(card)) {
+      guessArray.push(card);
+      grid_card.style.border = '3px solid red';
+      if (guessArray.length == 3) {
+        if (is_set(guessArray)) {
+          grid_obj.removeCard(guessArray, deckCards);
+          if (
+            document.getElementById('singleplayer_view').style.display != 'none'
+          ) {
+            players.player_list[0].score += 3;
+            document.getElementById(
+              players.player_list[0].name + '_score'
+            ).innerText = players.player_list[0].score;
+          } else {
+            var inputs = document
+              .getElementById('player_list')
+              .getElementsByTagName('input');
+            for (i = 0; i < inputs.length - 1; i++) {
+              if (inputs[i].checked) {
+                players.player_list[i].score += 3;
+                document.getElementById(
+                  players.player_list[i].name + '_score'
+                ).innerText = players.player_list[i].score;
+                break;
+              }
             }
-            guessArray = [];
-            if (CPU_turn) {
-                var comp_arr = computer_moves();
-                is_set(comp_arr);
-                comp_arr.length = 0;
-                window.alert("computer player turn ended")
+          }
+        } else {
+          if (
+            document.getElementById('singleplayer_view').style.display != 'none'
+          ) {
+            players.player_list[0].score -= 1;
+            document.getElementById(
+              players.player_list[0].name + '_score'
+            ).innerText = players.player_list[0].score;
+          } else {
+            var inputs = document
+              .getElementById('player_list')
+              .getElementsByTagName('input');
+            for (i = 0; i < inputs.length - 1; i++) {
+              if (inputs[i].checked) {
+                players.player_list[i].score -= 1;
+                document.getElementById(
+                  players.player_list[i].name + '_score'
+                ).innerText = players.player_list[i].score;
+                break;
+              }
             }
+          }
         }
+        guessArray = [];
+        if (CPU_turn) {
+          var comp_arr = computer_moves();
+          is_set(comp_arr);
+          comp_arr.length = 0;
+          window.alert('computer player turn ended');
+        }
+      }
+    } else {
+      grid_card.style.border = 'none';
+      guessArray = guessArray.filter(function(value, index, arr) {
+        value != card;
+      });
     }
   });
 
@@ -124,7 +139,6 @@ function addCardToGrid(grid_obj, card, players) {
 
   /* add Card object to array of cards in the grid */
   cardsInGrid.push(card);
-
 }
 
 /* Created by Jack Hanley
@@ -136,25 +150,32 @@ function give_hint(arr) {
   var count = 0;
   var temp;
   if (set_present(currentCombos) == false) {
-    window.alert("There may not be any sets to find here.");
+    window.alert('There may not be any sets to find here.');
   }
   while (flag == false && count < currentCombos.length) {
     temp = currentCombos[count];
     if (is_set(temp) == true) {
-
       flag = true;
     }
     count = count + 1;
   }
-  window.alert("Try using card with Color: " + temp[0].color + " | Shading: " +
-  temp[0].shading + " | Shape: " + temp[0].shape + " | Count: " + temp[0].number);
+  window.alert(
+    'Try using card with Color: ' +
+      temp[0].color +
+      ' | Shading: ' +
+      temp[0].shading +
+      ' | Shape: ' +
+      temp[0].shape +
+      ' | Count: ' +
+      temp[0].number
+  );
   return temp;
 }
 
 function Player(name, cp_flag) {
-    this.name = name;
-    this.score = 0;
-    this.is_CPU = cp_flag;
+  this.name = name;
+  this.score = 0;
+  this.is_CPU = cp_flag;
 }
 
 window.onload = function() {
@@ -208,8 +229,8 @@ window.onload = function() {
     start.innerHTML = 'Start';
     sp_menu_view.appendChild(start);
     start.addEventListener('click', function() {
-        CPU_turn = true;
-      if(player_name.value != '') {
+      CPU_turn = true;
+      if (player_name.value != '') {
         sp_menu_view.style.display = 'none';
         sp_game_view.style.display = 'block';
         if (document.getElementById('grid_container') != null) {
@@ -227,7 +248,7 @@ window.onload = function() {
         player_div.appendChild(player_score);
         sp_game_view.appendChild(player_div);
         var computer_div = document.createElement('div');
-        computer_div.id = 'computer_div'
+        computer_div.id = 'computer_div';
         var computer = document.createElement('p');
         computer.textContent = 'Computer: ';
         computer.id = 'computer';
@@ -246,20 +267,17 @@ window.onload = function() {
         hint.addEventListener('click', function() {
           give_hint(cardsInGrid);
         });
-          var back = document.createElement('button');
-          back.type = 'button';
-          back.innerHTML = 'Back to Main Menu';
-          sp_game_view.appendChild(back);
-          back.addEventListener('click', function() {
-              location.reload();
-          });
-
-      }else {
+        var back = document.createElement('button');
+        back.type = 'button';
+        back.innerHTML = 'Back to Main Menu';
+        sp_game_view.appendChild(back);
+        back.addEventListener('click', function() {
+          location.reload();
+        });
+      } else {
         window.alert('must fill in the argument');
       }
     });
-
-
   });
 
   /*starts the multiplayer view*/
