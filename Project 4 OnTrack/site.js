@@ -30,6 +30,11 @@ function Grid() {
     while (grid.childNodes.length < 12 && card_list.length > 0) {
       addCardToGrid(this, card_list.shift(), players);
     }
+
+    // No more remaining cards in grid or deck
+    if(grid.childNodes.length == 0 && card_list.length == 0) {
+      window.alert("No more remaining cards. The game has ended!");
+    }
   };
 
   /* function to remove the grid from its parent node */
