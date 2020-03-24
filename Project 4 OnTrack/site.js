@@ -251,6 +251,7 @@ var guessArray = [];
 var deckCards = [];
 /* Grid constructor */
 function Grid() {
+  var players;
   /* array of cards in the grid, not in the Deck */
   this.cardsInGrid = [];
 
@@ -265,10 +266,35 @@ function Grid() {
       guessArray.push(card);
       grid_card.style.border = "3px solid red";
       if (guessArray.length == 3) {
+        console.log(players);
         if(is_set(guessArray)) {
-            window.alert("Congratulations. You have correctly identified a set!");
+            if(document.getElementById('singleplayer_view').style.display != 'none') {
+              players.player_list[0].score += 3;
+              document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
+            }else {
+              var inputs = document.getElementById('player_list').getElementsByTagName('input');
+              for(i = 0; i < inputs.length - 1; i++) {
+                if(inputs[i].checked) {
+                  players.player_list[i].score += 3;
+                  document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
+                  break;
+                }
+              }
+            }
         } else {
-            window.alert("These cards do not make up a set.");
+          if(document.getElementById('singleplayer_view').style.display != 'none') {
+            players.player_list[0].score -= 1;
+            document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
+          }else {
+            var inputs = document.getElementById('player_list').getElementsByTagName('input');
+            for(i = 0; i < inputs.length - 1; i++) {
+              if(inputs[i].checked) {
+                players.player_list[i].score -= 1;
+                document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
+                break;
+              }
+            }
+          }
         }
         guessArray.length = 0;
           if(CPU_turn){
@@ -308,7 +334,8 @@ function Grid() {
   };
 
   /* function to create grid div and append to a node */
-  this.addGrid = function(node, card_list) {
+  this.addGrid = function(node, card_list, player_list) {
+    players = player_list;
     var grid = document.createElement('div');
     grid.setAttribute('id', 'grid_container');
     grid.className = 'grid';
@@ -580,7 +607,8 @@ window.onload = function() {
         computer_div.appendChild(computer);
         computer_div.appendChild(computer_score);
         sp_game_view.appendChild(computer_div);
-        grid_obj.addGrid(sp_game_view, deck.card_list);
+        player_list.player_list.push(new Player(player_name.value, false));
+        grid_obj.addGrid(sp_game_view, deck.card_list, player_list);
         var hint = document.createElement('button');
         hint.type = 'button';
         hint.innerHTML = 'Give Hint';
@@ -661,7 +689,7 @@ window.onload = function() {
           if (old_list) {
             old_list.remove();
           }
-          grid_obj.addGrid(game, deck.card_list);
+          
           var inputs = menu.getElementsByClassName('input_player');
           var list = document.createElement('div');
           list.id = 'player_list';
@@ -674,7 +702,7 @@ window.onload = function() {
             new_input.value = inputs[i].value;
             var name = document.createElement('label');
             var score = document.createElement('label');
-            score.htmlFor = inputs[i].value + '_score';
+            score.id = inputs[i].value + '_score';
             score.textContent = '0';
             name.htmlFor = inputs[i].value;
             name.textContent = inputs[i].value + ': ';
@@ -683,6 +711,7 @@ window.onload = function() {
             list.appendChild(score);
             player_list.player_list[i] = new Player(inputs[i].value);
           }
+          grid_obj.addGrid(game, deck.card_list, player_list);
           game.appendChild(list);
           console.log(player_list);
         }
