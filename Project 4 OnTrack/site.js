@@ -195,6 +195,7 @@ function give_hint(arr) {
   return temp;
 }
 
+// shows an alert with the hint about what card to play
 function give_hint_display(){
   window.alert(
       'Try using card with Color: ' +
@@ -208,6 +209,7 @@ function give_hint_display(){
   );
 }
 
+// Adding player functionality
 function Player(name, cp_flag) {
   this.name = name;
   this.score = 0;
