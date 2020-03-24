@@ -204,8 +204,7 @@ window.onload = function() {
   var goBackButtons = this.document.getElementsByClassName('backbutton');
   for (var i = 0; i < goBackButtons.length; i++) {
     goBackButtons[i].addEventListener('click', function() {
-      hideAll(views);
-      show(document.getElementById('home_view'));
+      location.reload();
     });
   }
 
@@ -227,6 +226,7 @@ window.onload = function() {
     start.type = 'button';
     start.innerHTML = 'Start';
     sp_menu_view.appendChild(start);
+    var back = document.createElement('button');
     start.addEventListener('click', function() {
       CPU_turn = true;
       if (player_name.value != '') {
@@ -361,7 +361,6 @@ window.onload = function() {
           }
           grid_obj.addGrid(game, deck.card_list, player_list);
           game.appendChild(list);
-          console.log(player_list);
         }
       });
   });
