@@ -9,8 +9,6 @@ var cardsInGrid = [];
 /* Grid constructor */
 function Grid() {
   var players;
-  /* array of cards in the grid, not in the Deck */
-  cardsInGrid = [];
 
   /* function to remove a card from the grid */
   this.removeCard = function(guessArray) {
@@ -18,12 +16,12 @@ function Grid() {
     console.log(guessArray);
     console.log(grid.childNodes);
     for(let i = 0; i < guessArray.length; i++){
-      for(let j = 0; i < this.cardsInGrid.length; j++){
-        if (guessArray[i] == this.cardsInGrid[j]){
+      for(let j = 0; i < cardsInGrid.length; j++){
+        if (guessArray[i] == cardsInGrid[j]){
           console.log(j);
           console.log(grid.childNodes[j]);
           grid.removeChild(grid.childNodes[j]);
-          this.cardsInGrid.splice(j, 1);
+          cardsInGrid.splice(j, 1);
           j = 0;
           break;
         }
