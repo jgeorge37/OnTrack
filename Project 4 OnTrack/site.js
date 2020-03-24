@@ -140,6 +140,7 @@ function addCardToGrid(grid_obj, card, players) {
           }
         }
         guessArray = [];
+        // checks if its the computer's turn
         if (CPU_turn) {
           var comp_arr = computer_moves();
           if(is_set(comp_arr)){
@@ -195,6 +196,7 @@ function give_hint(arr) {
   return temp;
 }
 
+/*shows hint suggestion as an alert*/
 function give_hint_display(){
   window.alert(
       'Try using card with Color: ' +
@@ -208,6 +210,7 @@ function give_hint_display(){
   );
 }
 
+//Add new player object
 function Player(name, cp_flag) {
   this.name = name;
   this.score = 0;
