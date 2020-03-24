@@ -195,7 +195,7 @@ function give_hint(arr) {
   return temp;
 }
 
-/* Displays a hint to a player */
+// shows an alert with the hint about what card to play
 function give_hint_display(){
   window.alert(
       'Try using card with Color: ' +
@@ -209,6 +209,7 @@ function give_hint_display(){
   );
 }
 
+// Adding player functionality
 function Player(name, cp_flag) {
   this.name = name;
   this.score = 0;
@@ -446,7 +447,6 @@ window.onload = function() {
             var currentCombos = create_combos(cardsInGrid, 3);
             // If set not present, add three more cards
             if (!set_present(currentCombos)) {
-              window.alert("Test");
               var counter = 0;
               var cardsToAdd = 3;
               var temp;
@@ -459,6 +459,9 @@ window.onload = function() {
             } else {
               // Else, subtract 1 point
               window.alert("There is a set present. Keep looking!");
+              var inputs = document
+                  .getElementById('player_list')
+                  .getElementsByTagName('input');
               for (i = 0; i < inputs.length; i++) {
                 if (inputs[i].checked) {
                   player_list.player_list[i].score -= 1;
