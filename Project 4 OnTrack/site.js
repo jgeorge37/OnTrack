@@ -77,7 +77,7 @@ function addCardToGrid(grid_obj, card, players) {
             var inputs = document
               .getElementById('player_list')
               .getElementsByTagName('input');
-            for (i = 0; i < inputs.length - 1; i++) {
+            for (i = 0; i < inputs.length; i++) {
               if (inputs[i].checked) {
                 players.player_list[i].score += 3;
                 document.getElementById(
@@ -99,8 +99,9 @@ function addCardToGrid(grid_obj, card, players) {
             var inputs = document
               .getElementById('player_list')
               .getElementsByTagName('input');
-            for (i = 0; i < inputs.length - 1; i++) {
+            for (i = 0; i < inputs.length; i++) {
               if (inputs[i].checked) {
+                console.log(players.player_list[i]);
                 players.player_list[i].score -= 1;
                 document.getElementById(
                   players.player_list[i].name + '_score'
@@ -244,7 +245,7 @@ window.onload = function() {
         player.id = player_name.value;
         var player_score = document.createElement('p');
         player_score.id = player_name.value + '_score';
-        player_score.textContent = player_name.score;
+        player_score.textContent = 0;
         player_div.appendChild(player);
         player_div.appendChild(player_score);
         sp_game_view.appendChild(player_div);
@@ -267,6 +268,8 @@ window.onload = function() {
         sp_game_view.appendChild(hint);
         hint.addEventListener('click', function() {
           give_hint(cardsInGrid);
+          player_list.player_list[0].score -= 1;
+          player_score.textContent = player_list.player_list[0].score;
         });
         var back = document.createElement('button');
         back.type = 'button';
