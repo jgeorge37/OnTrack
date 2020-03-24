@@ -3,6 +3,8 @@
 
 body {
   font-family: sans-serif;
+  background-color: antiquewhite;
+  font-size: x-large;
 }
 pre {
   font-family: sans-serif;
@@ -13,12 +15,14 @@ pre {
   justify-content: center;
 }
 
+
 .buttons {
   display: flex;
   flex-direction: column;
   align-content: space-between;
-  width: 150px;
+  width: 200px;
   margin: auto;
+
 }
 
 .buttons button {
