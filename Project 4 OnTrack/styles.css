@@ -84,13 +84,16 @@ pre {
   justify-content: center;
 }
 
-#multiplayer_menu_view {
-  display: none;
+#player_div {
+  display: flex;
+  flex-direction: row;
 }
 
-#multiplayer_game_view {
-  display: none;
+#computer_div {
+  display: flex;
+  flex-direction: row;
 }
+
 
 #highscore_list {
   display: flex;

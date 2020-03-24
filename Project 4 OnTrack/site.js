@@ -246,7 +246,6 @@ function Deck() {
 
   shuffle(this.card_list);
 }
-var CPU_turn = true;
 var guessArray = [];
 var deckCards = [];
 /* Grid constructor */
@@ -265,15 +264,13 @@ function Grid() {
       guessArray.push(card);
       grid_card.style.border = "3px solid red";
       if (guessArray.length == 3) {
-        is_set(guessArray);
-        guessArray.length = 0;
-        if(CPU_turn){
-           var comp_arr = computer_moves();
-           is_set(comp_arr);
-           comp_arr.length = 0;
+        if(is_set(guessArray)) {
+            window.alert("Congratulations. You have correctly identified a set!");
+        } else {
+            window.alert("These cards do not make up a set.");
         }
+        guessArray.length = 0;
       }
-
     });
     /* create appropriate number of shapes to show on card */
     for (var i = 0; i < card.number; i++) {
@@ -362,7 +359,6 @@ function is_set(array) {
   if (is_set == true) {
     window.alert("yay");
   }
-
   return is_set;
 }
 /* funtion to create all combos possible
@@ -374,25 +370,27 @@ function create_combos(arra, arra_size)
     var result_set = [];
     var result;
 
-    for(var x = 0; x < Math.pow(2, arra.length); x++)
-    {
-        result = [];
-        i = arra.length - 1;
-        do
-        {
-        if( (x & (1 << i)) !== 0)
+
+for(var x = 0; x < Math.pow(2, arra.length); x++)
+  {
+    result = [];
+    i = arra.length - 1;
+     do
+      {
+      if( (x & (1 << i)) !== 0)
           {
              result.push(arra[i]);
-          }
-        }  while(i--);
+           }
+      }  while(i--);
 
-        if(result.length == arra_size)
-        {
+    if(result.length == arra_size)
+       {
           result_set.push(result);
         }
     }
+
     return result_set;
- }
+}
 /* function that checks if a set is present in the cards on table */
 function set_present(arr) {
   var setPresent = false;
@@ -410,8 +408,8 @@ function set_present(arr) {
 // Created by Snigdha Tiwari 3/17/20
 
 // Return array of 3 cards the computer choose.
-function computers_cards(correct_set) {
-  var card_array = new Array(3);
+function computer_moves(correct_set, table_size) {
+  var card_array = new Array(table_size - 1);
 
   var choices_array = new Array(false, true, false);
 
@@ -438,7 +436,6 @@ function computers_cards(correct_set) {
     var card3 = card_array.shift();
 
     alert('Computer chose: ' + card1 + ' , ' + card2 + ' , ' + card3);
-    return correct_set;
   }
 }
 
@@ -457,14 +454,6 @@ function shuffle(arr) {
     arr[j] = x;
   }
   return arr;
-}
-
-function computer_moves(){
-    var cp_array = give_hint(grid_obj.cardsInGrid);
-    var array_correct = computers_cards(cp_array);
-    return array_correct;
-
-
 }
 
 /* Created by Jack Hanley
@@ -493,12 +482,9 @@ function give_hint(arr) {
 }
 
 class Player {
-  constructor(name, cp_flag) {
-
+  constructor(name) {
     this.name = name;
     this.score = 0;
-    this.is_CPU = cp_flag;
-
   }
 }
 
@@ -506,8 +492,6 @@ window.onload = function() {
   var grid_obj = new Grid();
   var deck = new Deck();
   var player_list = new PlayerGroup();
-
-
 
   /* Get the main menu buttons and main content views */
   var buttons = document.getElementById('menu').getElementsByTagName('button');
@@ -541,49 +525,65 @@ window.onload = function() {
   /* This shows the grid of cards in the singleplayer view */
   buttons[0].addEventListener('click', function() {
     var sp_view = document.getElementById('singleplayer_view');
+    var sp_menu_view = document.getElementById('singleplayer_menu_view');
+    var sp_game_view = document.getElementById('singleplayer_game_view');
+    sp_menu_view.style.display = 'block';
+    sp_game_view.style.display = 'none';
     var player_name = document.createElement('input');
     player_name.type = 'text';
     player_name.placeholder = 'Enter player name';
-    sp_view.appendChild(player_name);
-
-
-
-
+    sp_menu_view.appendChild(player_name);
     var start = document.createElement('button');
     start.type = 'button';
     start.innerHTML = 'Start';
-    sp_view.appendChild(start);
+    sp_menu_view.appendChild(start);
     start.addEventListener('click', function() {
-      if (document.getElementById('grid_container') != null) {
-        grid_obj.removeGrid();
-      }
-      grid_obj.addGrid(sp_view, deck.card_list);
-      var hint = document.createElement('button');
-      hint.type = 'button';
-      hint.innerHTML = 'Give Hint';
-      sp_view.appendChild(hint);
-      hint.addEventListener('click', function() {
-        give_hint(grid_obj.cardsInGrid);
-      });
-      CPU_turn = true;
-        var player = player_name.textContent;
-        var new_input = document.createElement('input');
-        new_input.type = 'radio';
-        new_input.name = 'player';
-        new_input.id = player;
-        new_input.value = player;
-        var name = document.createElement('label');
-        var score = document.createElement('label');
-        score.htmlFor = player + '_score';
-        score.textContent = '0';
-        name.htmlFor = player;
-        name.textContent = player + ': ';
-        list.appendChild(new_input);
-        list.appendChild(name);
-        list.appendChild(score);
-        player_list.player_list[0] = new Player(player, false);
-        player_list.player_list[1] = new Player("comPlayer", true);
-
+      if(player_name.value != '') {
+        sp_menu_view.style.display = 'none';
+        sp_game_view.style.display = 'block';
+        if (document.getElementById('grid_container') != null) {
+          grid_obj.removeGrid();
+        }
+        var player_div = document.createElement('div');
+        player_div.id = 'player_div';
+        var player = document.createElement('p');
+        player.textContent = player_name.value + ': ';
+        player.id = player_name.value;
+        var player_score = document.createElement('p');
+        player_score.id = player_name.value + '_score';
+        player_score.textContent = '0';
+        player_div.appendChild(player);
+        player_div.appendChild(player_score);
+        sp_game_view.appendChild(player_div);
+        var computer_div = document.createElement('div');
+        computer_div.id = 'computer_div'
+        var computer = document.createElement('p');
+        computer.textContent = 'Computer: ';
+        computer.id = 'computer';
+        var computer_score = document.createElement('p');
+        computer_score.id = 'computer_score';
+        computer_score.textContent = '0';
+        computer_div.appendChild(computer);
+        computer_div.appendChild(computer_score);
+        sp_game_view.appendChild(computer_div);
+        grid_obj.addGrid(sp_game_view, deck.card_list);
+        var hint = document.createElement('button');
+        hint.type = 'button';
+        hint.innerHTML = 'Give Hint';
+        sp_game_view.appendChild(hint);
+        hint.addEventListener('click', function() {
+          give_hint(grid_obj.cardsInGrid);
+        });
+          var back = document.createElement('button');
+          back.type = 'button';
+          back.innerHTML = 'Back to Main Menu';
+          sp_game_view.appendChild(back);
+          back.addEventListener('click', function() {
+              location.reload();
+          });
+      }else {
+        window.alert('must fill in the argument');
+      }  
     });
 
 
@@ -622,7 +622,6 @@ window.onload = function() {
       .getElementById('startbutton')
       .addEventListener('click', function() {
         var state = true;
-        CPU_turn = false;
         var inputs = menu.getElementsByClassName('input_player');
         var num = document.getElementById('player_number').value;
         console.log(num);
