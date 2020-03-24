@@ -57,6 +57,7 @@ function Grid() {
   };
 }
 
+
 function addCardToGrid(grid_obj, card, players) {
   /* retreive main grid container */
   var grid = document.getElementById('grid_container');
@@ -292,10 +293,18 @@ window.onload = function() {
         noSet.innerHTML = 'No Sets Present';
         sp_game_view.appendChild(noSet);
         noSet.addEventListener('click', function() {
-          var currentCombos = create_combos(arr, 3);
+          var currentCombos = create_combos(cardsInGrid, 3);
           // If set not present, add three more cards
           if (!set_present(currentCombos)) {
-
+            var counter = 0;
+            var cardsToAdd = 3;
+            var temp;
+            while (counter < cardsToAdd && deckCards.length > 0) {
+              temp = deckCards[counter];
+              console.log(temp);
+              addCardToGrid(grid_obj, temp, player_list.player_list);
+              counter = counter + 1;
+            }
           } else {
             // Else, subtract 1 point
             player_list.player_list[0].score -= 1;
