@@ -68,6 +68,7 @@ pre {
   height: 500px;
   width: 790px;
   grid-template-columns: auto auto auto auto;
+  margin-bottom: 20px;
 }
 
 #tutorial_view {
@@ -93,7 +94,6 @@ pre {
   display: flex;
   flex-direction: row;
 }
-
 
 #highscore_list {
   display: flex;
