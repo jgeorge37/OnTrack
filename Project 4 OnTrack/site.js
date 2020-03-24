@@ -545,8 +545,7 @@ window.onload = function() {
         var player = document.createElement('p');
         player.textContent = player_name.value + ': ';
         player.id = player_name.value;
-        var player_score = document.createElement('label');
-        player_score.htmlFor = player_name;
+        var player_score = document.createElement('p');
         player_score.id = player_name.value + '_score';
         player_score.textContent = '0';
         player_div.appendChild(player);
@@ -557,7 +556,7 @@ window.onload = function() {
         var computer = document.createElement('p');
         computer.textContent = 'Computer: ';
         computer.id = 'computer';
-        var computer_score = document.createElement('label');
+        var computer_score = document.createElement('p');
         computer_score.id = 'computer_score';
         computer_score.textContent = '0';
         computer_div.appendChild(computer);
