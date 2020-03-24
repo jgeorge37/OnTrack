@@ -287,7 +287,15 @@ window.onload = function() {
         noSet.innerHTML = 'No Sets Present';
         sp_game_view.appendChild(noSet);
         noSet.addEventListener('click', function() {
-          
+          var currentCombos = create_combos(arr, 3);
+          // If set not present, add three more cards
+          if (!set_present(currentCombos)) {
+
+          } else {
+            // Else, subtract 1 point
+            player_list.player_list[0].score -= 1;
+            player_score.textContent = player_list.player_list[0].score;
+          }
         });
 
         // Back to Main Menu button
