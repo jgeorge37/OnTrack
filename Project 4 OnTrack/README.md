@@ -1,5 +1,5 @@
 # Project #4 - Game of Set Reloaded (OnTrack)
-The goal of this project is to recreate the card game Set as a visual-based application using Javascript, HTML, and CSS.
+The goal of this project is to recreate the card game Set as a visual-based application using JavaScript, HTML, and CSS.
 
 ## Table of Contents
 * [Technologies Used](#technologies-used)
@@ -7,9 +7,11 @@ The goal of this project is to recreate the card game Set as a visual-based appl
 * [Additional Functionality Included](#additional-functionality)
 * [Installation](#installation)
 * [Usage Guide](#usage-guide)
+* [Styling](#styling)
+* [Authors](#authors)
 
 ## Technologies Used
-* Javascript
+* JavaScript
 * CSS
 * HTML
 
@@ -31,6 +33,10 @@ Download and extract the zip archive of the OnTrack repository.
 
 ## Usage Guide
 In a browser, open the index.html file from the 'Project 4 OnTrack' directory.
+
+## Styling
+All JavaScript files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/javascript).
+All CSS files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/css).
 
 ## Authors
 - Jing George
