@@ -79,7 +79,7 @@ function Grid() {
   };
 }
 
-
+/* adds a card to the grid. */
 function addCardToGrid(grid_obj, card, players) {
   /* retreive main grid container */
   var grid = document.getElementById('grid_container');
@@ -195,6 +195,7 @@ function give_hint(arr) {
   return temp;
 }
 
+/* Displays a hint to a player */
 function give_hint_display(){
   window.alert(
       'Try using card with Color: ' +
@@ -238,6 +239,7 @@ window.onload = function() {
     });
   }
 
+  /*adds listeners to each back button*/
   var goBackButtons = this.document.getElementsByClassName('backbutton');
   for (var i = 0; i < goBackButtons.length; i++) {
     goBackButtons[i].addEventListener('click', function() {
