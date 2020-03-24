@@ -444,7 +444,6 @@ window.onload = function() {
             var currentCombos = create_combos(cardsInGrid, 3);
             // If set not present, add three more cards
             if (!set_present(currentCombos)) {
-              window.alert("Test");
               var counter = 0;
               var cardsToAdd = 3;
               var temp;
