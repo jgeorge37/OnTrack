@@ -60,46 +60,48 @@ function addCardToGrid(grid_obj, card, players) {
   grid_card.className = 'grid_card';
 
   grid_card.addEventListener('click', function() {
-    guessArray.push(card);
-    grid_card.style.border = "3px solid red";
-    if (guessArray.length == 3) {
-      console.log(players);
-      if(is_set(guessArray)) {
-          if(document.getElementById('singleplayer_view').style.display != 'none') {
-            players.player_list[0].score += 3;
-            document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-            grid_obj.removeCard(guessArray);
-            guessArray = [];
-          }else {
-            var inputs = document.getElementById('player_list').getElementsByTagName('input');
-            for(i = 0; i < inputs.length - 1; i++) {
-              if(inputs[i].checked) {
-                players.player_list[i].score += 3;
-                document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
-                break;
-              }
+    if(!guessArray.includes(card)) {
+        guessArray.push(card);
+        grid_card.style.border = "3px solid red";
+        if (guessArray.length == 3) {
+            console.log(players);
+            if (is_set(guessArray)) {
+                if (document.getElementById('singleplayer_view').style.display != 'none') {
+                    players.player_list[0].score += 3;
+                    document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
+                    grid_obj.removeCard(guessArray);
+                    guessArray = [];
+                } else {
+                    var inputs = document.getElementById('player_list').getElementsByTagName('input');
+                    for (i = 0; i < inputs.length - 1; i++) {
+                        if (inputs[i].checked) {
+                            players.player_list[i].score += 3;
+                            document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                if (document.getElementById('singleplayer_view').style.display != 'none') {
+                    players.player_list[0].score -= 1;
+                    document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
+                } else {
+                    var inputs = document.getElementById('player_list').getElementsByTagName('input');
+                    for (i = 0; i < inputs.length - 1; i++) {
+                        if (inputs[i].checked) {
+                            players.player_list[i].score -= 1;
+                            document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
+                            break;
+                        }
+                    }
+                }
             }
-          }
-      } else {
-        if(document.getElementById('singleplayer_view').style.display != 'none') {
-          players.player_list[0].score -= 1;
-          document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-        }else {
-          var inputs = document.getElementById('player_list').getElementsByTagName('input');
-          for(i = 0; i < inputs.length - 1; i++) {
-            if(inputs[i].checked) {
-              players.player_list[i].score -= 1;
-              document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
-              break;
+            guessArray.length = 0;
+            if (CPU_turn) {
+                var comp_arr = computer_moves();
+                is_set(comp_arr);
+                comp_arr.length = 0;
             }
-          }
-        }
-      }
-      guessArray.length = 0;
-        if(CPU_turn){
-            var comp_arr = computer_moves();
-            is_set(comp_arr);
-            comp_arr.length = 0;
         }
     }
   });
