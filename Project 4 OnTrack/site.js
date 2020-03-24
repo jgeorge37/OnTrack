@@ -463,28 +463,27 @@ window.onload = function() {
       });
   });
 
-  /*starts the highscore*/
-  buttons[3].addEventListener('click', function() {
-    var list = document.getElementById('highscore_list');
-    while (list.hasChildNodes()) {
-      list.removeChild(list.lastChild);
-    }
-    if (player_list.highscore_list.length == 0) {
-      var no_records = document.createElement('p');
-      no_records.textContent = 'No records have been stored yet';
-      list.appendChild(no_records);
-    } else {
-      var order_list = document.createElement('ol');
-      for (i = 0; i < player_list.highscore_list.length; i++) {
-        var item = document.createElement('li');
-        item.textContent =
-          player_list.highscore_list[i].name +
-          ' : ' +
-          player_list.highscore_list[i].score;
-        order_list.appendChild(item);
-      }
-      list.appendChild(order_list);
-    }
-  });
-  //grid_obj.addCard(deck.card_list.shift());
+  // /*starts the highscore*/
+  // buttons[3].addEventListener('click', function() {
+  //   var list = document.getElementById('highscore_list');
+  //   while (list.hasChildNodes()) {
+  //     list.removeChild(list.lastChild);
+  //   }
+  //   if (player_list.highscore_list.length == 0) {
+  //     var no_records = document.createElement('p');
+  //     no_records.textContent = 'No records have been stored yet';
+  //     list.appendChild(no_records);
+  //   } else {
+  //     var order_list = document.createElement('ol');
+  //     for (i = 0; i < player_list.highscore_list.length; i++) {
+  //       var item = document.createElement('li');
+  //       item.textContent =
+  //         player_list.highscore_list[i].name +
+  //         ' : ' +
+  //         player_list.highscore_list[i].score;
+  //       order_list.appendChild(item);
+  //     }
+  //     list.appendChild(order_list);
+  //   }
+  // });
 };
