@@ -25,7 +25,6 @@ The goal of this project is to recreate the card game Set as a visual-based appl
 - Menus
 - Tutorial
 - Hints
-- High score tracking across multiple games
 - Playing against a computer player
 
 ## Installation
