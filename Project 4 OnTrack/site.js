@@ -5,20 +5,21 @@
 var CPU_turn = true;
 var guessArray = [];
 var deckCards = [];
+var cardsInGrid = [];
 /* Grid constructor */
 function Grid() {
   var players;
   /* array of cards in the grid, not in the Deck */
-  this.cardsInGrid = [];
+  cardsInGrid = [];
 
   /* function to remove a card from the grid */
   this.removeCard = function(guessArray) {
     var grid = document.getElementById('grid_container');
     for(var i = 0; i < guessArray.length; i++){
-      for(var j = 0; i < this.cardsInGrid.length; j++){
-        if (guessArray[i] == this.cardsInGrid[j]){
+      for(var j = 0; i < cardsInGrid.length; j++){
+        if (guessArray[i] == cardsInGrid[j]){
           grid.removeChild(grid.childNodes[j]);
-          this.cardsInGrid.splice(j, 1);
+          cardsInGrid.splice(j, 1);
           break;
         }
       }
@@ -46,11 +47,6 @@ function Grid() {
   };
 }
 
-function computer_moves(){
-    var cp_array = give_hint(this.cardsInGrid);
-
-    return cp_array;
-}
 
 function addCardToGrid(grid_obj, card, players) {
   /* retreive main grid container */
@@ -100,6 +96,7 @@ function addCardToGrid(grid_obj, card, players) {
                 var comp_arr = computer_moves();
                 is_set(comp_arr);
                 comp_arr.length = 0;
+                window.alert("computer player turn ended")
             }
         }
     }
@@ -117,7 +114,7 @@ function addCardToGrid(grid_obj, card, players) {
   grid.appendChild(grid_card);
 
   /* add Card object to array of cards in the grid */
-  grid_obj.cardsInGrid.push(card);
+  cardsInGrid.push(card);
 
 }
 
@@ -237,7 +234,7 @@ window.onload = function() {
         hint.innerHTML = 'Give Hint';
         sp_game_view.appendChild(hint);
         hint.addEventListener('click', function() {
-          give_hint(grid_obj.cardsInGrid);
+          give_hint(cardsInGrid);
         });
           var back = document.createElement('button');
           back.type = 'button';
