@@ -159,19 +159,21 @@ function give_hint(arr) {
     }
     count = count + 1;
   }
-  window.alert(
-    'Try using card with Color: ' +
-      temp[0].color +
-      ' | Shading: ' +
-      temp[0].shading +
-      ' | Shape: ' +
-      temp[0].shape +
-      ' | Count: ' +
-      temp[0].number
-  );
   return temp;
 }
 
+function give_hint_display() {
+    window.alert(
+        'Try using card with Color: ' +
+        temp[0].color +
+        ' | Shading: ' +
+        temp[0].shading +
+        ' | Shape: ' +
+        temp[0].shape +
+        ' | Count: ' +
+        temp[0].number
+    );
+}
 function Player(name, cp_flag) {
   this.name = name;
   this.score = 0;
@@ -266,6 +268,7 @@ window.onload = function() {
         sp_game_view.appendChild(hint);
         hint.addEventListener('click', function() {
           give_hint(cardsInGrid);
+          give_hint_display();
         });
         var back = document.createElement('button');
         back.type = 'button';
