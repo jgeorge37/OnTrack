@@ -1,3 +1,5 @@
+
+
 /* Function to not display an element */
 function hide(target) {
   target.style.display = 'none';
