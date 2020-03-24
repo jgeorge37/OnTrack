@@ -11,77 +11,20 @@ function Grid() {
   /* array of cards in the grid, not in the Deck */
   this.cardsInGrid = [];
 
-  /* function to add a card to the grid of displayed cards */
-  this.addCard = function(card, players) {
-    /* retreive main grid container */
-    var grid = document.getElementById('grid_container');
-    /* create div element for a card */
-    var grid_card = document.createElement('div');
-    grid_card.className = 'grid_card';
-    grid_card.addEventListener('click', function() {
-      guessArray.push(card);
-      grid_card.style.border = "3px solid red";
-      if (guessArray.length == 3) {
-        console.log(players);
-        if(is_set(guessArray)) {
-            if(document.getElementById('singleplayer_view').style.display != 'none') {
-              players.player_list[0].score += 3;
-              document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-            }else {
-              var inputs = document.getElementById('player_list').getElementsByTagName('input');
-              for(i = 0; i < inputs.length - 1; i++) {
-                if(inputs[i].checked) {
-                  players.player_list[i].score += 3;
-                  document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
-                  break;
-                }
-              }
-            }
-        } else {
-          if(document.getElementById('singleplayer_view').style.display != 'none') {
-            players.player_list[0].score -= 1;
-            document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
-          }else {
-            var inputs = document.getElementById('player_list').getElementsByTagName('input');
-            for(i = 0; i < inputs.length - 1; i++) {
-              if(inputs[i].checked) {
-                players.player_list[i].score -= 1;
-                document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
-                break;
-              }
-            }
-          }
-        }
-        guessArray.length = 0;
-          if(CPU_turn){
-              var comp_arr = computer_moves();
-              is_set(comp_arr);
-              comp_arr.length = 0;
-          }
-      }
-    });
-    /* create appropriate number of shapes to show on card */
-    for (var i = 0; i < card.number; i++) {
-      var shape = document.createElement('div');
-      shape.className = card.color;
-      shape.className += ' ' + card.shading;
-      shape.className += ' ' + card.shape;
-      grid_card.appendChild(shape);
-    }
-    /* add the card to the main grid container */
-    grid.appendChild(grid_card);
-
-    /* add Card object to array of cards in the grid */
-    this.cardsInGrid.push(card);
-  };
-
   /* function to remove a card from the grid */
-  this.removeCard = function(index) {
+  this.removeCard = function(guessArray) {
     var grid = document.getElementById('grid_container');
-    grid.removeChild(grid.childNodes[index]);
-    /* remove card from the array of cards */
-    this.cardsInGrid.splice(index, 1);
+    for(var i = 0; i < guessArray.length; i++){
+      for(var j = 0; i < this.cardsInGrid.length; j++){
+        if (guessArray[i] == this.cardsInGrid[j]){
+          grid.removeChild(grid.childNodes[j]);
+          this.cardsInGrid.splice(j, 1);
+          break;
+        }
+      }
+    }
   };
+
 
   /* function to remove the grid from its parent node */
   this.removeGrid = function() {
@@ -98,7 +41,7 @@ function Grid() {
     node.appendChild(grid);
 
     for (var i = 0; i < 12; i++) {
-      this.addCard(card_list.shift(), players);
+      addCardToGrid(this, card_list.shift(), players);
     }
   };
 }
@@ -107,6 +50,74 @@ function computer_moves(){
     var cp_array = give_hint(this.cardsInGrid);
 
     return cp_array;
+}
+
+function addCardToGrid(grid_obj, card, players) {
+  /* retreive main grid container */
+  var grid = document.getElementById('grid_container');
+  /* create div element for a card */
+  var grid_card = document.createElement('div');
+  grid_card.className = 'grid_card';
+
+  grid_card.addEventListener('click', function() {
+    guessArray.push(card);
+    grid_card.style.border = "3px solid red";
+    if (guessArray.length == 3) {
+      console.log(players);
+      if(is_set(guessArray)) {
+          if(document.getElementById('singleplayer_view').style.display != 'none') {
+            players.player_list[0].score += 3;
+            document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
+            grid_obj.removeCard(guessArray);
+            guessArray = [];
+          }else {
+            var inputs = document.getElementById('player_list').getElementsByTagName('input');
+            for(i = 0; i < inputs.length - 1; i++) {
+              if(inputs[i].checked) {
+                players.player_list[i].score += 3;
+                document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
+                break;
+              }
+            }
+          }
+      } else {
+        if(document.getElementById('singleplayer_view').style.display != 'none') {
+          players.player_list[0].score -= 1;
+          document.getElementById(players.player_list[0].name + '_score').innerText = players.player_list[0].score;
+        }else {
+          var inputs = document.getElementById('player_list').getElementsByTagName('input');
+          for(i = 0; i < inputs.length - 1; i++) {
+            if(inputs[i].checked) {
+              players.player_list[i].score -= 1;
+              document.getElementById(players.player_list[i].name + '_score').innerText = players.player_list[i].score;
+              break;
+            }
+          }
+        }
+      }
+      guessArray.length = 0;
+        if(CPU_turn){
+            var comp_arr = computer_moves();
+            is_set(comp_arr);
+            comp_arr.length = 0;
+        }
+    }
+  });
+
+  /* create appropriate number of shapes to show on card */
+  for (var i = 0; i < card.number; i++) {
+    var shape = document.createElement('div');
+    shape.className = card.color;
+    shape.className += ' ' + card.shading;
+    shape.className += ' ' + card.shape;
+    grid_card.appendChild(shape);
+  }
+  /* add the card to the main grid container */
+  grid.appendChild(grid_card);
+
+  /* add Card object to array of cards in the grid */
+  grid_obj.cardsInGrid.push(card);
+
 }
 
 /* Created by Jack Hanley
@@ -234,6 +245,7 @@ window.onload = function() {
           back.addEventListener('click', function() {
               location.reload();
           });
+
       }else {
         window.alert('must fill in the argument');
       }
