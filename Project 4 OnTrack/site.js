@@ -39,8 +39,8 @@ function Grid() {
         var highscore_player;
         for(i = 0; i < inputs.length; i++) {
           var score = document.getElementById(inputs[i].value + '_score').textContent;
-          if(score > hiscore) { 
-            hiscore = score;
+          if(score > highscore) { 
+            highscore = score;
             highscore_player = inputs[i].value;
           }
         }
