@@ -456,6 +456,9 @@ window.onload = function() {
             } else {
               // Else, subtract 1 point
               window.alert("There is a set present. Keep looking!");
+              var inputs = document
+                  .getElementById('player_list')
+                  .getElementsByTagName('input');
               for (i = 0; i < inputs.length; i++) {
                 if (inputs[i].checked) {
                   player_list.player_list[i].score -= 1;
