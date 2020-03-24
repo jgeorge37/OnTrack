@@ -441,22 +441,31 @@ window.onload = function() {
           noSet.innerHTML = 'No Sets Present';
           list.appendChild(noSet);
           noSet.addEventListener('click', function() {
-            var currentCombos = create_combos(arr, 3);
+            var currentCombos = create_combos(cardsInGrid, 3);
             // If set not present, add three more cards
             if (!set_present(currentCombos)) {
-
+              window.alert("Test");
+              var counter = 0;
+              var cardsToAdd = 3;
+              var temp;
+              while (counter < cardsToAdd && deckCards.length > 0) {
+                temp = deckCards[counter];
+                console.log(temp);
+                addCardToGrid(grid_obj, temp, player_list.player_list);
+                counter = counter + 1;
+              }
             } else {
               // Else, subtract 1 point
-              /* Need access to players
+              window.alert("There is a set present. Keep looking!");
               for (i = 0; i < inputs.length; i++) {
                 if (inputs[i].checked) {
-                  players.player_list[i].score -= 1;
+                  player_list.player_list[i].score -= 1;
                   document.getElementById(
-                      players.player_list[i].name + '_score'
-                  ).innerText = players.player_list[i].score;
+                      player_list.player_list[i].name + '_score'
+                  ).innerText = player_list.player_list[i].score;
                   break;
                 }
-              }*/
+              }
 
             }
           });
