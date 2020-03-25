@@ -34,7 +34,7 @@ function Grid() {
         // No more remaining cards in grid or deck or no more combos
         var currentCombos = create_combos(cardsInGrid, 3);
 
-        if ((grid.childNodes.length == 0 && card_list.length == 0) || (grid.childNodes.length <= 12 && !set_present(currentCombos))) {
+        if ((grid.childNodes.length == 0 && card_list.length == 0) || (grid.childNodes.length < 12 && !set_present(currentCombos))) {
             if (document.getElementById('multiplayer_view').style.display != 'none') {
                 var inputs = document.getElementById('player_list').getElementsByTagName('input');
                 var highscore = 0;
@@ -52,9 +52,9 @@ function Grid() {
                 var playerscore = document.getElementById(playerid + '_score');
                 var computerscore = document.getElementById('computer_score');
                 if (playerscore > computerscore) {
-                    window.alert('Congrats! You beat the computer with ' + playerscore + ' points!');
+                    window.alert('Congrats! You beat the computer with ' + playerscore.textContent + ' points!');
                 } else {
-                    window.alert('The computer beat you with ' + computerscore + ' points');
+                    window.alert('The computer beat you with ' + computerscore.textContent + ' points');
                 }
             }
             location.reload();
