@@ -174,51 +174,51 @@ function addCardToGrid(grid_obj, card, players) {
 }
 
 function give_hint(arr) {
-  var currentCombos = create_combos(arr, 3);
-  var flag = false;
-  var count = 0;
-  var temp;
-  while (flag == false && count < currentCombos.length) {
-    temp = currentCombos[count];
-    if (is_set(temp) == true) {
-      flag = true;
+    var currentCombos = create_combos(arr, 3);
+    var flag = false;
+    var count = 0;
+    var temp;
+    while (flag == false && count < currentCombos.length) {
+        temp = currentCombos[count];
+        if (is_set(temp) == true) {
+            flag = true;
+        }
+        count = count + 1;
     }
-    count = count + 1;
-  }
-  if (set_present(currentCombos) == false) {
-    window.alert('There may not be any sets to find here.');
-  } else {
-    window.alert(
-        'Try using card with Color: ' +
-        temp[0].color +
-        ' | Shading: ' +
-        temp[0].shading +
-        ' | Shape: ' +
-        temp[0].shape +
-        ' | Count: ' +
-        temp[0].number
-    );
-  }
+    if (set_present(currentCombos) == false) {
+        window.alert('There may not be any sets to find here.');
+    } else {
+        window.alert(
+            'Try using card with Color: ' +
+            temp[0].color +
+            ' | Shading: ' +
+            temp[0].shading +
+            ' | Shape: ' +
+            temp[0].shape +
+            ' | Count: ' +
+            temp[0].number
+        );
+    }
 
-  return temp;
+    return temp;
 }
 
 // creates an array of possible cards, size 3, for the computer
-function create_combos_comp(arr){
-  var currentCombos = create_combos(arr, 3);
-  var flag = false;
-  var count = 0;
-  var cpu_arr = [];
-  while (flag == false && count < currentCombos.length) {
+function create_combos_comp(arr) {
+    var currentCombos = create_combos(arr, 3);
+    var flag = false;
+    var count = 0;
+    var cpu_arr = [];
+    while (flag == false && count < currentCombos.length) {
 
-    cpu_arr = currentCombos[count];
+        cpu_arr = currentCombos[count];
 
-    if (is_set(cpu_arr) == true) {
-      flag = true;
+        if (is_set(cpu_arr) == true) {
+            flag = true;
+        }
+        count = count + 1;
     }
-    count = count + 1;
-  }
-  return cpu_arr;
+    return cpu_arr;
 }
 
 // Adding player functionality
@@ -312,17 +312,17 @@ window.onload = function() {
                 player_list.player_list.push(new Player(player_name.value, false));
                 grid_obj.addGrid(sp_game_view, deck.card_list, player_list);
 
-        // Hint button
-        var hint = document.createElement('button');
-        hint.type = 'button';
-        hint.innerHTML = 'Give Hint';
-        sp_game_view.appendChild(hint);
-        hint.addEventListener('click', function() {
-          give_hint(cardsInGrid);
-          create_combos_comp(cardsInGrid);
-          player_list.player_list[0].score -= 1;
-          player_score.textContent = player_list.player_list[0].score;
-        });
+                // Hint button
+                var hint = document.createElement('button');
+                hint.type = 'button';
+                hint.innerHTML = 'Give Hint';
+                sp_game_view.appendChild(hint);
+                hint.addEventListener('click', function() {
+                    give_hint(cardsInGrid);
+                    create_combos_comp(cardsInGrid);
+                    player_list.player_list[0].score -= 1;
+                    player_score.textContent = player_list.player_list[0].score;
+                });
 
                 // Hint button
                 var hint = document.createElement('button');
@@ -427,7 +427,7 @@ window.onload = function() {
                 }
                 if (state) {
                     menu.style.display = 'none';
-                    game.style.display = 'flex';
+                    game.style.display = 'block';
                     if (document.getElementById('grid_container') != null) {
                         grid_obj.removeGrid();
                     }
@@ -441,23 +441,27 @@ window.onload = function() {
                     list.id = 'player_list';
                     player_list.player_list = [];
                     for (i = 0; i < inputs.length; i++) {
+                        var div = document.createElement('div');
+                        div.className = 'multi_player';
                         var new_input = document.createElement('input');
                         new_input.type = 'radio';
                         new_input.name = 'player';
                         new_input.id = inputs[i].value;
                         new_input.value = inputs[i].value;
                         var name = document.createElement('label');
-                        var score = document.createElement('label');
+                        var score = document.createElement('p');
                         score.id = inputs[i].value + '_score';
                         score.textContent = '0';
                         name.htmlFor = inputs[i].value;
+                        score.htmlFor = inputs[i].value;
                         name.textContent = inputs[i].value + ': ';
-                        list.appendChild(new_input);
-                        list.appendChild(name);
-                        list.appendChild(score);
+                        div.appendChild(new_input);
+                        div.appendChild(name);
+                        div.appendChild(score);
+                        list.appendChild(div);
                         player_list.player_list[i] = new Player(inputs[i].value);
                     }
-                    list.firstChild.checked = true;
+                    list.firstChild.firstChild.checked = true;
                     grid_obj.addGrid(game, deck.card_list, player_list);
                     game.appendChild(list);
 
