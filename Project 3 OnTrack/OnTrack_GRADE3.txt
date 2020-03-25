@@ -1,0 +1,9 @@
+Correctness: Nice job scraping course name and appropriate section info (number, instructor, time, location, semester, etc.)! Output doesn't get duplicated on successive runs of rails server (good). Scraper seems like it would be very easy to change if site format changed! No meaningful test cases.
+
+Functionality/Features: Output page looks good! However, this isn't a meaningful improvement over the original site. Consider adding more complex view, way to filter data (maybe sort by professor, time, etc.), or some sort of data analysis in order to make this application a clear improvement over the original site. There is no real way for the user to interact with the output other than scrolling and finding the appropriate class/section.
+
+Design: Nice model-view-controller design with Rails! Some use of literals instead of constants in scraper. Nice simple design!
+
+Documentation: Nice thorough README. Great file-level documentation for data_scraper_controller.rb and output HTML! Nice documentation to explain each step of the scraping code. Commit messages are good!
+
+Style: Good job citing style rules. Good job using standard features of ruby. Nice use of embedded ruby to concisely output the data to an HTML page!
