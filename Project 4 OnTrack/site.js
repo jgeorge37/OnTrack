@@ -152,9 +152,9 @@ function addCardToGrid(grid_obj, card, players) {
             }
         } else {
             grid_card.style.border = 'none';
-            guessArray = guessArray.filter(function(value, index, arr) {
-                value != card;
-            });
+            for (i = 0; i < guessArray.length; i++) {
+                if (guessArray[i] === card) { guessArray.splice(i, 1) };
+            }
         }
     });
 
