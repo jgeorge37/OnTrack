@@ -134,8 +134,6 @@ button:hover {
     margin: 5px;
 }
 
-#player_div p:first-child {}
-
 #computer_div {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -198,7 +196,7 @@ button:hover {
 }
 
 
-/*design of player buttons here*/
+/*design of player buttons from here: https://markheath.net/post/customize-radio-button-css */
 
 #player_list input[type="radio"] {
     opacity: 0;
