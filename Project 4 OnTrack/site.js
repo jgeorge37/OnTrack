@@ -176,6 +176,10 @@ window.onload = function() {
             .addEventListener('click', function() {
                 var state = true;
                 var inputs = menu.getElementsByClassName('input_player');
+                var names = [];
+                for (i = 0; i < inputs.length; i++) {
+                    names.push(inputs[i].value);
+                }
                 var num = document.getElementById('player_number').value;
                 console.log(num);
                 CPU_turn = false;
@@ -189,6 +193,10 @@ window.onload = function() {
                 if (num <= 1 || num == '') {
                     state = false;
                     window.alert('Must have more than 1 player');
+                }
+                if (new Set(names).size !== names.length) {
+                    state = false;
+                    window.alert('Must have unique names');
                 }
                 if (state) {
                     menu.style.display = 'none';
