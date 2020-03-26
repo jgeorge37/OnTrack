@@ -96,6 +96,48 @@
                     three more cards. Each correctly identified set adds one point to the player's score. Each incorrect guess at a set takes one point away from the player's score. The goal of the game is to have the highest score once the deck completely
                     runs out of cards.
                 </p>
+                <hr>
+                <p>
+                    <u>How Scoring Works: Single Player</u>
+                </p>
+                <p>
+                    The player and computer both start at 0. Both the player and computer take alternating turns.
+                    If the player:
+                    <ul>
+                        <li> Find a set: +3</li>
+                        <li> Click No set present button but set present: -1</li>
+                        <li> Click no set present, no set present: +0</li>
+                        <li> Use hint, subtracts 1 from score only once every card change: -1</li>
+                    </ul>
+                    If the computer:
+                    <ul>
+                        <li> Find a set: +3</li>
+                        <li> No set found: -1</li>
+                    </ul>
+                </p>
+
+                <hr>
+                <p>
+                    <u>How Scoring Works: Multi Player</u>
+                </p>
+                <p>
+                    Both players start at 0. Both the players. Whenever it is the players turn, they have to click their name.
+                    Player scoring:
+                <ul>
+                    <li> Find a set: +3</li>
+                    <li> Click No set present button but set present: -1</li>
+                    <li> Click no set present, no set present: +0</li>
+                    <li> Use hint, subtracts 1 from score only once every card change: -1</li>
+                </ul>
+                </p>
+
+                <hr>
+                <p>
+                    <u> How To Unselect Cards</u>
+                </p>
+                <p>
+                    Click on the card again and the red border around it will go away. This means that you have unselected the card.
+                </p>
             </div>
             <button class="backbutton" type="button">Go Back</button>
         </div>
