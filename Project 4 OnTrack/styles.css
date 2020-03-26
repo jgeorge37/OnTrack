@@ -137,7 +137,6 @@ button:hover {
     color: black;
     border-radius: 50px;
     border: 3px solid black;
-    /*  */
 }
 
 #player_div p {
@@ -184,14 +183,18 @@ button:hover {
 .multi_player {
     display: flex;
     flex-direction: row;
-    padding-right: 20px;
-    width: 70px;
+    padding-right: 18px;
+    width: auto;
     height: 30px;
 }
 
 .multi_player label {
-    width: 10px;
+    padding: 10px 2px;
     height: 30px;
+}
+
+#player_list button {
+    padding: 9px 3px;
 }
 
 #player_list {
