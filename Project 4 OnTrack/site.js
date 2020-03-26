@@ -190,7 +190,7 @@ window.onload = function() {
                         var cardsToAdd = 3;
                         var temp;
                         while (counter < cardsToAdd && deckCards.length > 0) {
-                            addCardToGrid(grid_obj, deckCards.shift(), player_list.player_list);
+                            addCardToGrid(grid_obj, deckCards.shift(), player_list);
                             counter = counter + 1;
                         }
                     } else {
@@ -318,7 +318,7 @@ window.onload = function() {
                             var cardsToAdd = 3;
                             var temp;
                             while (counter < cardsToAdd && deckCards.length > 0) {
-                                addCardToGrid(grid_obj, deckCards.shift(), player_list.player_list);
+                                addCardToGrid(grid_obj, deckCards.shift(), player_list);
                                 counter = counter + 1;
                             }
                         } else {
