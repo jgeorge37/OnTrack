@@ -223,6 +223,20 @@ function addCardToGrid(grid_obj, card, players) {
     cardsInGrid.push(card);
 }
 
+// shows an alert with the hint about what card to play
+function give_hint_display(){
+    window.alert(
+        'Try using card with Color: ' +
+        temp[0].color +
+        ' | Shading: ' +
+        temp[0].shading +
+        ' | Shape: ' +
+        temp[0].shape +
+        ' | Count: ' +
+        temp[0].number
+    );
+}
+
 function give_hint(arr) {
     var currentCombos = create_combos(arr, 3);
     var flag = false;
