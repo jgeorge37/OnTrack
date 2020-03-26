@@ -186,13 +186,13 @@ window.onload = function() {
                     var currentCombos = create_combos(cardsInGrid, 3);
                     // If set not present, add three more cards
                     if (!set_present(currentCombos)) {
-                        var counter = 0;
-                        var cardsToAdd = 3;
-                        var temp;
-                        while (counter < cardsToAdd && deckCards.length > 0) {
-                            addCardToGrid(grid_obj, deckCards.shift(), player_list.player_list);
-                            counter = counter + 1;
-                        }
+                      var counter = 0;
+                      var cardsToAdd = 3;
+                      var temp;
+                      while (counter < cardsToAdd && deckCards.length > 0) {
+                          addCardToGrid(grid_obj, deckCards.shift(), player_list.player_list);
+                          counter = counter + 1;
+                      }
                     } else {
                         // Else, subtract 1 point
                         window.alert("There is a set present. Keep looking!");
