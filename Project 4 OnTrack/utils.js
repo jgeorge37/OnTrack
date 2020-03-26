@@ -80,40 +80,6 @@ function set_present(arr) {
     return setPresent;
 }
 
-// Created by Snigdha Tiwari 3/17/20
-
-// Return array of 3 cards the computer choose.
-function computers_cards(correct_set) {
-    var card_array = new Array(3);
-
-    var choices_array = new Array(false, true, false);
-
-    shuffle(choices_array);
-    var choice = choices_array.shift();
-
-    if (choice && (!Array.isArray(correct_set) || !correct_set.length)) {
-        alert(
-            'computer chose: ' +
-            correct_set[1] +
-            ', ' +
-            correct_set[2] +
-            ' ,' +
-            correct_set[3]
-        );
-    } else {
-        shuffle(card_array);
-        var card1 = card_array.shift();
-
-        shuffle(card_array);
-        var card2 = card_array.shift();
-
-        shuffle(card_array);
-        var card3 = card_array.shift();
-
-        alert('Computer chose: ' + card1 + ' , ' + card2 + ' , ' + card3);
-    }
-}
-
 /**
  * Shuffles array in place.
  * @param {Array} a items An array containing the items.
@@ -223,20 +189,6 @@ function addCardToGrid(grid_obj, card, players) {
     cardsInGrid.push(card);
 }
 
-// shows an alert with the hint about what card to play
-function give_hint_display(){
-    window.alert(
-        'Try using card with Color: ' +
-        temp[0].color +
-        ' | Shading: ' +
-        temp[0].shading +
-        ' | Shape: ' +
-        temp[0].shape +
-        ' | Count: ' +
-        temp[0].number
-    );
-}
-
 function give_hint(arr) {
     var currentCombos = create_combos(arr, 3);
     var flag = false;
@@ -252,7 +204,6 @@ function give_hint(arr) {
     if (set_present(currentCombos) == false) {
         window.alert('There may not be any sets to find here.');
     } else {
-        /*
         window.alert(
             'Try using card with Color: ' +
             temp[0].color +
@@ -263,21 +214,21 @@ function give_hint(arr) {
             ' | Count: ' +
             temp[0].number
         );
-         */
     }
 
     return temp;
 }
 
 // creates an array of possible cards, size 3, for the computer
+// similar functionality to give_hint
 function create_combos_comp(arr) {
-    var currentCombos = create_combos(arr, 3);
+    var current_com = create_combos(arr, 3);
     var flag = false;
     var count = 0;
     var cpu_arr = [];
-    while (flag == false && count < currentCombos.length) {
+    while (flag == false && count < current_com.length) {
 
-        cpu_arr = currentCombos[count];
+        cpu_arr = current_com[count];
 
         if (is_set(cpu_arr) == true) {
             flag = true;

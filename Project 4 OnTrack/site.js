@@ -98,7 +98,6 @@ window.onload = function() {
                 sp_game_view.appendChild(hint);
                 hint.addEventListener('click', function() {
                     give_hint(cardsInGrid);
-                    give_hint_display();
                     player_list.player_list[0].score -= 1;
                     player_score.textContent = player_list.player_list[0].score;
                 });
