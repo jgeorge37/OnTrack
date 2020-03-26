@@ -324,19 +324,6 @@ window.onload = function() {
                     player_score.textContent = player_list.player_list[0].score;
                 });
 
-                // Hint button
-                var hint = document.createElement('button');
-                hint.type = 'button';
-                hint.innerHTML = 'Give Hint';
-                sp_game_view.appendChild(hint);
-                hint.addEventListener('click', function() {
-                    give_hint(cardsInGrid);
-                    create_combos_comp();
-                    player_list.player_list[0].score -= 1;
-                    player_score.textContent = player_list.player_list[0].score;
-                });
-
-
                 // No Set button
                 var noSet = document.createElement('button');
                 noSet.type = 'button';
