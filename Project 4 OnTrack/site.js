@@ -193,7 +193,7 @@ window.onload = function() {
                 }
                 if (state) {
                     menu.style.display = 'none';
-                    game.style.display = 'flex';
+                    game.style.display = 'block';
                     if (document.getElementById('grid_container') != null) {
                         grid_obj.removeGrid();
                     }
@@ -207,20 +207,24 @@ window.onload = function() {
                     list.id = 'player_list';
                     player_list.player_list = [];
                     for (i = 0; i < inputs.length; i++) {
+                        var div = document.createElement('div');
+                        div.className = 'multi_player';
                         var new_input = document.createElement('input');
                         new_input.type = 'radio';
                         new_input.name = 'player';
                         new_input.id = inputs[i].value;
                         new_input.value = inputs[i].value;
                         var name = document.createElement('label');
-                        var score = document.createElement('label');
+                        var score = document.createElement('p');
                         score.id = inputs[i].value + '_score';
                         score.textContent = '0';
                         name.htmlFor = inputs[i].value;
+                        score.htmlFor = inputs[i].value;
                         name.textContent = inputs[i].value + ': ';
-                        list.appendChild(new_input);
-                        list.appendChild(name);
-                        list.appendChild(score);
+                        div.appendChild(new_input);
+                        div.appendChild(name);
+                        div.appendChild(score);
+                        list.appendChild(div);
                         player_list.player_list[i] = new Player(inputs[i].value);
                     }
                     list.firstChild.checked = true;
