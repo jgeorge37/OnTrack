@@ -32,7 +32,7 @@ function Grid() {
                 var highscore = 0;
                 var highscore_player;
                 for (i = 0; i < inputs.length; i++) {
-                    var score = document.getElementById(inputs[i].value + '_score').textContent;
+                    var score = document.getElementById(inputs[i].value + '_score').innerHTML;
                     if (score > highscore) {
                         highscore = score;
                         highscore_player = inputs[i].value;
