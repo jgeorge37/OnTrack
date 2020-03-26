@@ -66,7 +66,8 @@ function create_combos(arra, arra_size) {
 
     return result_set;
 }
-/* function that checks if a set is present in the cards on table */
+/* function that checks if a set is present in the cards on table  returns a
+    boolean */
 function set_present(arr) {
     var setPresent = false;
     var count = 0;
@@ -188,12 +189,14 @@ function addCardToGrid(grid_obj, card, players) {
     /* add Card object to array of cards in the grid */
     cardsInGrid.push(card);
 }
-
+/* function that returns a correct set of three cards */
 function give_hint(arr) {
+    // creates all combos of size 3 of the passed array
     var currentCombos = create_combos(arr, 3);
     var flag = false;
     var count = 0;
     var temp;
+    // iterates through possible combinations until it finds a set
     while (flag == false && count < currentCombos.length) {
         temp = currentCombos[count];
         if (is_set(temp) == true) {
@@ -201,9 +204,10 @@ function give_hint(arr) {
         }
         count = count + 1;
     }
+    // if no sets are present, it outputs a message to inform the user
     if (set_present(currentCombos) == false) {
         window.alert('There may not be any sets to find here.');
-    } else {
+    } else { // otherwise, it prints out a message that details the card to user
         window.alert(
             'Try using card with Color: ' +
             temp[0].color +
@@ -215,7 +219,7 @@ function give_hint(arr) {
             temp[0].number
         );
     }
-
+    // returns array of three cards that make a correct set
     return temp;
 }
 
