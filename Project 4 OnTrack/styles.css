@@ -98,10 +98,10 @@ button:hover {
 }
 
 #grid_container {
-    height: 500px;
-    width: 790px;
+    height: auto;
+    width: auto;
     grid-template-columns: auto auto auto auto;
-    margin-bottom: 20px;
+    margin: auto;
 }
 
 #singleplayer_menu_view {
@@ -242,11 +242,13 @@ button:hover {
     background-color: #f6f6f6;
     width: 145px;
     height: 115px;
-    margin: auto;
+    margin: 10px 5px 10px 5px;
     padding: 20px;
     display: grid;
     grid-template-columns: auto auto auto;
     border-radius: 10px;
+    border-collapse: separate;
+    border-spacing: 15px;
 }
 
 .grid_card div {
