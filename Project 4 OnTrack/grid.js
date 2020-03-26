@@ -41,12 +41,13 @@ function Grid() {
                 window.alert('There are no more cards. The winner is ' + highscore_player + ' with ' + highscore + ' points!');
             } else {
                 var playerid = document.getElementById('player_div').getElementsByTagName('p')[0].id;
-                var playerscore = document.getElementById(playerid + '_score');
-                var computerscore = document.getElementById('computer_score');
+                var playerscore = document.getElementById(playerid + '_score').textContent;
+                var computerscore = document.getElementById('computer_score').textContent;
+                console.log(playerscore);
                 if (playerscore > computerscore) {
-                    window.alert('Congrats! You beat the computer with ' + playerscore.textContent + ' points!');
+                    window.alert('Congrats! You beat the computer with ' + playerscore + ' points!');
                 } else {
-                    window.alert('The computer beat you with ' + computerscore.textContent + ' points');
+                    window.alert('The computer beat you with ' + computerscore + ' points');
                 }
             }
             location.reload();
