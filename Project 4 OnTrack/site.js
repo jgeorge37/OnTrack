@@ -227,7 +227,7 @@ window.onload = function() {
                         list.appendChild(div);
                         player_list.player_list[i] = new Player(inputs[i].value);
                     }
-                    list.firstChild.checked = true;
+                    list.firstChild.firstChild.checked = true;
                     grid_obj.addGrid(game, deck.card_list, player_list);
                     game.appendChild(list);
 
