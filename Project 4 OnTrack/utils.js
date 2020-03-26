@@ -81,7 +81,7 @@ function set_present(arr) {
     return setPresent;
 }
 
-/**
+/*
  * Shuffles array in place.
  * @param {Array} a items An array containing the items.
  * This function has been adapted from the Fisher-Yates Shuffle Algorithm:
