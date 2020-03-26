@@ -238,6 +238,7 @@ function give_hint(arr) {
     if (set_present(currentCombos) == false) {
         window.alert('There may not be any sets to find here.');
     } else {
+        /*
         window.alert(
             'Try using card with Color: ' +
             temp[0].color +
@@ -248,6 +249,7 @@ function give_hint(arr) {
             ' | Count: ' +
             temp[0].number
         );
+         */
     }
 
     return temp;
