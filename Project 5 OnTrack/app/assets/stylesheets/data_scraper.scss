@@ -1,0 +1,34 @@
+// Place all the styles related to the data_scraper controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+// Created by Jack Thompson
+// Modified by Snigdha Tiwari - added styles for table and font
+// Modified by Jack Thompson - added background colors and font
+
+h1,h4 {
+  color: white;
+  //https://stackoverflow.com/questions/4772906/css-is-it-possible-to-add-a-black-outline-around-each-character-in-text
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+}
+
+body {
+
+  background: linear-gradient(to right, rgb(202, 104, 112), rgb(193,80,90));
+}
+
+table, th,td{
+  border: 1px solid black;
+  background-color: white;
+}
+
+table, th{
+  background-color: #b9b9ba;
+  font-family: Padauk;
+  font-size: x-large;
+}
+
+table, td{
+  background-color: #EFEFEF;
+  font-family: Padauk;
+  font-size: large;
+}
