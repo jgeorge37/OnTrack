@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  class_number: 1
+  component: MyString
+  location: MyString
+  times: MyString
+  instructor: MyString
+  session: MyString
+  topic: MyString
+  semester: MyString
+  class_name_id: 1
+
+two:
+  class_number: 1
+  component: MyString
+  location: MyString
+  times: MyString
+  instructor: MyString
+  session: MyString
+  topic: MyString
+  semester: MyString
+  class_name_id: 1
