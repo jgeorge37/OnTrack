@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'recommendations/list'
+  get 'recommendations/new'
+  get 'recommendations/show'
+  get 'recommendations/edit'
+  get 'recommendations/destroy'
   root 'menu#index'
   get 'menu/index'
   post 'menu/index'

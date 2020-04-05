@@ -28277,3 +28277,100 @@ puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
 puma (4.3.3) lib/puma/server.rb:472:in `process_client'
 puma (4.3.3) lib/puma/server.rb:328:in `block in run'
 puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2020-04-05 19:02:53 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by MenuController#index as HTML
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 14.5ms | Allocations: 1043)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 698ms (Views: 696.3ms | ActiveRecord: 0.0ms | Allocations: 21285)
+
+
+Started POST "/student_application/index" for 127.0.0.1 at 2020-04-05 19:02:55 -0400
+Processing by StudentApplicationController#index as HTML
+  Parameters: {"authenticity_token"=>"0MLR4d+ewxM+03u/hIO1AuEfIuSQBpotEwstMqGBFFUlzAkBzGzepCxKbfAxvLeHzDMqa1qnGE8WnMYPe+J26A=="}
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 219)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 38ms (Views: 36.5ms | ActiveRecord: 0.0ms | Allocations: 5960)
+
+
+Started POST "/menu/index" for 127.0.0.1 at 2020-04-05 19:02:57 -0400
+Processing by MenuController#index as HTML
+  Parameters: {"authenticity_token"=>"fHrIxa81UHMM52YLycefJXOSGke/AcbThE+nzk68amOJdBAlvMdNxB5+cER8+J2gXr4SyHWgRLGB2EzzlN8I3g=="}
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 547)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 37ms (Views: 36.3ms | ActiveRecord: 0.0ms | Allocations: 5702)
+
+
+Started GET "/menu/index" for 127.0.0.1 at 2020-04-05 19:10:22 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by MenuController#index as HTML
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 1063)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 45ms (Views: 42.8ms | ActiveRecord: 0.0ms | Allocations: 7145)
+
+
+Started POST "/student_application/index" for 127.0.0.1 at 2020-04-05 19:10:23 -0400
+Processing by StudentApplicationController#index as HTML
+  Parameters: {"authenticity_token"=>"lCH16aCIWO5D3t73bhxrAjy4UgDcJZa0fqoPi3GtocdhLy0Js3pFWVFHyLjbI2mHEZRajxaEFNZ7PeS2q87Deg=="}
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 227)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 37ms (Views: 35.8ms | ActiveRecord: 0.0ms | Allocations: 5943)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-05 19:10:25 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 79)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 41ms (Views: 39.5ms | ActiveRecord: 0.0ms | Allocations: 5348)
+
+
+Started POST "/menu/index" for 127.0.0.1 at 2020-04-05 19:10:28 -0400
+Processing by MenuController#index as HTML
+  Parameters: {"authenticity_token"=>"lTxy4rW5NY3IMtvkYxB/mDT4D1mzG3xpcDYh7IQQrXxgMqoCpksoOtqrzavWL30dGdQH1nm6/gt1ocrRXnPPwQ=="}
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 546)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 52ms (Views: 50.7ms | ActiveRecord: 0.0ms | Allocations: 5709)
+
+
+Started POST "/student_application/index" for 127.0.0.1 at 2020-04-05 19:11:16 -0400
+Processing by StudentApplicationController#index as HTML
+  Parameters: {"authenticity_token"=>"3VhKVMg0IJRqlOAki3u6kJFNJpSsijO1POKKSlgJxMwoVpK028Y9I3gN9ms+RLgVvGEuG2Yrsdc5dWF3gmqmcQ=="}
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 224)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 56ms (Views: 53.5ms | ActiveRecord: 0.0ms | Allocations: 6327)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-05 19:11:17 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 225)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 32.5ms | ActiveRecord: 0.0ms | Allocations: 5503)
+
+
+Started POST "/student_application/index" for 127.0.0.1 at 2020-04-05 19:11:18 -0400
+Processing by StudentApplicationController#index as HTML
+  Parameters: {"authenticity_token"=>"T1Fqg4Si68yubyOeHCJgkw6up+yQstjiMYho7nXLysIopGnRNvduiQTT7bXFXmSLvuRKsWTZqnH4K6KnRHz6pg=="}
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 120)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 34.3ms | ActiveRecord: 0.0ms | Allocations: 5302)
+
+
+Started POST "/menu/index" for 127.0.0.1 at 2020-04-05 19:11:22 -0400
+Processing by MenuController#index as HTML
+  Parameters: {"authenticity_token"=>"L/0NoTxzk4w2xQ63u481XSt/jQnB2OxzNNKkPWB9FZ7a89VBL4GOOyRcGPgOsDfYBlOFhgt5bhExRU8Auh53Iw=="}
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 696)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 185ms (Views: 147.4ms | ActiveRecord: 0.0ms | Allocations: 6423)
+
+
