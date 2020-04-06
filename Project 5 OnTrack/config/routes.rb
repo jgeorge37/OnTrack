@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   post 'student_application/index'
   get 'student_application/new'
   post 'student_application/new'
+  get 'student_application/create'
+  post 'student_application/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

@@ -28374,3 +28374,880 @@ Processing by MenuController#index as HTML
 Completed 200 OK in 185ms (Views: 147.4ms | ActiveRecord: 0.0ms | Allocations: 6423)
 
 
+Started GET "/" for 127.0.0.1 at 2020-04-06 14:31:49 -0400
+  [1m[35m (9.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MenuController#index as HTML
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 39.9ms | Allocations: 1402)
+Started GET "/" for 127.0.0.1 at 2020-04-06 14:31:50 -0400
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 998ms (Views: 934.4ms | ActiveRecord: 0.0ms | Allocations: 46709)
+
+
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by MenuController#index as HTML
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 2.9ms | Allocations: 982)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 44ms (Views: 43.5ms | ActiveRecord: 0.0ms | Allocations: 6747)
+
+
+Started POST "/student_application/index" for 127.0.0.1 at 2020-04-06 14:31:55 -0400
+Processing by StudentApplicationController#index as HTML
+  Parameters: {"authenticity_token"=>"M5lxPUyhWLp9KsDAv1bs4TgvyLp0zRs9lMkJxhXHW5+ydLqIjaqV2sou897t20xNTTBpbpkD1guY6JBTNUKuYA=="}
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 7.9ms | Allocations: 235)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 51ms (Views: 49.8ms | ActiveRecord: 0.0ms | Allocations: 6595)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:31:57 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 347.9ms | Allocations: 148222)
+Completed 500 Internal Server Error in 351ms (ActiveRecord: 0.0ms | Allocations: 148819)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `student_application_create_path' for #<#<Class:0x000000000b436178>:0x000000000d5e3d70>
+Did you mean?  student_application_new_path
+               student_application_index_path):
+    14: 
+    15: 
+    16: 
+    17: <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:17
+Started GET "/student_application/index" for 127.0.0.1 at 2020-04-06 14:32:55 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#index as HTML
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 131)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 34ms (Views: 32.6ms | ActiveRecord: 0.0ms | Allocations: 6029)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:32:56 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 236)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 36ms (Views: 35.8ms | ActiveRecord: 0.0ms | Allocations: 5967)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:40:53 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 1.2ms | Allocations: 363)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 226ms (Views: 224.7ms | ActiveRecord: 0.0ms | Allocations: 25217)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:41:13 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 237)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 151ms (Views: 150.4ms | ActiveRecord: 0.0ms | Allocations: 24034)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:41:22 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.5ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 159ms (Views: 157.9ms | ActiveRecord: 0.0ms | Allocations: 25486)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:41:43 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 233)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 195ms (Views: 194.9ms | ActiveRecord: 0.0ms | Allocations: 25025)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:41:56 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 38ms (Views: 37.3ms | ActiveRecord: 0.0ms | Allocations: 6461)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:42:39 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 180ms (Views: 180.0ms | ActiveRecord: 0.0ms | Allocations: 24589)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:42:51 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 144ms (Views: 143.8ms | ActiveRecord: 0.0ms | Allocations: 25442)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:43:15 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 140ms (Views: 139.5ms | ActiveRecord: 0.0ms | Allocations: 24594)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:52:28 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 1093)
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms | Allocations: 2687)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <%= @classNames.each do |c| %>
+15:            <label for=<%= c.name%>><%= c.name%></label>
+16:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+17:        </div>
+18:    </form>
+19:    
+20:    
+21:    
+22:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:53:26 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 1.0ms | Allocations: 1121)
+Completed 500 Internal Server Error in 15ms (ActiveRecord: 0.0ms | Allocations: 2328)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+        -->
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            <label for=<%= c.name%>><%= c.name%></label>
+17:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+18:            -->
+19:        </div>
+20:    </form>
+21:    
+22:    
+23:    
+24:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/index" for 127.0.0.1 at 2020-04-06 14:53:31 -0400
+Processing by StudentApplicationController#index as HTML
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 230)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 37ms (Views: 35.5ms | ActiveRecord: 0.0ms | Allocations: 6310)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:53:33 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 1108)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 1566)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+        -->
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            <label for=<%= c.name%>><%= c.name%></label>
+17:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+18:            -->
+19:        </div>
+20:    </form>
+21:    
+22:    
+23:    
+24:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:53:56 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1113)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 1719)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+        -->
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            <label for=<%= c.name%>><%= c.name%></label>
+17:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+18:            -->
+19:        </div>
+20:    </form>
+21:    
+22:    
+23:    
+24:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/index" for 127.0.0.1 at 2020-04-06 14:54:00 -0400
+Processing by StudentApplicationController#index as HTML
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 131)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 34.2ms | ActiveRecord: 0.0ms | Allocations: 5872)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:54:01 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1108)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1549)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+        -->
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            <label for=<%= c.name%>><%= c.name%></label>
+17:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+18:            -->
+19:        </div>
+20:    </form>
+21:    
+22:    
+23:    
+24:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:54:20 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1126)
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 0.0ms | Allocations: 2312)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+        -->
+    </div>
+</form>
+
+
+<%# 
+<%= button_to 'Submit Application', student_application_create_path%> %>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            <label for=<%= c.name%>><%= c.name%></label>
+17:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+18:            -->
+19:        </div>
+20:    </form>
+21:    
+22:    
+23:    <%# 
+24:    <%= button_to 'Submit Application', student_application_create_path%> %>
+  
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+Started GET "/" for 127.0.0.1 at 2020-04-06 14:54:24 -0400
+Processing by MenuController#index as HTML
+  Rendering menu/index.html.erb within layouts/application
+  Rendered menu/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1133)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 39ms (Views: 37.2ms | ActiveRecord: 0.0ms | Allocations: 7656)
+
+
+Started POST "/student_application/index" for 127.0.0.1 at 2020-04-06 14:54:26 -0400
+Processing by StudentApplicationController#index as HTML
+  Parameters: {"authenticity_token"=>"oX0DTsi72rZ4DN/XYCIjwdegk1lT6rVXc/q5BoGBxBcgkMj7CbAX1s8I7Mkyr4Ntor8yjb4keGF/2yCToQQx6A=="}
+  Rendering student_application/index.html.erb within layouts/application
+  Rendered student_application/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 224)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 36ms (Views: 34.9ms | ActiveRecord: 0.0ms | Allocations: 6131)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:54:27 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 1118)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.0ms | Allocations: 1572)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+        -->
+    </div>
+</form>
+
+
+<%# 
+<%= button_to 'Submit Application', student_application_create_path%> %>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            <label for=<%= c.name%>><%= c.name%></label>
+17:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+18:            -->
+19:        </div>
+20:    </form>
+21:    
+22:    
+23:    <%# 
+24:    <%= button_to 'Submit Application', student_application_create_path%> %>
+  
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:26: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:54:49 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 365)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 40ms (Views: 38.2ms | ActiveRecord: 0.0ms | Allocations: 7061)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:54:54 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 237)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 35ms (Views: 34.6ms | ActiveRecord: 0.0ms | Allocations: 5989)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:55:04 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.5ms | Allocations: 242)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 39ms (Views: 36.0ms | ActiveRecord: 0.0ms | Allocations: 6532)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:55:28 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.9ms | Allocations: 1063)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.0ms | Allocations: 2287)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <!--
+        <%= @classNames.each do |c| %>
+        -->
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <!--
+15:            <%= @classNames.each do |c| %>
+16:            -->
+17:        </div>
+18:    </form>
+19:    
+20:    
+21:    
+22:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:55:58 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.9ms | Allocations: 1117)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 2335)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <h1>Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <label for="fname">First Name:</label>
+    <input type="text" id="fname" name="fname">
+    <label for="lname">Last Name:</label>
+    <input type="text" id="lname" name="lname">
+    <label for="lname.#">lastName.#:</label> 
+    <input type="text" id="lname.#" name="lname.#">
+    <div id=courses>
+        <% @classNames.each do |c| %>
+        <label for=<%= c.name%>><%= c.name%></label>
+        <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
+):
+1:    <h1>Form</h1>
+2:    
+3:    
+4:    <%= button_to 'Exit', student_application_index_path%>
+5:    
+6:    <form id="application">
+7:        <label for="fname">First Name:</label>
+8:        <input type="text" id="fname" name="fname">
+9:        <label for="lname">Last Name:</label>
+10:        <input type="text" id="lname" name="lname">
+11:        <label for="lname.#">lastName.#:</label> 
+12:        <input type="text" id="lname.#" name="lname.#">
+13:        <div id=courses>
+14:            <% @classNames.each do |c| %>
+15:            <label for=<%= c.name%>><%= c.name%></label>
+16:            <input type=checkbox id=<%= c.name%> name=<%= c.name%> value=<%= c.name%>>
+17:        </div>
+18:    </form>
+19:    
+20:    
+21:    
+22:    <%= button_to 'Submit Application', student_application_create_path%>
+  
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+app/views/student_application/new.html.erb:24: syntax error, unexpected end-of-input, expecting end
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:57:01 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  [1m[36mClassName Load (0.4ms)[0m  [1m[34mSELECT "class_names".* FROM "class_names"[0m
+  ↳ app/views/student_application/new.html.erb:14
+  Rendered student_application/new.html.erb within layouts/application (Duration: 10.8ms | Allocations: 5816)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 49ms (Views: 46.6ms | ActiveRecord: 1.4ms | Allocations: 12532)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 14:57:31 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  [1m[36mClassName Load (0.3ms)[0m  [1m[34mSELECT "class_names".* FROM "class_names"[0m
+  ↳ app/views/student_application/new.html.erb:14
+  Rendered student_application/new.html.erb within layouts/application (Duration: 3.8ms | Allocations: 2625)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 135ms (Views: 134.7ms | ActiveRecord: 0.3ms | Allocations: 27422)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:27:10 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.9ms | Allocations: 383)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 55ms (Views: 53.5ms | ActiveRecord: 0.0ms | Allocations: 7077)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:28:29 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 389)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 39ms (Views: 37.5ms | ActiveRecord: 0.0ms | Allocations: 7090)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:41:49 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.5ms | Allocations: 237)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 347ms (Views: 346.4ms | ActiveRecord: 0.0ms | Allocations: 26966)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:41:59 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 156ms (Views: 155.0ms | ActiveRecord: 0.0ms | Allocations: 25423)
+
+
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:47:16 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 151ms (Views: 149.8ms | ActiveRecord: 0.0ms | Allocations: 25838)
+
+
+Started GET "/student_application/new?fname=&lname=&lname.%23=&gpa=" for 127.0.0.1 at 2020-04-06 15:47:19 -0400
+Processing by StudentApplicationController#new as HTML
+  Parameters: {"fname"=>"", "lname"=>"", "lname.#"=>"", "gpa"=>""}
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.3ms | Allocations: 232)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 36ms (Views: 34.9ms | ActiveRecord: 0.0ms | Allocations: 5988)
+
+
+Started GET "/student_application/new?fname=&lname=&lname.%23=&gpa=" for 127.0.0.1 at 2020-04-06 15:47:36 -0400
+Processing by StudentApplicationController#new as HTML
+  Parameters: {"fname"=>"", "lname"=>"", "lname.#"=>"", "gpa"=>""}
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 0.8ms | Allocations: 389)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 49ms (Views: 47.6ms | ActiveRecord: 0.0ms | Allocations: 7093)
+
+
+Started GET "/student_application/new?fname=&lname=&lname.%23=&gpa=" for 127.0.0.1 at 2020-04-06 15:53:35 -0400
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by StudentApplicationController#new as HTML
+  Parameters: {"fname"=>"", "lname"=>"", "lname.#"=>"", "gpa"=>""}
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 7.0ms | Allocations: 6633)
+Completed 500 Internal Server Error in 13ms (ActiveRecord: 0.0ms | Allocations: 7831)
+
+
+  
+ActionView::Template::Error (The asset "student_application.js" is not present in the asset pipeline.):
+    1: 
+    2: <%= javascript_include_tag('student_application.js') %>
+    3: <h1>Form</h1>
+    4: 
+    5: 
+  
+app/views/student_application/new.html.erb:2
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:54:46 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 195.3ms | Allocations: 21869)
+Completed 500 Internal Server Error in 197ms (ActiveRecord: 0.0ms | Allocations: 22328)
+
+
+  
+ActionView::Template::Error (Asset `student_application.js` was not declared to be precompiled in production.
+Declare links to your assets in `app/assets/config/manifest.js`.
+
+  //= link student_application.js
+and restart your server):
+    1: 
+    2: <%= javascript_include_tag('student_application.js') %>
+    3: <h1>Form</h1>
+    4: 
+    5: 
+  
+app/views/student_application/new.html.erb:2
+Started GET "/student_application/new" for 127.0.0.1 at 2020-04-06 15:55:19 -0400
+Processing by StudentApplicationController#new as HTML
+  Rendering student_application/new.html.erb within layouts/application
+  Rendered student_application/new.html.erb within layouts/application (Duration: 68.4ms | Allocations: 14432)
+[Webpacker] Everything's up-to-date. Nothing to do
+Completed 200 OK in 103ms (Views: 102.0ms | ActiveRecord: 0.0ms | Allocations: 20314)
+
+

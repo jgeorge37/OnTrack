@@ -1,4 +1,41 @@
-<h1>Form</h1>
+
+<%# <%= javascript_include_tag('student_application.js') %>
+<h1>New Form</h1>
 
 
 <%= button_to 'Exit', student_application_index_path%>
+
+<form id="application">
+    <div id="contact_info">
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname">
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname">
+        <label for="lname.#">lastName.#:</label> 
+        <input type="text" id="lname.#" name="lname.#">
+    </div>
+    <div id="academic_info">
+        <label for="gpa">Overall GPA:</label>
+        <input type="text" id="gpa" name="gpa">
+        <h2>Courses Completed</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="course_list">
+                </tr>
+            </tbody>
+        </table>    
+        <button id="add_courses">Add a Course</button>
+    </div>
+    <div id="time_info">
+    </div>
+</form>
+
+
+
+<%= button_to 'Submit Application', student_application_create_path%>
