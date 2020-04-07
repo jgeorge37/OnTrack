@@ -1,0 +1,9 @@
+Correctness: Nice job ensuring that the user types in text for their name and that user enters in a positive number for number of players. After a user selects a set, they should probably be notified if the set was valid or not (instead of just updating their score). Game is pretty intuitive and it doesn't seem like it is possible to crash the game.
+
+Functionality/Features: Great inclusion of very-thorough tutorial! Good UI (I especially like how the buttons change when you hover over them). Nice job with hint functionality (although it would be more helpful if this highlighted a card instead of just listing the card's attributes). Nice job allowing for single-player mode against a computer and multi-player mode. Consider adding timer, different levels, or more advanced statistics to take the game to the next level!
+
+Design: Good job abstracting out code into Card, Deck, Grid, and Player classes! Good job using site.js to run the game and having utils.js provide utility functions. Some functions are a bit verbose and can probably be simplified, especially in site.js.
+
+Documentation: Nice thorough README (especially including required and additional functionality)! Very nice file-level, function-level, and in-code documentation! Commit messages look good.
+
+Style: Great job citing style guide for javascript and CSS! Good job using some standard javascript features (event listeners, passing in functions to functions).
