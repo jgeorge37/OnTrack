@@ -1,3 +1,5 @@
+<!-- Created by Jing George 4/10/2020 -->
+
 <%= button_to 'Back to Menu', menu_index_path %>
 <h1> Administrator Panel </h1>
 
@@ -20,18 +22,28 @@ Need to show each class as a div
       <div class="row">
       <div class="title"><%= v[:name] %>, Class #<%= k[0] %></div>
       <div class="edit"><a href="/admin_panel/modify">Edit</a></div>
+      <div class="clear"></div>
       </div>
+
       <div class="row">
-      <div class="comp">Component: <%= v[:component] %></div>
       <div class="sem">Semester: <%= k[1] %></div>
       <div class="ses">Session: <%= v[:session] %></div>
+      <div class="comp">Component: <%= v[:component] %></div>
+      <div class="clear"></div>
       </div>
+
+      <div class="row">
+      <%= v[:num_g] - v[:grader_ids].length() %> of <%= v[:num_g] %> grading positions open.
+       Graders assigned: <%= v[:grader_ids].join(', ') %>
+      </div>
+
       <!-- for each meeting print a row -->
       <% v[:meetings].each do |m| %>
       <div class ="row">
       <div class="loc"><%= m[:location] %></div>
       <div class="time"><%= m[:times] %></div>
-      <div class="instr"><%= m[:instructors] %></div>
+      <div class="instr"><%= m[:instructors].join('; ') %></div>
+      <div class="clear"></div>
       </div>
       <% end %>
     </div>

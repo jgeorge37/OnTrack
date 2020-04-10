@@ -9,7 +9,7 @@
 }
 
 #course_list {
-  background-color: gray;
+  background-color: #e0e4d8;
   padding: 10px;
 }
 
@@ -19,5 +19,60 @@
   padding: 10px;
   border-radius: 5px;
   font-family: sans-serif;
+}
 
+.row {
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.clear {
+  clear: both;
+}
+
+.title {
+  width: auto;
+  float: left;
+  font-weight: bold;
+}
+
+.edit {
+  width: 40px;
+  float: right;
+}
+
+.comp {
+  width: 200px;
+  float: left;
+  color: #006771;
+}
+
+.sem {
+  width: 200px;
+  float: left;
+  color: #006771;
+}
+
+.ses {
+  width: 200px;
+  float: left;
+  color: #006771;
+}
+
+.loc {
+  width: 150px;
+  float: left;
+  color: #292929;
+}
+
+.time {
+  width: 200px;
+  float: left;
+  color: #292929;
+}
+
+.instr {
+  width: 350px;
+  float: left;
+  color: #292929;
 }

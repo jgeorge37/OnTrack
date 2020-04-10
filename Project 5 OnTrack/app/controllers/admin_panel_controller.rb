@@ -22,7 +22,7 @@ class AdminPanelController < ApplicationController
         @map[key][:meetings].each do |r|  # r is each hash in the meeting array of hashes
           # if location and time are the same, only add instructor
           if r[:location] == c.location && r[:times] == c.times
-            r[:instructors].concat("; " + c.instructor)
+            r[:instructors].push(c.instructor)
             done = true  # no more changes needed
           end
         end
@@ -32,8 +32,8 @@ class AdminPanelController < ApplicationController
       if !done
         # make meeting as a hash
         loc = c.location
-        if loc == "" then loc = "Location N/A" end
-        meeting = {location: loc, times: c.times, instructors: c.instructor}
+        if loc == " " then loc = "Location N/A" end
+        meeting = {location: loc, times: c.times, instructors: [c.instructor] }
         # add meeting to list of meetings
         @map[key][:meetings].push(meeting)
 
