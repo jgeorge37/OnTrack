@@ -1,2 +1,29 @@
-<h1>AdminPanel#index</h1>
-<p>Find me in app/views/admin_panel/index.html.erb</p>
+<%= button_to 'Back to Menu', menu_index_path %>
+<h1> Administrator Panel </h1>
+
+<!-- FILTERING
+https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
+-->
+
+<!--
+Need to show filter options
+Need to show each class as a div
+-->
+
+<div id="filters">
+
+</div>
+
+<div id="course_list">
+  <% @courses.each do |c| %>
+    <div class="course">
+
+      <div class="title">
+        <%= @names.find(c.class_name_id).name %>   Class #<%= c.class_number %>
+      </div>
+      <div class="edit"><<a href="/admin_panel/modify">Edit</a></div>
+
+      
+    </div>
+  <% end %>
+<div>
