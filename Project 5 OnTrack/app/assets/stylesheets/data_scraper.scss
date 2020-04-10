@@ -5,17 +5,6 @@
 // Modified by Snigdha Tiwari - added styles for table and font
 // Modified by Jack Thompson - added background colors and font
 
-h1,h4 {
-  color: white;
-  //https://stackoverflow.com/questions/4772906/css-is-it-possible-to-add-a-black-outline-around-each-character-in-text
-  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
-}
-
-body {
-
-  background: linear-gradient(to right, rgb(202, 104, 112), rgb(193,80,90));
-}
-
 table, th,td{
   border: 1px solid black;
   background-color: white;

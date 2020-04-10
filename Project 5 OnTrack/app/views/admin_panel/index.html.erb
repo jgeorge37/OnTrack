@@ -15,15 +15,25 @@ Need to show each class as a div
 </div>
 
 <div id="course_list">
-  <% @courses.each do |c| %>
+  <% @map.each do |k, v| %>
     <div class="course">
-
-      <div class="title">
-        <%= @names.find(c.class_name_id).name %>   Class #<%= c.class_number %>
+      <div class="row">
+      <div class="title"><%= v[:name] %>, Class #<%= k[0] %></div>
+      <div class="edit"><a href="/admin_panel/modify">Edit</a></div>
       </div>
-      <div class="edit"><<a href="/admin_panel/modify">Edit</a></div>
-
-      
+      <div class="row">
+      <div class="comp">Component: <%= v[:component] %></div>
+      <div class="sem">Semester: <%= k[1] %></div>
+      <div class="ses">Session: <%= v[:session] %></div>
+      </div>
+      <!-- for each meeting print a row -->
+      <% v[:meetings].each do |m| %>
+      <div class ="row">
+      <div class="loc"><%= m[:location] %></div>
+      <div class="time"><%= m[:times] %></div>
+      <div class="instr"><%= m[:instructors] %></div>
+      </div>
+      <% end %>
     </div>
   <% end %>
 <div>
