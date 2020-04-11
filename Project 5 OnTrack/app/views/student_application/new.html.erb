@@ -1,28 +1,45 @@
 <%= javascript_pack_tag 'student_application', 'data-turbolinks-track': 'reload' %>
 <script>
     function addCourse() {
-        var tbody = document.getElementById('course_list');
-        var newCourse = document.createElement('tr');
-        var selection = document.createElement('td');
-        var grade = document.createElement('td');
-        var gradeText = document.createElement('select');
-        var grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
-        for(var i = 0; i < grades.length; i++) {
-            var gradeOption = document.createElement('option');
-            gradeOption.vaLue = grades[i];
-            gradeOption.textContent = grades[i];
-            gradeText.appendChild(gradeOption);
-        }
-        var deleteButton = document.createElement('button');
-        deleteButton.textContent = "Delete this Class";
-        deleteButton.addEventListener('click', function() {
-            newCourse.remove();
-        });
-        grade.appendChild(gradeText);
-        newCourse.appendChild(selection);
-        newCourse.appendChild(grade);
-        newCourse.appendChild(deleteButton);
-        tbody.appendChild(newCourse);
+        fetch('../student_application/new.json', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                var tbody = document.getElementById('course_list');
+                var newCourse = document.createElement('tr');
+                var courseSelection = document.createElement('td');
+                var courseText = document.createElement('select');
+                var arrayCourse = [];
+                json.forEach(element => {
+                    var array = element.name.split(' ');
+                    arrayCourse.push(array[0] + ' ' + array[1]);
+                });
+                arrayCourse.forEach(element => {
+                    var courseOption = document.createElement('option');;
+                    courseOption.value = element;
+                    courseOption.textContent = element;
+                    courseText.append(courseOption);
+                });
+                var gradeSelection = document.createElement('td');
+                var gradeText = document.createElement('select');
+                var grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
+                for(var i = 0; i < grades.length; i++) {
+                    var gradeOption = document.createElement('option');
+                    gradeOption.value = grades[i];
+                    gradeOption.textContent = grades[i];
+                    gradeText.appendChild(gradeOption);
+                }
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = "Delete this Class";
+                deleteButton.addEventListener('click', function() {
+                    newCourse.remove();
+                });
+                courseSelection.appendChild(courseText);
+                gradeSelection.appendChild(gradeText);
+                newCourse.appendChild(courseSelection);
+                newCourse.appendChild(gradeSelection);
+                newCourse.appendChild(deleteButton);
+                tbody.appendChild(newCourse);
+            });
     }
 
     
@@ -39,8 +56,6 @@
         <input type="text" id="fname" name="fname">
         <label for="lname">Last Name:</label>
         <input type="text" id="lname" name="lname">
-        <label for="lname.#">lastName.#:</label> 
-        <input type="text" id="lname.#" name="lname.#">
     </div>
     <div id="academic_info">
         <label for="gpa">Overall GPA:</label>
