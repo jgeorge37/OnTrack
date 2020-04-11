@@ -15,7 +15,7 @@ https://flatironschool.com/blog/how-params-works-in-rails
 https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
 -->
 <div id="filters">
-  <% hsh = get_filter_opts(@map) %>
+  <% hsh = get_filter_opts(@map, params) %>
   <%= form_tag admin_panel_index_path, method: "get" do %>
     <%= select "course", "semester", options_for_select(hsh[:sem], selected: params[:semester]) %>
     <%= select "course", "name", options_for_select(hsh[:name], selected: params[:name]) %>
@@ -25,7 +25,8 @@ https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
 </div>
 
 <div id="course_list">
-  <% @map.each do |k, v| %>
+  <%filtered = filter_courses(@map, params) %>
+  <% filtered.each do |k, v| %>
     <div class="course">
       <div class="row">
       <div class="title"><%= v[:name] %>, Class #<%= k[0] %></div>

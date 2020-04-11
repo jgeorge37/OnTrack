@@ -1,7 +1,9 @@
 class AdminPanelController < ApplicationController
 
+# admin_panel/index?course[semester]=SP20&course[name]=All+courses&course[session]=All+sessions
 
   def index
+
     @names = ClassName.all
     @courses = Teaching.all
 
@@ -39,6 +41,7 @@ class AdminPanelController < ApplicationController
       end
 
     end # end do-each
+
   end  # end index
 
 end
