@@ -1,0 +1,7 @@
+/* line 4, app/assets/stylesheets/menu.scss */
+#menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

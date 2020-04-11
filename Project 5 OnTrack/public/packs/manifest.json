@@ -9,6 +9,16 @@
       "js.map": [
         "/packs/js/application-c1c08c2dda64a9899c73.js.map"
       ]
+    },
+    "student_application": {
+      "js": [
+        "/packs/js/student_application-16e46dd5c9ad7eb39cf2.js"
+      ],
+      "js.map": [
+        "/packs/js/student_application-16e46dd5c9ad7eb39cf2.js.map"
+      ]
     }
-  }
+  },
+  "student_application.js": "/packs/js/student_application-16e46dd5c9ad7eb39cf2.js",
+  "student_application.js.map": "/packs/js/student_application-16e46dd5c9ad7eb39cf2.js.map"
 }

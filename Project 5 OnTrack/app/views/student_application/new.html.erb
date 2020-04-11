@@ -1,4 +1,32 @@
+<%= javascript_pack_tag 'student_application', 'data-turbolinks-track': 'reload' %>
+<script>
+    function addCourse() {
+        var tbody = document.getElementById('course_list');
+        var newCourse = document.createElement('tr');
+        var selection = document.createElement('td');
+        var grade = document.createElement('td');
+        var gradeText = document.createElement('select');
+        var grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
+        for(var i = 0; i < grades.length; i++) {
+            var gradeOption = document.createElement('option');
+            gradeOption.vaLue = grades[i];
+            gradeOption.textContent = grades[i];
+            gradeText.appendChild(gradeOption);
+        }
+        var deleteButton = document.createElement('button');
+        deleteButton.textContent = "Delete this Class";
+        deleteButton.addEventListener('click', function() {
+            newCourse.remove();
+        });
+        grade.appendChild(gradeText);
+        newCourse.appendChild(selection);
+        newCourse.appendChild(grade);
+        newCourse.appendChild(deleteButton);
+        tbody.appendChild(newCourse);
+    }
 
+    
+</script>
 <%# <%= javascript_include_tag('student_application.js') %>
 <h1>New Form</h1>
 
@@ -25,12 +53,10 @@
                     <th>Grade</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr id="course_list">
-                </tr>
+            <tbody id="course_list">
             </tbody>
         </table>    
-        <button id="add_courses">Add a Course</button>
+        <button type="button" id="add_courses" onclick="addCourse()">Add a Course</button>
     </div>
     <div id="time_info">
     </div>

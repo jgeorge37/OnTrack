@@ -1,0 +1,1 @@
+{"ast":null,"code":"window.onload = function () {};","map":{"version":3,"sources":["D:/Projects/GitRepos/OnTrack/Project 5 OnTrack/app/javascript/student_application/new.js"],"names":["window","onload"],"mappings":"AAAAA,MAAM,CAACC,MAAP,GAAgB,YAAW,CAAE,CAA7B","sourcesContent":["window.onload = function() {}"]},"metadata":{},"sourceType":"module"}
