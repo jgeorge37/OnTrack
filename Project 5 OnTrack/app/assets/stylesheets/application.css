@@ -16,9 +16,10 @@
 
 body {
   font-family: sans-serif;
-  background-color: #f1f1f1;
+  background-color: #f7f7f7;
 }
 
 h1 {
-  color: #da1515;
+  color: #b11c1c;
+  font-weight: normal;
 }

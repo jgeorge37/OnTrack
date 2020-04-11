@@ -1,4 +1,6 @@
 class AdminPanelController < ApplicationController
+
+
   def index
     @names = ClassName.all
     @courses = Teaching.all
@@ -6,17 +8,15 @@ class AdminPanelController < ApplicationController
     # Make map for class number, semester -> all other info
     @map = Hash.new
     @courses.each do |c|
-      done = false
 
+      done = false
       # get class number and semester for key
       key = [c.class_number, c.semester]
-
       # if key is not already in map
       if !@map.key?(key)
         # some classes have different meeting schedules throughout the week
         # each meeting has location, time, instructor(s)
         @map[key] = {name: @names.find(c.class_name_id).name, session: c.session, component: c.component, num_g: 0, grader_ids: [], meetings: []}
-
       # check if only change is additional instructor for an existing meeting
       else
         @map[key][:meetings].each do |r|  # r is each hash in the meeting array of hashes
@@ -36,11 +36,9 @@ class AdminPanelController < ApplicationController
         meeting = {location: loc, times: c.times, instructors: [c.instructor] }
         # add meeting to list of meetings
         @map[key][:meetings].push(meeting)
-
       end
 
-    end
-
-  end
+    end # end do-each
+  end  # end index
 
 end
