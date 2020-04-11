@@ -3,23 +3,23 @@
 <%= button_to 'Back to Menu', menu_index_path %>
 <h1> Administrator Panel </h1>
 
-<!-- FILTERING
-https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
--->
+
 
 <!-- PARAMS
 https://flatironschool.com/blog/how-params-works-in-rails
 -->
 
-<!--
-Need to show filter options
-Need to show each class as a div
--->
 
+
+<!-- Filtering adapted from
+https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
+-->
 <div id="filters">
   <% hsh = get_filter_opts(@map) %>
   <%= form_tag admin_panel_index_path, method: "get" do %>
     <%= select "course", "semester", options_for_select(hsh[:sem], selected: params[:semester]) %>
+    <%= select "course", "name", options_for_select(hsh[:name], selected: params[:name]) %>
+    <%= select "course", "session", options_for_select(hsh[:ses], selected: params[:session]) %>
     <%= submit_tag "Filter", name: nil %>
   <% end %>
 </div>
