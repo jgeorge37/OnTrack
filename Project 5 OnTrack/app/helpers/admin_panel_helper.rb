@@ -5,9 +5,7 @@ module AdminPanelHelper
 
     filters[:sem] = Course.distinct.pluck(:semester)
     filters[:name] = Description.distinct.pluck(:name)
-    filters[:name].each do |n|
-      n = n[0, n.index(' ', 7)]
-    end
+    filters[:name].map! {|n| n[0, n.index(' ', 7)]}
     filters[:ses] = Description.distinct.pluck(:session)
 
     filters[:sem].unshift("All semesters")
@@ -28,6 +26,6 @@ module AdminPanelHelper
     return filters
   end
 
-  
+
 
 end
