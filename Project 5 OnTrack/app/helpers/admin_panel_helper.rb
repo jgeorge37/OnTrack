@@ -1,7 +1,12 @@
 module AdminPanelHelper
 
   def get_filter_opts(par)
-    filters = {sem: ["All semesters"], name: ["All courses"], ses: ["All sessions"]}
+    filters = {
+      sem: ["All semesters"],
+      name: ["All courses"],
+      ses: ["All sessions"],
+      open: [ ["Courses with and without open positions", 0], ["Only courses with open positions", 1] ]
+    }
 
     filters[:sem] = Course.distinct.pluck(:semester)
     filters[:name] = Description.distinct.pluck(:name)
@@ -17,6 +22,9 @@ module AdminPanelHelper
       filters[:sem].unshift(par[:course][:semester])
       filters[:name].unshift(par[:course][:name])
       filters[:ses].unshift(par[:course][:session])
+      if par[:course][:open].to_i == 1
+        filters[:open].reverse!
+      end
     end
 
     filters[:sem] = filters[:sem].uniq

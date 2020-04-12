@@ -14,6 +14,7 @@
     <%= select "course", "semester", options_for_select(hsh[:sem], selected: params[:semester]) %>
     <%= select "course", "name", options_for_select(hsh[:name], selected: params[:name]) %>
     <%= select "course", "session", options_for_select(hsh[:ses], selected: params[:session]) %>
+    <%= select "course", "open", options_for_select(hsh[:open], selected: params[:open]) %>
     <%= submit_tag "Filter", name: nil %>
   <% end %>
 </div>

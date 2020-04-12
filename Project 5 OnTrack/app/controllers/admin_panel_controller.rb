@@ -4,7 +4,7 @@ class AdminPanelController < ApplicationController
   end
 
   def modify
-    
+
   end
 
   def load
@@ -71,7 +71,10 @@ class AdminPanelController < ApplicationController
         fc = fc.select {|c| c.description.name[0, c.description.name.index(' ', 7)] == par[:course][:name]}
       end
       if par[:course][:session] != "All sessions"
-        fc = fc.select {|c| c.description.name == par[:course][:session]}
+        fc = fc.select {|c| c.description.session == par[:course][:session]}
+      end
+      if par[:course][:open].to_i == 1
+        fc = fc.select {|c| c.description.num_graders - c.description.graders.length() > 0}
       end
     end
     return fc
