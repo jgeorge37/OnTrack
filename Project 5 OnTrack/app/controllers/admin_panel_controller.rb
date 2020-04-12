@@ -1,5 +1,13 @@
 class AdminPanelController < ApplicationController
   def index
+    @filtered = filter_courses(params)
+  end
+
+  def modify
+    
+  end
+
+  def load
     if !Course.any?
       names = ClassName.all
       classes = Teaching.all
@@ -18,7 +26,7 @@ class AdminPanelController < ApplicationController
         # check if record is not in db
         if course == nil
           course = Course.create(class_num: c.class_number, semester: c.semester)
-          puts course
+
           # add description
           course.description = Description.create(
             name: names.find(c.class_name_id).name,
@@ -26,7 +34,6 @@ class AdminPanelController < ApplicationController
             component: c.component,
             attendance: false,
             num_graders: 0)
-          puts course.description
         else
           # check if only change is additional instructor for existing meeting
           course.description.meetings.each do |meet|
@@ -46,19 +53,9 @@ class AdminPanelController < ApplicationController
         end
       end # end do each
     end # end if
-    @courses = Course.all
-    @courses.each do |r|
-      puts r
-    end
 
-    @filtered = filter_courses(params)
-    @filtered.each do |y|
-      puts y
-    end
-  end
+    redirect_to action: "index"
 
-  def modify
-    @courses = Course.all
   end
 
   private

@@ -43,7 +43,7 @@
       <i> ** This class requires grader attendance ** </i><br/>
       <% end %>
       <%= c.description.num_graders - c.description.graders.length() %> of <%= c.description.num_graders %> grading positions open.
-       Graders assigned: <%= c.description.graders.join(', ') %>
+       Graders assigned: <%= c.description.graders.pluck(:name).join('; ') %>
       </div>
 
       <!-- for each meeting print a row -->
