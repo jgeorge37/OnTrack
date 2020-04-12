@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'admin_panel/index'
   post 'admin_panel/index'
+  get 'admin_panel/modify'
   get 'recommendations/list'
   get 'recommendations/new'
   get 'recommendations/show'
