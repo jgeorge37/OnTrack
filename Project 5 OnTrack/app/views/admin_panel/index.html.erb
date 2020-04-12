@@ -30,7 +30,7 @@
         <div class="row">
         <div class="title"><%= c.description.name %>, Class #<%= c.class_num %></div>
         <!-- link to assign grader and make other changes -->
-        <div class="edit"><a href="/admin_panel/modify?num=<%=c.class_num%>&sem=<%=c.semester%>">Edit</a></div>
+        <div class="edit"><a href="/admin_panel/modify?id=<%= c.id %>">Edit</a></div>
         <div class="clear"></div>
         </div>
 
