@@ -1,47 +1,83 @@
 class AdminPanelController < ApplicationController
   def index
-    set_up_vars
+    if !Course.any?
+      names = ClassName.all
+      classes = Teaching.all
+
+      classes.each do |c|
+        done = false
+
+        course = Course.find_by(class_num: c.class_number, semester: c.semester)
+
+        # in any case we need an instructor
+        ins = Instructor.find_by(name: c.instructor)
+        if ins == nil
+          ins = Instructor.create(name: c.instructor)
+        end
+
+        # check if record is not in db
+        if course == nil
+          course = Course.create(class_num: c.class_number, semester: c.semester)
+          puts course
+          # add description
+          course.description = Description.create(
+            name: names.find(c.class_name_id).name,
+            session: c.session,
+            component: c.component,
+            attendance: false,
+            num_graders: 0)
+          puts course.description
+        else
+          # check if only change is additional instructor for existing meeting
+          course.description.meetings.each do |meet|
+            if meet.location == c.location && meet.time == c.times
+              meet.instructors.push(ins)
+              done = true
+            end
+          end
+        end
+        # if changes are needed, add the meeting
+        if !done
+          loc = c.location
+          if loc == " " then loc = "Location N/A" end
+          m = Meeting.create(location: loc, time: c.times)
+          m.instructors.push(ins)
+          course.description.meetings.push(m)
+        end
+      end # end do each
+    end # end if
+    @courses = Course.all
+    @courses.each do |r|
+      puts r
+    end
+
+    @filtered = filter_courses(params)
+    @filtered.each do |y|
+      puts y
+    end
   end
 
   def modify
-    set_up_vars
+    @courses = Course.all
   end
 
-  def set_up_vars
-    names = ClassName.all
-    courses = Teaching.all
-    # Make map for class number, semester -> all other info
-    @map = Hash.new
-    courses.each do |c|
-      done = false
-      # get class number and semester for key
-      key = [c.class_number, c.semester]
-      # if key is not already in map
-      if !@map.key?(key)
-        # some classes have different meeting schedules throughout the week
-        # each meeting has location, time, instructor(s)
-        @map[key] = {name: names.find(c.class_name_id).name, session: c.session, component: c.component, attd: false, num_g: 0, grader_ids: [], meetings: []}
-      # check if only change is additional instructor for an existing meeting
-      else
-        @map[key][:meetings].each do |r|  # r is each hash in the meeting array of hashes
-          # if location and time are the same, only add instructor
-          if r[:location] == c.location && r[:times] == c.times
-            r[:instructors].push(c.instructor)
-            done = true  # no more changes needed
-          end
-        end
-      end
-      # if changes are needed, add the meeting
-      if !done
-        # make meeting as a hash
-        loc = c.location
-        if loc == " " then loc = "Location N/A" end
-        meeting = {location: loc, times: c.times, instructors: [c.instructor] }
-        # add meeting to list of meetings
-        @map[key][:meetings].push(meeting)
-      end
-    end # end do-each
-  end  # end set_up_vars
+  private
 
+  def filter_courses(par)
+    fc = Course.all
+
+    if par[:course]
+      if par[:course][:semester] != "All semesters"
+        fc = fc.select {|c| c.semester == par[:course][:semester]}
+      end
+      if par[:course][:name] != "All courses"
+        fc = fc.select {|c| c.description.name[0, c.description.name.index(' ', 7)] == par[:course][:name]}
+      end
+      if par[:course][:session] != "All sessions"
+        fc = fc.select {|c| c.description.name == par[:course][:session]}
+      end
+    end
+    return fc
+  end
 
 end

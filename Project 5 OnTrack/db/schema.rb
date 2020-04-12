@@ -10,10 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_203918) do
+ActiveRecord::Schema.define(version: 2020_04_12_152243) do
 
   create_table "class_names", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.integer "class_num"
+    t.string "semester"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "descriptions", force: :cascade do |t|
+    t.string "name"
+    t.string "session"
+    t.string "component"
+    t.boolean "attendance"
+    t.integer "num_graders"
+    t.integer "course_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "descriptions_graders", id: false, force: :cascade do |t|
+    t.integer "grader_id", null: false
+    t.integer "description_id", null: false
+    t.index ["description_id"], name: "index_descriptions_graders_on_description_id"
+    t.index ["grader_id"], name: "index_descriptions_graders_on_grader_id"
+  end
+
+  create_table "graders", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "instructors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "instructors_meetings", id: false, force: :cascade do |t|
+    t.integer "meeting_id", null: false
+    t.integer "instructor_id", null: false
+    t.index ["instructor_id"], name: "index_instructors_meetings_on_instructor_id"
+    t.index ["meeting_id"], name: "index_instructors_meetings_on_meeting_id"
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.string "location"
+    t.string "time"
+    t.integer "description_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

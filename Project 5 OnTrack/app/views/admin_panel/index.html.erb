@@ -6,7 +6,7 @@
 <!-- options to filter courses from the big list -->
 <div id="filters">
   <!-- get options for filter dropdowns -->
-  <% hsh = get_filter_opts(@map, params) %>
+  <% hsh = get_filter_opts(params) %>
   <!-- Filtering adapted from
   https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
   -->
@@ -20,37 +20,38 @@
 
 <!-- display courses -->
 <div id="course_list">
-  <% filtered = filter_courses(@map, params) %>
-  <% filtered.each do |k, v| %>
+
+  <% @filtered.each do |c| %>
+
     <div class="course">
       <div class="row">
-      <div class="title"><%= v[:name] %>, Class #<%= k[0] %></div>
+      <div class="title"><%= c.description.name %>, Class #<%= c.class_num %></div>
       <!-- link to assign grader and make other changes -->
-      <div class="edit"><a href="/admin_panel/modify?num=<%=k[0]%>&sem=<%=k[1]%>">Edit</a></div>
+      <div class="edit"><a href="/admin_panel/modify?num=<%=c.class_num%>&sem=<%=c.semester%>">Edit</a></div>
       <div class="clear"></div>
       </div>
 
       <div class="row">
-      <div class="sem">Semester: <%= k[1] %></div>
-      <div class="ses">Session: <%= v[:session] %></div>
-      <div class="comp">Component: <%= v[:component] %></div>
+      <div class="sem">Semester: <%= c.semester %></div>
+      <div class="ses">Session: <%= c.description.session %></div>
+      <div class="comp">Component: <%= c.description.component %></div>
       <div class="clear"></div>
       </div>
 
       <div class="row">
-      <% if v[:attd] %>
+      <% if c.description.attendance %>
       <i> ** This class requires grader attendance ** </i><br/>
       <% end %>
-      <%= v[:num_g] - v[:grader_ids].length() %> of <%= v[:num_g] %> grading positions open.
-       Graders assigned: <%= v[:grader_ids].join(', ') %>
+      <%= c.description.num_graders - c.description.graders.length() %> of <%= c.description.num_graders %> grading positions open.
+       Graders assigned: <%= c.description.graders.join(', ') %>
       </div>
 
       <!-- for each meeting print a row -->
-      <% v[:meetings].each do |m| %>
+      <% c.description.meetings.each do |m| %>
       <div class ="row">
-      <div class="loc"><%= m[:location] %></div>
-      <div class="time"><%= m[:times] %></div>
-      <div class="instr"><%= m[:instructors].join('; ') %></div>
+      <div class="loc"><%= m.location %></div>
+      <div class="time"><%= m.time %></div>
+      <div class="instr"><%= m.instructors.pluck(:name).join('; ') %></div>
       <div class="clear"></div>
       </div>
       <% end %>
