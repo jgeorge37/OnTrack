@@ -20,7 +20,7 @@ class AdminPanelController < ApplicationController
       if !@map.key?(key)
         # some classes have different meeting schedules throughout the week
         # each meeting has location, time, instructor(s)
-        @map[key] = {name: names.find(c.class_name_id).name, session: c.session, component: c.component, attd: true, num_g: 0, grader_ids: [], meetings: []}
+        @map[key] = {name: names.find(c.class_name_id).name, session: c.session, component: c.component, attd: false, num_g: 0, grader_ids: [], meetings: []}
       # check if only change is additional instructor for an existing meeting
       else
         @map[key][:meetings].each do |r|  # r is each hash in the meeting array of hashes
