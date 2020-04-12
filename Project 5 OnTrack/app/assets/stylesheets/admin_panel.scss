@@ -4,7 +4,6 @@
 
 #filters {
   background-color: #b11c1c;
-
   height: 30px;
   padding: 10px;
 }
@@ -24,7 +23,11 @@
 
 .row {
   width: 100%;
-  padding: 10px 5px;
+  padding: 10px 0px;
+}
+
+.row i {
+  color: #ed6e00;
 }
 
 .clear {

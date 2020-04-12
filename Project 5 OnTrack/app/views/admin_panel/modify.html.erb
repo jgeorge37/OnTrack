@@ -1,0 +1,28 @@
+<!-- Created by Jing George 4/10/2020 -->
+
+<%= button_to 'Back to Administrator Panel', admin_panel_index_path %>
+
+<% v = @map[[params[:num].to_i, params[:sem]]] %>
+
+<h2>Modify <%= v[:name] %>, Class #<%= params[:num]%></h2>
+<p">
+  Semester: <%= params[:sem] %> | Session: <%= v[:session] %> | Component: <%= v[:component] %>
+  <% if v[:attd] %>
+  <i> | ** This class requires grader attendance ** </i><br/>
+  <% end %>
+</p>
+<p>
+<%= v[:num_g] - v[:grader_ids].length() %> of <%= v[:num_g] %> grading positions open.
+   Graders assigned: <%= v[:grader_ids].join(', ') %>
+</p>
+
+<!-- for each meeting print a row -->
+<% v[:meetings].each do |m| %>
+<div class ="row">
+<div class="loc"><%= m[:location] %></div>
+<div class="time"><%= m[:times] %></div>
+<div class="instr"><%= m[:instructors].join('; ') %></div>
+<div class="clear"></div>
+</div>
+<% end %>
+<br/>
