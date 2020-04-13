@@ -5,9 +5,11 @@ class StudentApplicationController < ApplicationController
 
     def new
         @classNames = ClassName.all
+        @teachings = Teaching.all
+        response = { :classNames => @classNames, :teachings => @teachings}
         respond_to do |format|
             format.html { render :new }
-            format.json { render :json => @classNames.to_json }
+            format.json { render :json => response }
         end
     end
 
