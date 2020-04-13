@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'admin_panel/modify'
   get 'admin_panel/load'
   post 'admin_panel/load'
+  get 'configuraiton/index'
+  post 'configuration/index'
   get 'recommendations/list'
   get 'recommendations/new'
   get 'recommendations/show'
