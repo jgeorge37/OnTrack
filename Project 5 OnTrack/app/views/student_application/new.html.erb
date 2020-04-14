@@ -1,15 +1,23 @@
 
 <script>
+    let courseArray = [];
+    let timeArray = [];
+
     function addCourse() {
         fetch('../student_application/new.json', {method: 'GET'})
             .then(response => response.json())
             .then(json => {
-                console.log(json);
                 var tbody = document.getElementById('course_list');
                 var newCourse = document.createElement('tr');
                 var courseSelection = document.createElement('td');
                 var courseText = document.createElement('select');
-                courseText.id = "courseText";
+                if(courseArray.length == 0) {
+                    courseText.class = 0;
+                    courseArray.push(Number(courseText.class));
+                }else {
+                    courseText.class = Number(courseArray[courseArray.length - 1]) + 1;
+                    courseArray.push(Number(courseText.class));
+                }
                 courseText.addEventListener('change', function(){ 
                     timeOnCourse(json.descriptions, json.meetings, courseText);
                     newCourse.class = courseText.value;
@@ -34,7 +42,13 @@
                 var deleteButton = document.createElement('button');
                 deleteButton.textContent = "Delete this Class";
                 deleteButton.addEventListener('click', function() {
-                    document.getElementById(courseText.value.split(' ')[0] + ' ' + courseText.value.split(' ')[1]).remove();
+                    document.getElementById(courseText.class).remove();
+                    for(var i=0; i < courseArray.length; i++) {
+                        if(courseText.class == courseArray[i]) {
+                            courseArray.splice(i, 1);
+                            timeArray.splice(i, 1);
+                        }
+                    }
                     newCourse.remove();  
                 });
                 courseSelection.appendChild(courseText);
@@ -47,6 +61,11 @@
     }
 
     function timeOnCourse(descriptions, meetings, courseText) {
+        if(timeArray.includes(Number(courseText.class))) {
+            document.getElementById(courseText.class).remove();
+        }else  {
+            timeArray.push(courseText.class);
+        }
         var value = courseText.value;
         var descriptionId = [];
         var times = [];
@@ -62,7 +81,7 @@
         })
         var timeTBody = document.getElementById('available_time');
         var newTimeRow = document.createElement('tr');
-        newTimeRow.id = value.split(' ')[0] + ' ' + value.split(' ')[1];
+        newTimeRow.id = Number(courseText.class);
         var course = document.createElement('td');
         course.textContent = value.split(' ')[0] + ' ' + value.split(' ')[1];
         var timeTd = document.createElement('td');
@@ -86,7 +105,37 @@
         newTimeRow.append(course);
         newTimeRow.append(timeTd);
         timeTBody.append(newTimeRow);
-        console.log(times);
+
+    }
+
+    function addGradedCourse() {
+       fetch('../student_application/new.json', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                var tbody = document.getElementById('graded_courses');
+                var newCourse = document.createElement('tr');
+                var courseSelection = document.createElement('td');
+                var courseText = document.createElement('select');
+                courseText.id = "gradedCourseText";
+                var arrayCourse = [];
+                json.classNames.forEach(element => {
+                    var shortName = element.name.split(' ');
+                    var courseOption = document.createElement('option');
+                    courseOption.value = element.name;
+                    courseOption.textContent = shortName[0] + ' ' + shortName[1];
+                    courseText.append(courseOption);
+                })
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = "Delete this Class";
+                deleteButton.addEventListener('click', function() {
+                    newCourse.remove();  
+                });
+                courseSelection.appendChild(courseText);
+                newCourse.appendChild(courseSelection);
+                newCourse.appendChild(deleteButton);
+                tbody.appendChild(newCourse);
+            }); 
     }
 </script>
 <%# <%= javascript_include_tag('student_application.js') %>
@@ -102,6 +151,8 @@
         <input type="text" id="fname" name="fname">
         <label for="lname">Last Name:</label>
         <input type="text" id="lname" name="lname">
+        <label for="lname.#">Last Name.#</label>
+        <input type="text" id="lname.#" name="lname.#">
     </div>
     <div id="academic_info">
         <h2>Academic Info</h2>
@@ -129,11 +180,19 @@
             <tbody id="available_time">
             </tbody>
         </table>
-    </div>
-    <div id="time_info">
+        <h3>Classes Graded In the Past</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="graded_courses">
+            </tbody>
+        </table>
+        <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>
     </div>
 </form>
-
-
-
+<div id=submit_button>
 <%= button_to 'Submit Application', student_application_create_path%>
+</div>
