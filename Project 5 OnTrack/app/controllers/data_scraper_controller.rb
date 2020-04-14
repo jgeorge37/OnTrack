@@ -4,6 +4,10 @@
 # Modified: Snigdha Tiwari - Added comments
 
 class DataScraperController < ApplicationController
+  def load
+
+  end
+
   def scrape
 
     # Clear out ClassName and Teaching (the scraping models)
@@ -54,12 +58,11 @@ class DataScraperController < ApplicationController
       end
     end
 
-
-
     redirect_to action: 'organize'
   end
 
   def organize
+
 
     names = ClassName.all
     classes = Teaching.all
