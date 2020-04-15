@@ -40,7 +40,13 @@ function addCourse() {
             var deleteButton = document.createElement('button');
             deleteButton.textContent = "Delete this Class";
             deleteButton.addEventListener('click', function() {
-                document.getElementById(courseText.value.split(' ')[0] + ' ' + courseText.value.split(' ')[1]).remove();
+                document.getElementById(courseText.class).remove();
+                for (var i = 0; i < courseArray.length; i++) {
+                    if (courseText.class == courseArray[i]) {
+                        courseArray.splice(i, 1);
+                        timeArray.splice(i, 1);
+                    }
+                }
                 newCourse.remove();
             });
             courseSelection.appendChild(courseText);
@@ -128,5 +134,4 @@ function addGradedCourse() {
             newCourse.appendChild(deleteButton);
             tbody.appendChild(newCourse);
         });
-
 }

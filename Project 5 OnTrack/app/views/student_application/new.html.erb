@@ -1,3 +1,5 @@
+<!--<%= javascript_pack_tag 'student_application'%> -->
+
 
 <script>
     let courseArray = [];
@@ -137,14 +139,14 @@
                 tbody.appendChild(newCourse);
             }); 
     }
-</script>
-<%# <%= javascript_include_tag('student_application.js') %>
+</script> 
 <h1>New Form</h1>
 
 
 <%= button_to 'Exit', student_application_index_path%>
 
 <form id="application">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
     <div id="contact_info">
         <h2>Contact Information</h2>
         <label for="fname">First Name:</label>
