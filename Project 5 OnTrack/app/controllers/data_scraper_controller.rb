@@ -4,6 +4,10 @@
 # Modified: Snigdha Tiwari - Added comments
 
 class DataScraperController < ApplicationController
+  def load
+
+  end
+
   def scrape
 
     # Clear out ClassName and Teaching (the scraping models)
@@ -54,12 +58,11 @@ class DataScraperController < ApplicationController
       end
     end
 
-
-
     redirect_to action: 'organize'
   end
 
   def organize
+
 
     names = ClassName.all
     classes = Teaching.all
@@ -67,7 +70,7 @@ class DataScraperController < ApplicationController
     classes.each do |c|
       done = false
 
-      course = Course.find_by(class_num: c.class_number, semester: c.semester)
+      course2 = Course.find_by(class_num: c.class_number, semester: c.semester)
 
       # in any case we need an instructor
       ins = Instructor.find_by(name: c.instructor)
@@ -76,11 +79,11 @@ class DataScraperController < ApplicationController
       end
 
       # check if record is not in db
-      if course == nil
-        course = Course.create(class_num: c.class_number, semester: c.semester)
+      if course2 == nil
+        course2 = Course.create(class_num: c.class_number, semester: c.semester)
 
         # add description
-        course.description = Description.create(
+        course2.description = Description.create(
           name: names.find(c.class_name_id).name,
           session: c.session,
           component: c.component,
@@ -89,7 +92,7 @@ class DataScraperController < ApplicationController
         )
       else
         # check if only change is additional instructor for existing meeting
-        course.description.meetings.each do |meet|
+        course2.description.meetings.each do |meet|
           if meet.location == c.location && meet.time == c.times
             meet.instructors.push(ins)
             done = true
@@ -102,7 +105,7 @@ class DataScraperController < ApplicationController
         if loc == " " then loc = "Location N/A" end
         m = Meeting.create(location: loc, time: c.times)
         m.instructors.push(ins)
-        course.description.meetings.push(m)
+        course2.description.meetings.push(m)
       end
     end # end do each
 
