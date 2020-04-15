@@ -1,0 +1,2 @@
+class GraderPreviousGradeCourse < ApplicationRecord
+end
