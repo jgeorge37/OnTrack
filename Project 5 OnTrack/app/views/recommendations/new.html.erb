@@ -1,2 +1,61 @@
-<h1>Recommendations#new</h1>
-<p>Find me in app/views/recommendations/new.html.erb</p>
+<!--# <h1>Recommendations#new</h1>-->
+<!--# <p>Find me in app/views/recommendations/new.html.erb</p>-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Recommendation Form</title>
+</head>
+<body>
+
+<h1>Recommendation Form</h1>
+
+<form action="/recommendations" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="student_fname">First Name:</label>
+  <input type="text" id="student_fname" name="user[student_fname]">
+  <br>
+
+  <label for="student_lname">Last Name:</label>
+  <input type="text" id="student_lname" name="user[student_lname]">
+  <br>
+
+  <label for="student_lname.#">Last Name.#</label>
+  <input type="text" id="student_lname.#" name="user[student_lname_num]">
+  <br>
+
+  <label for="teacher_fname">Instructor First Name:</label>
+  <input type="text" id="teacher_fname" name="user[teacher_fname]">
+  <br>
+
+  <label for="teacher_lname">Instructor Last Name:</label>
+  <input type="text" id="teacher_lname" name="user[teacher_lname]">
+  <br>
+
+  <label for="teacher_lname.#">Instructor Last Name.#</label>
+  <input type="text" id="teacher_lname.#" name="user[teacher_lname_num]">
+  <br>
+
+  <label for="course">Course Recommendation</label>
+  <input type="text" id="course" name="user[course]">
+  <br>
+
+   <label for="course_section">Course Section (OPTIONAL):</label>
+   <input type="text" id="course_section" name="user[course_section]">
+  <br>
+
+   <input type="radio" id="next_semester" name="user[next_semester]" value="next_semester">
+   <label for="next_semester">Next Semester</label>
+  <input type="radio" id="future_semester" name="user[future_semester]" value="future_semester">
+  <label for="future_semester">Future Semesters</label>
+  <br>
+
+  <input type="submit" name="submit" class="submit">
+
+</form>
+</body>
+
+
+</html>
+

@@ -24,5 +24,10 @@ Rails.application.routes.draw do
   post 'student_application/new'
   get 'student_application/create'
   post 'student_application/create'
+
+  # Added for testing recommendation form
+  #get '/' =>'recommendations#new'
+  post 'recommendations/new'
+  post '/' => 'recommendations#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

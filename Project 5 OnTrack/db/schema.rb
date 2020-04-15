@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_12_152243) do
+ActiveRecord::Schema.define(version: 2020_04_15_194354) do
 
   create_table "class_names", force: :cascade do |t|
     t.string "name"
@@ -43,10 +43,34 @@ ActiveRecord::Schema.define(version: 2020_04_12_152243) do
     t.index ["grader_id"], name: "index_descriptions_graders_on_grader_id"
   end
 
+  create_table "grader_completed_courses", force: :cascade do |t|
+    t.integer "grader_id"
+    t.integer "course_id"
+    t.string "grade"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "grader_previous_grade_courses", force: :cascade do |t|
+    t.integer "grader_id"
+    t.integer "course_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "grader_time_availabilities", force: :cascade do |t|
+    t.integer "grader_completed_course_id"
+    t.string "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "graders", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "last_name_dot"
+    t.integer "gpa"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -82,6 +106,16 @@ ActiveRecord::Schema.define(version: 2020_04_12_152243) do
     t.integer "class_name_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "student_fname"
+    t.string "student_lname"
+    t.integer "student_lname_num"
+    t.string "teacher_fname"
+    t.string "teacher_lname"
+    t.integer "teacher_lname_num"
+    t.string "course"
   end
 
 end
