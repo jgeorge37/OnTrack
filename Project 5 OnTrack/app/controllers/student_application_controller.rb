@@ -1,5 +1,5 @@
 class StudentApplicationController < ApplicationController
-    def index 
+    def index
 
     end
 
@@ -16,7 +16,6 @@ class StudentApplicationController < ApplicationController
         end
     end
 
-    def create 
-
+    def create
     end
 end
