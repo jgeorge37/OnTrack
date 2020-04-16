@@ -13,6 +13,9 @@
                 var newCourse = document.createElement('tr');
                 var courseSelection = document.createElement('td');
                 var courseText = document.createElement('select');
+                var gradeSelection = document.createElement('td');
+                var gradeText = document.createElement('select');
+
                 if(courseArray.length == 0) {
                     courseText.class = 0;
                     courseArray.push(Number(courseText.class));
@@ -23,17 +26,18 @@
                 courseText.addEventListener('change', function(){ 
                     timeOnCourse(json.descriptions, json.meetings, courseText);
                     newCourse.class = courseText.value;
-                    });
+                    var shortName = courseText.value.split(' ');
+                    gradeText.name = 'course[' + courseText.value + '][grade]';
+                    }); 
                 var arrayCourse = [];
                 json.classNames.forEach(element => {
-                    var shortName = element.name.split(' ');
+                    var shortName2 = element.name.split(' ');
                     var courseOption = document.createElement('option');
                     courseOption.value = element.name;
-                    courseOption.textContent = shortName[0] + ' ' + shortName[1];
+                    courseOption.textContent = shortName2[0] + ' ' + shortName2[1];
                     courseText.append(courseOption);
                 })
-                var gradeSelection = document.createElement('td');
-                var gradeText = document.createElement('select');
+                
                 var grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
                 for(var i = 0; i < grades.length; i++) {
                     var gradeOption = document.createElement('option');
@@ -97,6 +101,7 @@
                 checkBox.type = 'checkbox';
                 checkBox.id = element;
                 checkBox.value = element;
+                checkBox.name = 'course[' + value + '][time][]';
                 label.htmlFor = element;
                 label.textContent = element;
                 div.append(checkBox);
@@ -120,6 +125,10 @@
                 var courseSelection = document.createElement('td');
                 var courseText = document.createElement('select');
                 courseText.id = "gradedCourseText";
+                courseText.addEventListener('change', function() {
+                    var shortName = courseText.value.split(' ');
+                    courseText.name = 'gradedCourse[]';
+                })
                 var arrayCourse = [];
                 json.classNames.forEach(element => {
                     var shortName = element.name.split(' ');
@@ -145,8 +154,8 @@
 
 <%= button_to 'Exit', student_application_index_path%>
 
-<form id="application">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<%= form_with(url: '/student_application/create', method: "post") do %>
+    <input type="hidden" name="authenticity_token" value="< form_authenticity_token %>">
     <div id="contact_info">
         <h2>Contact Information</h2>
         <label for="fname">First Name:</label>
@@ -194,7 +203,5 @@
         </table>
         <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>
     </div>
-</form>
-<div id=submit_button>
-<%= button_to 'Submit Application', student_application_create_path%>
-</div>
+    <%= submit_tag("Submit Application") %>
+<% end %>
