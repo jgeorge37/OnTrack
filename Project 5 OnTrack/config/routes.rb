@@ -30,5 +30,6 @@ Rails.application.routes.draw do
   #get '/' =>'recommendations#new'
   post 'recommendations/new'
   post '/' => 'recommendations#create'
+  post 'recommendations/show' => 'recommendations#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

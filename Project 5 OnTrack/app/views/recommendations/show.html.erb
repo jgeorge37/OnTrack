@@ -1,2 +1,22 @@
-<h1>Recommendations#show</h1>
-<p>Find me in app/views/recommendations/show.html.erb</p>
+<!--<h1>Recommendations#show</h1>-->
+<!--<p>Find me in app/views/recommendations/show.html.erb</p>-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>List</title>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+  <%= @user.each do |user| %>
+    <tr>
+      <td><%= user.student_fname %></td>
+    </tr>
+  <% end %>
+</table>
+
+</body>

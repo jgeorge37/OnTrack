@@ -10,7 +10,7 @@
 
 <h1>Recommendation Form</h1>
 
-<form action="/recommendations" method="POST">
+<form action="/recommendations/show" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="student_fname">First Name:</label>
@@ -45,15 +45,17 @@
    <input type="text" id="course_section" name="user[course_section]">
   <br>
 
-   <input type="radio" id="next_semester" name="user[next_semester]" value="next_semester">
-   <label for="next_semester">Next Semester</label>
-  <input type="radio" id="future_semester" name="user[future_semester]" value="future_semester">
+  <input type="radio" id="next_semester" name="user[semester]" value="next_semester">
+  <label for="next_semester">Next Semester</label>
+  <input type="radio" id="future_semester" name="user[semester]" value="future_semester">
   <label for="future_semester">Future Semesters</label>
   <br>
 
   <input type="submit" name="submit" class="submit">
 
+
 </form>
+<%= button_to 'Exit To Menu', menu_index_path%>
 </body>
 
 
