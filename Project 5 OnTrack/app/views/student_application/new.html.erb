@@ -155,7 +155,7 @@
 <%= button_to 'Exit', student_application_index_path%>
 
 <%= form_with(url: '/student_application/create', method: "post") do %>
-    <input type="hidden" name="authenticity_token" value="< form_authenticity_token %>">
+
     <div id="contact_info">
         <h2>Contact Information</h2>
         <label for="fname">First Name:</label>
@@ -163,7 +163,7 @@
         <label for="lname">Last Name:</label>
         <input type="text" id="lname" name="lname">
         <label for="lname.#">Last Name.#</label>
-        <input type="text" id="lname.#" name="lname.#">
+        <input type="text" id="lname.#" name="lname_dot">
     </div>
     <div id="academic_info">
         <h2>Academic Info</h2>
