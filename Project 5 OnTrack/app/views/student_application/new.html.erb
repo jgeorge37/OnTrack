@@ -46,6 +46,7 @@
                     gradeText.appendChild(gradeOption);
                 }
                 var deleteButton = document.createElement('button');
+                deleteButton.type = "button"
                 deleteButton.textContent = "Delete this Class";
                 deleteButton.addEventListener('click', function() {
                     document.getElementById(courseText.class).remove();
@@ -67,7 +68,7 @@
     }
 
     function timeOnCourse(descriptions, meetings, courseText) {
-        if(timeArray.includes(Number(courseText.class))) {
+        else if(timeArray.includes(Number(courseText.class))) {
             document.getElementById(courseText.class).remove();
         }else  {
             timeArray.push(courseText.class);
@@ -138,6 +139,7 @@
                     courseText.append(courseOption);
                 })
                 var deleteButton = document.createElement('button');
+                deleteButton.type = "button"
                 deleteButton.textContent = "Delete this Class";
                 deleteButton.addEventListener('click', function() {
                     newCourse.remove();  
