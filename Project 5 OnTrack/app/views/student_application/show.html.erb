@@ -1,0 +1,79 @@
+<%= button_to 'Go Back to Index', student_application_index_path%>
+
+<h1><%= @grader.name.split[0] + ' ' + @grader.name.split[1]%>'s Application</h1>
+<br>
+<div id="application">
+    <div id="contact_info">
+        <h2>Contact Information</h2>
+        <p>First Name: <%= @grader.name.split[0]%></p>
+        <p>Last Name: <%= @grader.name.split[1]%></p>
+        <p>Last Name.# <%= @grader.last_name_dot %></p>
+    </div>
+    <div id="academic_info">
+        <h2>Academic Info</h2>
+        <p>Overall GPA: <%= @grader.gpa %></p>
+        <h3>Courses Completed</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody id="course_list">
+                <% @completedCourses.each do |c| %>
+                    <% @split1 = @classNames.find(c.course_id).name.split %>
+                    <tr>
+                        <td><%= @split1[0] + ' ' + @split1[1] %></td>
+                        <td><%= c.grade %></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <br>
+        <h3>Time Available</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Times</th>
+                </tr>
+            </thead>
+            <tbody id="available_time">
+                <% @completedCourses.each do |c| %>
+                    <tr>
+                        <% @split1 = @classNames.find(c.course_id).name.split %>
+                        <td><%= @split1[0] + ' ' + @split1[1] %></td>
+                        <% @times = Array(GraderTimeAvailability.where(grader_completed_course_id: c.id)) %>
+                        <td>
+                        <% @times.each do |t| %>
+                            <%= t.time %>
+                            <br>
+                        <% end %>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <br>
+        <h3>Classes Graded In the Past</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="graded_courses">
+                <% @previousCourses.each do |p| %>
+                    <% @split2 = @classNames.find(p.course_id).name.split%>
+                    <tr>
+                        <td><%= @split2[0] + ' ' +  @split2[1]%></td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        
+    </div>
+    <br>
+    <button><a href="/student_application/edit?id=<%= @grader.id %>">Edit This Application</a></button>
+</div>

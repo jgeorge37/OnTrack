@@ -4,7 +4,10 @@ class StudentApplicationController < ApplicationController
     end
 
     def show
-
+        @classNames = ClassName.all
+        @grader = Grader.find(params[:id])
+        @completedCourses = Array(GraderCompletedCourse.where(grader_id: params[:id]))
+        @previousCourses = Array(GraderPreviousGradeCourse.where(grader_id: params[:id]))
     end
 
     def new
@@ -32,7 +35,8 @@ class StudentApplicationController < ApplicationController
                     end
                 end
             end
-            if params.has_key?(:gradeCourse) then 
+            puts params.has_key?(:gradedCourse)
+            if params.has_key?(:gradedCourse) then 
                 params[:gradedCourse].each do |c|
                     @className = ClassName.find_by(name: c)
                     @gradedPreviousCourse = GraderPreviousGradeCourse.create(grader_id: @grader.id, course_id: @className.id)
@@ -46,14 +50,8 @@ class StudentApplicationController < ApplicationController
 
     def edit
         @grader = Grader.find(params[:id]);
-        @completedCourses = Array(GraderCompletedCourse.find_by(grader_id: params[:id]))
-        @previousCourses = Array(GraderPreviousGradeCourse.find_by(grader_id: params[:id]))
-        @graderTimeAvailability = []
-        if @completedCourses
-            @completedCourses.each do |c| 
-                @graderTimeAvailability.push(GraderTimeAvailability.find_by(grader_completed_course_id: c.id));
-            end
-        end
+        @completedCourses = GraderCompletedCourse.where(grader_id: params[:id])
+        @previousCourses = GraderPreviousGradeCourse.where(grader_id: params[:id])
         @classNames = ClassName.all
         @teachings = Teaching.all
         @descriptions = Description.all
