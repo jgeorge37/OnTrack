@@ -16,9 +16,9 @@
         <tr>
             <td><%= g.name%></td>
             <td><%= g.last_name_dot%></td>
-            <td><a href="/student_application/edit/<%= g.id %>">Edit</a></td>
-            <td><a href="/student_application/show/<%= g.id %>">Show</a></td>
-            <td><a href="/student_application/delete/<%= g.id %>">Delete</a></td>
+            <td><a href="/student_application/edit?id=<%= g.id %>">Edit</a></td>
+            <td><a href="/student_application/show?id=<%= g.id %>">Show</a></td>
+            <td><a href="/student_application/delete?id=<%= g.id %>">Delete</a></td>
         </tr>
         <% end %>
     </tbody>
