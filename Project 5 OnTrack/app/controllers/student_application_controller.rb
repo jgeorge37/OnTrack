@@ -3,6 +3,10 @@ class StudentApplicationController < ApplicationController
         @grader = Grader.all
     end
 
+    def show
+
+    end
+
     def new
         @classNames = ClassName.all
         @teachings = Teaching.all
@@ -41,11 +45,49 @@ class StudentApplicationController < ApplicationController
     end
 
     def edit
-
+        @grader = Grader.find(params[:id]);
+        @completedCourses = Array(GraderCompletedCourse.find_by(grader_id: params[:id]))
+        @previousCourses = Array(GraderPreviousGradeCourse.find_by(grader_id: params[:id]))
+        @graderTimeAvailability = []
+        if @completedCourses
+            @completedCourses.each do |c| 
+                @graderTimeAvailability.push(GraderTimeAvailability.find_by(grader_completed_course_id: c.id));
+            end
+        end
+        @classNames = ClassName.all
+        @teachings = Teaching.all
+        @descriptions = Description.all
+        @meetings = Meeting.all
+        response = { :classNames => @classNames, :teachings => @teachings,
+             :descriptions => @descriptions, :meetings => @meetings}
+        respond_to do |format|
+            format.html 
+            format.json { render :json => response }
+        end
     end
 
     def update
 
+    end
+
+    def delete
+        @grader = Grader.find(params[:id])
+    
+        @previousCourses = Array(GraderPreviousGradeCourse.find_by(grader_id: params[:id]))
+        @previousCourses.each do |p|
+            p.destroy
+        end
+        @completedCourses = Array(GraderCompletedCourse.find_by(grader_id: params[:id]))
+        
+        @completedCourses.each do |c|
+            @time = Array(GraderTimeAvailability.find_by(grader_completed_course_id: c.id))
+            @time.each do |t|
+                t.destroy
+            end
+            c.destroy
+        end
+        @grader.destroy
+        redirect_to "student_application/index"
     end
 
 end
