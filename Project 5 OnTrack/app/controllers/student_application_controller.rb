@@ -20,11 +20,10 @@ class StudentApplicationController < ApplicationController
         @grader = Grader.new(name: params[:fname] + " " + params[:lname], last_name_dot: params[:lname_dot], gpa: params[:gpa]);
         if @grader.save
             if params.has_key?(:course) then
-                newParams = params.require(:course).permit!
-                newParams[:course] do |k, v|
+                params[:course].each do |key, value|
                     @className = ClassName.find_by(name: key)
-                    @completedCourse = GraderCompletedCourse.create(grader_id: @grader.id, course_id: @className.id, grade: key[:grade])
-                    key[:time].each do |t|
+                    @completedCourse = GraderCompletedCourse.create(grader_id: @grader.id, course_id: @className.id, grade: value[:grade])
+                    value[:time].each do |t|
                         @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
                     end
                 end
