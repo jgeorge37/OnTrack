@@ -9,6 +9,7 @@
         fetch('../student_application/new.json', {method: 'GET'})
             .then(response => response.json())
             .then(json => {
+                console.log(json);
                 var tbody = document.getElementById('course_list');
                 var newCourse = document.createElement('tr');
                 var courseSelection = document.createElement('td');
@@ -24,7 +25,7 @@
                     courseArray.push(Number(courseText.class));
                 }
                 courseText.addEventListener('change', function(){ 
-                    timeOnCourse(json.descriptions, json.meetings, courseText);
+                    timeOnCourse(json.course, json.meetings, courseText);
                     newCourse.class = courseText.value;
                     var shortName = courseText.value.split(' ');
                     gradeText.name = 'course[' + courseText.value + '][grade]';
@@ -67,22 +68,22 @@
             });
     }
 
-    function timeOnCourse(descriptions, meetings, courseText) {
+    function timeOnCourse(courses, meetings, courseText) {
         if(timeArray.includes(Number(courseText.class))) {
             document.getElementById(courseText.class).remove();
         }else  {
             timeArray.push(courseText.class);
         }
         var value = courseText.value;
-        var descriptionId = [];
+        var courseId = [];
         var times = [];
-        descriptions.forEach(element => {
+        courses.forEach(element => {
             if(element.name === value) {
-                descriptionId.push(element.id);
+                courseId.push(element.id);
             }
         })
         meetings.forEach(element => {
-            if(descriptionId.includes(element.description_id)) {
+            if(courseId.includes(element.course_id)) {
                 times.push(element.time);
             }
         })

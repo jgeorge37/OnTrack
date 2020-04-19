@@ -14,10 +14,10 @@ class StudentApplicationController < ApplicationController
     def new
         @classNames = ClassName.all
         @teachings = Teaching.all
-        @descriptions = Description.all
+        @courses = Course.all
         @meetings = Meeting.all
         response = { :classNames => @classNames, :teachings => @teachings,
-             :descriptions => @descriptions, :meetings => @meetings}
+             :course => @courses, :meetings => @meetings}
         respond_to do |format|
             format.html { render :new }
             format.json { render :json => response }
@@ -59,10 +59,10 @@ class StudentApplicationController < ApplicationController
         @previousCourses = GraderPreviousGradeCourse.where(grader_id: params[:id])
         @classNames = ClassName.all
         @teachings = Teaching.all
-        @descriptions = Description.all
+        @courses = Course.all
         @meetings = Meeting.all
         response = { :classNames => @classNames, :teachings => @teachings,
-             :descriptions => @descriptions, :meetings => @meetings}
+             :course=> @courses, :meetings => @meetings}
         respond_to do |format|
             format.html 
             format.json { render :json => response }
