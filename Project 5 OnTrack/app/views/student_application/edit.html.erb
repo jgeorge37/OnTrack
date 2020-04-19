@@ -196,6 +196,23 @@
                 </tr>
             </thead>
             <tbody id="graded_courses">
+                <% @previousCourses.each do |p| %>
+                    <% @name = @classNames.find(p.course_id).name %>
+                    <% @split2 = @classNames.find(p.course_id).name.split%>
+                    <tr>
+                        <td>
+                            <select id="gradedCourseText" name="gradedCourse[]" value="<%= @name %>">
+                                <% @classNames.each do |c| %>
+                                    <% splitName = c.name.split %>
+                                    <option value="<%=c.name%>"><%=splitName[0] + ' ' + splitName[1]%></option>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button">Delete this Class</button>
+                        </td>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
         <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>
