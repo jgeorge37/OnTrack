@@ -43,6 +43,7 @@
                     gradeText.appendChild(gradeOption);
                 }
                 var deleteButton = document.createElement('button');
+                deleteButton.type = "button"
                 deleteButton.textContent = "Delete this Class";
                 deleteButton.addEventListener('click', function() {
                     document.getElementById(courseText.class).remove();
@@ -135,6 +136,7 @@
                     courseText.append(courseOption);
                 })
                 var deleteButton = document.createElement('button');
+                deleteButton.type = "button";
                 deleteButton.textContent = "Delete this Class";
                 deleteButton.addEventListener('click', function() {
                     newCourse.remove();  
@@ -144,6 +146,14 @@
                 newCourse.appendChild(deleteButton);
                 tbody.appendChild(newCourse);
             }); 
+    }
+
+    function editDeleteButton(object) {
+        document.getElementById(object.id + '_course').remove();
+    }
+
+    function editChangeCourse(object) {
+        course = document.getElementById(object_id + '')
     }
 </script> 
 <h1>Edit Form</h1>
@@ -175,6 +185,40 @@
                 </tr>
             </thead>
             <tbody id="course_list">
+                <% @completedCourses.each do |cc| %>
+                    <% @name = @classNames.find(cc.course_id).name %>
+                    <% @split2 = @classNames.find(cc.course_id).name.split%>
+                    <tr id="<%= @courseValue.to_s + "_course" %>">
+                        <td>
+                             <select onchange="editChangeCourse(this)" id="<%= @courseValue.to_s + '_select'%>">
+                                <% @classNames.each do |c| %>
+                                    <% splitName = c.name.split %>
+                                    <% if @name == c.name %>
+                                        <option value="<%=c.name%>" selected ><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% else %>
+                                        <option value="<%=c.name%>"><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="course[<%=@name%>][grade]" id="<%=@courseValue.to_s + "_grade"%>">
+                                <% grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'] %>
+                                <% grades.each do |g| %>
+                                    <% if g == cc.grade %>
+                                        <option value="<%=g%>" selected><%=g%></option>
+                                    <% else %>
+                                        <option value="<%=g%>"><%=g%></option>
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button" id="<%= @courseValue%>" onclick="editDeleteButton(this)">Delete this Class</button>
+                        </td>
+                    </tr>
+                    <% @courseValue = @courseValue + 1%>
+                <% end %>
             </tbody>
         </table>
         <button type="button" id="add_courses" onclick="addCourse()">Add a Course</button>   
@@ -186,6 +230,7 @@
                 </tr>
             </thead>
             <tbody id="available_time">
+                
             </tbody>
         </table>
         <h3>Classes Graded In the Past</h3>
@@ -196,6 +241,27 @@
                 </tr>
             </thead>
             <tbody id="graded_courses">
+                <% @previousCourses.each do |p| %>
+                    <% @name = @classNames.find(p.course_id).name %>
+                    <% @split2 = @classNames.find(p.course_id).name.split%>
+                    <tr>
+                        <td>
+                            <select id="gradedCourseText" name="gradedCourse[]" value="<%= @name %>">
+                                <% @classNames.each do |c| %>
+                                    <% splitName = c.name.split %>
+                                    <% if @name == c.name %>
+                                        <option value="<%=c.name%>" selected><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% else %>
+                                        <option value="<%=c.name%>"><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button">Delete this Class</button>
+                        </td>
+                    </tr>
+                <% end %>
             </tbody>
         </table>
         <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>

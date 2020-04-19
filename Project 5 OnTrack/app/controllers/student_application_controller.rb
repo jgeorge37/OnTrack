@@ -14,10 +14,10 @@ class StudentApplicationController < ApplicationController
     def new
         @classNames = ClassName.all
         @teachings = Teaching.all
-        @descriptions = Description.all
+        @courses = Course.all
         @meetings = Meeting.all
         response = { :classNames => @classNames, :teachings => @teachings,
-             :descriptions => @descriptions, :meetings => @meetings}
+             :course => @courses, :meetings => @meetings}
         respond_to do |format|
             format.html { render :new }
             format.json { render :json => response }
@@ -31,9 +31,11 @@ class StudentApplicationController < ApplicationController
                 params[:course].each do |key, value|
                     @className = ClassName.find_by(name: key)
                     @completedCourse = GraderCompletedCourse.create(grader_id: @grader.id, course_id: @className.id, grade: value[:grade])
-                    value[:time].each do |t|
-                        @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
-                    end
+                    if(value.has_key?(:time)) then
+                        value[:time].each do |t|
+                            @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
+                        end
+                    end 
                 end
             end
             puts params.has_key?(:gradedCourse)
@@ -50,15 +52,17 @@ class StudentApplicationController < ApplicationController
     end
 
     def edit
+        @courseValue = 0;
+        @timeValue = 0;
         @grader = Grader.find(params[:id]);
         @completedCourses = GraderCompletedCourse.where(grader_id: params[:id])
         @previousCourses = GraderPreviousGradeCourse.where(grader_id: params[:id])
         @classNames = ClassName.all
         @teachings = Teaching.all
-        @descriptions = Description.all
+        @courses = Course.all
         @meetings = Meeting.all
         response = { :classNames => @classNames, :teachings => @teachings,
-             :descriptions => @descriptions, :meetings => @meetings}
+             :course=> @courses, :meetings => @meetings}
         respond_to do |format|
             format.html 
             format.json { render :json => response }
