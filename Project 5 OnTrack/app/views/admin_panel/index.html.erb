@@ -5,16 +5,14 @@
 
 <!-- options to filter courses from the big list -->
 <div id="filters">
-  <!-- get options for filter dropdowns -->
-  <% hsh = get_filter_opts(params) %>
   <!-- Filtering adapted from
   https://forum.upcase.com/t/how-to-implement-filtering-for-my-rails-app/2834/2
   -->
   <%= form_tag admin_panel_index_path, method: "get" do %>
-    <%= select "course", "semester", options_for_select(hsh[:sem], selected: params[:semester]) %>
-    <%= select "course", "name", options_for_select(hsh[:name], selected: params[:name]) %>
-    <%= select "course", "session", options_for_select(hsh[:ses], selected: params[:session]) %>
-    <%= select "course", "open", options_for_select(hsh[:open], selected: params[:open]) %>
+    <%= select "course", "semester", options_for_select(@filter_opts[:sem], selected: params[:semester]) %>
+    <%= select "course", "name", options_for_select(@filter_opts[:name], selected: params[:name]) %>
+    <%= select "course", "session", options_for_select(@filter_opts[:ses], selected: params[:session]) %>
+    <%= select "course", "open", options_for_select(@filter_opts[:open], selected: params[:open]) %>
     <%= submit_tag "Filter", name: nil %>
   <% end %>
 </div>
