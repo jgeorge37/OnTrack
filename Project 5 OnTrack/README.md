@@ -28,9 +28,9 @@ PROJECT GOAL HERE
 ```
 $ bundle install
 ```
-4. Load the database content with the following command (this will take a couple minutes):
+4. Construct the database and load content with the following command (this will take a couple minutes):
 ```
-$ rails db:seed
+$ rails db:reset
 ```
 
 ## Usage
