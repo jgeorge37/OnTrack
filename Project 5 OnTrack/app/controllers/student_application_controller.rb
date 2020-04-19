@@ -1,6 +1,7 @@
 class StudentApplicationController < ApplicationController
     def index
         @grader = Grader.all
+        @notice = params[:notice]
     end
 
     def show
@@ -42,7 +43,7 @@ class StudentApplicationController < ApplicationController
                     @gradedPreviousCourse = GraderPreviousGradeCourse.create(grader_id: @grader.id, course_id: @className.id)
                 end
             end
-            redirect_to "/student_application/index", note: 'Succcessfully submitted application'
+            redirect_to :action => 'index', notice: 'Succcessfully submitted the application'
         else
             render "/student_application/index"
         end
@@ -70,22 +71,23 @@ class StudentApplicationController < ApplicationController
 
     def delete
         @grader = Grader.find(params[:id])
-    
-        @previousCourses = Array(GraderPreviousGradeCourse.find_by(grader_id: params[:id]))
+        @previousCourses = GraderPreviousGradeCourse.where(grader_id: params[:id])
+        puts @previousCourses
         @previousCourses.each do |p|
             p.destroy
         end
-        @completedCourses = Array(GraderCompletedCourse.find_by(grader_id: params[:id]))
+        @completedCourses = GraderCompletedCourse.where(grader_id: params[:id])
         
         @completedCourses.each do |c|
-            @time = Array(GraderTimeAvailability.find_by(grader_completed_course_id: c.id))
+            @time = GraderTimeAvailability.where(grader_completed_course_id: c.id)
             @time.each do |t|
                 t.destroy
             end
             c.destroy
         end
+        puts @grader
         @grader.destroy
-        redirect_to "student_application/index"
+        redirect_to :action => 'index', notice: 'Successfully deleted the application'
     end
 
 end
