@@ -20,13 +20,13 @@ class AdminPanelController < ApplicationController
         fc = fc.select {|c| c.semester == par[:course][:semester]}
       end
       if par[:course][:name] != "All courses"
-        fc = fc.select {|c| c.description.name[0, c.description.name.index(' ', 7)] == par[:course][:name]}
+        fc = fc.select {|c| c.name[0, c.name.index(' ', 7)] == par[:course][:name]}
       end
       if par[:course][:session] != "All sessions"
-        fc = fc.select {|c| c.description.session == par[:course][:session]}
+        fc = fc.select {|c| c.session == par[:course][:session]}
       end
       if par[:course][:open].to_i == 1
-        fc = fc.select {|c| c.description.num_graders - c.description.graders.length() > 0}
+        fc = fc.select {|c| c.num_graders - c.graders.length() > 0}
       end
     end
     return fc
@@ -41,9 +41,9 @@ class AdminPanelController < ApplicationController
     }
 
     filters[:sem] = Course.distinct.pluck(:semester)
-    filters[:name] = Description.distinct.pluck(:name)
+    filters[:name] = Course.distinct.pluck(:name)
     filters[:name].map! {|n| n[0, n.index(' ', 7)]}
-    filters[:ses] = Description.distinct.pluck(:session)
+    filters[:ses] = Course.distinct.pluck(:session)
 
     filters[:sem].unshift("All semesters")
     filters[:name].unshift("All courses")

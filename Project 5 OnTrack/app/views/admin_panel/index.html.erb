@@ -27,7 +27,7 @@
 
       <div class="course">
         <div class="row">
-        <div class="title"><%= c.description.name %>, Class #<%= c.class_num %></div>
+        <div class="title"><%= c.name %>, Class #<%= c.class_num %></div>
         <!-- link to assign grader and make other changes -->
         <div class="edit"><a href="/admin_panel/modify?id=<%= c.id %>">Edit</a></div>
         <div class="clear"></div>
@@ -35,21 +35,21 @@
 
         <div class="row">
         <div class="sem">Semester: <%= c.semester %></div>
-        <div class="ses">Session: <%= c.description.session %></div>
-        <div class="comp">Component: <%= c.description.component %></div>
+        <div class="ses">Session: <%= c.session %></div>
+        <div class="comp">Component: <%= c.component %></div>
         <div class="clear"></div>
         </div>
 
         <div class="row">
-        <% if c.description.attendance %>
+        <% if c.attendance %>
         <i> ** This class requires grader attendance ** </i><br/>
         <% end %>
-        <%= c.description.num_graders - c.description.graders.length() %> of <%= c.description.num_graders %> grading positions open.
-         Graders assigned: <%= c.description.graders.pluck(:name).join('; ') %>
+        <%= c.num_graders - c.graders.length() %> of <%= c.num_graders %> grading positions open.
+         Graders assigned: <%= c.graders.pluck(:name).join('; ') %>
         </div>
 
         <!-- for each meeting print a row -->
-        <% c.description.meetings.each do |m| %>
+        <% c.meetings.each do |m| %>
         <div class ="row">
         <div class="loc"><%= m.location %></div>
         <div class="time"><%= m.time %></div>
