@@ -12,9 +12,9 @@
   <tr>
     <th>Name</th>
   </tr>
-  <%= @user.each do |user| %>
+  <%= @allrecommend.each do |t| %>
     <tr>
-      <td><%= user.student_fname %></td>
+      <td><%= t.student_fname %></td>
     </tr>
   <% end %>
 </table>

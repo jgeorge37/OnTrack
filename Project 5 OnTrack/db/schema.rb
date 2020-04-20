@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_16_161544) do
+ActiveRecord::Schema.define(version: 2020_04_20_194717) do
 
   create_table "class_names", force: :cascade do |t|
     t.string "name"
@@ -94,6 +94,21 @@ ActiveRecord::Schema.define(version: 2020_04_16_161544) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "student_recommends", force: :cascade do |t|
+    t.string "student_fname"
+    t.string "student_lname"
+    t.integer "student_lname_num"
+    t.string "teacher_fname"
+    t.string "teacher_lname"
+    t.integer "teacher_lname_num"
+    t.string "course"
+    t.string "course_section"
+    t.boolean "future_semester"
+    t.boolean "next_semester"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "teachings", force: :cascade do |t|
     t.integer "class_number"
     t.string "component"
@@ -109,21 +124,11 @@ ActiveRecord::Schema.define(version: 2020_04_16_161544) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "student_fname"
-    t.string "student_lname"
-    t.integer "student_lname_num"
-    t.string "teacher_fname"
-    t.string "teacher_lname"
-    t.integer "teacher_lname_num"
-    t.string "course"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "course_section"
-    t.boolean "future_semester"
-    t.boolean "next_semester"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
