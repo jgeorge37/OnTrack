@@ -211,7 +211,7 @@
 <%= button_to 'Exit', student_application_index_path%>
 
 <%= form_with(url: '/student_application/update', method: "put") do %>
-
+    <input type="hidden" name="id" value="<%=@grader.id%>">
     <div id="contact_info">
         <h2>Contact Information</h2>
         <label for="fname">First Name:</label>
@@ -263,6 +263,7 @@
                             </select>
                         </td>
                         <td>
+                            <input type="hidden" name="ccEdit[]" value="<%= cc.id.to_s + '_' + @name %>">
                             <button type="button" id="<%= @courseValue.to_s + '_button'%>" onclick="editDeleteButton(this)">Delete this Class</button>
                         </td>
                     </tr>
