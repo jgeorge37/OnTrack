@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   post 'student_application/create'
   get 'student_application/show'
   get  'student_application/edit'
+  get 'student_applicaiton/update'
+  put 'student_application/update'
   get 'student_application/delete'
   delete 'student_application/delete'
 

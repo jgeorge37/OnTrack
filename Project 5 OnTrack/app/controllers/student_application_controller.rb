@@ -70,7 +70,41 @@ class StudentApplicationController < ApplicationController
     end
 
     def update
+        grader = Grader.find(params[:id])
+        grader.name = params[:fname] + ' ' + params[:lname]
+        grader.last_name_dot = params[:lname_dot]
+        grader.gpa = params[:gpa]
+        if grader.save then
+            # if params.has_key?(:course) then
+            #     params[:course].each do |key, value|
+            #         if(params[:ccEdit].include?(key)) then
+                        
+            #         else
+            #             @className = ClassName.find_by(name: key)
+            #             @completedCourse = GraderCompletedCourse.create(grader_id: @grader.id, course_id: @className.id, grade: value[:grade])
+            #             if(value.has_key?(:time)) then
+            #                 value[:time].each do |t|
+            #                     @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
+            #                 end
+            #             end 
+            #         end
+            #     end
+            # end
 
+            # if params.has_keys?(:gradedCourse) then
+            #     params[:gradedCourse].each do |c|
+            #         if then
+
+            #         else
+
+            #         end 
+            #     end
+            # end
+            redirect_to :action => 'index', notice: 'Successfully updated the application'
+        else
+            redirect_to :action => 'index', notice: 'Could not save application'    
+        end
+       
     end
 
     def delete
