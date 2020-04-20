@@ -6,6 +6,7 @@
         fetch('../student_application/new.json', {method: 'GET'})
             .then(response => response.json())
             .then(json => {
+                console.log(json);
                 var tbody = document.getElementById('course_list');
                 var newCourse = document.createElement('tr');
                 var courseSelection = document.createElement('td');
@@ -21,7 +22,7 @@
                     courseArray.push(Number(courseText.class));
                 }
                 courseText.addEventListener('change', function(){ 
-                    timeOnCourse(json.descriptions, json.meetings, courseText);
+                    timeOnCourse(json.course, json.meetings, courseText);
                     newCourse.class = courseText.value;
                     var shortName = courseText.value.split(' ');
                     gradeText.name = 'course[' + courseText.value + '][grade]';
@@ -64,22 +65,22 @@
             });
     }
 
-    function timeOnCourse(descriptions, meetings, courseText) {
+    function timeOnCourse(courses, meetings, courseText) {
         if(timeArray.includes(Number(courseText.class))) {
             document.getElementById(courseText.class).remove();
         }else  {
             timeArray.push(courseText.class);
         }
         var value = courseText.value;
-        var descriptionId = [];
+        var courseId = [];
         var times = [];
-        descriptions.forEach(element => {
+        courses.forEach(element => {
             if(element.name === value) {
-                descriptionId.push(element.id);
+                courseId.push(element.id);
             }
         })
         meetings.forEach(element => {
-            if(descriptionId.includes(element.description_id)) {
+            if(courseId.includes(element.course_id)) {
                 times.push(element.time);
             }
         })
@@ -149,11 +150,59 @@
     }
 
     function editDeleteButton(object) {
-        document.getElementById(object.id + '_course').remove();
+        document.getElementById(object.id.split('_')[0] + '_course').remove();
+        document.getElementById(object.id.split('_')[0] + '_time').remove();
     }
 
     function editChangeCourse(object) {
-        course = document.getElementById(object_id + '')
+        fetch('../student_application/new.json', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                document.getElementById(object.id.split('_')[0] + '_grade').name = 'course[' + object.value + '][grade]';
+                document.getElementById(object.id.split('_')[0] + '_time').remove();
+                var courses = json.course;
+                var meetings = json.meetings;
+                var value = object.value;
+                var courseId = [];
+                var times = [];
+                courses.forEach(element => {
+                    if(element.name === value) {
+                        courseId.push(element.id);
+                    }
+                })
+                meetings.forEach(element => {
+                    if(courseId.includes(element.course_id)) {
+                        times.push(element.time);
+                    }
+                })
+                var timeTBody = document.getElementById('available_time');
+                var newTimeRow = document.createElement('tr');
+                newTimeRow.id = object.id.split('_')[0] + '_time';
+                var course = document.createElement('td');
+                course.textContent = value.split(' ')[0] + ' ' + value.split(' ')[1];
+                var timeTd = document.createElement('td');
+                times = new Set(times);
+                times.forEach(element => {
+                    if(element != "ARR") {
+                        var div = document.createElement('div');
+                        div.class = 'timeDiv';
+                        var checkBox = document.createElement('input');
+                        var label = document.createElement('label');
+                        checkBox.type = 'checkbox';
+                        checkBox.id = element;
+                        checkBox.value = element;
+                        checkBox.name = 'course[' + value + '][time][]';
+                        label.htmlFor = element;
+                        label.textContent = element;
+                        div.append(checkBox);
+                        div.append(label);
+                        timeTd.append(div);
+                    }
+                })
+                newTimeRow.append(course);
+                newTimeRow.append(timeTd);
+                timeTBody.append(newTimeRow);
+        });
     }
 </script> 
 <h1>Edit Form</h1>
@@ -214,7 +263,7 @@
                             </select>
                         </td>
                         <td>
-                            <button type="button" id="<%= @courseValue%>" onclick="editDeleteButton(this)">Delete this Class</button>
+                            <button type="button" id="<%= @courseValue.to_s + '_button'%>" onclick="editDeleteButton(this)">Delete this Class</button>
                         </td>
                     </tr>
                     <% @courseValue = @courseValue + 1%>
@@ -227,10 +276,43 @@
             <thead>
                 <tr>
                     <th>Course</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody id="available_time">
-                
+                <% @completedCourses.each do |cc|%>
+                    <% @name = @classNames.find(cc.course_id).name %>
+                    <% @split3 = @classNames.find(cc.course_id).name.split%>
+                    <tr id="<%= @timeValue.to_s + "_time" %>">
+                        <td><%= @split3[0] + ' ' + @split3[1]%></td>
+                        <td>
+                            <% timeArray = [] %>
+                            <% time = GraderTimeAvailability.where(grader_completed_course_id: cc.id) %>
+                            <% time.each do |tt|%>
+                                <% timeArray.push(tt.time) %>
+                            <% end %>
+                            <% someCourses = Course.where(name: @name) %>
+                            <% courseIdArray  = [] %>
+                            <% someCourses.each do |sc|%>
+                                <% courseIdArray.push(sc.id) %>
+                            <% end %>
+                            <% meetings = Meeting.all %>
+                            <% meetings.each do |m| %>
+                                    <% if courseIdArray.include?(m.course_id) %>
+                                        <div>
+                                        <% if timeArray.include?(m.time) %>
+                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]" checked>
+                                        <% else %>
+                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]">
+                                        <% end %>
+                                        <label for="<%=m.time%>"><%=m.time%></label>
+                                        </div>
+                                    <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <% @timeValue = @timeValue + 1%>
+                <% end %>
             </tbody>
         </table>
         <h3>Classes Graded In the Past</h3>
