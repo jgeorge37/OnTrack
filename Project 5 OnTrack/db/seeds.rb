@@ -10,6 +10,7 @@
 ClassName.delete_all
 Teaching.delete_all
 # Clear out organization models
+Meeting.delete_all
 Course.delete_all
 
 secondary_names = []
