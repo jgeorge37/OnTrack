@@ -1,3 +1,4 @@
 class Course < ApplicationRecord
-  has_one :description, dependent: :delete
+  has_many :meetings, dependent: :delete_all
+  has_and_belongs_to_many :graders
 end

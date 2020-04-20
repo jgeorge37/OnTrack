@@ -1,0 +1,353 @@
+<script>
+    let courseArray = [];
+    let timeArray = [];
+
+    function addCourse() {
+        fetch('../student_application/new.json', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                var tbody = document.getElementById('course_list');
+                var newCourse = document.createElement('tr');
+                var courseSelection = document.createElement('td');
+                var courseText = document.createElement('select');
+                var gradeSelection = document.createElement('td');
+                var gradeText = document.createElement('select');
+
+                if(courseArray.length == 0) {
+                    courseText.class = 0;
+                    courseArray.push(Number(courseText.class));
+                }else {
+                    courseText.class = Number(courseArray[courseArray.length - 1]) + 1;
+                    courseArray.push(Number(courseText.class));
+                }
+                courseText.addEventListener('change', function(){ 
+                    timeOnCourse(json.course, json.meetings, courseText);
+                    newCourse.class = courseText.value;
+                    var shortName = courseText.value.split(' ');
+                    gradeText.name = 'course[' + courseText.value + '][grade]';
+                    }); 
+                var arrayCourse = [];
+                json.classNames.forEach(element => {
+                    var shortName2 = element.name.split(' ');
+                    var courseOption = document.createElement('option');
+                    courseOption.value = element.name;
+                    courseOption.textContent = shortName2[0] + ' ' + shortName2[1];
+                    courseText.append(courseOption);
+                })
+                
+                var grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
+                for(var i = 0; i < grades.length; i++) {
+                    var gradeOption = document.createElement('option');
+                    gradeOption.value = grades[i];
+                    gradeOption.textContent = grades[i];
+                    gradeText.appendChild(gradeOption);
+                }
+                var deleteButton = document.createElement('button');
+                deleteButton.type = "button"
+                deleteButton.textContent = "Delete this Class";
+                deleteButton.addEventListener('click', function() {
+                    document.getElementById(courseText.class).remove();
+                    for(var i=0; i < courseArray.length; i++) {
+                        if(courseText.class == courseArray[i]) {
+                            courseArray.splice(i, 1);
+                            timeArray.splice(i, 1);
+                        }
+                    }
+                    newCourse.remove();  
+                });
+                courseSelection.appendChild(courseText);
+                gradeSelection.appendChild(gradeText);
+                newCourse.appendChild(courseSelection);
+                newCourse.appendChild(gradeSelection);
+                newCourse.appendChild(deleteButton);
+                tbody.appendChild(newCourse);
+            });
+    }
+
+    function timeOnCourse(courses, meetings, courseText) {
+        if(timeArray.includes(Number(courseText.class))) {
+            document.getElementById(courseText.class).remove();
+        }else  {
+            timeArray.push(courseText.class);
+        }
+        var value = courseText.value;
+        var courseId = [];
+        var times = [];
+        courses.forEach(element => {
+            if(element.name === value) {
+                courseId.push(element.id);
+            }
+        })
+        meetings.forEach(element => {
+            if(courseId.includes(element.course_id)) {
+                times.push(element.time);
+            }
+        })
+        var timeTBody = document.getElementById('available_time');
+        var newTimeRow = document.createElement('tr');
+        newTimeRow.id = Number(courseText.class);
+        var course = document.createElement('td');
+        course.textContent = value.split(' ')[0] + ' ' + value.split(' ')[1];
+        var timeTd = document.createElement('td');
+        times = new Set(times);
+        times.forEach(element => {
+            if(element != "ARR") {
+                var div = document.createElement('div');
+                div.class = 'timeDiv';
+                var checkBox = document.createElement('input');
+                var label = document.createElement('label');
+                checkBox.type = 'checkbox';
+                checkBox.id = element;
+                checkBox.value = element;
+                checkBox.name = 'course[' + value + '][time][]';
+                label.htmlFor = element;
+                label.textContent = element;
+                div.append(checkBox);
+                div.append(label);
+                timeTd.append(div);
+            }
+        })
+        newTimeRow.append(course);
+        newTimeRow.append(timeTd);
+        timeTBody.append(newTimeRow);
+
+    }
+
+    function addGradedCourse() {
+       fetch('../student_application/new.json', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                var tbody = document.getElementById('graded_courses');
+                var newCourse = document.createElement('tr');
+                var courseSelection = document.createElement('td');
+                var courseText = document.createElement('select');
+                courseText.id = "gradedCourseText";
+                courseText.addEventListener('change', function() {
+                    var shortName = courseText.value.split(' ');
+                    courseText.name = 'gradedCourse[]';
+                })
+                var arrayCourse = [];
+                json.classNames.forEach(element => {
+                    var shortName = element.name.split(' ');
+                    var courseOption = document.createElement('option');
+                    courseOption.value = element.name;
+                    courseOption.textContent = shortName[0] + ' ' + shortName[1];
+                    courseText.append(courseOption);
+                })
+                var deleteButton = document.createElement('button');
+                deleteButton.type = "button";
+                deleteButton.textContent = "Delete this Class";
+                deleteButton.addEventListener('click', function() {
+                    newCourse.remove();  
+                });
+                courseSelection.appendChild(courseText);
+                newCourse.appendChild(courseSelection);
+                newCourse.appendChild(deleteButton);
+                tbody.appendChild(newCourse);
+            }); 
+    }
+
+    function editDeleteButton(object) {
+        document.getElementById(object.id.split('_')[0] + '_course').remove();
+        document.getElementById(object.id.split('_')[0] + '_time').remove();
+    }
+
+    function editChangeCourse(object) {
+        fetch('../student_application/new.json', {method: 'GET'})
+            .then(response => response.json())
+            .then(json => {
+                document.getElementById(object.id.split('_')[0] + '_grade').name = 'course[' + object.value + '][grade]';
+                document.getElementById(object.id.split('_')[0] + '_time').remove();
+                var courses = json.course;
+                var meetings = json.meetings;
+                var value = object.value;
+                var courseId = [];
+                var times = [];
+                courses.forEach(element => {
+                    if(element.name === value) {
+                        courseId.push(element.id);
+                    }
+                })
+                meetings.forEach(element => {
+                    if(courseId.includes(element.course_id)) {
+                        times.push(element.time);
+                    }
+                })
+                var timeTBody = document.getElementById('available_time');
+                var newTimeRow = document.createElement('tr');
+                newTimeRow.id = object.id.split('_')[0] + '_time';
+                var course = document.createElement('td');
+                course.textContent = value.split(' ')[0] + ' ' + value.split(' ')[1];
+                var timeTd = document.createElement('td');
+                times = new Set(times);
+                times.forEach(element => {
+                    if(element != "ARR") {
+                        var div = document.createElement('div');
+                        div.class = 'timeDiv';
+                        var checkBox = document.createElement('input');
+                        var label = document.createElement('label');
+                        checkBox.type = 'checkbox';
+                        checkBox.id = element;
+                        checkBox.value = element;
+                        checkBox.name = 'course[' + value + '][time][]';
+                        label.htmlFor = element;
+                        label.textContent = element;
+                        div.append(checkBox);
+                        div.append(label);
+                        timeTd.append(div);
+                    }
+                })
+                newTimeRow.append(course);
+                newTimeRow.append(timeTd);
+                timeTBody.append(newTimeRow);
+        });
+    }
+</script> 
+<h1>Edit Form</h1>
+
+
+<%= button_to 'Exit', student_application_index_path%>
+
+<%= form_with(url: '/student_application/update', method: "put") do %>
+    <input type="hidden" name="id" value="<%=@grader.id%>">
+    <div id="contact_info">
+        <h2>Contact Information</h2>
+        <label for="fname">First Name:</label>
+        <input type="text" id="fname" name="fname" value="<%= @grader.name.split[0] %>">
+        <label for="lname">Last Name:</label>
+        <input type="text" id="lname" name="lname" value="<%= @grader.name.split[0] %>">
+        <label for="lname.#">Last Name.#</label>
+        <input type="text" id="lname.#" name="lname_dot" value="<%= @grader.last_name_dot %>">
+    </div>
+    <div id="academic_info">
+        <h2>Academic Info</h2>
+        <label for="gpa">Overall GPA:</label>
+        <input type="text" id="gpa" name="gpa" value="<%= @grader.gpa%>">
+        <h3>Courses Completed</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Grade</th>
+                </tr>
+            </thead>
+            <tbody id="course_list">
+                <% @completedCourses.each do |cc| %>
+                    <% @name = @classNames.find(cc.course_id).name %>
+                    <% @split2 = @classNames.find(cc.course_id).name.split%>
+                    <tr id="<%= @courseValue.to_s + "_course" %>">
+                        <td>
+                             <select onchange="editChangeCourse(this)" id="<%= @courseValue.to_s + '_select'%>">
+                                <% @classNames.each do |c| %>
+                                    <% splitName = c.name.split %>
+                                    <% if @name == c.name %>
+                                        <option value="<%=c.name%>" selected ><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% else %>
+                                        <option value="<%=c.name%>"><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <select name="course[<%=@name%>][grade]" id="<%=@courseValue.to_s + "_grade"%>">
+                                <% grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'] %>
+                                <% grades.each do |g| %>
+                                    <% if g == cc.grade %>
+                                        <option value="<%=g%>" selected><%=g%></option>
+                                    <% else %>
+                                        <option value="<%=g%>"><%=g%></option>
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="hidden" name="ccEdit[]" value="<%= cc.id.to_s + '_' + @name %>">
+                            <button type="button" id="<%= @courseValue.to_s + '_button'%>" onclick="editDeleteButton(this)">Delete this Class</button>
+                        </td>
+                    </tr>
+                    <% @courseValue = @courseValue + 1%>
+                <% end %>
+            </tbody>
+        </table>
+        <button type="button" id="add_courses" onclick="addCourse()">Add a Course</button>   
+        <h3>Time Available</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody id="available_time">
+                <% @completedCourses.each do |cc|%>
+                    <% @name = @classNames.find(cc.course_id).name %>
+                    <% @split3 = @classNames.find(cc.course_id).name.split%>
+                    <tr id="<%= @timeValue.to_s + "_time" %>">
+                        <td><%= @split3[0] + ' ' + @split3[1]%></td>
+                        <td>
+                            <% timeArray = [] %>
+                            <% time = GraderTimeAvailability.where(grader_completed_course_id: cc.id) %>
+                            <% time.each do |tt|%>
+                                <% timeArray.push(tt.time) %>
+                            <% end %>
+                            <% someCourses = Course.where(name: @name) %>
+                            <% courseIdArray  = [] %>
+                            <% someCourses.each do |sc|%>
+                                <% courseIdArray.push(sc.id) %>
+                            <% end %>
+                            <% meetings = Meeting.all %>
+                            <% meetings.each do |m| %>
+                                    <% if courseIdArray.include?(m.course_id) %>
+                                        <div>
+                                        <% if timeArray.include?(m.time) %>
+                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]" checked>
+                                        <% else %>
+                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]">
+                                        <% end %>
+                                        <label for="<%=m.time%>"><%=m.time%></label>
+                                        </div>
+                                    <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <% @timeValue = @timeValue + 1%>
+                <% end %>
+            </tbody>
+        </table>
+        <h3>Classes Graded In the Past</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                </tr>
+            </thead>
+            <tbody id="graded_courses">
+                <% @previousCourses.each do |p| %>
+                    <% @name = @classNames.find(p.course_id).name %>
+                    <% @split2 = @classNames.find(p.course_id).name.split%>
+                    <tr>
+                        <td>
+                            <select id="gradedCourseText" name="gradedCourse[]" value="<%= @name %>">
+                                <% @classNames.each do |c| %>
+                                    <% splitName = c.name.split %>
+                                    <% if @name == c.name %>
+                                        <option value="<%=c.name%>" selected><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% else %>
+                                        <option value="<%=c.name%>"><%=splitName[0] + ' ' + splitName[1]%></option>
+                                    <% end %>
+                                <% end %>
+                            </select>
+                        </td>
+                        <td>
+                            <button type="button">Delete this Class</button>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>
+    </div>
+    <%= submit_tag("Submit Application") %>
+<% end %>

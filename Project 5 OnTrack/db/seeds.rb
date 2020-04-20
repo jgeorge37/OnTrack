@@ -10,8 +10,8 @@
 ClassName.delete_all
 Teaching.delete_all
 # Clear out organization models
+Meeting.delete_all
 Course.delete_all
-
 
 secondary_names = []
 # Gets the web page and makes it parseable
@@ -71,10 +71,9 @@ classes.each do |c|
 
   # check if record is not in db
   if course2 == nil
-    course2 = Course.create(class_num: c.class_number, semester: c.semester)
-
-    # add description
-    course2.description = Description.create(
+    course2 = Course.create(
+      class_num: c.class_number,
+      semester: c.semester,
       name: names.find(c.class_name_id).name,
       session: c.session,
       component: c.component,
@@ -83,7 +82,7 @@ classes.each do |c|
     )
   else
     # check if only change is additional instructor for existing meeting
-    course2.description.meetings.each do |meet|
+    course2.meetings.each do |meet|
       if meet.location == c.location && meet.time == c.times
         meet.instructors.push(ins)
         done = true
@@ -96,6 +95,6 @@ classes.each do |c|
     if loc == " " then loc = "Location N/A" end
     m = Meeting.create(location: loc, time: c.times)
     m.instructors.push(ins)
-    course2.description.meetings.push(m)
+    course2.meetings.push(m)
   end
 end # end do each

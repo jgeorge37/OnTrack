@@ -21,26 +21,20 @@ ActiveRecord::Schema.define(version: 2020_04_20_194717) do
   create_table "courses", force: :cascade do |t|
     t.integer "class_num"
     t.string "semester"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "descriptions", force: :cascade do |t|
     t.string "name"
     t.string "session"
     t.string "component"
     t.boolean "attendance"
     t.integer "num_graders"
-    t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "descriptions_graders", id: false, force: :cascade do |t|
+  create_table "courses_graders", id: false, force: :cascade do |t|
     t.integer "grader_id", null: false
-    t.integer "description_id", null: false
-    t.index ["description_id"], name: "index_descriptions_graders_on_description_id"
-    t.index ["grader_id"], name: "index_descriptions_graders_on_grader_id"
+    t.integer "course_id", null: false
+    t.index ["course_id"], name: "index_courses_graders_on_course_id"
+    t.index ["grader_id"], name: "index_courses_graders_on_grader_id"
   end
 
   create_table "grader_completed_courses", force: :cascade do |t|
@@ -89,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_04_20_194717) do
   create_table "meetings", force: :cascade do |t|
     t.string "location"
     t.string "time"
-    t.integer "description_id"
+    t.integer "course_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -133,4 +127,5 @@ ActiveRecord::Schema.define(version: 2020_04_20_194717) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "meetings", "courses"
 end

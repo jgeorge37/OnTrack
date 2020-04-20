@@ -1,8 +1,28 @@
 <%= button_to 'Back to Menu', menu_index_path %>
+<p id="notice"><%= @notice %></p>
 <h1> Student Applications </h1>
 
 
 <!-- Add Models for students Applications -->
+<table>
+    <thead>
+        <tr>
+        <th>Name</th>
+        <th>Last Name.#</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @grader.each do |g| %>
+        <tr>
+            <td><%= g.name%></td>
+            <td><%= g.last_name_dot%></td>
+            <td><a href="/student_application/edit?id=<%= g.id %>">Edit</a></td>
+            <td><a href="/student_application/show?id=<%= g.id %>">Show</a></td>
+            <td><a href="/student_application/delete?id=<%= g.id %>">Delete</a></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
 
 
 <a href="/student_application/new">New Application</a>

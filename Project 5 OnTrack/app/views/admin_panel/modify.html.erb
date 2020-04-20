@@ -4,20 +4,20 @@
 
 <% c = Course.find(params[:id]) %>
 
-<h2>Modify <%= c.description.name %>, Class #<%= c.class_num %></h2>
+<h2>Modify <%= c.name %>, Class #<%= c.class_num %></h2>
 <p">
-  Semester: <%= c.semester %> | Session: <%= c.description.session %> | Component: <%= c.description.component %>
-  <% if c.description.attendance %>
+  Semester: <%= c.semester %> | Session: <%= c.session %> | Component: <%= c.component %>
+  <% if c.attendance %>
   <i> | ** This class requires grader attendance ** </i><br/>
   <% end %>
 </p>
 <p>
-<%= c.description.num_graders - c.description.graders.length() %> of <%= c.description.num_graders %> grading positions open.
-   Graders assigned: <%= c.description.graders.pluck(:name).join('; ') %>
+<%= c.num_graders - c.graders.length() %> of <%= c.num_graders %> grading positions open.
+   Graders assigned: <%= c.graders.pluck(:name).join('; ') %>
 </p>
 
 <!-- for each meeting print a row -->
-<% c.description.meetings.each do |m| %>
+<% c.meetings.each do |m| %>
 <div class ="row">
 <div class="loc"><%= m.location %></div>
 <div class="time"><%= m.time %></div>
