@@ -210,6 +210,8 @@
 
 <%= button_to 'Exit', student_application_index_path%>
 
+<p id="alert"><%= @alert %></p>
+
 <%= form_with(url: '/student_application/update', method: "put") do %>
     <input type="hidden" name="id" value="<%=@grader.id%>">
     <div id="contact_info">

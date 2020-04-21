@@ -157,6 +157,8 @@
 
 <%= button_to 'Exit', student_application_index_path%>
 
+<p id="alert"><%= @alert %></p>
+
 <%= form_with(url: '/student_application/create', method: "post") do %>
 
     <div id="contact_info">
@@ -206,5 +208,6 @@
         </table>
         <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>
     </div>
+    <br>
     <%= submit_tag("Submit Application") %>
 <% end %>
