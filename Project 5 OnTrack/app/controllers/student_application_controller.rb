@@ -103,7 +103,7 @@ class StudentApplicationController < ApplicationController
            end
 
              #updates previous graded courses
-             if params.has_key?(:gradedCourse) then
+            if params.has_key?(:gradedCourse) then
              @previousCourses.each do |p|
                  if !params[:gradedCourse].include?(p)
                    p.destroy
@@ -114,8 +114,9 @@ class StudentApplicationController < ApplicationController
                  @gradedPreviousCourse = GraderPreviousGradeCourse.create(grader_id: @grader.id, course_id: @className.id)
              end
 
-             redirect_to :action => 'index', notice: 'Could save application'
+             
            end
+           redirect_to :action => 'index', notice: 'Could save application'
         else
             redirect_to :action => 'index', notice: 'Could not save application'
         end
