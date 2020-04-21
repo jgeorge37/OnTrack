@@ -301,12 +301,14 @@
                             <% meetings.each do |m| %>
                                     <% if courseIdArray.include?(m.course_id) %>
                                         <div>
-                                        <% if timeArray.include?(m.time) %>
-                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]" checked>
-                                        <% else %>
-                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]">
+                                        <% if m.time != "ARR" %>
+                                            <% if timeArray.include?(m.time)%>
+                                                <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]" checked>
+                                            <% else %>
+                                                <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]">
+                                            <% end %>
+                                            <label for="<%=m.time%>"><%=m.time%></label>
                                         <% end %>
-                                        <label for="<%=m.time%>"><%=m.time%></label>
                                         </div>
                                     <% end %>
                             <% end %>
