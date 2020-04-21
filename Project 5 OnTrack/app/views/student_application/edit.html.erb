@@ -21,12 +21,12 @@
                     courseText.class = Number(courseArray[courseArray.length - 1]) + 1;
                     courseArray.push(Number(courseText.class));
                 }
-                courseText.addEventListener('change', function(){ 
+                courseText.addEventListener('change', function(){
                     timeOnCourse(json.course, json.meetings, courseText);
                     newCourse.class = courseText.value;
                     var shortName = courseText.value.split(' ');
                     gradeText.name = 'course[' + courseText.value + '][grade]';
-                    }); 
+                    });
                 var arrayCourse = [];
                 json.classNames.forEach(element => {
                     var shortName2 = element.name.split(' ');
@@ -35,7 +35,7 @@
                     courseOption.textContent = shortName2[0] + ' ' + shortName2[1];
                     courseText.append(courseOption);
                 })
-                
+
                 var grades = ['A', 'A-', 'B+', 'B', 'B-', 'C+', 'C', 'C-', 'D+', 'D', 'D-', 'F'];
                 for(var i = 0; i < grades.length; i++) {
                     var gradeOption = document.createElement('option');
@@ -54,7 +54,7 @@
                             timeArray.splice(i, 1);
                         }
                     }
-                    newCourse.remove();  
+                    newCourse.remove();
                 });
                 courseSelection.appendChild(courseText);
                 gradeSelection.appendChild(gradeText);
@@ -140,13 +140,13 @@
                 deleteButton.type = "button";
                 deleteButton.textContent = "Delete this Class";
                 deleteButton.addEventListener('click', function() {
-                    newCourse.remove();  
+                    newCourse.remove();
                 });
                 courseSelection.appendChild(courseText);
                 newCourse.appendChild(courseSelection);
                 newCourse.appendChild(deleteButton);
                 tbody.appendChild(newCourse);
-            }); 
+            });
     }
 
     function editDeleteButton(object) {
@@ -204,7 +204,7 @@
                 timeTBody.append(newTimeRow);
         });
     }
-</script> 
+</script>
 <h1>Edit Form</h1>
 
 
@@ -271,7 +271,7 @@
                 <% end %>
             </tbody>
         </table>
-        <button type="button" id="add_courses" onclick="addCourse()">Add a Course</button>   
+        <button type="button" id="add_courses" onclick="addCourse()">Add a Course</button>
         <h3>Time Available</h3>
         <table>
             <thead>
@@ -349,5 +349,5 @@
         </table>
         <button type="button" id="add_graded_courses" onclick="addGradedCourse()">Add a Graded Course</button>
     </div>
-    <%= submit_tag("Submit Application") %>
+    <%= submit_tag("Update Application") %>
 <% end %>

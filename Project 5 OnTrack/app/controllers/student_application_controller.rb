@@ -35,11 +35,11 @@ class StudentApplicationController < ApplicationController
                         value[:time].each do |t|
                             @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
                         end
-                    end 
+                    end
                 end
             end
             puts params.has_key?(:gradedCourse)
-            if params.has_key?(:gradedCourse) then 
+            if params.has_key?(:gradedCourse) then
                 params[:gradedCourse].each do |c|
                     @className = ClassName.find_by(name: c)
                     @gradedPreviousCourse = GraderPreviousGradeCourse.create(grader_id: @grader.id, course_id: @className.id)
@@ -64,47 +64,62 @@ class StudentApplicationController < ApplicationController
         response = { :classNames => @classNames, :teachings => @teachings,
              :course=> @courses, :meetings => @meetings}
         respond_to do |format|
-            format.html 
+            format.html
             format.json { render :json => response }
         end
     end
 
     def update
-        grader = Grader.find(params[:id])
-        grader.name = params[:fname] + ' ' + params[:lname]
-        grader.last_name_dot = params[:lname_dot]
-        grader.gpa = params[:gpa]
-        if grader.save then
-            # if params.has_key?(:course) then
-            #     params[:course].each do |key, value|
-            #         if(params[:ccEdit].include?(key)) then
-                        
-            #         else
-            #             @className = ClassName.find_by(name: key)
-            #             @completedCourse = GraderCompletedCourse.create(grader_id: @grader.id, course_id: @className.id, grade: value[:grade])
-            #             if(value.has_key?(:time)) then
-            #                 value[:time].each do |t|
-            #                     @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
-            #                 end
-            #             end 
-            #         end
-            #     end
-            # end
+        @grader = Grader.find(params[:id])
+        @grader.name = params[:fname] + ' ' + params[:lname]
+        @grader.last_name_dot = params[:lname_dot]
+        @grader.gpa = params[:gpa]
+        @completedCourses = GraderCompletedCourse.where(grader_id: params[:id])
+        @previousCourses = GraderPreviousGradeCourse.where(grader_id: params[:id])
+        @classNames = ClassName.all
+        @teachings = Teaching.all
+        @courses = Course.all
+        @meetings = Meeting.all
+        if @grader.save then
+            if params.has_key?(:course) then
+              @completedCourses.each do |q|
+                 if !params[:ccEdit].include?(q) then
+                    @time = GraderTimeAvailability.where(grader_completed_course_id: q.id)
+                    @time.each do |t|
+                        t.destroy
+                    end
+                    q.destroy
+                 end
+               end
+               params[:course].each do |key, value|
+                  @className = ClassName.find_by(name: key)
+                  @completedCourse = GraderCompletedCourse.create(grader_id: @grader.id, course_id: @className.id, grade: value[:grade])
+                  if(value.has_key?(:time)) then
+                      value[:time].each do |t|
+                          @graderTimeAvailability = GraderTimeAvailability.create(grader_completed_course_id: @completedCourse.id, time: t)
+                      end
+                  end
+               end
+           end
 
-            # if params.has_keys?(:gradedCourse) then
-            #     params[:gradedCourse].each do |c|
-            #         if then
+             #updates previous graded courses
+             if params.has_key?(:gradedCourse) then
+             @previousCourses.each do |p|
+                 if !params[:gradedCourse].include?(p)
+                   p.destroy
+                 end
+             end
+             params[:gradedCourse].each do |c|
+                 @className = ClassName.find_by(name: c)
+                 @gradedPreviousCourse = GraderPreviousGradeCourse.create(grader_id: @grader.id, course_id: @className.id)
+             end
 
-            #         else
-
-            #         end 
-            #     end
-            # end
-            redirect_to :action => 'index', notice: 'Successfully updated the application'
+             redirect_to :action => 'index', notice: 'Could save application'
+           end
         else
-            redirect_to :action => 'index', notice: 'Could not save application'    
+            redirect_to :action => 'index', notice: 'Could not save application'
         end
-       
+
     end
 
     def delete
@@ -115,7 +130,7 @@ class StudentApplicationController < ApplicationController
             p.destroy
         end
         @completedCourses = GraderCompletedCourse.where(grader_id: params[:id])
-        
+
         @completedCourses.each do |c|
             @time = GraderTimeAvailability.where(grader_completed_course_id: c.id)
             @time.each do |t|
