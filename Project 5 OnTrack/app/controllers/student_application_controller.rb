@@ -103,13 +103,13 @@ class StudentApplicationController < ApplicationController
         value3 = params[:fname] =~ /^[a-zA-Z]+$/
         value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/
         if (value1 != 0) then
-            redirect_to :action => 'new', alert: 'Last Name Dot field must fit this format: [last name].#'
+            redirect_to :action => 'edit', id: params[:id], alert: 'Last Name Dot field must fit this format: [last name].#'
             return
         elsif (value2 != 0 || value3 != 0 ) then
-            redirect_to :action => 'new', alert: 'First and Last name must only include letters'
+            redirect_to :action => 'edit', id: params[:id], alert: 'First and Last name must only include letters'
             return
         elsif (value3 != 0) then
-            redirect_to :action => 'new', alert: 'GPA must fit in the range of 0.0 and 4.0'
+            redirect_to :action => 'edit ', id: params[:id], alert: 'GPA must fit in the range of 0.0 and 4.0'
             return
         end
 
