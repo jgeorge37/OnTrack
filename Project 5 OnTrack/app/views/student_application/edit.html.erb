@@ -13,6 +13,7 @@
                 var courseText = document.createElement('select');
                 var gradeSelection = document.createElement('td');
                 var gradeText = document.createElement('select');
+                gradeText.name = 'course[' + courseText.value + '][grade]';
 
                 if(courseArray.length == 0) {
                     courseText.class = 0;
@@ -56,6 +57,7 @@
                     }
                     newCourse.remove();
                 });
+                timeOnCourse(json.course, json.meetings, courseText);
                 courseSelection.appendChild(courseText);
                 gradeSelection.appendChild(gradeText);
                 newCourse.appendChild(courseSelection);
