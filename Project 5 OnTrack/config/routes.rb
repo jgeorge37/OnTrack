@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'evaluations/index'
   devise_for :users
   get 'admin_panel/index'
   post 'admin_panel/index'

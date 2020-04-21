@@ -1,0 +1,44 @@
+<!--# <h1>Evaluations#index</h1>-->
+<!--# <p>Find me in app/views/evaluations/index.html.erb</p>-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Evaluation Form</title>
+</head>
+<body>
+
+<h1>Evaluation Form</h1>
+
+<form>
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+  <label for="teacher_fname">Instructor First Name:</label>
+  <input type="text" id="teacher_fname">
+  <br>
+
+  <label for="teacher_lname">Instructor Last Name:</label>
+  <input type="text" id="teacher_lname">
+  <br>
+
+  <label for="teacher_lname.#">Instructor Last Name.#</label>
+  <input type="text" id="teacher_lname.#">
+  <br>
+
+  <label for="grader_lname.#">Last Name.# of Grader</label>
+  <input type="text" id="student_lname.#">
+  <br>
+
+  <label for="course">Course</label>
+  <input type="text" id="course">
+  <br>
+
+  <input type="submit" name="submit">
+
+
+</form>
+<%= button_to 'Exit To Menu', menu_index_path%>
+</body>
+
+
+</html>
