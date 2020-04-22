@@ -1,16 +1,9 @@
 <!--# <h1>Evaluations#index</h1>-->
 <!--# <p>Find me in app/views/evaluations/index.html.erb</p>-->
-<!DOCTYPE html>
-<html>
-
-<head>
-  <title>Evaluation Form</title>
-</head>
-<body>
 
 <h1>Evaluation Form</h1>
 
-<form>
+<form action="/evaluations/create" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="teacher_fname">Instructor First Name:</label>
@@ -32,13 +25,40 @@
   <label for="course">Course</label>
   <input type="text" id="course">
   <br>
-
-  <input type="submit" name="submit">
-
+  <div id="quality">
+  <label for="quality">Quality of student's grading:</label>
+  <% @rate.each do |rate| %>
+    <input type="radio" name="quality" value = rate + "">
+    <label for="quality"><%= rate %></label>
+  <% end %>
+  </div>
+  </<br>
+  <div id="punctuality">
+  <label for="punctuality">Punctuality of student's grading:</label>
+  <% @rate.each do |rate| %>
+    <input type="radio"  name="punctuality" value = rate + "">
+    <label for="punctuality"><%= rate %></label>
+  <% end %>
+  </div>
+  </<br>
+  <div id="com-skills">
+  <label for="com-skills">Communication skills of student:</label>
+  <% @rate.each do |rate| %>
+    <input type="radio" name="com-skills" value = rate + "">
+    <label for="com-skills"><%= rate %></label>
+  <% end %>
+  </div>
+  </<br>
+  <div id="knowledge">
+  <label for="knowledge">Knowledge of course content:</label>
+  <% @rate.each do |rate| %>
+    <input type="radio" name="knowledge" value = rate + "">
+    <label for="knowledge"><%= rate %></label>
+  <% end %>
+  </div>
+  </<br>
+  </<br>
+  <%= submit_tag("Submit Evaluation") %>
 
 </form>
 <%= button_to 'Exit To Menu', menu_index_path%>
-</body>
-
-
-</html>
