@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_013438) do
+ActiveRecord::Schema.define(version: 2020_04_22_205228) do
 
   create_table "class_names", force: :cascade do |t|
     t.string "name"
@@ -88,6 +88,13 @@ ActiveRecord::Schema.define(version: 2020_04_22_013438) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.string "f_name"
+    t.string "l_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "student_recommends", force: :cascade do |t|
     t.string "student_fname"
     t.string "student_lname"
@@ -125,9 +132,12 @@ ActiveRecord::Schema.define(version: 2020_04_22_013438) do
     t.datetime "remember_created_at"
     t.boolean "admin"
     t.string "category"
+    t.integer "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "meetings", "courses"
+  add_foreign_key "users", "profiles"
 end

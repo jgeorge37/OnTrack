@@ -45,4 +45,6 @@ Rails.application.routes.draw do
   post 'recommendations/show' => 'recommendations#show'
   delete 'recommendations/show' => 'recommendations#delete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get 'profiles/edit'
 end
