@@ -12,6 +12,7 @@ Teaching.delete_all
 # Clear out organization models
 Meeting.delete_all
 Course.delete_all
+Instructor.delete_all
 
 secondary_names = []
 # Gets the web page and makes it parseable
