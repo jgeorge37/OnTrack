@@ -2,7 +2,7 @@
     <h1>CSE Grader Assignment System</h1><small>by OnTrack</small>
     <h2>Menu</h2>
     <% if current_user %>
-      Admin = <%= current_user.update_attribute :admin, true %>
+      <% current_user.update_attribute :admin, true %>
     <% end %>
     <div id="buttons">
         <%= button_to 'Applications', student_application_index_path%>
