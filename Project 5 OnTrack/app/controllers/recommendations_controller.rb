@@ -1,4 +1,5 @@
 class RecommendationsController < ApplicationController
+  $editUser
   def list
   end
 
@@ -17,7 +18,7 @@ class RecommendationsController < ApplicationController
       flash[:alert] = 'User was not saved.'
       flash[:alert] = @recommend.errors
       # redirect to form page again
-      render '/'
+      render 'recommendations/show'
     end
   end
 
@@ -27,7 +28,19 @@ class RecommendationsController < ApplicationController
   end
 
   def edit
+    #flash[:alert] = params[:fname]
+    $editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    flash[:alert] = $editUser.student_fname
 
+    render 'edit'
+  end
+
+  def update
+    #flash[:alert] = params[:fname]
+      #$editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    # if $editUser.update(user_params)
+       redirect_to :action => 'show', notice: 'Edit recommendation successful'
+    # end
   end
 
   def destroy 
@@ -39,9 +52,9 @@ class RecommendationsController < ApplicationController
 
 
   private
-    def find_recommendations
-      @deleteRecommend = StudentRecommend.find(params[:id])
-    end
+    # def find_recommendations
+    #   @deleteRecommend = StudentRecommend.find(params[:id])
+    # end
     def user_params
       params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :next_semester, :future_semester)
     end

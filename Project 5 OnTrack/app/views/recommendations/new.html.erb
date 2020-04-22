@@ -13,6 +13,14 @@
 <form action="/recommendations/create" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
+  <%#if @recommend.errors.any? %>
+<!--    <h2>Errors</h2>-->
+<!--    <ul>-->
+      <%#@recommend.errors.full messages.each do |messages| %>
+<!--        <li><%#= messages %></li>-->
+      <%# end %>
+<!--    </ul>-->
+  <%#end %>
   <label for="student_fname">First Name:</label>
   <input type="text" id="student_fname" name="recommend[student_fname]">
   <br>
