@@ -8,15 +8,38 @@
   <title>List</title>
 </head>
 <body>
+<%= button_to 'Exit To Menu', menu_index_path%>
 <table>
   <tr>
-    <th>Name</th>
+    <th>Student First Name</th>
+    <th>Student Last Name</th>
+    <th>Student Dot Number</th>
+    <th>Teacher First Name</th>
+    <th>Teacher Last Name</th>
+    <th>Teacher Dot Number</th>
+    <th>Course</th>
+    <th>Course Section</th>
+    <th>Next Semester</th>
+    <th>Future Semester</th>
+    <th>Delete</th>
+
   </tr>
-  <%= @user.each do |user| %>
+  <% @allrecommend.each do |t| %>
     <tr>
-      <td><%= user.student_fname %></td>
+      <td><%= t.student_fname %></td>
+      <td><%= t.student_lname %></td>
+      <td><%= t.student_lname_num %></td>
+      <td><%= t.teacher_fname %></td>
+      <td><%= t.teacher_lname %></td>
+      <td><%= t.teacher_lname_num %></td>
+      <td><%= t.course %></td>
+      <td><%= t.course_section%></td>
+      <td><%= t.next_semester %></td>
+      <td><%= t.future_semester %></td>
+      <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: t.id, method: :delete %></td>
     </tr>
   <% end %>
 </table>
-
 </body>
+
+<%= button_to 'Create a new form' , recommendations_new_path%>

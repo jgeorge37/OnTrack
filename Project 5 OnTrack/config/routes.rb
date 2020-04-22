@@ -27,13 +27,22 @@ Rails.application.routes.draw do
   post 'student_application/create'
   get 'student_application/show'
   get  'student_application/edit'
+  get 'student_applicaiton/update'
+  put 'student_application/update'
   get 'student_application/delete'
   delete 'student_application/delete'
+  get 'evaluations/index'
+  post 'evaluations/index'
 
   # Added for testing recommendation form
   #get '/' =>'recommendations#new'
   post 'recommendations/new'
-  post '/' => 'recommendations#create'
-  post 'recommendations/show' => 'recommendations#create'
+  get 'recommendation/create'
+  post 'recommendation/create'
+  get 'recommendation/show'
+  post 'recommendation/show'
+  post 'recommendations/create' => 'recommendations#create'
+  post 'recommendations/show' => 'recommendations#show'
+  delete 'recommendations/show' => 'recommendations#delete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

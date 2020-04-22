@@ -12,14 +12,19 @@ PROJECT GOAL HERE
 
 ## Technologies Used
 - Ruby 2.6.5
-- Rails 5.2.3
+- Rails 6.0.2.2
 - SQLite 3.2.4
 
 ## Required Functionality Included
-- REQUIRED FUNCTIONALITY HERE
+- Application Submission
+- Adminstrator Interface
+- Avaiable Course/Sections 
+- Recommendation Submission
+
 
 ## Additional Functionality Included
-- ADDITIONAL FUNCTIONALITY HERE
+- Login System
+- Evaluation System
 
 ## Installation
 1. Download and extract the zip archive of the OnTrack repository.

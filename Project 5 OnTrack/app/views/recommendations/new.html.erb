@@ -10,44 +10,44 @@
 
 <h1>Recommendation Form</h1>
 
-<form action="/recommendations/show" method="POST">
+<form action="/recommendations/create" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="student_fname">First Name:</label>
-  <input type="text" id="student_fname" name="user[student_fname]">
+  <input type="text" id="student_fname" name="recommend[student_fname]">
   <br>
 
   <label for="student_lname">Last Name:</label>
-  <input type="text" id="student_lname" name="user[student_lname]">
+  <input type="text" id="student_lname" name="recommend[student_lname]">
   <br>
 
-  <label for="student_lname.#">Last Name.#</label>
-  <input type="text" id="student_lname.#" name="user[student_lname_num]">
+  <label for="student_lname.#">Dot Number</label>
+  <input type="text" id="student_lname.#" name="recommend[student_lname_num]">
   <br>
 
   <label for="teacher_fname">Instructor First Name:</label>
-  <input type="text" id="teacher_fname" name="user[teacher_fname]">
+  <input type="text" id="teacher_fname" name="recommend[teacher_fname]">
   <br>
 
   <label for="teacher_lname">Instructor Last Name:</label>
-  <input type="text" id="teacher_lname" name="user[teacher_lname]">
+  <input type="text" id="teacher_lname" name="recommend[teacher_lname]">
   <br>
 
-  <label for="teacher_lname.#">Instructor Last Name.#</label>
-  <input type="text" id="teacher_lname.#" name="user[teacher_lname_num]">
+  <label for="teacher_lname.#">Dot Number</label>
+  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]">
   <br>
 
   <label for="course">Course Recommendation</label>
-  <input type="text" id="course" name="user[course]">
+  <input type="text" id="course" name="recommend[course]">
   <br>
 
    <label for="course_section">Course Section (OPTIONAL):</label>
-   <input type="text" id="course_section" name="user[course_section]">
+   <input type="text" id="course_section" name="recommend[course_section]">
   <br>
 
-  <input type="radio" id="next_semester" name="user[semester]" value="next_semester">
+  <input type="radio" id="next_semester" name="recommend[semester]" value="next_semester">
   <label for="next_semester">Next Semester</label>
-  <input type="radio" id="future_semester" name="user[semester]" value="future_semester">
+  <input type="radio" id="future_semester" name="recommend[semester]" value="future_semester">
   <label for="future_semester">Future Semesters</label>
   <br>
 
