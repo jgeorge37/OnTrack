@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'evaluations/index'
   devise_for :users
   get 'admin_panel/index'
   post 'admin_panel/index'
@@ -32,6 +31,8 @@ Rails.application.routes.draw do
   put 'student_application/update'
   get 'student_application/delete'
   delete 'student_application/delete'
+  get 'evaluations/index'
+  post 'evaluations/index'
 
   # Added for testing recommendation form
   #get '/' =>'recommendations#new'
