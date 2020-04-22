@@ -31,6 +31,10 @@ Rails.application.routes.draw do
   put 'student_application/update'
   get 'student_application/delete'
   delete 'student_application/delete'
+  get 'evaluations/show'
+  post 'evaluations/show'
+  get 'evaluations/new'
+  post 'evaluations/new'
   get 'evaluations/index'
   post 'evaluations/index'
 
