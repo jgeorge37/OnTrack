@@ -24,7 +24,7 @@
     <th>Delete</th>
 
   </tr>
-  <%= @allrecommend.each do |t| %>
+  <% @allrecommend.each do |t| %>
     <tr>
       <td><%= t.student_fname %></td>
       <td><%= t.student_lname %></td>
@@ -36,9 +36,10 @@
       <td><%= t.course_section%></td>
       <td><%= t.next_semester %></td>
       <td><%= t.future_semester %></td>
-      <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: @recommend.id, method: :delete %></td>
+      <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: t.id, method: :delete %></td>
     </tr>
   <% end %>
 </table>
-
 </body>
+
+<%= button_to 'Create a new form' , recommendations_new_path%>

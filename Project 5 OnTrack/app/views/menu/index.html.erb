@@ -10,7 +10,7 @@
         <% if current_user.category == "Student" %>
           <%= button_to 'Applications', student_application_index_path%>
         <% else %>
-          <%= button_to 'Recommendations', recommendations_new_path%>
+          <%= button_to 'Recommendations', recommendations_show_path%>
           <%= button_to 'Evaluations', evaluations_index_path%>
         <% end %>
         <% if current_user.admin? %>
@@ -18,7 +18,7 @@
         <% end %>
       <% else %>
         <%= button_to 'Applications', student_application_index_path%>
-        <%= button_to 'Recommendations', recommendations_new_path%>
+        <%= button_to 'Recommendations', recommendations_show_path%>
         <%= button_to 'Evaluations', evaluations_index_path%>
       <% end %>
 

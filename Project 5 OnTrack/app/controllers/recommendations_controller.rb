@@ -22,28 +22,19 @@ class RecommendationsController < ApplicationController
   end
 
   def show
-
+     # use @ symbols if you want to use it the view
+    @allrecommend = StudentRecommend.all
   end
 
   def edit
+
   end
 
-  def destroy
-    # the commented out delete would only delete the last row regardless
-    # uncommented delete is error
-    #StudentRecommend.find_by(id: params[:id], sender_Id: 1)
-    # @delete = StudentRecommend.find(params[:id])
-    # if @delete.present?
-    #   @delete.destroy
-    # end
-    @deleteRecommend.destroy
-    respond_to do |format|
-      format.html { redirect_to 'menu/index' ,notice: 'Delete recommendation successful'}
-      format.json {head :no_content}
-    end
-    #Can you refresh page to depict changes in database table?
-    # render 'menu/index'
-      #redirect :back
+  def destroy 
+    # i would add checks, just in case
+    delete = StudentRecommend.find(params[:id])
+    delete.destroy
+    redirect_to :action => 'show', notice: 'Delete recommendation successful'
   end
 
 
