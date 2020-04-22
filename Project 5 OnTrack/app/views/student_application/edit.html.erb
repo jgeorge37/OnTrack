@@ -13,6 +13,7 @@
                 var courseText = document.createElement('select');
                 var gradeSelection = document.createElement('td');
                 var gradeText = document.createElement('select');
+                gradeText.name = 'course[' + courseText.value + '][grade]';
 
                 if(courseArray.length == 0) {
                     courseText.class = 0;
@@ -56,6 +57,7 @@
                     }
                     newCourse.remove();
                 });
+                timeOnCourse(json.course, json.meetings, courseText);
                 courseSelection.appendChild(courseText);
                 gradeSelection.appendChild(gradeText);
                 newCourse.appendChild(courseSelection);
@@ -210,6 +212,8 @@
 
 <%= button_to 'Exit', student_application_index_path%>
 
+<p id="alert"><%= @alert %></p>
+
 <%= form_with(url: '/student_application/update', method: "put") do %>
     <input type="hidden" name="id" value="<%=@grader.id%>">
     <div id="contact_info">
@@ -217,7 +221,7 @@
         <label for="fname">First Name:</label>
         <input type="text" id="fname" name="fname" value="<%= @grader.name.split[0] %>">
         <label for="lname">Last Name:</label>
-        <input type="text" id="lname" name="lname" value="<%= @grader.name.split[0] %>">
+        <input type="text" id="lname" name="lname" value="<%= @grader.name.split[1] %>">
         <label for="lname.#">Last Name.#</label>
         <input type="text" id="lname.#" name="lname_dot" value="<%= @grader.last_name_dot %>">
     </div>
@@ -301,12 +305,14 @@
                             <% meetings.each do |m| %>
                                     <% if courseIdArray.include?(m.course_id) %>
                                         <div>
-                                        <% if timeArray.include?(m.time) %>
-                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]" checked>
-                                        <% else %>
-                                            <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]">
+                                        <% if m.time != "ARR" %>
+                                            <% if timeArray.include?(m.time)%>
+                                                <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]" checked>
+                                            <% else %>
+                                                <input type="checkbox" id="<%=m.time%>" value="<%=m.time%>" name="course[<%=@name%>][time][]">
+                                            <% end %>
+                                            <label for="<%=m.time%>"><%=m.time%></label>
                                         <% end %>
-                                        <label for="<%=m.time%>"><%=m.time%></label>
                                         </div>
                                     <% end %>
                             <% end %>

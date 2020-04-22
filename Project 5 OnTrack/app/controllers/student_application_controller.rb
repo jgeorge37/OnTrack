@@ -2,6 +2,7 @@ class StudentApplicationController < ApplicationController
     def index
         @grader = Grader.all
         @notice = params[:notice]
+        @alert = params[:alert]
     end
 
     def show
@@ -12,6 +13,7 @@ class StudentApplicationController < ApplicationController
     end
 
     def new
+        @alert = params[:alert]
         @classNames = ClassName.all
         @teachings = Teaching.all
         @courses = Course.all
@@ -25,6 +27,26 @@ class StudentApplicationController < ApplicationController
     end
 
     def create
+        if(params[:fname].strip == "" || params[:lname].strip == ""  || params[:lname_dot].strip == "" || params[:gpa].strip == "" ) then
+            redirect_to :action => 'new', alert: 'Must fill in all of Contact Info and GPA'
+            return 
+        end
+        value1 = params[:lname_dot] =~ /[a-zA-Z]+\.[1-9]\d*/
+        value2 = params[:fname] =~ /^[a-zA-Z]+$/
+        value3 = params[:fname] =~ /^[a-zA-Z]+$/
+        value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/
+        if (value1 != 0) then
+            redirect_to :action => 'new', alert: 'Last Name Dot field must fit this format: [last name].#'
+            return
+        elsif (value2 != 0 || value3 != 0 ) then
+            redirect_to :action => 'new', alert: 'First and Last name must only include letters'
+            return
+        elsif (value3 != 0) then
+            redirect_to :action => 'new', alert: 'GPA must fit in the range of 0.0 and 4.0'
+            return
+        end
+        
+
         @grader = Grader.new(name: params[:fname] + " " + params[:lname], last_name_dot: params[:lname_dot], gpa: params[:gpa]);
         if @grader.save
             if params.has_key?(:course) then
@@ -47,11 +69,12 @@ class StudentApplicationController < ApplicationController
             end
             redirect_to :action => 'index', notice: 'Succcessfully submitted the application'
         else
-            render "/student_application/index"
+            redirect_to :action => 'index', alert: 'Error trying to create a new application'
         end
     end
 
     def edit
+        @alert = params[:alert]
         @courseValue = 0;
         @timeValue = 0;
         @grader = Grader.find(params[:id]);
@@ -70,6 +93,27 @@ class StudentApplicationController < ApplicationController
     end
 
     def update
+        
+        if(params[:fname].strip == "" || params[:lname].strip == ""  || params[:lname_dot].strip == "" || params[:gpa].strip == "" ) then
+            redirect_to :action => 'edit' , id: params[:id] , alert: 'Must fill in all of Contact Info and GPA'
+            return 
+        end
+        value1 = params[:lname_dot] =~ /[a-zA-Z]+\.[1-9]\d*/
+        value2 = params[:fname] =~ /^[a-zA-Z]+$/
+        value3 = params[:fname] =~ /^[a-zA-Z]+$/
+        value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/
+        if (value1 != 0) then
+            redirect_to :action => 'edit', id: params[:id], alert: 'Last Name Dot field must fit this format: [last name].#'
+            return
+        elsif (value2 != 0 || value3 != 0 ) then
+            redirect_to :action => 'edit', id: params[:id], alert: 'First and Last name must only include letters'
+            return
+        elsif (value3 != 0) then
+            redirect_to :action => 'edit ', id: params[:id], alert: 'GPA must fit in the range of 0.0 and 4.0'
+            return
+        end
+
+
         @grader = Grader.find(params[:id])
         @grader.name = params[:fname] + ' ' + params[:lname]
         @grader.last_name_dot = params[:lname_dot]
@@ -103,7 +147,7 @@ class StudentApplicationController < ApplicationController
            end
 
              #updates previous graded courses
-             if params.has_key?(:gradedCourse) then
+            if params.has_key?(:gradedCourse) then
              @previousCourses.each do |p|
                  if !params[:gradedCourse].include?(p)
                    p.destroy
@@ -114,10 +158,11 @@ class StudentApplicationController < ApplicationController
                  @gradedPreviousCourse = GraderPreviousGradeCourse.create(grader_id: @grader.id, course_id: @className.id)
              end
 
-             redirect_to :action => 'index', notice: 'Could save application'
+             
            end
+           redirect_to :action => 'index', notice: 'Sucessfully updated the application'
         else
-            redirect_to :action => 'index', notice: 'Could not save application'
+            redirect_to :action => 'index', notice: 'Error updating the application'
         end
 
     end

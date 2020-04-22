@@ -37,8 +37,12 @@ Rails.application.routes.draw do
   # Added for testing recommendation form
   #get '/' =>'recommendations#new'
   post 'recommendations/new'
-
+  get 'recommendation/create'
+  post 'recommendation/create'
+  get 'recommendation/show'
+  post 'recommendation/show'
   post 'recommendations/create' => 'recommendations#create'
   post 'recommendations/show' => 'recommendations#show'
+  delete 'recommendations/show' => 'recommendations#delete'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
