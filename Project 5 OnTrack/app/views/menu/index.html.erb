@@ -3,14 +3,26 @@
     <h2>Menu</h2>
     <% if current_user %>
       <% current_user.update_attribute :admin, true %>
+      <%= current_user.category %>
     <% end %>
     <div id="buttons">
+      <% if current_user %>
+        <% if current_user.category == "Student" %>
+          <%= button_to 'Applications', student_application_index_path%>
+        <% else %>
+          <%= button_to 'Recommendations', recommendations_new_path%>
+          <%= button_to 'Evaluations', evaluations_index_path%>
+        <% end %>
+        <% if current_user.admin? %>
+          <%= button_to 'Adminstrator Panel', admin_panel_index_path%>
+        <% end %>
+      <% else %>
         <%= button_to 'Applications', student_application_index_path%>
         <%= button_to 'Recommendations', recommendations_new_path%>
         <%= button_to 'Evaluations', evaluations_index_path%>
-        <%= button_to 'Configuration', configuration_index_path%>
-      <% if current_user.try(:admin?) %>
-        <%= button_to 'Adminstrator Panel', admin_panel_index_path%>
       <% end %>
+
+      <%= button_to 'Configuration', configuration_index_path%>
+
     </div>
 </div>
