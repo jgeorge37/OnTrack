@@ -37,6 +37,20 @@ ActiveRecord::Schema.define(version: 2020_04_22_205228) do
     t.index ["grader_id"], name: "index_courses_graders_on_grader_id"
   end
 
+  create_table "evaluations", force: :cascade do |t|
+    t.string "instructor_fname"
+    t.string "instructor_lname"
+    t.string "instructor_name_dotnum"
+    t.string "grader_lname_dotnum"
+    t.string "course"
+    t.integer "quality"
+    t.integer "punctuality"
+    t.integer "com_skills"
+    t.integer "course_knowledge"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "grader_completed_courses", force: :cascade do |t|
     t.integer "grader_id"
     t.integer "course_id"

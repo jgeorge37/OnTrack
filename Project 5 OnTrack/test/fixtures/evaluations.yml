@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  instructor_fname: MyString
+  instructor_lname: MyString
+  instructor_name_dotnum: MyString
+  grader_lname_dotnum: MyString
+  course: MyString
+  quality: 1
+  punctuality: 1
+  com_skills: 1
+  course_knowledge: 1
+
+two:
+  instructor_fname: MyString
+  instructor_lname: MyString
+  instructor_name_dotnum: MyString
+  grader_lname_dotnum: MyString
+  course: MyString
+  quality: 1
+  punctuality: 1
+  com_skills: 1
+  course_knowledge: 1
