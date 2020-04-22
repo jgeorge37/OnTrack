@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   post 'data_scraper/organize'
   get 'data_scraper/load'
   post 'data_scraper/load'
-  get 'configuraton/index'
+  get 'configuration/index'
   post 'configuration/index'
   get 'recommendations/list'
   get 'recommendations/new'

@@ -51,7 +51,9 @@
         <!-- for each meeting print a row -->
         <% c.meetings.each do |m| %>
         <div class ="row">
-        <div class="loc"><%= m.location %></div>
+        <% loc = m.location %>
+        <% if loc == " " then loc = "Location N/A" end %>
+        <div class="loc"><%= loc %></div>
         <div class="time"><%= m.time %></div>
         <div class="instr"><%= m.instructors.pluck(:name).join('; ') %></div>
         <div class="clear"></div>
