@@ -1,11 +1,16 @@
 <div id="menu">
     <h1>CSE Grader Assignment System</h1><small>by OnTrack</small>
     <h2>Menu</h2>
+    <% if current_user %>
+      Admin = <%= current_user.update_attribute :admin, true %>
+    <% end %>
     <div id="buttons">
         <%= button_to 'Applications', student_application_index_path%>
         <%= button_to 'Recommendations', recommendations_new_path%>
         <%= button_to 'Evaluations', evaluations_index_path%>
-        <%= button_to 'Adminstrator Panel', admin_panel_index_path%>
         <%= button_to 'Configuration', configuration_index_path%>
+      <% if current_user.try(:admin?) %>
+        <%= button_to 'Adminstrator Panel', admin_panel_index_path%>
+      <% end %>
     </div>
 </div>
