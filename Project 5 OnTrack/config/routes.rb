@@ -35,6 +35,10 @@ Rails.application.routes.draw do
   post 'evaluations/new'
   get 'evaluations/index'
   post 'evaluations/index'
+  get 'evaluations/create'
+  post 'evaluations/create'
+  delete 'evaluations/index' => 'evaluations#delete'
+  get 'evaluations/destroy'
 
 
   #get '/' =>'recommendations#new'
