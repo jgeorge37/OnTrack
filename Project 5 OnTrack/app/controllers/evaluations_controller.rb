@@ -1,4 +1,5 @@
 class EvaluationsController < ApplicationController
+  before_action :authenticate_teacher_user!
   def index
     @grader = Grader.all
     @rate = Array(1..5)
