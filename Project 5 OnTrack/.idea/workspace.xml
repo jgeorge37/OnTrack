@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e11f28c9-950f-461f-bdaa-e9b6c593ca48" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/student_application/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/student_application/new.html.erb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/recommendations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/recommendations/new.html.erb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
