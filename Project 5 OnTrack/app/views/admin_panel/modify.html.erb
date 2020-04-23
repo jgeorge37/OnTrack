@@ -1,6 +1,6 @@
 <!-- Created by Jing George 4/10/2020 -->
 
-<%= button_to 'Back to Administrator Panel', url_for(:back)  %>
+<%= button_to 'Back to Administrator Panel', admin_panel_index_path %>
 
 <% c = Course.find(params[:id]) %>
 
@@ -18,11 +18,28 @@
 
 <!-- for each meeting print a row -->
 <% c.meetings.each do |m| %>
+<% loc = m.location %>
+<% if loc == " " then loc = "Location N/A" end %>
 <div class ="row">
-<div class="loc"><%= m.location %></div>
+<div class="loc"><%= loc %></div>
 <div class="time"><%= m.time %></div>
 <div class="instr"><%= m.instructors.pluck(:name).join('; ') %></div>
 <div class="clear"></div>
 </div>
 <% end %>
 <br/>
+<h2>Available graders: </h2>
+<div id="grader_list">
+<% if @filtered.empty? %>
+  <h3>No graders are eligible to grade this class.</h3>
+<% else %>
+  <% @filtered.each do |g| %>
+    <div class="grader">
+      <div class="row">
+        <div class="title"><%= g.name %>, <%= g.last_name_dot %>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>
+</div>

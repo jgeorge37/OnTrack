@@ -5,7 +5,7 @@ class AdminPanelController < ApplicationController
   end
 
   def modify
-
+    @filtered = filter_graders(params)
   end
 
 
@@ -30,6 +30,38 @@ class AdminPanelController < ApplicationController
       end
     end
     return fc
+  end
+
+  def filter_graders(params)
+    filtered = []
+    # get the className id
+    cn_id = ClassName.find_by(name: Course.find(params[:id]).name)
+
+    meeting_times = []
+    # get the list of times that this class meets
+    Course.find(params[:id]).meetings.each {|m| meeting_times.push(m.time)}
+
+    graders = Grader.all
+    graders.each do |g|
+      puts g.last_name_dot
+      # check if course is complete
+      completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)
+      puts completed.course_id
+      # check for availability
+      if completed != nil
+        times = []
+        GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|
+          times.push(t.time)
+        end
+        if (meeting_times - times).empty? then filtered.push(g) end
+      
+      end
+    end
+
+
+
+    return filtered
+
   end
 
   def get_filter_opts(par)
