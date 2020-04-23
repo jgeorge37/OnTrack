@@ -16,7 +16,7 @@ class EvaluationsController < ApplicationController
       flash[:notice] = 'Evaluation saved successfully'
       flash[:alert] = ''
       @allevaluation = Evaluation.all
-      render 'evaluations/show'
+      render 'evaluations/index'
     else
       #Saving failed, we can inspect @user.errors for more information
       flash[:alert] = 'User was not saved.'
@@ -40,7 +40,7 @@ class EvaluationsController < ApplicationController
 
   private
     def user_params
-      params.permit(:instructor_fname, :instructor_lname, :instructor_name_dotnum, :grader_lname_dotnum, :course,  :quality, :punctuality, :com_skills, :course_knowledge)
+      params.require(:evaluation).permit(:instructor_fname, :instructor_lname, :instructor_name_dotnum, :grader_lname_dotnum, :course,  :quality, :punctuality, :com_skills, :course_knowledge)
     end
 
 end
