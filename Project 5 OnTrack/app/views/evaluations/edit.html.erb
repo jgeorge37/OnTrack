@@ -1,0 +1,61 @@
+
+
+<h1>Edit Form</h1>
+<%= button_to 'Exit', evaluations_index_path%>
+
+<%= form_with(url: '/evaluations/update', method: "put") do |form| %>
+<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<input type="hidden" name="id" value="<%=@evaluation.id%>">
+<label for="teacher_fname">Instructor First Name:</label>
+<input type="text" id="teacher_fname" name="evaluation[instructor_fname]" value="<%= @evaluation.instructor_fname %>">
+<br>
+
+<label for="teacher_lname">Instructor Last Name:</label>
+<input type="text" id="teacher_lname" name="evaluation[instructor_lname]" value="<%= @evaluation.instructor_lname %>">
+<br>
+
+<label for="teacher_lname.#">Instructor Last Name.#</label>
+<input type="text" id="teacher_lname.#" name="evaluation[instructor_name_dotnum]" value="<%= @evaluation.instructor_name_dotnum %>">
+<br>
+
+<label for="grader_lname.#">Last Name.# of Grader</label>
+<input type="text" id="student_lname.#" name="evaluation[grader_lname_dotnum]" value="<%= @evaluation.grader_lname_dotnum%>">
+<br>
+
+<label for="course">Course</label>
+<input type="text" id="course" name="evaluation[course]" value="<%= @evaluation.course %>">
+<br>
+<div id="quality">
+<label for="quality">Quality of student's grading:</label>
+<% @rate.each do |rate| %>
+  <input type="radio" id="quality" name="evaluation[quality]" value=rate>
+  <label for="quality"><%= rate %></label>
+<% end %>
+</div>
+</<br>
+<div id="punctuality">
+<label for="punctuality">Punctuality of student's grading:</label>
+<% @rate.each do |rate| %>
+  <input type="radio" id="punctuality" name="evaluation[punctuality]" value=rate>
+  <label for="punctuality"><%= rate %></label>
+<% end %>
+</div>
+</<br>
+<div id="com_skills">
+<label for="com_skills">Communication skills of student:</label>
+<% @rate.each do |rate| %>
+  <input type="radio" id="com_skills" name="evaluation[com_skills]" value=rate>
+  <label for="com_skills"><%= rate %></label>
+<% end %>
+</div>
+</<br>
+<div id="course_knowledge">
+<label for="course_knowledge">Knowledge of course content:</label>
+<% @rate.each do |rate| %>
+  <input type="radio" id="course_knowledge" name="evaluation[course_knowledge]" value=rate>
+  <label for="course_knowledge"><%= rate %></label>
+<% end %>
+</div>
+</br>
+<%= submit_tag("Update Evaluation") %>
+<% end %>

@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   post 'evaluations/create'
   delete 'evaluations/index' => 'evaluations#delete'
   get 'evaluations/destroy'
+  get 'evaluations/update'
+  put 'evaluations/update'
+  get 'evaluations/edit'
 
 
   #get '/' =>'recommendations#new'
