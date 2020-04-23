@@ -19,10 +19,15 @@ module AdminPanelHelper
   end
 
   def get_evals(grader)
-    eval_arr = []
+    eval_arr = ["Evaluation scores out of 5:"]
     # get list of all evals of this student
     evals = Evaluation.where(grader_lname_dotnum: grader.last_name_dot)
-
+    evals.each do |e|
+      str = "#{e.course} -- Grading quality: #{e.quality} | Punctuality: #{e.punctuality}"
+      str.concat(" | Communication: #{e.com_skills} | Knowledge: #{e.course_knowledge}")
+      eval_arr.push(str)
+    end
+    return eval_arr
   end
 
   def disable_add(params)

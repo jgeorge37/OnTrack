@@ -60,6 +60,12 @@
         <%= r %><br/>
       <% end %>
     <div class="clear"></div></div>
+
+    <div class="row">
+      <% get_evals(g).each do |e| %>
+        <%= e %><br/>
+      <% end %>
+    <div class="clear"></div></div>
   </div>
 <% end %>
 </div>
@@ -98,6 +104,12 @@
       <div class="row">
         <% get_recs(g).each do |r| %>
           <%= r %><br/>
+        <% end %>
+      <div class="clear"></div></div>
+
+      <div class="row">
+        <% get_evals(g).each do |e| %>
+          <%= e %><br/>
         <% end %>
       <div class="clear"></div></div>
 
