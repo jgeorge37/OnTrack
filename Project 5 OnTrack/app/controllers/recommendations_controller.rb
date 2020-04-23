@@ -1,5 +1,5 @@
 class RecommendationsController < ApplicationController
-
+  before_action :authenticate_teacher_user!
   def list
   end
 

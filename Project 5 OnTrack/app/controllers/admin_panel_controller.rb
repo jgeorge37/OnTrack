@@ -1,4 +1,6 @@
 class AdminPanelController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @filtered = filter_courses(params)
     @filter_opts = get_filter_opts(params)

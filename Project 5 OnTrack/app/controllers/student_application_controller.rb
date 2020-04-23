@@ -1,4 +1,5 @@
 class StudentApplicationController < ApplicationController
+    before_action :authenticate_user!
     def index
         @grader = Grader.all
         @notice = params[:notice]
