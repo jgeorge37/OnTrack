@@ -10,6 +10,18 @@
 
 <h1>Recommendation Form</h1>
 
+<% if !@recommend.nil? && @recommend.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@recommend.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @recommend.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <form action="/recommendations/create" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
@@ -45,7 +57,7 @@
    <input type="text" id="course_section" name="recommend[course_section]">
   <br>
 
-  <label for="semester">Future Semesters(FT) or Next Semester(NT)</label>
+  <label for="semester">Future Semesters(FS) or Next Semester(NS)</label>
   <input type="text" id="semester" name="recommend[semester]">
   <br>
 
@@ -56,19 +68,6 @@
   <input type="submit" name="submit" class="submit">
 
 </form>
-
-<%# if @recommend.errors.any? %>
-<!--  <div id="error_explanation">-->
-<!--    <h2><%#= pluralize(@recommend.errors.count, "error") %> prohibited this article from being saved:</h2>-->
-
-<!--    <ul>-->
-      <%# @recommend.errors.full_messages.each do |msg| %>
-<!--        <li><%#= msg %></li>-->
-      <%# end %>
-<!--    </ul>-->
-<!--  </div>-->
-<%# end %>
-
 
 <br>
 

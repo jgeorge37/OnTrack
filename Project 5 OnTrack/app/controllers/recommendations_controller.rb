@@ -15,10 +15,10 @@ class RecommendationsController < ApplicationController
       render 'recommendations/show'
     else
       #Saving failed, we can inspect @user.errors for more information
-      flash[:alert] = 'User was not saved.'
-      flash[:alert] = @recommend.errors
+      # flash[:alert] = 'User was not saved.'
+      #flash[:alert] = @recommend.errors
       # redirect to form page again
-      render 'recommendations/show'
+      render 'recommendations/new'
     end
   end
 
@@ -28,9 +28,6 @@ class RecommendationsController < ApplicationController
   end
 
   def edit
-    #flash[:alert] = params[:fname]
-    #@editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-    #flash[:alert] = @editUser.student_fname
     @recommend = StudentRecommend.find(params[:id])
     render 'edit'
   end
