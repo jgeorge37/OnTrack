@@ -1,7 +1,19 @@
 
 
 <h1>Edit Form</h1>
-<%= button_to 'Exit', evaluations_index_path%>
+<%= button_to 'Back', evaluations_index_path%>
+
+<% if !@evaluation.nil? && @evaluation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@evaluation.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @evaluation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= form_with(url: '/evaluations/update', method: "put") do |form| %>
 <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -14,7 +26,7 @@
 <input type="text" id="student_lname.#" name="evaluation[grader_lname_dotnum]" value="<%= @evaluation.grader_lname_dotnum%>">
 <br>
 
-<label for="course">Course</label>
+<label for="course">Course Number:</label>
 <input type="text" id="course" name="evaluation[course]" value="<%= @evaluation.course %>">
 <br>
 <div id="quality">

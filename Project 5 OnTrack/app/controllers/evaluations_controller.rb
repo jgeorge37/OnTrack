@@ -19,11 +19,8 @@ class EvaluationsController < ApplicationController
       @allevaluation = Evaluation.all
       render 'evaluations/index'
     else
-      #Saving failed, we can inspect @user.errors for more information
-      flash[:alert] = 'Evaluation was not saved.'
-      flash[:alert] = @evaluation.errors
       # redirect to form page again
-      render '/'
+      render 'evaluations/new'
     end
   end
 
@@ -35,7 +32,9 @@ class EvaluationsController < ApplicationController
   def update
     @evaluation = Evaluation.find(params[:id])
     if @evaluation.update(user_params)
-      redirect_to :action => 'index', notice: 'Sucessfully updated the evaluation'
+      if @evaluation.save
+        redirect_to :action => 'index', notice: 'Sucessfully updated the evaluation'
+      end
     else
       redirect_to :action => 'index', notice: 'Error updating the evaluation'
     end
