@@ -40,7 +40,7 @@
       <div class="message">Student is already assigned to a class in
         <%= Course.find(params[:id]).semester %>.</div>
       <% end %>
-    <div class="button">
+    <div class="button2">
     <%= button_to "Remove from class", admin_panel_modify_path(rm: 1, id: params[:id], gr: g.id)%>
     </div>
     <div class="clear"></div></div>
@@ -85,7 +85,7 @@
         <div class="message">Student is already assigned to a class in
           <%= Course.find(params[:id]).semester %>.</div>
         <% end %>
-      <div class="button">
+      <div class="button2">
       <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id),
        disable: disable_add(params) %>
       </div>
