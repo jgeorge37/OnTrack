@@ -1,0 +1,3 @@
+class OverallLoginController < ApplicationController
+
+end

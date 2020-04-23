@@ -12,13 +12,15 @@
 
   <body>
     <div id="page_content">
-      <% if user_signed_in? %>
+      <% if current_user %>
         <%= link_to "Edit Profile", edit_user_registration_path %>
-        <%= link_to "Test", profiles_edit_path %>
         <%= link_to "Logout", destroy_user_session_path, method: :get %>
-      <% else %>
-        <%= link_to "Sign up", new_user_registration_path %>
-        <%= link_to "Login", new_user_session_path %>
+      <% elsif current_teacher_user %>
+        <%= link_to "Edit Profile", edit_teacher_user_registration_path %>
+        <%= link_to "Logout", destroy_teacher_user_session_path, method: :get %>
+      <% elsif current_admin %>
+        <%= link_to "Edit Profile", edit_admin_registration_path %>
+        <%= link_to "Logout", destroy_admin_session_path, method: :get %>
       <% end %>
 
       <p class="notice"><%= notice %></p>
