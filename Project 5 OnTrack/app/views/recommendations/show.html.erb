@@ -21,6 +21,7 @@
     <th>Course</th>
     <th>Course Section</th>
     <th>Future Semester(FS) vs Next Semester(NS)</th>
+    <th>General(G) or Specific(S) Endorsement</th>
     <th>Edit</th>
     <th>Delete</th>
 
@@ -36,6 +37,7 @@
       <td><%= t.course %></td>
       <td><%= t.course_section%></td>
       <td><%= t.semester %></td>
+      <td><%= t.course_specification %></td>
       <td><%= link_to 'Edit', controller: 'recommendations', action: 'edit', editID: t.id, method: :edit %></td>
       <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: t.id, method: :delete %></td>
     </tr>

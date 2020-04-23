@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_23_032549) do
+ActiveRecord::Schema.define(version: 2020_04_23_075415) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -133,6 +133,7 @@ ActiveRecord::Schema.define(version: 2020_04_23_032549) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "semester"
+    t.string "course_specification"
   end
 
   create_table "teacher_users", force: :cascade do |t|
