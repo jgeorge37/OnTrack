@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Project5Ontrack</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+</head>
+
+<body>
+  <%= link_to "Student Sign Up", new_user_registration_path %>
+  <%= link_to "Teacher Sign Up", new_teacher_user_registration_path %>
+  <%= link_to "Admin Sign Up", new_admin_registration_path %>
+</body>
+</html>
+

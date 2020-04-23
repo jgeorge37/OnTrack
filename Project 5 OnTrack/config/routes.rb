@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :teacher_users
   devise_for :users
   get 'admin_panel/index'
   post 'admin_panel/index'
@@ -57,4 +59,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
   get 'profiles/edit'
+
+  get 'overall_login/choose_user'
+  post 'overall_login/choose_user'
 end
