@@ -1,5 +1,5 @@
 class RecommendationsController < ApplicationController
-  $editUser
+
   def list
   end
 
@@ -29,17 +29,18 @@ class RecommendationsController < ApplicationController
 
   def edit
     #flash[:alert] = params[:fname]
-    $editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-    flash[:alert] = $editUser.student_fname
+    @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    flash[:alert] = @editUser.student_fname
 
     render 'edit'
   end
 
   def update
     #flash[:alert] = params[:fname]
-      #$editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-    # if $editUser.update(user_params)
-       redirect_to :action => 'show', notice: 'Edit recommendation successful'
+    @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    @editUser.update(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    #raise params.inspect
+    redirect_to :action => 'show', notice: 'Edit recommendation successful'
     # end
   end
 
