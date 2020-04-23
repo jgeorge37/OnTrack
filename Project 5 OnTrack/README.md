@@ -78,6 +78,9 @@ The section is for teachers to fill out an evaluation of a student who grader th
 All Ruby files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/ruby).
 All views are styled with SCSS and are printed to the site using HTML.
 
+## Presentation Link
+https://docs.google.com/presentation/d/1nq994_W9ReOBMVf5kYcdqXTDPxBwjXe-24c_JyURz0U/edit?usp=sharing
+
 ## Authors
 - Jing George
 - Jack Hanley
