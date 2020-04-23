@@ -1,0 +1,386 @@
+Index: app/controllers/recommendations_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class RecommendationsController < ApplicationController\n  before_action :authenticate_teacher_user!\n  def list\n  end\n\n  def new\n  end\n\n  def create\n    @recommend = StudentRecommend.new(user_params)\n    if @recommend.save\n      flash[:notice] = 'User saved successfully'\n      flash[:alert] = ''\n      @allrecommend = StudentRecommend.all\n      render 'recommendations/show'\n    else\n      #Saving failed, we can inspect @user.errors for more information\n      flash[:alert] = 'User was not saved.'\n      flash[:alert] = @recommend.errors\n      # redirect to form page again\n      render 'recommendations/show'\n    end\n  end\n\n  def show\n     # use @ symbols if you want to use it the view\n    @allrecommend = StudentRecommend.all\n  end\n\n  def edit\n    #flash[:alert] = params[:fname]\n    #@editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])\n    #flash[:alert] = @editUser.student_fname\n    @recommend = StudentRecommend.find(params[:id])\n    render 'edit'\n  end\n\n  def update\n     @recommend = StudentRecommend.find(params[:id])\n     if @recommend.update(user_params)\n       redirect_to :action => 'show', notice: 'Successfully updated the evaluation'\n     else\n       redirect_to :action => 'show', notice: 'Error updating the evaluation'\n     end\n  end\n\n  def destroy \n    # i would add checks, just in case\n    delete = StudentRecommend.find(params[:id])\n    delete.destroy\n    redirect_to :action => 'show', notice: 'Delete recommendation successful'\n  end\n\n\n  private\n    def user_params\n      params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :semester, :course_specification)\n    end\nend\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/recommendations_controller.rb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/controllers/recommendations_controller.rb	(date 1587667128922)
+@@ -15,10 +15,10 @@
+       render 'recommendations/show'
+     else
+       #Saving failed, we can inspect @user.errors for more information
+-      flash[:alert] = 'User was not saved.'
+-      flash[:alert] = @recommend.errors
++      # flash[:alert] = 'User was not saved.'
++      #flash[:alert] = @recommend.errors
+       # redirect to form page again
+-      render 'recommendations/show'
++      render 'recommendations/new'
+     end
+   end
+ 
+@@ -28,9 +28,6 @@
+   end
+ 
+   def edit
+-    #flash[:alert] = params[:fname]
+-    #@editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+-    #flash[:alert] = @editUser.student_fname
+     @recommend = StudentRecommend.find(params[:id])
+     render 'edit'
+   end
+Index: app/controllers/admin_panel_controller.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class AdminPanelController < ApplicationController\n  before_action :authenticate_admin!\n\n  def index\n    @filtered = filter_courses(params)\n    @filter_opts = get_filter_opts(params)\n  end\n\n  def modify\n    c = Course.find(params[:id])\n    if params[:gr]\n      if params[:rm]\n        c.graders.delete(Grader.find(params[:gr]))\n      else\n        c.graders.push(Grader.find(params[:gr]))\n      end\n    end\n    @assigned = c.graders\n    @filtered = filter_graders(params)\n  end\n\n\n\n  private\n\n  def filter_courses(par)\n    fc = Course.all\n\n    if par[:course]\n      if par[:course][:semester] != \"All semesters\"\n        fc = fc.where(semester: par[:course][:semester])\n      end\n      if par[:course][:session] != \"All sessions\"\n        fc = fc.where(session: par[:course][:session])\n      end\n      if par[:course][:name] != \"All courses\"\n        fc = fc.select {|c| c.name[0, c.name.index(' ', 7)] == par[:course][:name]}\n      end\n      if par[:course][:open].to_i == 1\n        fc = fc.select {|c| c.num_graders - c.graders.length() > 0}\n      end\n    end\n    return fc\n  end\n\n  def filter_graders(params)\n    filtered = []\n    c = Course.find(params[:id])\n    # get the className id\n    cn_id = ClassName.find_by(name: c.name)\n\n    meeting_times = []\n    # get the list of times that this class meets\n    c.meetings.each {|m| meeting_times.push(m.time)}\n\n    graders_list = Grader.all\n    graders_list.each do |g|\n      if c.graders.find_by(id: g.id) == nil\n        # check if course is complete\n        completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)\n        puts completed.course_id\n        # check for availability\n        if completed != nil\n          if !c.attendance\n            filtered.push(g) # if attendance is not required, they are eligible\n          else\n            times = []\n            GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|\n              times.push(t.time)\n            end\n            if (meeting_times - times).empty?\n              filtered.push(g) # grader is eligible if they are available\n            end\n          end\n        end\n      end\n    end\n    return filtered\n  end\n\n  def get_filter_opts(par)\n    filters = {\n      sem: [\"All semesters\"],\n      name: [\"All courses\"],\n      ses: [\"All sessions\"],\n      open: [ [\"Courses with and without open positions\", 0], [\"Only courses with open positions\", 1] ]\n    }\n\n    filters[:sem] = Course.distinct.pluck(:semester)\n    filters[:name] = Course.distinct.pluck(:name)\n    filters[:name].map! {|n| n[0, n.index(' ', 7)]}\n    filters[:ses] = Course.distinct.pluck(:session)\n\n    filters[:sem].unshift(\"All semesters\")\n    filters[:name].unshift(\"All courses\")\n    filters[:ses].unshift(\"All sessions\")\n\n    # if parameters have been passed, the active filter should be the top option\n    if par[:course]\n      filters[:sem].unshift(par[:course][:semester])\n      filters[:name].unshift(par[:course][:name])\n      filters[:ses].unshift(par[:course][:session])\n      if par[:course][:open].to_i == 1\n        filters[:open].reverse!\n      end\n    end\n\n    filters[:sem] = filters[:sem].uniq\n    filters[:name] = filters[:name].uniq\n    filters[:ses] = filters[:ses].uniq\n\n    return filters\n  end\n\nend\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/controllers/admin_panel_controller.rb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/controllers/admin_panel_controller.rb	(date 1587667128926)
+@@ -9,10 +9,11 @@
+   def modify
+     c = Course.find(params[:id])
+     if params[:gr]
+-      if params[:rm]
++      if params[:rm] && c.graders.find_by(id: params[:gr]) != nil
+         c.graders.delete(Grader.find(params[:gr]))
+-      else
++      elsif c.graders.find_by(id: params[:gr]) == nil
+         c.graders.push(Grader.find(params[:gr]))
++
+       end
+     end
+     @assigned = c.graders
+@@ -58,7 +59,6 @@
+       if c.graders.find_by(id: g.id) == nil
+         # check if course is complete
+         completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)
+-        puts completed.course_id
+         # check for availability
+         if completed != nil
+           if !c.attendance
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+># Adapted from https://github.com/github/gitignore/blob/master/Rails.gitignore\n\n*.rbc\ncapybara-*.html\n.rspec\n/db/*.sqlite3\n/db/*.sqlite3-journal\n/db/*.sqlite3-[0-9]*\n/public/system\n/coverage/\n/spec/tmp\n*.orig\nrerun.txt\npickle-email-*.html\n\n/log/*\n/tmp/*\n!/log/.keep\n!/tmp/.keep\n\n.rvmrc\n\n# Ignore pow environment settings\n.powenv\n\n# Ignore Byebug command history file.\n.byebug_history\n\n# Ignore node_modules\nnode_modules/\n\n# Ignore precompiled javascript packs\n/public/packs\n/public/packs-test\n/public/assets\n\n# Ignore yarn files\n/yarn-error.log\nyarn-debug.log*\n.yarn-integrity\n\n# Ignore uploaded files in development\n/storage/*\n!/storage/.keep\n/public/uploads\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ .gitignore	(date 1587667128850)
+@@ -13,6 +13,8 @@
+ rerun.txt
+ pickle-email-*.html
+ 
++/db/development.sqlite3
++
+ /log/*
+ /tmp/*
+ !/log/.keep
+Index: app/views/admin_panel/modify.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!-- Created by Jing George 4/10/2020 -->\n\n<%= button_to 'Back to Administrator Panel', admin_panel_index_path %>\n\n<% c = Course.find(params[:id]) %>\n\n<h2>Modify <%= c.name %>, Class #<%= c.class_num %></h2>\n<p>\n  Semester: <%= c.semester %> | Session: <%= c.session %> | Component: <%= c.component %>\n  <% if c.attendance %>\n  <i> | ** This class requires grader attendance ** </i><br/>\n  <% end %>\n</p>\n<p>\n<%= c.num_graders - c.graders.length() %> of <%= c.num_graders %> grading positions open.\n   Graders assigned: <%= c.graders.pluck(:name).join('; ') %>\n</p>\n\n<!-- for each meeting print a row -->\n<% c.meetings.each do |m| %>\n<% loc = m.location %>\n<% if loc == \" \" then loc = \"Location N/A\" end %>\n<div class =\"row\">\n<div class=\"loc\"><%= loc %></div>\n<div class=\"time\"><%= m.time %></div>\n<div class=\"instr\"><%= m.instructors.pluck(:name).join('; ') %></div>\n<div class=\"clear\"></div>\n</div>\n<% end %>\n<br/>\n\n<% if @assigned.length() > 0 %>\n<h2>Assigned graders: </h2>\n<div class=\"grader_list\">\n<% @assigned.each do |g| %>\n  <div class=\"grader\">\n    <div class=\"row\">\n      <div class=\"title\"><%= g.name %>, <%= g.last_name_dot %></div>\n      <% if g.courses.find_by(semester: Course.find(params[:id]).semester) != nil %>\n      <div class=\"message\">Student is already assigned to a class in\n        <%= Course.find(params[:id]).semester %>.</div>\n      <% end %>\n    <div class=\"button\">\n    <%= button_to \"Remove from class\", admin_panel_modify_path(rm: 1, id: params[:id], gr: g.id)%>\n    </div>\n    <div class=\"clear\"></div></div>\n\n    <div class=\"row\">\n      <% cn = ClassName.find_by(name: Course.find(params[:id]).name) %>\n      Grade in <%= cn.name %>:\n      <%= GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn.id).grade %>\n    <div class=\"clear\"></div></div>\n\n    <div class=\"row\">\n      GPA: <%= g.gpa %>\n    <div class=\"clear\"></div></div>\n  </div>\n<% end %>\n</div>\n<% end %>\n\n\n<h2>Available graders: </h2>\n<div class=\"grader_list\">\n<% if @filtered.empty? %>\n  <h3>There are no eligible candidates to grade this class.</h3>\n<% else %>\n  <% @filtered.each do |g| %>\n    <div class=\"grader\">\n      <div class=\"row\">\n        <div class=\"title\"><%= g.name %>, <%= g.last_name_dot %></div>\n        <% if g.courses.find_by(semester: Course.find(params[:id]).semester) != nil %>\n        <div class=\"message\">Student is already assigned to a class in\n          <%= Course.find(params[:id]).semester %>.</div>\n        <% end %>\n      <div class=\"button\">\n      <%= button_to \"Assign to class\", admin_panel_modify_path(id: params[:id], gr: g.id)%>\n      </div>\n      <div class=\"clear\"></div></div>\n\n      <div class=\"row\">\n        <% cn = ClassName.find_by(name: Course.find(params[:id]).name) %>\n        Grade in <%= cn.name %>:\n        <%= GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn.id).grade %>\n      <div class=\"clear\"></div></div>\n\n      <div class=\"row\">\n        GPA: <%= g.gpa %>\n      <div class=\"clear\"></div></div>\n    </div>\n  <% end %>\n<% end %>\n</div>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/admin_panel/modify.html.erb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/views/admin_panel/modify.html.erb	(date 1587667128858)
+@@ -54,6 +54,12 @@
+     <div class="row">
+       GPA: <%= g.gpa %>
+     <div class="clear"></div></div>
++
++    <div class="row">
++      <% get_recs(g).each do |r| %>
++        <%= r %><br/>
++      <% end %>
++    <div class="clear"></div></div>
+   </div>
+ <% end %>
+ </div>
+@@ -74,7 +80,8 @@
+           <%= Course.find(params[:id]).semester %>.</div>
+         <% end %>
+       <div class="button">
+-      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id)%>
++      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id),
++       disable: disable_add(params) %>
+       </div>
+       <div class="clear"></div></div>
+ 
+@@ -87,6 +94,13 @@
+       <div class="row">
+         GPA: <%= g.gpa %>
+       <div class="clear"></div></div>
++
++      <div class="row">
++        <% get_recs(g).each do |r| %>
++          <%= r %><br/>
++        <% end %>
++      <div class="clear"></div></div>
++
+     </div>
+   <% end %>
+ <% end %>
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"e11f28c9-950f-461f-bdaa-e9b6c593ca48\" name=\"Default Changelist\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/controllers/admin_panel_controller.rb\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/controllers/admin_panel_controller.rb\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/controllers/evaluations_controller.rb\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/controllers/evaluations_controller.rb\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/controllers/recommendations_controller.rb\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/controllers/recommendations_controller.rb\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/app/controllers/student_application_controller.rb\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/app/controllers/student_application_controller.rb\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/db/development.sqlite3\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/db/development.sqlite3\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/db/test.sqlite3\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/db/test.sqlite3\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\n  </component>\n  <component name=\"ProjectId\" id=\"1aPkCOos9xsbY2JoVZP8c3nGJCs\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"RunManager\" selected=\"Rails.Development: Project 5 OnTrack\">\n    <configuration name=\"Development: Project 5 OnTrack\" type=\"RailsRunConfigurationType\" factoryName=\"Rails\">\n      <module name=\"Project 5 OnTrack\" />\n      <predefined_log_file enabled=\"true\" id=\"RUBY_RAILS_SERVER\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"RUBY_ARGS\" VALUE=\"\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"WORK DIR\" VALUE=\"$MODULE_DIR$\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"SHOULD_USE_SDK\" VALUE=\"false\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"ALTERN_SDK_NAME\" VALUE=\"\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"myPassParentEnvs\" VALUE=\"true\" />\n      <EXTENSION ID=\"BundlerRunConfigurationExtension\" bundleExecEnabled=\"false\" />\n      <EXTENSION ID=\"JRubyRunConfigurationExtension\" NailgunExecEnabled=\"false\" />\n      <EXTENSION ID=\"RubyCoverageRunConfigurationExtension\" track_test_folders=\"true\" runner=\"rcov\">\n        <COVERAGE_PATTERN ENABLED=\"true\">\n          <PATTERN REGEXPS=\"/.rvm/\" INCLUDED=\"false\" />\n        </COVERAGE_PATTERN>\n      </EXTENSION>\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"SCRIPT_ARGS\" VALUE=\"\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"PORT\" VALUE=\"3000\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"IP\" VALUE=\"0.0.0.0\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"DUMMY_APP\" VALUE=\"test/dummy\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"RAILS_SERVER_TYPE\" VALUE=\"Default\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"ENVIRONMENT_TYPE\" VALUE=\"development\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"LAUNCH_JS\" VALUE=\"false\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"Production: Project 5 OnTrack\" type=\"RailsRunConfigurationType\" factoryName=\"Rails\">\n      <module name=\"Project 5 OnTrack\" />\n      <predefined_log_file enabled=\"true\" id=\"RUBY_RAILS_SERVER\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"RUBY_ARGS\" VALUE=\"\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"WORK DIR\" VALUE=\"$MODULE_DIR$\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"SHOULD_USE_SDK\" VALUE=\"false\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"ALTERN_SDK_NAME\" VALUE=\"\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"myPassParentEnvs\" VALUE=\"true\" />\n      <EXTENSION ID=\"BundlerRunConfigurationExtension\" bundleExecEnabled=\"false\" />\n      <EXTENSION ID=\"JRubyRunConfigurationExtension\" NailgunExecEnabled=\"false\" />\n      <EXTENSION ID=\"RubyCoverageRunConfigurationExtension\" track_test_folders=\"true\" runner=\"rcov\">\n        <COVERAGE_PATTERN ENABLED=\"true\">\n          <PATTERN REGEXPS=\"/.rvm/\" INCLUDED=\"false\" />\n        </COVERAGE_PATTERN>\n      </EXTENSION>\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"SCRIPT_ARGS\" VALUE=\"\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"PORT\" VALUE=\"3000\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"IP\" VALUE=\"0.0.0.0\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"DUMMY_APP\" VALUE=\"test/dummy\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"RAILS_SERVER_TYPE\" VALUE=\"Default\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"ENVIRONMENT_TYPE\" VALUE=\"production\" />\n      <RAILS_SERVER_CONFIG_SETTINGS_ID NAME=\"LAUNCH_JS\" VALUE=\"false\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"spec: Project 5 OnTrack\" type=\"RakeRunConfigurationType\" factoryName=\"Rake\">\n      <module name=\"Project 5 OnTrack\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RUBY_ARGS\" VALUE=\"\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"WORK DIR\" VALUE=\"$MODULE_DIR$\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"SHOULD_USE_SDK\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"ALTERN_SDK_NAME\" VALUE=\"\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"myPassParentEnvs\" VALUE=\"true\" />\n      <EXTENSION ID=\"BundlerRunConfigurationExtension\" bundleExecEnabled=\"false\" />\n      <EXTENSION ID=\"JRubyRunConfigurationExtension\" NailgunExecEnabled=\"false\" />\n      <EXTENSION ID=\"RubyCoverageRunConfigurationExtension\" track_test_folders=\"true\" runner=\"rcov\">\n        <COVERAGE_PATTERN ENABLED=\"true\">\n          <PATTERN REGEXPS=\"/.rvm/\" INCLUDED=\"false\" />\n        </COVERAGE_PATTERN>\n      </EXTENSION>\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_NAME\" VALUE=\"spec\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_ARGS\" VALUE=\"\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_ATTACHED_TEST_FRAMEWORKS\" VALUE=\":rspec \" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_TRACE\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_DRYRUN\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_PREREQS\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_TESTOPTS\" VALUE=\"\" />\n      <method v=\"2\" />\n    </configuration>\n    <configuration name=\"test: Project 5 OnTrack\" type=\"RakeRunConfigurationType\" factoryName=\"Rake\">\n      <module name=\"Project 5 OnTrack\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RUBY_ARGS\" VALUE=\"\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"WORK DIR\" VALUE=\"$MODULE_DIR$\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"SHOULD_USE_SDK\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"ALTERN_SDK_NAME\" VALUE=\"\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"myPassParentEnvs\" VALUE=\"true\" />\n      <envs>\n        <env name=\"RAILS_ENV\" value=\"test\" />\n      </envs>\n      <EXTENSION ID=\"BundlerRunConfigurationExtension\" bundleExecEnabled=\"false\" />\n      <EXTENSION ID=\"JRubyRunConfigurationExtension\" NailgunExecEnabled=\"false\" />\n      <EXTENSION ID=\"RubyCoverageRunConfigurationExtension\" track_test_folders=\"true\" runner=\"rcov\">\n        <COVERAGE_PATTERN ENABLED=\"true\">\n          <PATTERN REGEXPS=\"/.rvm/\" INCLUDED=\"false\" />\n        </COVERAGE_PATTERN>\n      </EXTENSION>\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_NAME\" VALUE=\"test\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_ARGS\" VALUE=\"\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_ATTACHED_TEST_FRAMEWORKS\" VALUE=\":test_unit \" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_TRACE\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_DRYRUN\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_PREREQS\" VALUE=\"false\" />\n      <RAKE_RUN_CONFIG_SETTINGS_ID NAME=\"RAKE_TASK_OPTION_TESTOPTS\" VALUE=\"\" />\n      <method v=\"2\" />\n    </configuration>\n  </component>\n  <component name=\"SpringUtil\" SPRING_PRE_LOADER_OPTION=\"true\" RAKE_SPRING_PRE_LOADER_OPTION=\"true\" RAILS_SPRING_PRE_LOADER_OPTION=\"true\" />\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"e11f28c9-950f-461f-bdaa-e9b6c593ca48\" name=\"Default Changelist\" comment=\"\" />\n      <created>1586644487195</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1586644487195</updated>\n      <workItem from=\"1586644491712\" duration=\"651000\" />\n      <workItem from=\"1586720079508\" duration=\"3188000\" />\n      <workItem from=\"1586806386115\" duration=\"418000\" />\n      <workItem from=\"1586806814187\" duration=\"929000\" />\n      <workItem from=\"1587006183983\" duration=\"2500000\" />\n      <workItem from=\"1587062093819\" duration=\"278000\" />\n      <workItem from=\"1587588609631\" duration=\"1265000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"2\" />\n  </component>\n  <component name=\"WindowStateProjectService\">\n    <state x=\"291\" y=\"68\" key=\"#com.intellij.execution.impl.EditConfigurationsDialog\" timestamp=\"1587666058724\">\n      <screen x=\"67\" y=\"27\" width=\"1533\" height=\"768\" />\n    </state>\n    <state x=\"291\" y=\"68\" key=\"#com.intellij.execution.impl.EditConfigurationsDialog/67.27.1533.768@67.27.1533.768\" timestamp=\"1587666058724\" />\n    <state x=\"525\" y=\"215\" width=\"619\" height=\"390\" key=\"#com.intellij.fileTypes.FileTypeChooser\" timestamp=\"1587608097869\">\n      <screen x=\"67\" y=\"27\" width=\"1533\" height=\"768\" />\n    </state>\n    <state x=\"525\" y=\"215\" width=\"619\" height=\"390\" key=\"#com.intellij.fileTypes.FileTypeChooser/67.27.1533.768@67.27.1533.768\" timestamp=\"1587608097869\" />\n    <state x=\"616\" y=\"168\" width=\"424\" height=\"484\" key=\"FileChooserDialogImpl\" timestamp=\"1586806805028\">\n      <screen x=\"67\" y=\"27\" width=\"1533\" height=\"768\" />\n    </state>\n    <state x=\"616\" y=\"168\" width=\"424\" height=\"484\" key=\"FileChooserDialogImpl/67.27.1533.768@67.27.1533.768\" timestamp=\"1586806805028\" />\n    <state x=\"496\" y=\"116\" width=\"672\" height=\"678\" key=\"search.everywhere.popup\" timestamp=\"1587516476854\">\n      <screen x=\"67\" y=\"27\" width=\"1533\" height=\"768\" />\n    </state>\n    <state x=\"496\" y=\"116\" width=\"672\" height=\"678\" key=\"search.everywhere.popup/67.27.1533.768@67.27.1533.768\" timestamp=\"1587516476854\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ .idea/workspace.xml	(date 1587667294742)
+@@ -2,13 +2,18 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="e11f28c9-950f-461f-bdaa-e9b6c593ca48" name="Default Changelist" comment="">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/controllers/admin_panel_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/admin_panel_controller.rb" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/controllers/evaluations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/evaluations_controller.rb" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/app/controllers/recommendations_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/recommendations_controller.rb" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/app/controllers/student_application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/student_application_controller.rb" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/db/test.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/test.sqlite3" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/helpers/admin_panel_helper.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/helpers/admin_panel_helper.rb" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/models/student_recommend.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/student_recommend.rb" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/views/admin_panel/modify.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/admin_panel/modify.html.erb" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/views/recommendations/edit.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/recommendations/edit.html.erb" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/app/views/recommendations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/recommendations/new.html.erb" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/32/3d19d308f08363" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/32/3d19d308f08363" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/a3/86b8b5772b0e83" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/a3/86b8b5772b0e83" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/b1/d47930d7ddfcab" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/b1/d47930d7ddfcab" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/f8/fbd34b5a7a235f" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-compile-cache/f8/fbd34b5a7a235f" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -166,6 +171,10 @@
+       <screen x="67" y="27" width="1533" height="768" />
+     </state>
+     <state x="616" y="168" width="424" height="484" key="FileChooserDialogImpl/67.27.1533.768@67.27.1533.768" timestamp="1586806805028" />
++    <state x="714" y="278" key="MultipleFileMergeDialog" timestamp="1587667294113">
++      <screen x="67" y="27" width="1533" height="768" />
++    </state>
++    <state x="714" y="278" key="MultipleFileMergeDialog/67.27.1533.768@67.27.1533.768" timestamp="1587667294113" />
+     <state x="496" y="116" width="672" height="678" key="search.everywhere.popup" timestamp="1587516476854">
+       <screen x="67" y="27" width="1533" height="768" />
+     </state>
+Index: app/views/recommendations/edit.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!--<h1>Recommendations#edit</h1>-->\n<!--<p>Find me in app/views/recommendations/edit.html.erb</p>-->\n<!--# <h1>Recommendations#new</h1>-->\n<!--# <p>Find me in app/views/recommendations/new.html.erb</p>-->\n<!DOCTYPE html>\n<html>\n\n<head>\n  <title>Edit Recommendation Form</title>\n</head>\n<body>\n\n<h1>Edit Recommendation Form</h1>\n\n<form action=\"/recommendations/update\" method=\"POST\">\n  <input type=\"hidden\" name=\"authenticity_token\" value=\"<%= form_authenticity_token %>\">\n  <input type=\"hidden\" name=\"id\" value=\"<%=@recommend.id%>\">\n  <label for=\"student_fname\">First Name:</label>\n  <input type=\"text\" id=\"student_fname\" name=\"recommend[student_fname]\">\n  <br>\n\n  <label for=\"student_lname\">Last Name:</label>\n  <input type=\"text\" id=\"student_lname\" name=\"recommend[student_lname]\">\n  <br>\n\n  <label for=\"student_lname.#\">Dot Number</label>\n  <input type=\"text\" id=\"student_lname.#\" name=\"recommend[student_lname_num]\">\n  <br>\n\n  <label for=\"teacher_fname\">Instructor First Name:</label>\n  <input type=\"text\" id=\"teacher_fname\" name=\"recommend[teacher_fname]\">\n  <br>\n\n  <label for=\"teacher_lname\">Instructor Last Name:</label>\n  <input type=\"text\" id=\"teacher_lname\" name=\"recommend[teacher_lname]\">\n  <br>\n\n  <label for=\"teacher_lname.#\">Dot Number</label>\n  <input type=\"text\" id=\"teacher_lname.#\" name=\"recommend[teacher_lname_num]\">\n  <br>\n\n  <label for=\"course\">Course Recommendation</label>\n  <input type=\"text\" id=\"course\" name=\"recommend[course]\">\n  <br>\n\n  <label for=\"course_section\">Course Section (OPTIONAL):</label>\n  <input type=\"text\" id=\"course_section\" name=\"recommend[course_section]\">\n  <br>\n\n  <label for=\"semester\">Future Semesters(FT) or Next Semester(NT)</label>\n  <input type=\"text\" id=\"semester\" name=\"recommend[semester]\">\n  <br>\n\n  <label for=\"course_specification\">General(G) or Specific(S) Endorsement</label>\n  <input type=\"text\" id=\"course_specification\" name=\"recommend[course_specification]\">\n  <br>\n\n  <input type=\"submit\" name=\"submit\" class=\"submit\">\n\n\n</form>\n<%= button_to 'Exit To Menu', menu_index_path%>\n</body>\n\n\n</html>\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/recommendations/edit.html.erb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/views/recommendations/edit.html.erb	(date 1587667128858)
+@@ -12,47 +12,63 @@
+ 
+ <h1>Edit Recommendation Form</h1>
+ 
++<% if @recommend.nil? && @recommend.errors.any? %>
++  <div id="error_explanation">
++    <h2><%= pluralize(@recommend.errors.count, "error") %> prohibited this article from being saved:</h2>
++
++    <ul>
++      <% @recommend.errors.full_messages.each do |msg| %>
++        <li><%= msg %></li>
++      <% end %>
++    </ul>
++  </div>
++<% end %>
++
+ <form action="/recommendations/update" method="POST">
+   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+   <input type="hidden" name="id" value="<%=@recommend.id%>">
++  <input type="hidden" id="teacher_fname" name="recommend[teacher_fname]" value="<%=current_teacher_user.f_name%>">
++  <input type="hidden" id="teacher_lname" name="recommend[teacher_lname]" value="<%=current_teacher_user.l_name%>">
++  <input type="hidden" id="teacher_lanem.#" name="recommend[teacher_lname_num]" value="<%=current_teacher_user.dot_num%>">
++
+   <label for="student_fname">First Name:</label>
+-  <input type="text" id="student_fname" name="recommend[student_fname]">
++  <input type="text" id="student_fname" name="recommend[student_fname]" value="<%= @recommend.student_fname %>">
+   <br>
+ 
+   <label for="student_lname">Last Name:</label>
+-  <input type="text" id="student_lname" name="recommend[student_lname]">
++  <input type="text" id="student_lname" name="recommend[student_lname]" value="<%= @recommend.student_lname %>">
+   <br>
+ 
+   <label for="student_lname.#">Dot Number</label>
+-  <input type="text" id="student_lname.#" name="recommend[student_lname_num]">
+-  <br>
+-
+-  <label for="teacher_fname">Instructor First Name:</label>
+-  <input type="text" id="teacher_fname" name="recommend[teacher_fname]">
++  <input type="text" id="student_lname.#" name="recommend[student_lname_num]" value="<%= @recommend.student_lname_num %>">
+   <br>
+ 
+-  <label for="teacher_lname">Instructor Last Name:</label>
+-  <input type="text" id="teacher_lname" name="recommend[teacher_lname]">
+-  <br>
++<!--  <label for="teacher_fname">Instructor First Name:</label>-->
++<!--  <input type="text" id="teacher_fname" name="recommend[teacher_fname]" value="<%#= @recommend.teacher_fname %>">-->
++<!--  <br>-->
+ 
+-  <label for="teacher_lname.#">Dot Number</label>
+-  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]">
+-  <br>
++<!--  <label for="teacher_lname">Instructor Last Name:</label>-->
++<!--  <input type="text" id="teacher_lname" name="recommend[teacher_lname]" value="<%#= @recommend.teacher_lname %>">-->
++<!--  <br>-->
++
++<!--  <label for="teacher_lname.#">Dot Number</label>-->
++<!--  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]" value="<%#= @recommend.teacher_lname_num %>">-->
++<!--  <br>-->
+ 
+   <label for="course">Course Recommendation</label>
+-  <input type="text" id="course" name="recommend[course]">
++  <input type="text" id="course" name="recommend[course]" value="<%= @recommend.course %>">
+   <br>
+ 
+   <label for="course_section">Course Section (OPTIONAL):</label>
+-  <input type="text" id="course_section" name="recommend[course_section]">
++  <input type="text" id="course_section" name="recommend[course_section]" value="<%= @recommend.course_section %>">
+   <br>
+ 
+-  <label for="semester">Future Semesters(FT) or Next Semester(NT)</label>
+-  <input type="text" id="semester" name="recommend[semester]">
++  <label for="semester">Future Semesters(FS) or Next Semester(NS)</label>
++  <input type="text" id="semester" name="recommend[semester]" value="<%= @recommend.semester %>">
+   <br>
+ 
+   <label for="course_specification">General(G) or Specific(S) Endorsement</label>
+-  <input type="text" id="course_specification" name="recommend[course_specification]">
++  <input type="text" id="course_specification" name="recommend[course_specification]" value="<%= @recommend.course_specification %>">
+   <br>
+ 
+   <input type="submit" name="submit" class="submit">
+Index: app/helpers/admin_panel_helper.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module AdminPanelHelper\n\n\nend\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/helpers/admin_panel_helper.rb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/helpers/admin_panel_helper.rb	(date 1587667128850)
+@@ -1,4 +1,34 @@
+ module AdminPanelHelper
++  def get_recs(grader)
++    rec_arr = []
++    # array with last name and dot number
++    ndn = grader.last_name_dot.split(".")
++    # get all recommendations associated with student
++    recs = StudentRecommend.where(student_lname: ndn[0], student_lname_num: ndn[1])
++    recs.each do |r|
++      str = "Student has been "
++      if r.course_specification.chomp == 'G'
++        str.concat("generally recommended to grade #{r.course}")
++      elsif r.course_specification.chomp == 'S'
++        str.concat("specifically requested to grade #{r.course}, class number #{r.course_section},")
++      end
++      str.concat(" by #{r.teacher_fname} #{r.teacher_lname}.")
++      rec_arr.push(str)
++    end
++    return rec_arr
++  end
++
++  def get_evals(grader)
++    eval_arr = []
++    # get list of all evals of this student
++    evals = Evaluation.where(grader_lname_dotnum: grader.last_name_dot)
+ 
++  end
++
++  def disable_add(params)
++    c = Course.find(params[:id])
++    if c.graders.length() == c.num_graders then return true end
++    return false
++  end
+ 
+ end
+Index: app/models/student_recommend.rb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>class StudentRecommend < ApplicationRecord\n  validates :student_fname, presence: true, length: { in: 1..30 }\nend\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/models/student_recommend.rb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/models/student_recommend.rb	(date 1587667128858)
+@@ -1,3 +1,12 @@
+ class StudentRecommend < ApplicationRecord
+   validates :student_fname, presence: true, length: { in: 1..30 }
++  validates :student_lname, presence: true, length: { in: 1..30 }
++  # validates :teacher_fname, presence: true, length: { in: 1..30 }
++  # validates :teacher_lname, presence: true, length: { in: 1..30 }
++  validates :student_lname_num, numericality: { only_integer: true }
++  # validates :teacher_lname_num, numericality: { only_integer: true }
++  validates :course, presence: true
++    #validates :course_section, allow_blank: true
++  validates :course_specification, presence: {message: "'Type in G or S'"}
++  validates :semester, presence: {message: "'Type in FS or NS'"}
+ end
+Index: app/views/recommendations/new.html.erb
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><!--# <h1>Recommendations#new</h1>-->\n<!--# <p>Find me in app/views/recommendations/new.html.erb</p>-->\n<!DOCTYPE html>\n<html>\n\n<head>\n  <title>Recommendation Form</title>\n</head>\n<body>\n\n<h1>Recommendation Form</h1>\n\n<form action=\"/recommendations/create\" method=\"POST\">\n  <input type=\"hidden\" name=\"authenticity_token\" value=\"<%= form_authenticity_token %>\">\n  <input type=\"hidden\" id=\"teacher_fname\" name=\"recommend[teacher_fname]\" value=\"<%=current_teacher_user.f_name%>\">\n  <input type=\"hidden\" id=\"teacher_lname\" name=\"recommend[teacher_lname]\" value=\"<%=current_teacher_user.l_name%>\">\n  <input type=\"hidden\" id=\"teacher_lanem.#\" name=\"recommend[teacher_lname_num]\" value=\"<%=current_teacher_user.dot_num%>\">\n\n  <label for=\"student_fname\">First Name:</label>\n  <input type=\"text\" id=\"student_fname\" name=\"recommend[student_fname]\">\n  <br>\n\n  <label for=\"student_lname\">Last Name:</label>\n  <input type=\"text\" id=\"student_lname\" name=\"recommend[student_lname]\">\n  <br>\n\n  <label for=\"student_lname.#\">Dot Number</label>\n  <input type=\"text\" id=\"student_lname.#\" name=\"recommend[student_lname_num]\">\n  <br>\n\n  <label for=\"course\">Course Recommendation</label>\n  <input type=\"text\" id=\"course\" name=\"recommend[course]\">\n  <br>\n\n   <label for=\"course_section\">Course Section (OPTIONAL):</label>\n   <input type=\"text\" id=\"course_section\" name=\"recommend[course_section]\">\n  <br>\n\n  <label for=\"semester\">Future Semesters(FT) or Next Semester(NT)</label>\n  <input type=\"text\" id=\"semester\" name=\"recommend[semester]\">\n  <br>\n\n  <label for=\"course_specification\">General(G) or Specific(S) Endorsement</label>\n  <input type=\"text\" id=\"course_specification\" name=\"recommend[course_specification]\">\n  <br>\n\n  <input type=\"submit\" name=\"submit\" class=\"submit\">\n\n</form>\n\n<%# if @recommend.errors.any? %>\n<!--  <div id=\"error_explanation\">-->\n<!--    <h2><%#= pluralize(@recommend.errors.count, \"error\") %> prohibited this article from being saved:</h2>-->\n\n<!--    <ul>-->\n      <%# @recommend.errors.full_messages.each do |msg| %>\n<!--        <li><%#= msg %></li>-->\n      <%# end %>\n<!--    </ul>-->\n<!--  </div>-->\n<%# end %>\n\n\n<br>\n\n<%= button_to 'Exit To Menu', menu_index_path%>\n</body>\n\n\n</html>\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/views/recommendations/new.html.erb	(revision 86cd16a00b195b47db3cab36758e90111d7b2373)
++++ app/views/recommendations/new.html.erb	(date 1587667128858)
+@@ -10,6 +10,18 @@
+ 
+ <h1>Recommendation Form</h1>
+ 
++<% if !@recommend.nil? && @recommend.errors.any? %>
++  <div id="error_explanation">
++    <h2><%= pluralize(@recommend.errors.count, "error") %> prohibited this article from being saved:</h2>
++
++    <ul>
++      <% @recommend.errors.full_messages.each do |msg| %>
++        <li><%= msg %></li>
++      <% end %>
++    </ul>
++  </div>
++<% end %>
++
+ <form action="/recommendations/create" method="POST">
+   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+   <input type="hidden" id="teacher_fname" name="recommend[teacher_fname]" value="<%=current_teacher_user.f_name%>">
+@@ -36,7 +48,7 @@
+    <input type="text" id="course_section" name="recommend[course_section]">
+   <br>
+ 
+-  <label for="semester">Future Semesters(FT) or Next Semester(NT)</label>
++  <label for="semester">Future Semesters(FS) or Next Semester(NS)</label>
+   <input type="text" id="semester" name="recommend[semester]">
+   <br>
+ 
+@@ -48,19 +60,6 @@
+ 
+ </form>
+ 
+-<%# if @recommend.errors.any? %>
+-<!--  <div id="error_explanation">-->
+-<!--    <h2><%#= pluralize(@recommend.errors.count, "error") %> prohibited this article from being saved:</h2>-->
+-
+-<!--    <ul>-->
+-      <%# @recommend.errors.full_messages.each do |msg| %>
+-<!--        <li><%#= msg %></li>-->
+-      <%# end %>
+-<!--    </ul>-->
+-<!--  </div>-->
+-<%# end %>
+-
+-
+ <br>
+ 
+ <%= button_to 'Exit To Menu', menu_index_path%>
