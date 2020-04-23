@@ -48,7 +48,7 @@ class StudentApplicationController < ApplicationController
         end
         
 
-        @grader = Grader.new(name: params[:fname] + " " + params[:lname], last_name_dot: params[:lname_dot], gpa: params[:gpa]);
+        @grader = Grader.new(account_id: params[:account_id], name: params[:fname] + " " + params[:lname], last_name_dot: params[:lname_dot], gpa: params[:gpa]);
         if @grader.save
             if params.has_key?(:course) then
                 params[:course].each do |key, value|

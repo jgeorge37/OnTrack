@@ -164,6 +164,7 @@
 
 <%= form_with(url: '/student_application/create', method: "post") do %>
     <input type="hidden" id="fname" name="fname" value="<%=current_user.f_name%>">
+    <input type="hidden" id="account_id" name="account_id" value="<%= current_user.id %>">
     <input type="hidden" id="lname" name="lname" value="<%=current_user.l_name%>">
     <input type="hidden" id="lanem.#" name="lname_dot" value="<%=current_user.l_name.downcase + "." + current_user.dot_num.to_s%>">
     <input type="hidden" id="gpa" name="gpa" value="<%=current_user.gpa%>">
