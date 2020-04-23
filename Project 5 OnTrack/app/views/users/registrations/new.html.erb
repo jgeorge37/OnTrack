@@ -21,6 +21,26 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :First_Name %><br />
+    <%= f.text_field :f_name, autocomplete: "f-name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_Name %><br />
+    <%= f.text_field :l_name, autocomplete: "l-name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :Dot_Number %><br />
+    <%= f.text_field :dot_num, autocomplete: "dot-num" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :GPA %><br />
+    <%= f.text_field :gpa, autocomplete: "gpa" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
