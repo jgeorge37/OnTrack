@@ -29,25 +29,19 @@ class RecommendationsController < ApplicationController
 
   def edit
     #flash[:alert] = params[:fname]
-    @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    #@editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
     #flash[:alert] = @editUser.student_fname
-
+    @recommend = StudentRecommend.find(params[:id])
     render 'edit'
   end
 
   def update
-    #@form = StudentRecommend.find(params[:editID])
-    # if @form.update_attributes(params[:recommend])
-    #   redirect_to :action => 'show', notice: 'Edit recommendation successful'
-    # else
-    #   render action: :edit
-     # end
-    # #flash[:alert] = params[:fname]
-     @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-     @editUser.update(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-    # #raise params.inspect
-    #redirect_to :action => 'show', notice: 'Edit recommendation successful'
-    # end
+     @recommend = StudentRecommend.find(params[:id])
+     if @recommend.update(user_params)
+       redirect_to :action => 'show', notice: 'Successfully updated the evaluation'
+     else
+       redirect_to :action => 'show', notice: 'Error updating the evaluation'
+     end
   end
 
   def destroy 

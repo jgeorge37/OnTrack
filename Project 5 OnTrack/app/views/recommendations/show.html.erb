@@ -38,7 +38,7 @@
       <td><%= t.course_section%></td>
       <td><%= t.semester %></td>
       <td><%= t.course_specification %></td>
-      <td><%= link_to 'Edit', controller: 'recommendations', action: 'edit', editID: t.id, method: :edit %></td>
+      <td><%= link_to 'Edit', controller: 'recommendations', action: 'edit', id: t.id, method: :edit %></td>
       <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: t.id, method: :delete %></td>
     </tr>
   <% end %>

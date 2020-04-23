@@ -14,7 +14,7 @@
 
 <form action="/recommendations/update" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
+  <input type="hidden" name="id" value="<%=@recommend.id%>">
   <label for="student_fname">First Name:</label>
   <input type="text" id="student_fname" name="recommend[student_fname]">
   <br>
