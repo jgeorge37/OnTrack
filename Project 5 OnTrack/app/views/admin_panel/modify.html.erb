@@ -37,6 +37,10 @@
     <div class="grader">
       <div class="row">
         <div class="title"><%= g.name %>, <%= g.last_name_dot %></div>
+        <% if g.courses.find_by(semester: Course.find(params[:id]).semester) != nil %>
+        <div class="message">This student has already been assigned to one class in
+          <%= Course.find(params[:id]).semester %>.</div>
+        <% end %>
       <div class="clear"></div></div>
 
       <div class="row">

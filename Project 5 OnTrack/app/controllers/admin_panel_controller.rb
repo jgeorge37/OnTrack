@@ -49,12 +49,17 @@ class AdminPanelController < ApplicationController
       puts completed.course_id
       # check for availability
       if completed != nil
-        times = []
-        GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|
-          times.push(t.time)
+        if !Course.find(params[:id]).attendance
+          filtered.push(g) # if attendance is not required, they are eligible
+        else
+          times = []
+          GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|
+            times.push(t.time)
+          end
+          if (meeting_times - times).empty?
+            filtered.push(g) # grader is eligible if they are available
+          end
         end
-        if (meeting_times - times).empty? then filtered.push(g) end
-      
       end
     end
 
