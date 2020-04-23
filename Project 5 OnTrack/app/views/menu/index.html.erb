@@ -4,11 +4,9 @@
     <div id="buttons">
       <% if current_user %>
           <%= button_to 'Applications', student_application_index_path%>
-          <%= button_to 'Configuration', configuration_index_path%>
       <% elsif current_teacher_user %>
           <%= button_to 'Recommendations', recommendations_list_path%>
           <%= button_to 'Evaluations', evaluations_index_path%>
-          <%= button_to 'Configuration', configuration_index_path%>
       <% elsif current_admin %>
           <%= button_to 'Adminstrator Panel', admin_panel_index_path%>
           <%= button_to 'Configuration', configuration_index_path%>
