@@ -5,7 +5,7 @@
 <% c = Course.find(params[:id]) %>
 
 <h2>Modify <%= c.name %>, Class #<%= c.class_num %></h2>
-<p">
+<p>
   Semester: <%= c.semester %> | Session: <%= c.session %> | Component: <%= c.component %>
   <% if c.attendance %>
   <i> | ** This class requires grader attendance ** </i><br/>
@@ -28,19 +28,54 @@
 </div>
 <% end %>
 <br/>
+
+<% if @assigned.length() > 0 %>
+<h2>Assigned graders: </h2>
+<div class="grader_list">
+<% @assigned.each do |g| %>
+  <div class="grader">
+    <div class="row">
+      <div class="title"><%= g.name %>, <%= g.last_name_dot %></div>
+      <% if g.courses.find_by(semester: Course.find(params[:id]).semester) != nil %>
+      <div class="message">Student is already assigned to a class in
+        <%= Course.find(params[:id]).semester %>.</div>
+      <% end %>
+    <div class="button">
+    <%= button_to "Remove from class", admin_panel_modify_path(rm: 1, id: params[:id], gr: g.id)%>
+    </div>
+    <div class="clear"></div></div>
+
+    <div class="row">
+      <% cn = ClassName.find_by(name: Course.find(params[:id]).name) %>
+      Grade in <%= cn.name %>:
+      <%= GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn.id).grade %>
+    <div class="clear"></div></div>
+
+    <div class="row">
+      GPA: <%= g.gpa %>
+    <div class="clear"></div></div>
+  </div>
+<% end %>
+</div>
+<% end %>
+
+
 <h2>Available graders: </h2>
-<div id="grader_list">
+<div class="grader_list">
 <% if @filtered.empty? %>
-  <h3>No graders are eligible to grade this class.</h3>
+  <h3>There are no eligible candidates to grade this class.</h3>
 <% else %>
   <% @filtered.each do |g| %>
     <div class="grader">
       <div class="row">
         <div class="title"><%= g.name %>, <%= g.last_name_dot %></div>
         <% if g.courses.find_by(semester: Course.find(params[:id]).semester) != nil %>
-        <div class="message">This student has already been assigned to one class in
+        <div class="message">Student is already assigned to a class in
           <%= Course.find(params[:id]).semester %>.</div>
         <% end %>
+      <div class="button">
+      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id)%>
+      </div>
       <div class="clear"></div></div>
 
       <div class="row">

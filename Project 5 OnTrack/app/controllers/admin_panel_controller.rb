@@ -5,6 +5,15 @@ class AdminPanelController < ApplicationController
   end
 
   def modify
+    c = Course.find(params[:id])
+    if params[:gr]
+      if params[:rm]
+        c.graders.delete(Grader.find(params[:gr]))
+      else
+        c.graders.push(Grader.find(params[:gr]))
+      end
+    end
+    @assigned = c.graders
     @filtered = filter_graders(params)
   end
 
@@ -34,39 +43,37 @@ class AdminPanelController < ApplicationController
 
   def filter_graders(params)
     filtered = []
+    c = Course.find(params[:id])
     # get the className id
-    cn_id = ClassName.find_by(name: Course.find(params[:id]).name)
+    cn_id = ClassName.find_by(name: c.name)
 
     meeting_times = []
     # get the list of times that this class meets
-    Course.find(params[:id]).meetings.each {|m| meeting_times.push(m.time)}
+    c.meetings.each {|m| meeting_times.push(m.time)}
 
-    graders = Grader.all
-    graders.each do |g|
-      puts g.last_name_dot
-      # check if course is complete
-      completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)
-      puts completed.course_id
-      # check for availability
-      if completed != nil
-        if !Course.find(params[:id]).attendance
-          filtered.push(g) # if attendance is not required, they are eligible
-        else
-          times = []
-          GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|
-            times.push(t.time)
-          end
-          if (meeting_times - times).empty?
-            filtered.push(g) # grader is eligible if they are available
+    graders_list = Grader.all
+    graders_list.each do |g|
+      if c.graders.find_by(id: g.id) == nil
+        # check if course is complete
+        completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)
+        puts completed.course_id
+        # check for availability
+        if completed != nil
+          if !c.attendance
+            filtered.push(g) # if attendance is not required, they are eligible
+          else
+            times = []
+            GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|
+              times.push(t.time)
+            end
+            if (meeting_times - times).empty?
+              filtered.push(g) # grader is eligible if they are available
+            end
           end
         end
       end
     end
-
-
-
     return filtered
-
   end
 
   def get_filter_opts(par)

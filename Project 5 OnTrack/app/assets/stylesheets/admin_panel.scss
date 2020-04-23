@@ -8,7 +8,7 @@
   padding: 10px;
 }
 
-#course_list, #grader_list {
+#course_list, .grader_list {
   background-color: #d8dfe3;
   padding: 10px;
 }
@@ -30,6 +30,11 @@
   color: #ed6e00;
 }
 
+.button {
+  width: 150px;
+  float: right;
+}
+
 .clear {
   clear: both;
 }
@@ -46,8 +51,9 @@
 }
 
 .message {
-  width: 300px;
-  float: right;
+  width: auto;
+  margin-left: 20px;
+  float: left;
   color: orange;
 }
 

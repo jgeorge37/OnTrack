@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'admin_panel/index'
   post 'admin_panel/index'
   get 'admin_panel/modify'
+  post 'admin_panel/modify'
   get 'data_scraper/organize'
   post 'data_scraper/organize'
   get 'data_scraper/load'
