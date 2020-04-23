@@ -29,18 +29,24 @@ class RecommendationsController < ApplicationController
 
   def edit
     #flash[:alert] = params[:fname]
-    @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    @form = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
     flash[:alert] = @editUser.student_fname
 
     render 'edit'
   end
 
   def update
-    #flash[:alert] = params[:fname]
-    @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-    @editUser.update(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
-    #raise params.inspect
-    redirect_to :action => 'show', notice: 'Edit recommendation successful'
+    #@form = StudentRecommend.find(params[:editID])
+    if @form.update_attributes(params[:recommend])
+      redirect_to :action => 'show', notice: 'Edit recommendation successful'
+    else
+      render action: :edit
+    end
+    # #flash[:alert] = params[:fname]
+    # @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    # @editUser.update(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    # #raise params.inspect
+    #redirect_to :action => 'show', notice: 'Edit recommendation successful'
     # end
   end
 
@@ -57,7 +63,7 @@ class RecommendationsController < ApplicationController
     #   @deleteRecommend = StudentRecommend.find(params[:id])
     # end
     def user_params
-      params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :next_semester, :future_semester)
+      params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :semester)
     end
 end
 

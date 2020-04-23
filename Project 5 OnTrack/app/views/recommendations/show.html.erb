@@ -20,8 +20,7 @@
     <th>Teacher Dot Number</th>
     <th>Course</th>
     <th>Course Section</th>
-    <th>Next Semester</th>
-    <th>Future Semester</th>
+    <th>Future Semester(FS) vs Next Semester(NS)</th>
     <th>Edit</th>
     <th>Delete</th>
 
@@ -36,9 +35,8 @@
       <td><%= t.teacher_lname_num %></td>
       <td><%= t.course %></td>
       <td><%= t.course_section%></td>
-      <td><%= t.next_semester %></td>
-      <td><%= t.future_semester %></td>
-      <td><%= link_to 'Edit', controller: 'recommendations', action: 'edit', fname: t.student_fname, lname:t.student_lname, num:t.student_lname_num, method: :edit %></td>
+      <td><%= t.semester %></td>
+      <td><%= link_to 'Edit', controller: 'recommendations', action: 'edit', editID: t.id, method: :edit %></td>
       <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: t.id, method: :delete %></td>
     </tr>
   <% end %>
