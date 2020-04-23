@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e11f28c9-950f-461f-bdaa-e9b6c593ca48" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/application_controller.rb" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/application_controller.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/devise/registrations/new.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/menu/index.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/menu/index.html.erb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/development.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db/development.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schema.rb" beforeDir="false" afterPath="$PROJECT_DIR$/db/schema.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache" beforeDir="false" afterPath="$PROJECT_DIR$/tmp/cache/bootsnap-load-path-cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/profiles/edit.html.erb" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/profiles/edit.html.erb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,6 +140,7 @@
       <workItem from="1586806814187" duration="929000" />
       <workItem from="1587006183983" duration="2500000" />
       <workItem from="1587062093819" duration="278000" />
+      <workItem from="1587588609631" duration="1265000" />
     </task>
     <servers />
   </component>
@@ -152,10 +148,10 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="525" y="215" width="607" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586806962248">
+    <state x="525" y="215" width="607" height="390" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1587588903665">
       <screen x="67" y="27" width="1533" height="768" />
     </state>
-    <state x="525" y="215" width="607" height="390" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1533.768@67.27.1533.768" timestamp="1586806962248" />
+    <state x="525" y="215" width="607" height="390" key="#com.intellij.fileTypes.FileTypeChooser/67.27.1533.768@67.27.1533.768" timestamp="1587588903665" />
     <state x="616" y="168" width="424" height="484" key="FileChooserDialogImpl" timestamp="1586806805028">
       <screen x="67" y="27" width="1533" height="768" />
     </state>

@@ -1,3 +1,16 @@
 // Place all the styles related to the Configuration controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+#criteria input {
+  margin-bottom: 8px;
+}
+
+.textfield {
+  display: inline-block;
+  margin-right: 16px;
+}
+
+#submit {
+  display: inline-block;
+}

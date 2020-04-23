@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'evaluations/index'
   devise_for :users
   get 'admin_panel/index'
   post 'admin_panel/index'
@@ -8,7 +7,7 @@ Rails.application.routes.draw do
   post 'data_scraper/organize'
   get 'data_scraper/load'
   post 'data_scraper/load'
-  get 'configuraton/index'
+  get 'configuration/index'
   post 'configuration/index'
 
   root 'menu#index'
@@ -28,6 +27,12 @@ Rails.application.routes.draw do
   put 'student_application/update'
   get 'student_application/delete'
   delete 'student_application/delete'
+  get 'evaluations/show'
+  post 'evaluations/show'
+  get 'evaluations/new'
+  post 'evaluations/new'
+  get 'evaluations/index'
+  post 'evaluations/index'
 
 
   #get '/' =>'recommendations#new'
@@ -50,4 +55,6 @@ Rails.application.routes.draw do
   post 'recommendations/update' => 'recommendations#update'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get 'profiles/edit'
 end

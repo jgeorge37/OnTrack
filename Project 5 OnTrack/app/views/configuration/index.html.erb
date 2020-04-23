@@ -1,2 +1,48 @@
 <h3>This will delete almost all info</h3>
 <%= button_to 'Run Web Scraper', data_scraper_scrape_path %>
+
+<h3>View or create a configuration</h3>
+
+<%= form_tag configuration_index_path, method: "get" do %>
+  <p>I want to
+  <%= select "grouping", "action", options_for_select(["view", "create or change"], selected: params[:action]) %>
+   the configuration for all classes that
+  <%= select "grouping", "inclusion", options_for_select(["meet", "do not meet"], selected: params[:inclusion]) %>
+   the following criteria:</p>
+   <p>*** Leave a field blank if no preference ***</p>
+   <p>*** To list multiple identifiers of one type, separate each by a comma and space.
+     Example: 3901, 3902, 3903 ***</p>
+
+  <div id="criteria">
+  <div class="textfield">
+  <%= label_tag(:semester, "Semester (ex: SU20):") %>
+  <%= text_field_tag(:semester) %>
+  </div><div class="textfield">
+  <%= label_tag(:c_component, "Component (ex: LAB):") %>
+  <%= text_field_tag(:c_component)%>
+  </div><div class="textfield">
+  <%= label_tag(:c_number, "Class number (unique):") %>
+  <%= text_field_tag(:c_number) %>
+  </div><div class="textfield">
+  <%= label_tag(:c_name, "Number in name (ex: 2221):") %>
+  <%= text_field_tag(:c_name)%>
+  <br/></div>
+<div id="submit">
+<%= submit_tag "Submit", name: nil %>
+</div>
+</div>
+<% end %>
+
+<div id="result">
+  <% if @view %>
+
+  <% elsif @change %>
+    <%= form_tag configuration_index_path, method: "get" do %>
+      <%= radio_button_tag(:attend, "true") %>
+      <%= label_tag(:attend_true, "Grader attendance is required") %>
+      <%= radio_button_tag(:attend, "false") %>
+      <%= label_tag(:attend_false, "Grader attendance is not required") %>
+    <%= submit_tag "Update", name: nil %>
+    <% end %>
+  <% end %>
+</div>

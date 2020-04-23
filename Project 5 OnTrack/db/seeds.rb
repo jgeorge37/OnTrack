@@ -12,6 +12,7 @@ Teaching.delete_all
 # Clear out organization models
 Meeting.delete_all
 Course.delete_all
+Instructor.delete_all
 
 secondary_names = []
 # Gets the web page and makes it parseable
@@ -84,7 +85,9 @@ classes.each do |c|
     # check if only change is additional instructor for existing meeting
     course2.meetings.each do |meet|
       if meet.location == c.location && meet.time == c.times
-        meet.instructors.push(ins)
+        if not meet.instructors.include?(ins)
+          meet.instructors.push(ins)
+        end
         done = true
       end
     end
@@ -92,9 +95,10 @@ classes.each do |c|
   # if changes are needed, add the meeting
   if !done
     loc = c.location
-    if loc == " " then loc = "Location N/A" end
     m = Meeting.create(location: loc, time: c.times)
-    m.instructors.push(ins)
+    if not m.instructors.include?(ins)
+      m.instructors.push(ins)
+    end
     course2.meetings.push(m)
   end
 end # end do each

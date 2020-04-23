@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_013438) do
+ActiveRecord::Schema.define(version: 2020_04_22_235216) do
 
   create_table "class_names", force: :cascade do |t|
     t.string "name"
@@ -35,6 +35,20 @@ ActiveRecord::Schema.define(version: 2020_04_22_013438) do
     t.integer "course_id", null: false
     t.index ["course_id"], name: "index_courses_graders_on_course_id"
     t.index ["grader_id"], name: "index_courses_graders_on_grader_id"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.string "instructor_fname"
+    t.string "instructor_lname"
+    t.string "instructor_name_dotnum"
+    t.string "grader_lname_dotnum"
+    t.string "course"
+    t.integer "quality"
+    t.integer "punctuality"
+    t.integer "com_skills"
+    t.integer "course_knowledge"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "grader_completed_courses", force: :cascade do |t|
@@ -64,7 +78,7 @@ ActiveRecord::Schema.define(version: 2020_04_22_013438) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "last_name_dot"
-    t.integer "gpa"
+    t.decimal "gpa", precision: 8, scale: 2
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -84,6 +98,13 @@ ActiveRecord::Schema.define(version: 2020_04_22_013438) do
     t.string "location"
     t.string "time"
     t.integer "course_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "f_name"
+    t.string "l_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -125,9 +146,12 @@ ActiveRecord::Schema.define(version: 2020_04_22_013438) do
     t.datetime "remember_created_at"
     t.boolean "admin"
     t.string "category"
+    t.integer "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "meetings", "courses"
+  add_foreign_key "users", "profiles"
 end
