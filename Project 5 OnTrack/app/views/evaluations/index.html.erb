@@ -5,9 +5,6 @@
 <%= button_to 'Exit To Menu', menu_index_path%>
 <table>
   <tr>
-    <th>Instructor First Name</th>
-    <th>Instructor Last Name</th>
-    <th>Instructor Last Name and Dot Number</th>
     <th>Grader Last Name and Dot Number</th>
     <th>Course</th>
     <th>Quality</th>
@@ -19,9 +16,6 @@
   </tr>
   <% @allevaluation.each do |t| %>
     <tr>
-      <td><%= t.instructor_fname %></td>
-      <td><%= t.instructor_lname %></td>
-      <td><%= t.instructor_name_dotnum %></td>
       <td><%= t.grader_lname_dotnum %></td>
       <td><%= t.course %></td>
       <td><%= t.quality %></td>
