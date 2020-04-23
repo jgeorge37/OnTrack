@@ -12,47 +12,63 @@
 
 <h1>Edit Recommendation Form</h1>
 
+<% if @recommend.nil? && @recommend.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@recommend.errors.count, "error") %> prohibited this article from being saved:</h2>
+
+    <ul>
+      <% @recommend.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <form action="/recommendations/update" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="id" value="<%=@recommend.id%>">
+  <input type="hidden" id="teacher_fname" name="recommend[teacher_fname]" value="<%=current_teacher_user.f_name%>">
+  <input type="hidden" id="teacher_lname" name="recommend[teacher_lname]" value="<%=current_teacher_user.l_name%>">
+  <input type="hidden" id="teacher_lanem.#" name="recommend[teacher_lname_num]" value="<%=current_teacher_user.dot_num%>">
+
   <label for="student_fname">First Name:</label>
-  <input type="text" id="student_fname" name="recommend[student_fname]">
+  <input type="text" id="student_fname" name="recommend[student_fname]" value="<%= @recommend.student_fname %>">
   <br>
 
   <label for="student_lname">Last Name:</label>
-  <input type="text" id="student_lname" name="recommend[student_lname]">
+  <input type="text" id="student_lname" name="recommend[student_lname]" value="<%= @recommend.student_lname %>">
   <br>
 
   <label for="student_lname.#">Dot Number</label>
-  <input type="text" id="student_lname.#" name="recommend[student_lname_num]">
+  <input type="text" id="student_lname.#" name="recommend[student_lname_num]" value="<%= @recommend.student_lname_num %>">
   <br>
 
-  <label for="teacher_fname">Instructor First Name:</label>
-  <input type="text" id="teacher_fname" name="recommend[teacher_fname]">
-  <br>
+<!--  <label for="teacher_fname">Instructor First Name:</label>-->
+<!--  <input type="text" id="teacher_fname" name="recommend[teacher_fname]" value="<%#= @recommend.teacher_fname %>">-->
+<!--  <br>-->
 
-  <label for="teacher_lname">Instructor Last Name:</label>
-  <input type="text" id="teacher_lname" name="recommend[teacher_lname]">
-  <br>
+<!--  <label for="teacher_lname">Instructor Last Name:</label>-->
+<!--  <input type="text" id="teacher_lname" name="recommend[teacher_lname]" value="<%#= @recommend.teacher_lname %>">-->
+<!--  <br>-->
 
-  <label for="teacher_lname.#">Dot Number</label>
-  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]">
-  <br>
+<!--  <label for="teacher_lname.#">Dot Number</label>-->
+<!--  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]" value="<%#= @recommend.teacher_lname_num %>">-->
+<!--  <br>-->
 
   <label for="course">Course Recommendation</label>
-  <input type="text" id="course" name="recommend[course]">
+  <input type="text" id="course" name="recommend[course]" value="<%= @recommend.course %>">
   <br>
 
   <label for="course_section">Course Section (OPTIONAL):</label>
-  <input type="text" id="course_section" name="recommend[course_section]">
+  <input type="text" id="course_section" name="recommend[course_section]" value="<%= @recommend.course_section %>">
   <br>
 
-  <label for="semester">Future Semesters(FT) or Next Semester(NT)</label>
-  <input type="text" id="semester" name="recommend[semester]">
+  <label for="semester">Future Semesters(FS) or Next Semester(NS)</label>
+  <input type="text" id="semester" name="recommend[semester]" value="<%= @recommend.semester %>">
   <br>
 
   <label for="course_specification">General(G) or Specific(S) Endorsement</label>
-  <input type="text" id="course_specification" name="recommend[course_specification]">
+  <input type="text" id="course_specification" name="recommend[course_specification]" value="<%= @recommend.course_specification %>">
   <br>
 
   <input type="submit" name="submit" class="submit">
