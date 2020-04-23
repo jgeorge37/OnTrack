@@ -35,6 +35,7 @@ class ConfigurationController < ApplicationController
     update = 0
     if params[:config] # update the configuration for the found classes
       @courses.each {|c| Course.find(c.id).update(num_graders: params[:config][:num_g].to_i)}
+      @courses.each {|c| Course.find(c.id).graders.take(params[:config][:num_g].to_i)}
       update = 1
     end
     if params[:attend] == "true"
