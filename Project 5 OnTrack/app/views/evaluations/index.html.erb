@@ -1,64 +1,34 @@
 <!--# <h1>Evaluations#index</h1>-->
 <!--# <p>Find me in app/views/evaluations/index.html.erb</p>-->
 
-<h1>Evaluation Form</h1>
-
-<form action="/evaluations/create" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-  <label for="teacher_fname">Instructor First Name:</label>
-  <input type="text" id="teacher_fname">
-  <br>
-
-  <label for="teacher_lname">Instructor Last Name:</label>
-  <input type="text" id="teacher_lname">
-  <br>
-
-  <label for="teacher_lname.#">Instructor Last Name.#</label>
-  <input type="text" id="teacher_lname.#">
-  <br>
-
-  <label for="grader_lname.#">Last Name.# of Grader</label>
-  <input type="text" id="student_lname.#">
-  <br>
-
-  <label for="course">Course</label>
-  <input type="text" id="course">
-  <br>
-  <div id="quality">
-  <label for="quality">Quality of student's grading:</label>
-  <% @rate.each do |rate| %>
-    <input type="radio" name="quality" value = rate + "">
-    <label for="quality"><%= rate %></label>
-  <% end %>
-  </div>
-  </<br>
-  <div id="punctuality">
-  <label for="punctuality">Punctuality of student's grading:</label>
-  <% @rate.each do |rate| %>
-    <input type="radio"  name="punctuality" value = rate + "">
-    <label for="punctuality"><%= rate %></label>
-  <% end %>
-  </div>
-  </<br>
-  <div id="com-skills">
-  <label for="com-skills">Communication skills of student:</label>
-  <% @rate.each do |rate| %>
-    <input type="radio" name="com-skills" value = rate + "">
-    <label for="com-skills"><%= rate %></label>
-  <% end %>
-  </div>
-  </<br>
-  <div id="knowledge">
-  <label for="knowledge">Knowledge of course content:</label>
-  <% @rate.each do |rate| %>
-    <input type="radio" name="knowledge" value = rate + "">
-    <label for="knowledge"><%= rate %></label>
-  <% end %>
-  </div>
-  </<br>
-  </<br>
-  <%= submit_tag("Submit Evaluation") %>
-
-</form>
+<body>
 <%= button_to 'Exit To Menu', menu_index_path%>
+<table>
+  <tr>
+    <th>Instructor First Name</th>
+    <th>Instructor Last Name</th>
+    <th>Instructor Last Name and Dot Number</th>
+    <th>Grader Last Name and Dot Number</th>
+    <th>Course</th>
+    <th>Quality</th>
+    <th>Punctuality</th>
+    <th>Communication Skills</th>
+    <th>Course Knowledge</th>
+  </tr>
+  <% @allevaluation.each do |t| %>
+    <tr>
+      <td><%= t.instructor_fname %></td>
+      <td><%= t.instructor_lname %></td>
+      <td><%= t.instructor_name_dotnum %></td>
+      <td><%= t.grader_lname_dotnum %></td>
+      <td><%= t.course %></td>
+      <td><%= t.quality %></td>
+      <td><%= t.punctuality %></td>
+      <td><%= t.com_skills%></td>
+      <td><%= t.course_knowledge %></td>
+    </tr>
+  <% end %>
+</table>
+</body>
+
+<%= button_to 'Create a new evaluation' , evaluations_new_path%>

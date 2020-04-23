@@ -1,4 +1,5 @@
 class RecommendationsController < ApplicationController
+
   def list
   end
 
@@ -17,7 +18,7 @@ class RecommendationsController < ApplicationController
       flash[:alert] = 'User was not saved.'
       flash[:alert] = @recommend.errors
       # redirect to form page again
-      render '/'
+      render 'recommendations/show'
     end
   end
 
@@ -27,7 +28,26 @@ class RecommendationsController < ApplicationController
   end
 
   def edit
+    #flash[:alert] = params[:fname]
+    @form = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    flash[:alert] = @editUser.student_fname
 
+    render 'edit'
+  end
+
+  def update
+    #@form = StudentRecommend.find(params[:editID])
+    if @form.update_attributes(params[:recommend])
+      redirect_to :action => 'show', notice: 'Edit recommendation successful'
+    else
+      render action: :edit
+    end
+    # #flash[:alert] = params[:fname]
+    # @editUser = StudentRecommend.find_by(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    # @editUser.update(student_fname: params[:fname], student_lname: params[:lname], student_lname_num: params[:num])
+    # #raise params.inspect
+    #redirect_to :action => 'show', notice: 'Edit recommendation successful'
+    # end
   end
 
   def destroy 
@@ -39,11 +59,11 @@ class RecommendationsController < ApplicationController
 
 
   private
-    def find_recommendations
-      @deleteRecommend = StudentRecommend.find(params[:id])
-    end
+    # def find_recommendations
+    #   @deleteRecommend = StudentRecommend.find(params[:id])
+    # end
     def user_params
-      params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :next_semester, :future_semester)
+      params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :semester)
     end
 end
 

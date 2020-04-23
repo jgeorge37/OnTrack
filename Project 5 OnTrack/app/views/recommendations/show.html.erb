@@ -9,6 +9,7 @@
 </head>
 <body>
 <%= button_to 'Exit To Menu', menu_index_path%>
+<%= button_to 'Create a new form' , recommendations_new_path%>
 <table>
   <tr>
     <th>Student First Name</th>
@@ -19,8 +20,8 @@
     <th>Teacher Dot Number</th>
     <th>Course</th>
     <th>Course Section</th>
-    <th>Next Semester</th>
-    <th>Future Semester</th>
+    <th>Future Semester(FS) vs Next Semester(NS)</th>
+    <th>Edit</th>
     <th>Delete</th>
 
   </tr>
@@ -34,12 +35,12 @@
       <td><%= t.teacher_lname_num %></td>
       <td><%= t.course %></td>
       <td><%= t.course_section%></td>
-      <td><%= t.next_semester %></td>
-      <td><%= t.future_semester %></td>
+      <td><%= t.semester %></td>
+      <td><%= link_to 'Edit', controller: 'recommendations', action: 'edit', editID: t.id, method: :edit %></td>
       <td><%= link_to 'Delete', controller: 'recommendations', action: 'destroy', id: t.id, method: :delete %></td>
     </tr>
   <% end %>
 </table>
 </body>
 
-<%= button_to 'Create a new form' , recommendations_new_path%>
+

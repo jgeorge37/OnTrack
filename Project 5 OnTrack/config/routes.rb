@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admins
+  devise_for :teacher_users
   devise_for :users
   get 'admin_panel/index'
   post 'admin_panel/index'
@@ -9,11 +11,7 @@ Rails.application.routes.draw do
   post 'data_scraper/load'
   get 'configuration/index'
   post 'configuration/index'
-  get 'recommendations/list'
-  get 'recommendations/new'
-  get 'recommendations/show'
-  get 'recommendations/edit'
-  get 'recommendations/destroy'
+
   root 'menu#index'
   get 'menu/index'
   post 'menu/index'
@@ -27,22 +25,41 @@ Rails.application.routes.draw do
   post 'student_application/create'
   get 'student_application/show'
   get  'student_application/edit'
-  get 'student_applicaiton/update'
+  get 'student_application/update'
   put 'student_application/update'
   get 'student_application/delete'
   delete 'student_application/delete'
+  get 'evaluations/show'
+  post 'evaluations/show'
+  get 'evaluations/new'
+  post 'evaluations/new'
   get 'evaluations/index'
   post 'evaluations/index'
 
-  # Added for testing recommendation form
+
   #get '/' =>'recommendations#new'
+  get 'recommendations/list'
+  get 'recommendations/new'
+  get 'recommendations/show'
+  get 'recommendations/edit'
+  get 'recommendations/destroy'
+  post 'recommendations/list'
   post 'recommendations/new'
-  get 'recommendation/create'
-  post 'recommendation/create'
-  get 'recommendation/show'
-  post 'recommendation/show'
+  post 'recommendations/edit'
+  get 'recommendations/create'
+  post 'recommendations/create'
+  #get 'recommendation/show'
+  post 'recommendations/show'
   post 'recommendations/create' => 'recommendations#create'
   post 'recommendations/show' => 'recommendations#show'
   delete 'recommendations/show' => 'recommendations#delete'
+  post 'recommendations/show' => 'recommendations#edit'
+  post 'recommendations/update' => 'recommendations#update'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  get 'profiles/edit'
+
+  get 'overall_login/choose_user'
+  post 'overall_login/choose_user'
 end
