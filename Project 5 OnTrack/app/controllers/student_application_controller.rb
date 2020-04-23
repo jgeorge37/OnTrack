@@ -32,7 +32,7 @@ class StudentApplicationController < ApplicationController
             redirect_to :action => 'new', alert: 'Must fill in all of Contact Info and GPA'
             return 
         end
-        value1 = params[:lname_dot] =~ /[a-zA-Z]+\.[1-9]\d*/
+        value1 = params[:lname_dot] =~ /^[a-zA-Z]+\.[1-9]\d*$/
         value2 = params[:fname] =~ /^[a-zA-Z]+$/
         value3 = params[:fname] =~ /^[a-zA-Z]+$/
         value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/
@@ -99,7 +99,7 @@ class StudentApplicationController < ApplicationController
             redirect_to :action => 'edit' , id: params[:id] , alert: 'Must fill in all of Contact Info and GPA'
             return 
         end
-        value1 = params[:lname_dot] =~ /[a-zA-Z]+\.[1-9]\d*/
+        value1 = params[:lname_dot] =~ /^[a-zA-Z]+\.[1-9]\d*$/
         value2 = params[:fname] =~ /^[a-zA-Z]+$/
         value3 = params[:fname] =~ /^[a-zA-Z]+$/
         value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/
