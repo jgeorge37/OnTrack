@@ -6,11 +6,29 @@
   margin-bottom: 8px;
 }
 
-.textfield {
+.block {
   display: inline-block;
   margin-right: 16px;
 }
 
+.button {
+  display: inline-block;
+  margin-right: 4px;
+}
+
 #submit {
   display: inline-block;
+}
+
+#alert {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 15px;
+  color: red;
+}
+
+#notice {
+  font-style: italic;
+  font-size: 14px;
+  color: green;
 }

@@ -5,7 +5,7 @@ class AdminPanelController < ApplicationController
   end
 
   def modify
-
+    @filtered = filter_graders(params)
   end
 
 
@@ -17,19 +17,56 @@ class AdminPanelController < ApplicationController
 
     if par[:course]
       if par[:course][:semester] != "All semesters"
-        fc = fc.select {|c| c.semester == par[:course][:semester]}
+        fc = fc.where(semester: par[:course][:semester])
+      end
+      if par[:course][:session] != "All sessions"
+        fc = fc.where(session: par[:course][:session])
       end
       if par[:course][:name] != "All courses"
         fc = fc.select {|c| c.name[0, c.name.index(' ', 7)] == par[:course][:name]}
-      end
-      if par[:course][:session] != "All sessions"
-        fc = fc.select {|c| c.session == par[:course][:session]}
       end
       if par[:course][:open].to_i == 1
         fc = fc.select {|c| c.num_graders - c.graders.length() > 0}
       end
     end
     return fc
+  end
+
+  def filter_graders(params)
+    filtered = []
+    # get the className id
+    cn_id = ClassName.find_by(name: Course.find(params[:id]).name)
+
+    meeting_times = []
+    # get the list of times that this class meets
+    Course.find(params[:id]).meetings.each {|m| meeting_times.push(m.time)}
+
+    graders = Grader.all
+    graders.each do |g|
+      puts g.last_name_dot
+      # check if course is complete
+      completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)
+      puts completed.course_id
+      # check for availability
+      if completed != nil
+        if !Course.find(params[:id]).attendance
+          filtered.push(g) # if attendance is not required, they are eligible
+        else
+          times = []
+          GraderTimeAvailability.where(grader_completed_course_id: completed.id).each do |t|
+            times.push(t.time)
+          end
+          if (meeting_times - times).empty?
+            filtered.push(g) # grader is eligible if they are available
+          end
+        end
+      end
+    end
+
+
+
+    return filtered
+
   end
 
   def get_filter_opts(par)

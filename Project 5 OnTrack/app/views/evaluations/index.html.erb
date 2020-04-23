@@ -14,6 +14,8 @@
     <th>Punctuality</th>
     <th>Communication Skills</th>
     <th>Course Knowledge</th>
+    <th>Edit</th>
+    <th>Delete</th>
   </tr>
   <% @allevaluation.each do |t| %>
     <tr>
@@ -26,6 +28,8 @@
       <td><%= t.punctuality %></td>
       <td><%= t.com_skills%></td>
       <td><%= t.course_knowledge %></td>
+      <td><a href="/evaluations/edit?id=<%= t.id %>">Edit</a></td>
+      <td><a href="/evaluations/destroy?id=<%= t.id %>">Delete</td>
     </tr>
   <% end %>
 </table>

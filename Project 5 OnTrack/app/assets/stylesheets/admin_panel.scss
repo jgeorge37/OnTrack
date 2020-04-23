@@ -8,12 +8,12 @@
   padding: 10px;
 }
 
-#course_list {
+#course_list, #grader_list {
   background-color: #d8dfe3;
   padding: 10px;
 }
 
-.course {
+.course, .grader {
   background-color: white;
   margin: 10px 3px;
   padding: 10px;
@@ -45,13 +45,13 @@
   float: right;
 }
 
-.comp {
-  width: 200px;
-  float: left;
-  color: #006771;
+.message {
+  width: 300px;
+  float: right;
+  color: orange;
 }
 
-.sem {
+.comp, .sem {
   width: 200px;
   float: left;
   color: #006771;

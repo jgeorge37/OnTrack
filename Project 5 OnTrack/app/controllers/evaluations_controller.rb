@@ -16,13 +16,27 @@ class EvaluationsController < ApplicationController
       flash[:notice] = 'Evaluation saved successfully'
       flash[:alert] = ''
       @allevaluation = Evaluation.all
-      render 'evaluations/show'
+      render 'evaluations/index'
     else
       #Saving failed, we can inspect @user.errors for more information
-      flash[:alert] = 'User was not saved.'
+      flash[:alert] = 'Evaluation was not saved.'
       flash[:alert] = @evaluation.errors
       # redirect to form page again
       render '/'
+    end
+  end
+
+  def edit
+    @rate = Array(1..5)
+    @evaluation = Evaluation.find(params[:id])
+  end
+
+  def update
+    @evaluation = Evaluation.find(params[:id])
+    if @evaluation.update(user_params)
+      redirect_to :action => 'index', notice: 'Sucessfully updated the evaluation'
+    else
+      redirect_to :action => 'index', notice: 'Error updating the evaluation'
     end
   end
 
@@ -32,15 +46,14 @@ class EvaluationsController < ApplicationController
   end
 
   def destroy
-    # i would add checks, just in case
     delete = Evaluation.find(params[:id])
     delete.destroy
-    redirect_to :action => 'show', notice: 'Delete evaluation successful'
+    redirect_to :action => 'show', notice: 'Deleted evaluation successfully'
   end
 
   private
     def user_params
-      params.permit(:instructor_fname, :instructor_lname, :instructor_name_dotnum, :grader_lname_dotnum, :course,  :quality, :punctuality, :com_skills, :course_knowledge)
+      params.require(:evaluation).permit(:instructor_fname, :instructor_lname, :instructor_name_dotnum, :grader_lname_dotnum, :course,  :quality, :punctuality, :com_skills, :course_knowledge)
     end
 
 end
