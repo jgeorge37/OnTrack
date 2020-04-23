@@ -54,6 +54,12 @@
     <div class="row">
       GPA: <%= g.gpa %>
     <div class="clear"></div></div>
+
+    <div class="row">
+      <% get_recs(g).each do |r| %>
+        <%= r %><br/>
+      <% end %>
+    <div class="clear"></div></div>
   </div>
 <% end %>
 </div>
@@ -74,7 +80,8 @@
           <%= Course.find(params[:id]).semester %>.</div>
         <% end %>
       <div class="button">
-      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id)%>
+      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id),
+       disable: disable_add(params) %>
       </div>
       <div class="clear"></div></div>
 
@@ -87,6 +94,13 @@
       <div class="row">
         GPA: <%= g.gpa %>
       <div class="clear"></div></div>
+
+      <div class="row">
+        <% get_recs(g).each do |r| %>
+          <%= r %><br/>
+        <% end %>
+      <div class="clear"></div></div>
+
     </div>
   <% end %>
 <% end %>

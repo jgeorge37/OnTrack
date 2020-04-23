@@ -7,10 +7,11 @@ class AdminPanelController < ApplicationController
   def modify
     c = Course.find(params[:id])
     if params[:gr]
-      if params[:rm]
+      if params[:rm] && c.graders.find_by(id: params[:gr]) != nil
         c.graders.delete(Grader.find(params[:gr]))
-      else
+      elsif c.graders.find_by(id: params[:gr]) == nil
         c.graders.push(Grader.find(params[:gr]))
+
       end
     end
     @assigned = c.graders
@@ -56,7 +57,6 @@ class AdminPanelController < ApplicationController
       if c.graders.find_by(id: g.id) == nil
         # check if course is complete
         completed = GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn_id)
-        puts completed.course_id
         # check for availability
         if completed != nil
           if !c.attendance

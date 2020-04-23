@@ -1,4 +1,34 @@
 module AdminPanelHelper
+  def get_recs(grader)
+    rec_arr = []
+    # array with last name and dot number
+    ndn = grader.last_name_dot.split(".")
+    # get all recommendations associated with student
+    recs = StudentRecommend.where(student_lname: ndn[0], student_lname_num: ndn[1])
+    recs.each do |r|
+      str = "Student has been "
+      if r.course_specification.chomp == 'G'
+        str.concat("generally recommended to grade #{r.course}")
+      elsif r.course_specification.chomp == 'S'
+        str.concat("specifically requested to grade #{r.course}, class number #{r.course_section},")
+      end
+      str.concat(" by #{r.teacher_fname} #{r.teacher_lname}.")
+      rec_arr.push(str)
+    end
+    return rec_arr
+  end
 
+  def get_evals(grader)
+    eval_arr = []
+    # get list of all evals of this student
+    evals = Evaluation.where(grader_lname_dotnum: grader.last_name_dot)
+
+  end
+
+  def disable_add(params)
+    c = Course.find(params[:id])
+    if c.graders.length() == c.num_graders then return true end
+    return false
+  end
 
 end
