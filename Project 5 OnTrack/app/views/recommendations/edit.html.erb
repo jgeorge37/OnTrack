@@ -27,6 +27,10 @@
 <form action="/recommendations/update" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="id" value="<%=@recommend.id%>">
+  <input type="hidden" id="teacher_fname" name="recommend[teacher_fname]" value="<%=current_teacher_user.f_name%>">
+  <input type="hidden" id="teacher_lname" name="recommend[teacher_lname]" value="<%=current_teacher_user.l_name%>">
+  <input type="hidden" id="teacher_lanem.#" name="recommend[teacher_lname_num]" value="<%=current_teacher_user.dot_num%>">
+
   <label for="student_fname">First Name:</label>
   <input type="text" id="student_fname" name="recommend[student_fname]" value="<%= @recommend.student_fname %>">
   <br>
@@ -39,17 +43,17 @@
   <input type="text" id="student_lname.#" name="recommend[student_lname_num]" value="<%= @recommend.student_lname_num %>">
   <br>
 
-  <label for="teacher_fname">Instructor First Name:</label>
-  <input type="text" id="teacher_fname" name="recommend[teacher_fname]" value="<%= @recommend.teacher_fname %>">
-  <br>
+<!--  <label for="teacher_fname">Instructor First Name:</label>-->
+<!--  <input type="text" id="teacher_fname" name="recommend[teacher_fname]" value="<%#= @recommend.teacher_fname %>">-->
+<!--  <br>-->
 
-  <label for="teacher_lname">Instructor Last Name:</label>
-  <input type="text" id="teacher_lname" name="recommend[teacher_lname]" value="<%= @recommend.teacher_lname %>">
-  <br>
+<!--  <label for="teacher_lname">Instructor Last Name:</label>-->
+<!--  <input type="text" id="teacher_lname" name="recommend[teacher_lname]" value="<%#= @recommend.teacher_lname %>">-->
+<!--  <br>-->
 
-  <label for="teacher_lname.#">Dot Number</label>
-  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]" value="<%= @recommend.teacher_lname_num %>">
-  <br>
+<!--  <label for="teacher_lname.#">Dot Number</label>-->
+<!--  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]" value="<%#= @recommend.teacher_lname_num %>">-->
+<!--  <br>-->
 
   <label for="course">Course Recommendation</label>
   <input type="text" id="course" name="recommend[course]" value="<%= @recommend.course %>">
