@@ -53,9 +53,6 @@ class RecommendationsController < ApplicationController
 
 
   private
-    # def find_recommendations
-    #   @deleteRecommend = StudentRecommend.find(params[:id])
-    # end
     def user_params
       params.require(:recommend).permit(:student_fname, :student_lname, :student_lname_num, :teacher_fname, :teacher_lname,  :teacher_lname_num, :course, :course_section, :semester, :course_specification)
     end
