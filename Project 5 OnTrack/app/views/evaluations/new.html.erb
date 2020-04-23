@@ -5,18 +5,9 @@
 
 <form action="/evaluations/create" method="POST">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-
-  <label for="teacher_fname">Instructor First Name:</label>
-  <input type="text" id="teacher_fname" name="evaluation[instructor_fname]" value="<%= current_teacher_user.f_name %>">
-  <br>
-
-  <label for="teacher_lname">Instructor Last Name:</label>
-  <input type="text" id="teacher_lname" name="evaluation[instructor_lname]" value="<%= current_teacher_user.l_name %>">
-  <br>
-
-  <label for="teacher_lname.#">Instructor Last Name.#</label>
-  <input type="text" id="teacher_lname.#" name="evaluation[instructor_name_dotnum]" value="<%= current_teacher_user.dot_num %>">
-  <br>
+  <input type="hidden" id="teacher_fname" name="evaluation[instructor_fname]" value="<%=current_teacher_user.f_name%>">
+  <input type="hidden" id="teacher_lname" name="evaluation[instructor_lname]" value="<%=current_teacher_user.l_name%>">
+  <input type="hidden" id="teacher_lname.#.#" name="evaluation[instructor_name_dotnum]" value="<%=current_teacher_user.l_name.downcase + "." + current_teacher_user.dot_num.to_s%>">
 
   <label for="grader_lname.#">Last Name.# of Grader</label>
   <input type="text" id="student_lname.#" name="evaluation[grader_lname_dotnum]">
