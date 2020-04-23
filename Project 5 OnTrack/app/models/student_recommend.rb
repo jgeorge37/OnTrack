@@ -7,6 +7,6 @@ class StudentRecommend < ApplicationRecord
   # validates :teacher_lname_num, numericality: { only_integer: true }
   validates :course, presence: true, numericality:{only_integer: true}, length: {is: 4}
   #validates :course_section, allow_blank: true
-  validates :course_specification, presence: {message: "'Type in G or S'"}
-  validates :semester, presence: {message: "'Type in FS or NS'"}
+  validates :course_specification, presence: true
+  validates :semester, presence: true
 end
