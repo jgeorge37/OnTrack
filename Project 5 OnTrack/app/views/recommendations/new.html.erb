@@ -26,15 +26,15 @@
   <br>
 
   <label for="teacher_fname">Instructor First Name:</label>
-  <input type="text" id="teacher_fname" name="recommend[teacher_fname]">
+  <input type="text" id="teacher_fname" name="recommend[teacher_fname]" value="<%= current_teacher_user.f_name %>">
   <br>
 
   <label for="teacher_lname">Instructor Last Name:</label>
-  <input type="text" id="teacher_lname" name="recommend[teacher_lname]">
+  <input type="text" id="teacher_lname" name="recommend[teacher_lname]" value="<%= current_teacher_user.l_name %>">
   <br>
 
   <label for="teacher_lname.#">Dot Number</label>
-  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]">
+  <input type="text" id="teacher_lname.#" name="recommend[teacher_lname_num]" value="<%= current_teacher_user.dot_num %>">
   <br>
 
   <label for="course">Course Recommendation</label>
