@@ -36,9 +36,18 @@
   <% @filtered.each do |g| %>
     <div class="grader">
       <div class="row">
-        <div class="title"><%= g.name %>, <%= g.last_name_dot %>
+        <div class="title"><%= g.name %>, <%= g.last_name_dot %></div>
+      <div class="clear"></div></div>
 
-      </div>
+      <div class="row">
+        <% cn = ClassName.find_by(name: Course.find(params[:id]).name) %>
+        Grade in <%= cn.name %>:
+        <%= GraderCompletedCourse.find_by(grader_id: g.id, course_id: cn.id).grade %>
+      <div class="clear"></div></div>
+
+      <div class="row">
+        GPA: <%= g.gpa %>
+      <div class="clear"></div></div>
     </div>
   <% end %>
 <% end %>
