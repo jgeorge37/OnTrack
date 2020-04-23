@@ -32,7 +32,7 @@ class StudentApplicationController < ApplicationController
             redirect_to :action => 'new', alert: 'Must fill in all of Contact Info and GPA'
             return 
         end
-        value1 = params[:lname_dot] =~ /[a-zA-Z]+\.[1-9]\d*/
+        value1 = params[:lname_dot] =~ /^[a-zA-Z]+\.[1-9]\d*$/
         value2 = params[:fname] =~ /^[a-zA-Z]+$/
         value3 = params[:fname] =~ /^[a-zA-Z]+$/
         value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/
@@ -48,7 +48,7 @@ class StudentApplicationController < ApplicationController
         end
         
 
-        @grader = Grader.new(name: params[:fname] + " " + params[:lname], last_name_dot: params[:lname_dot], gpa: params[:gpa]);
+        @grader = Grader.new(account_id: params[:account_id], name: params[:fname] + " " + params[:lname], last_name_dot: params[:lname_dot], gpa: params[:gpa]);
         if @grader.save
             if params.has_key?(:course) then
                 params[:course].each do |key, value|
@@ -99,7 +99,7 @@ class StudentApplicationController < ApplicationController
             redirect_to :action => 'edit' , id: params[:id] , alert: 'Must fill in all of Contact Info and GPA'
             return 
         end
-        value1 = params[:lname_dot] =~ /[a-zA-Z]+\.[1-9]\d*/
+        value1 = params[:lname_dot] =~ /^[a-zA-Z]+\.[1-9]\d*$/
         value2 = params[:fname] =~ /^[a-zA-Z]+$/
         value3 = params[:fname] =~ /^[a-zA-Z]+$/
         value4 = params[:gpa] =~ /^[0-4]\.\d{1,2}$/

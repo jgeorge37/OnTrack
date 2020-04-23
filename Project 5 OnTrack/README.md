@@ -69,7 +69,10 @@ Each class has an "Edit" link that takes the user to a new page. This page lists
 This section is for students to fill out an application to be a grader. Applicants fill out identifying information as well as classes they are interested in grading with the grade they received. Students must also specify which times they are available to grade the classes they are interested in.
 
 **Recommendation**
+This section is for teachers to fill out a recommendation of a student that they have taught to be a grader. The teacher will specify which class they are recommending the student for, and may provide a general endorsement or a specific request for the student to grade a particular class section.
 
+**Evaluation**
+The section is for teachers to fill out an evaluation of a student who grader their class. There are four categories that the student can be rated in out of five points: grading quality, punctuality, communication, and course knowledge.
 
 ## Styling
 All Ruby files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/ruby).
