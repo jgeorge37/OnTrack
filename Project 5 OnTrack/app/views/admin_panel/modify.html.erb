@@ -86,8 +86,9 @@
           <%= Course.find(params[:id]).semester %>.</div>
         <% end %>
       <div class="button2">
-      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id),
-       disable: disable_add(params) %>
+        <% if enable_add(params) %>
+      <%= button_to "Assign to class", admin_panel_modify_path(id: params[:id], gr: g.id)%>
+      <% end %>
       </div>
       <div class="clear"></div></div>
 

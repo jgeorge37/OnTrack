@@ -30,10 +30,10 @@ module AdminPanelHelper
     return eval_arr
   end
 
-  def disable_add(params)
+  def enable_add(params)
     c = Course.find(params[:id])
-    if c.graders.length() == c.num_graders then return true end
-    return false
+    if c.graders.length().to_i == c.num_graders.to_i then return false end
+    return true
   end
 
 end
