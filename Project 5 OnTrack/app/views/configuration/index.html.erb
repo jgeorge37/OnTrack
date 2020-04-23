@@ -13,36 +13,58 @@
    <p>*** To list multiple identifiers of one type, separate each by a comma and space.
      Example: 3901, 3902, 3903 ***</p>
 
+  <p id="alert">Alert: <%= params[:alert] %></p>
+
   <div id="criteria">
-  <div class="textfield">
+  <div class="block">
   <%= label_tag(:semester, "Semester (ex: SU20):") %>
   <%= text_field_tag(:semester) %>
-  </div><div class="textfield">
-  <%= label_tag(:c_component, "Component (ex: LAB):") %>
-  <%= text_field_tag(:c_component)%>
-  </div><div class="textfield">
+  </div><div class="block">
+  <%= label_tag(:component, "Component (ex: LAB):") %>
+  <%= text_field_tag(:component)%>
+  </div><div class="block">
   <%= label_tag(:c_number, "Class number (unique):") %>
   <%= text_field_tag(:c_number) %>
-  </div><div class="textfield">
+  </div><div class="block">
   <%= label_tag(:c_name, "Number in name (ex: 2221):") %>
   <%= text_field_tag(:c_name)%>
-  <br/></div>
+  </div>
 <div id="submit">
 <%= submit_tag "Submit", name: nil %>
 </div>
 </div>
 <% end %>
 
-<div id="result">
-  <% if @view %>
+<% if @view %>
+  <h3>Search results for all classes
+  <%= @with %> these properties: <%= @properties.values.join(", ") %>.</h3>
 
-  <% elsif @change %>
-    <%= form_tag configuration_index_path, method: "get" do %>
-      <%= radio_button_tag(:attend, "true") %>
-      <%= label_tag(:attend_true, "Grader attendance is required") %>
-      <%= radio_button_tag(:attend, "false") %>
-      <%= label_tag(:attend_false, "Grader attendance is not required") %>
-    <%= submit_tag "Update", name: nil %>
-    <% end %>
+<% elsif @change %>
+  <h3>Change configuration for all classes
+  <%= @with %> these properties: <%= @properties.values.join(", ") %>.</h3>
+
+  <div id="config">
+  <%= form_tag configuration_index_path, method: "get" do %>
+    <div class="block">
+    <%= label_tag(:num_g, "Number of graders:") %>
+    <%= text_field_tag(:num_g)%>
+    </div><div class="button">
+    <%= radio_button_tag(:attend, "true") %>
+    </div><div class="block">
+    <%= label_tag(:attend_true, "Grader attendance is required") %>
+    </div><div class="button">
+    <%= radio_button_tag(:attend, "false") %>
+    </div><div class="block">
+    <%= label_tag(:attend_false, "Grader attendance is not required") %>
+    </div><div class="block">
+  <%= submit_tag "Update", name: nil %></div>
   <% end %>
+  </div>
+
+<% end %>
+
+<div id="result">
+  <p>
+
+  </p>
 </div>
