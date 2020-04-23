@@ -49,7 +49,7 @@ class EvaluationsController < ApplicationController
   def destroy
     delete = Evaluation.find(params[:id])
     delete.destroy
-    redirect_to :action => 'show', notice: 'Deleted evaluation successfully'
+    redirect_to :action => 'index', notice: 'Deleted evaluation successfully'
   end
 
   private
