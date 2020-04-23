@@ -70,4 +70,6 @@ Rails.application.routes.draw do
 
   get 'overall_login/choose_user'
   post 'overall_login/choose_user'
+  get 'overall_login/choose_login'
+  post 'overall_login/choose_login'
 end
