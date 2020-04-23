@@ -17,13 +17,13 @@ class AdminPanelController < ApplicationController
 
     if par[:course]
       if par[:course][:semester] != "All semesters"
-        fc = fc.select {|c| c.semester == par[:course][:semester]}
+        fc = fc.where(semester: par[:course][:semester])
+      end
+      if par[:course][:session] != "All sessions"
+        fc = fc.where(session: par[:course][:session])
       end
       if par[:course][:name] != "All courses"
         fc = fc.select {|c| c.name[0, c.name.index(' ', 7)] == par[:course][:name]}
-      end
-      if par[:course][:session] != "All sessions"
-        fc = fc.select {|c| c.session == par[:course][:session]}
       end
       if par[:course][:open].to_i == 1
         fc = fc.select {|c| c.num_graders - c.graders.length() > 0}
