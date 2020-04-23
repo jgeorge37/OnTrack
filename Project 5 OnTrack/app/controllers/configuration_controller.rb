@@ -1,14 +1,10 @@
 class ConfigurationController < ApplicationController
   def index
-    @view = false
-    @change = false
     @courses = []
     @properties = []
     @prop_hash = {}
     @with = "with"
     if params[:grouping]
-      if params[:grouping][:action] == "view" then @view = true end
-      if params[:grouping][:action] == "create or change" then @change = true end
       if params[:grouping][:inclusion] == "do not meet" then @with = "without" end
 
       check_sem = params[:semester].chomp.match(/^(((AU|SP|SU)\d{2}[,][ ])*)(AU|SP|SU)\d{2}$/)
@@ -38,19 +34,21 @@ class ConfigurationController < ApplicationController
     end
     update = 0
     if params[:config] # update the configuration for the found classes
-      params[:courses].each {|c| Course.find(c.id).num_graders = params[:config][:num_g].to_i }
+      @courses.each {|c| Course.find(c.id).update(num_graders: params[:config][:num_g].to_i)}
       update = 1
     end
     if params[:attend] == "true"
-      params[:courses].each {|c| Course.find(c.id).attendance = true }
+      @courses.each {|c| Course.find(c.id).update(attendance: true)}
       update = 1
     elsif params[:attend] == "false"
-      params[:courses].each {|c| Course.find(c.id).attendance = false }
+      @courses.each {|c| Course.find(c.id).update(attendance: false) }
       update = 1
     end
     if update == 1
-      redirect_to action: 'index', notice: 'Courses successfully updated.'
-
+      puts @courses
+      @courses.each {|c| puts Course.find(c.id).attendance}
+      str = "Courses " + @with + " the properties " + @properties.join(", ") + " successfully updated."
+      redirect_to action: 'index', notice: str
       return
     end
 

@@ -1,15 +1,15 @@
+<%= button_to "Back to menu", menu_index_path %>
+
 <h3>This will delete almost all info</h3>
 <%= button_to 'Run Web Scraper', data_scraper_scrape_path %>
 
 <h3>View or create a configuration</h3>
 
-<%= form_tag configuration_index_path, method: "get" do %>
-  <p>I want to
-  <%= select "grouping", "action", options_for_select(["view", "create or change"], selected: params[:action]) %>
-   the configuration for all classes that
+<%= form_tag configuration_index_path, method: "post" do %>
+  <p>I want to change the configuration for all classes that
   <%= select "grouping", "inclusion", options_for_select(["meet", "do not meet"], selected: params[:inclusion]) %>
    the following criteria:</p>
-   <p>*** Leave a field blank if no preference ***</p>
+   <p>*** Leave a field blank if no preference. ***</p>
    <p>*** To list multiple identifiers of one type, separate each by a comma and space.
      Example: 3901, 3902, 3903 ***</p>
 
@@ -31,9 +31,22 @@
   <%= label_tag(:name, "Number in name (ex: 2221):") %>
   <%= text_field_tag(:name)%>
   </div>
-<div id="submit">
-<%= submit_tag "Submit", name: nil %>
-</div>
+  </div>
+
+  <div id="config">
+  <div class="block">
+  <%= label_tag(:num_g, "Number of graders:") %>
+  <%= select "config", "num_g", options_for_select(["0", "1", "2", "3", "4", "5", "6", "7", "8"], selected: params[:num_g]) %>
+  </div><div class="button">
+  <%= radio_button_tag(:attend, "true") %>
+  </div><div class="block">
+  <%= label_tag(:attend_true, "Grader attendance is required") %>
+  </div><div class="button">
+  <%= radio_button_tag(:attend, "false") %>
+  </div><div class="block">
+  <%= label_tag(:attend_false, "Grader attendance is not required") %>
+  </div><div class="block">
+<%= submit_tag "Update", name: nil %></div>
 </div>
 <% end %>
 
@@ -41,34 +54,6 @@
 <p id="notice"><%= params[:notice] %></p>
 <% end %>
 
-<% if @view %>
-  <h3>Search results for all classes
-  <%= @with %> these properties: <%= @properties.join(", ") %>.</h3>
-
-<% elsif @change %>
-  <h3>Change configuration for all classes
-  <%= @with %> these properties: <%= @properties.join(", ") %>.</h3>
-
-  <div id="config">
-  <%= form_tag configuration_index_path, method: "post" do %>
-
-    <div class="block">
-    <%= label_tag(:num_g, "Number of graders:") %>
-    <%= select "config", "num_g", options_for_select(["0", "1", "2", "3", "4", "5", "6", "7", "8"], selected: params[:num_g]) %>
-    </div><div class="button">
-    <%= radio_button_tag(:attend, "true") %>
-    </div><div class="block">
-    <%= label_tag(:attend_true, "Grader attendance is required") %>
-    </div><div class="button">
-    <%= radio_button_tag(:attend, "false") %>
-    </div><div class="block">
-    <%= label_tag(:attend_false, "Grader attendance is not required") %>
-    </div><div class="block">
-  <%= submit_tag "Update", name: nil %></div>
-  <% end %>
-  </div>
-
-<% end %>
 
 <div id="result">
   <p>
