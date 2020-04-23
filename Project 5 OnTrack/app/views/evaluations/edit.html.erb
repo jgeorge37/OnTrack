@@ -27,34 +27,38 @@
 <br>
 <div id="quality">
 <label for="quality">Quality of student's grading:</label>
-<% @rate.each do |rate| %>
-  <input type="radio" id="quality" name="evaluation[quality]" value=rate>
-  <label for="quality"><%= rate %></label>
-<% end %>
+  <%= radio_button("evaluation", "quality", "1", checked:true) %> 1<br />
+  <%= radio_button("evaluation", "quality", "2") %>2<br />
+  <%= radio_button("evaluation", "quality", "3") %> 3<br />
+  <%= radio_button("evaluation", "quality", "4") %> 4<br />
+  <%= radio_button("evaluation", "quality", "5") %> 5<br />
 </div>
 </<br>
 <div id="punctuality">
 <label for="punctuality">Punctuality of student's grading:</label>
-<% @rate.each do |rate| %>
-  <input type="radio" id="punctuality" name="evaluation[punctuality]" value=rate>
-  <label for="punctuality"><%= rate %></label>
-<% end %>
+  <%= radio_button("evaluation", "punctuality", "1", checked:true) %> 1<br />
+  <%= radio_button("evaluation", "punctuality", "2") %>2<br />
+  <%= radio_button("evaluation", "punctuality", "3") %> 3<br />
+  <%= radio_button("evaluation", "punctuality", "4") %> 4<br />
+  <%= radio_button("evaluation", "punctuality", "5") %> 5<br />
 </div>
 </<br>
 <div id="com_skills">
 <label for="com_skills">Communication skills of student:</label>
-<% @rate.each do |rate| %>
-  <input type="radio" id="com_skills" name="evaluation[com_skills]" value=rate>
-  <label for="com_skills"><%= rate %></label>
-<% end %>
+  <%= radio_button("evaluation", "com_skills", "1", checked:true) %> 1<br />
+  <%= radio_button("evaluation", "com_skills", "2") %>2<br />
+  <%= radio_button("evaluation", "com_skills", "3") %> 3<br />
+  <%= radio_button("evaluation", "com_skills", "4") %> 4<br />
+  <%= radio_button("evaluation", "com_skills", "5") %> 5<br />
 </div>
 </<br>
 <div id="course_knowledge">
 <label for="course_knowledge">Knowledge of course content:</label>
-<% @rate.each do |rate| %>
-  <input type="radio" id="course_knowledge" name="evaluation[course_knowledge]" value=rate>
-  <label for="course_knowledge"><%= rate %></label>
-<% end %>
+  <%= radio_button("evaluation", "course_knowledge", "1", checked:true) %> 1<br />
+  <%= radio_button("evaluation", "course_knowledge", "2") %>2<br />
+  <%= radio_button("evaluation", "course_knowledge", "3") %> 3<br />
+  <%= radio_button("evaluation", "course_knowledge", "4") %> 4<br />
+  <%= radio_button("evaluation", "course_knowledge", "5") %> 5<br />
 </div>
 </br>
 <%= submit_tag("Update Evaluation") %>
