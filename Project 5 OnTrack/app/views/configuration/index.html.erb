@@ -1,8 +1,11 @@
 <%= button_to "Back to menu", menu_index_path %>
 <h1> Configuration </h1>
 
-<h3>Update courses (this will overwrite all course info, including current grader assignments)</h3>
-<%= button_to 'Run Web Scraper', data_scraper_scrape_path %>
+<h3>Run web scraper to update and overwrite courses (this will overwrite all course info, including current grader assignments)</h3>
+<%= button_to 'Update and overwrite', data_scraper_scrape_path %>
+
+<h3>Run web scraper to collect new courses (this will only add new course info and will not overwrite anything)</h3>
+<%= button_to 'Collect new courses', data_scraper_collect_path %>
 
 <h3>View or create a configuration</h3>
 

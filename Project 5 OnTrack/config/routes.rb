@@ -12,7 +12,8 @@ Rails.application.routes.draw do
   post 'data_scraper/load'
   get 'configuration/index'
   post 'configuration/index'
-
+  get 'data_scraper/collect'
+  post 'data_scraper/collect'
   root 'menu#index'
   get 'menu/index'
   post 'menu/index'
