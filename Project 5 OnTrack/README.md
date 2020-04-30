@@ -13,7 +13,7 @@ The goal of this project was to create an application to streamline the grader h
 ## Technologies Used
 - Ruby 2.6.5
 - Rails 6.0.2.2
-- SQLite 3.2.4
+- PostgreSQL
 - [Mechanize](https://github.com/sparklemotion/mechanize)
 - [Devise](https://github.com/heartcombo/devise)
 
