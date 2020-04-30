@@ -4,7 +4,7 @@ module AdminPanelHelper
     # array with last name and dot number
     ndn = grader.last_name_dot.split(".")
     # get all recommendations associated with student
-    recs = StudentRecommend.where(student_lname: ndn[0], student_lname_num: ndn[1])
+    recs = StudentRecommend.where(student_lname: ndn[0].capitalize, student_lname_num: ndn[1]).or(StudentRecommend.where(student_lname: ndn[0], student_lname_num: ndn[1]))
     recs.each do |r|
       str = "Student has been "
       if r.course_specification.chomp == 'G'

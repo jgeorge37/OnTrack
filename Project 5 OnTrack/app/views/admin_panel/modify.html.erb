@@ -102,17 +102,21 @@
         GPA: <%= g.gpa %>
       <div class="clear"></div></div>
 
+      <% if get_recs(g).length() > 0 %>
       <div class="row">
         <% get_recs(g).each do |r| %>
           <%= r %><br/>
         <% end %>
       <div class="clear"></div></div>
+      <% end %>
 
+      <% if get_evals(g).length() > 1 %>
       <div class="row">
         <% get_evals(g).each do |e| %>
           <%= e %><br/>
         <% end %>
       <div class="clear"></div></div>
+      <% end %>
 
     </div>
   <% end %>
