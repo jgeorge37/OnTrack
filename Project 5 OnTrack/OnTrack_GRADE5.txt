@@ -1,0 +1,12 @@
+Correctness: When filling out a grading application, would be nice to have times sorted from AM to PM (instead of just whatever order they're scraped in). Nice job only letting users see what they should have permission to see! Admin panel takes awhile to load each time (probably a better way to load data or only load what is truly needed). Seems pretty easy to assign graders to sections. Graders probably shouldn't be able to be assigned to a section if they didn't select that the time works for them. It doesn't seem like it is possible for admins to see evaluation results of past graders. Good job validating most user input fields, but some are not validated (user can enter in a letter for GPA for example). Edit user profile page doesn't seem to work.
+
+Functionality/Features: Great job allowing professors to both recommend students for classes and also evaluate past graders! Nice job adding filter feature on admin panel...this greatly increases usability. UI looks a little outdated with some inconsistencies...this could be solved by using a front-end framework to standardize the look of your application. Overall, your team was able to implement a lot of features into your app and with a few usability fixes, this could be a very valuable tool!
+
+Design: Schema seems a little too complex (some unnecessary tables, there are also some points where tables can be combined). Good use of javascript to handle front-end changes. Nice addition of some validations and relations in your models! Nice use of embedded ruby to reduce repetition in front-end code!
+
+Documentation: Extremely thorough README, great job! Some documentation at tricky points of code, but overall mostly inconsistent file-level and function-level documentation in code. Commit messages look good overall.
+
+Style: Nice job citing style guide. Good overall use of standard Rails styling/features, although there is some inconsistent tabbing and spacing.
+
+
+Have a great summer!
