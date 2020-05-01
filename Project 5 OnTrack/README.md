@@ -83,6 +83,7 @@ All views are styled with SCSS and are printed to the site using HTML.
 
 ## V2 Revisions
 Fixed minor bugs
+
 Allow admin to add new data to existing database. 
 
 
