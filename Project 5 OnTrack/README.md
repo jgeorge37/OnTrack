@@ -78,6 +78,13 @@ The section is for teachers to fill out an evaluation of a student who grader th
 All Ruby files in this project adhere to the rules in the style guide found [here](https://github.com/airbnb/ruby).
 All views are styled with SCSS and are printed to the site using HTML.
 
+## [Heroku Link](OnTrackLab5.herokuapp.com)
+**Note:** When running Application Panel or Web Scraping, heroku may time out the website. 
+
+## V2 Revisions
+Fixed minor bugs
+
+
 ## Presentation Link
 https://docs.google.com/presentation/d/1nq994_W9ReOBMVf5kYcdqXTDPxBwjXe-24c_JyURz0U/edit?usp=sharing
 
